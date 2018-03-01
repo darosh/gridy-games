@@ -1,14 +1,13 @@
 {
   "name": "gridy-games",
-  "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "Board games",
+  "version": "0.1.0",
   "author": "darosh <ensonador@gmail.com>",
-  "private": true,
-  "scripts": {
-    "dev": "node build/dev-server.js",
-    "build": "node build/build.js",
-    "eslint": "eslint --fix --ext .js,.vue src"
-  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
   "dependencies": {
     "gridy": "github:darosh/gridy",
     "vue": "^2.5.2",
@@ -30,6 +29,7 @@
     "copy-webpack-plugin": "^4.1.1",
     "css-loader": "^0.28.7",
     "cssnano": "^3.10.0",
+    "deploy-to-gh-pages": "^1.3.6",
     "eslint": "^4.9.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-friendly-formatter": "^3.0.0",
@@ -57,6 +57,7 @@
     "stylus-loader": "^3.0.2",
     "sw-precache-webpack-plugin": "^0.11.4",
     "ts-loader": "^3.5.0",
+    "tslint": "^5.9.1",
     "typescript": "^2.7.2",
     "uglify-es": "^3.1.3",
     "url-loader": "^0.6.2",
@@ -74,9 +75,12 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+  "private": true,
+  "scripts": {
+    "build": "node build/build.js",
+    "deploy": "npm run build && deploy-to-gh-pages --local ./dist",
+    "dev": "node build/dev-server.js",
+    "eslint": "eslint --fix --ext .js,.vue src",
+    "tslint": "tslint --fix -p tsconfig.json"
+  }
 }
