@@ -20,6 +20,7 @@
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-imports": "^1.4.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-2": "^6.24.1",
@@ -78,6 +79,7 @@
   "private": true,
   "scripts": {
     "build": "node build/build.js",
+    "report": "npm run build --report",
     "deploy": "npm run build && deploy-to-gh-pages --local ./dist",
     "dev": "node build/dev-server.js",
     "eslint": "eslint --fix --ext .js,.vue src",

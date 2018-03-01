@@ -22,8 +22,8 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
-      '@': resolve('src'),
-      'vue$': 'vue/dist/vue.esm.js'
+      '@': resolve('src')
+      // 'vue$': 'vue/dist/vue.esm.js'
     }
   },
   module: {
@@ -39,7 +39,7 @@ module.exports = {
       // },
       {
         test: /\.ts$/,
-        use: 'ts-loader',
+        loaders: ['babel-loader', 'ts-loader'],
         exclude: /node_modules/,
         include: [resolve('lib')]
       },
@@ -49,7 +49,7 @@ module.exports = {
         options: vueLoaderConfig
       },
       {
-        test: /\.js$/,
+        test: /\.(js|ts)$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]
       },
