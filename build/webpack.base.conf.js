@@ -1,6 +1,7 @@
 'use strict'
 
 const path = require('path')
+const webpack = require('webpack')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
@@ -26,6 +27,12 @@ module.exports = {
       // 'vue$': 'vue/dist/vue.esm.js'
     }
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.APP_VERSION': JSON.stringify(require('../package').version),
+      'process.APP_BUILD': JSON.stringify(new Date().toISOString())
+    })
+  ],
   module: {
     rules: [
       // {
