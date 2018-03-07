@@ -98,6 +98,7 @@
   },
   "private": true,
   "scripts": {
+    "clean": "del-cli dist/*.js dist/*.html dist/static",
     "build": "webpack --mode production -p",
     "deploy": "npm --no-git-tag-version version patch && npm run build && deploy-to-gh-pages --local ./dist",
     "dev": "webpack --mode development",
