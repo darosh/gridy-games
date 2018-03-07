@@ -1,6 +1,6 @@
 # gridy-games
 
-> A Vue.js project
+> Board games 
 
 ## Build Setup
 
