@@ -4,21 +4,20 @@ import {
 
 export let env
 
-export function tickStop(value) {
+export function tickStop (value) {
   if (env) {
     env.cancel(value)
   }
 }
 
-export function tickSound() {
-  import ('tone').then(({
+export function tickSound () {
+  import('tone').then(({
     default: {
       AmplitudeEnvelope,
       Oscillator,
       supported
     }
   }) => {
-
     if (!supported) {
       return
     }

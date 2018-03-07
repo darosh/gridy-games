@@ -4,8 +4,8 @@ import {
 
 let env
 
-export function failSound() {
-  import ('tone').then(({
+export function failSound () {
+  import('tone').then(({
     default: {
       AmplitudeEnvelope,
       Oscillator,

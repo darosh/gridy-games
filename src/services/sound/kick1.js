@@ -8,8 +8,8 @@ import {
 
 let env
 
-export function kick1Sound() {
-  import ('tone').then(({
+export function kick1Sound () {
+  import('tone').then(({
     default: {
       AmplitudeEnvelope,
       Oscillator,
@@ -17,7 +17,6 @@ export function kick1Sound() {
       supported
     }
   }) => {
-
     if (!supported) {
       return
     }

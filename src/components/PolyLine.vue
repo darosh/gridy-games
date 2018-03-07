@@ -18,25 +18,25 @@ export default {
       default: 0
     }
   },
-  data() {
+  data () {
     return {
-      points: ""
-    };
+      points: ''
+    }
   },
   watch: {
     tiles: {
       immediate: true,
-      handler: function(value) {
+      handler: function (value) {
         setTimeout(() => {
-          this.points = this.line(value);
+          this.points = this.line(value)
         }, this.delay)
       }
     }
   },
   methods: {
-    line(tiles) {
-      return tiles.map(t => this.center(t).toString()).join(",");
+    line (tiles) {
+      return tiles.map(t => this.center(t).toString()).join(',')
     }
   }
-};
+}
 </script>
