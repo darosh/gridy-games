@@ -121,25 +121,27 @@
                 :x2="center(l[1]).x"
                 :y2="center(l[1]).y"
                 :class="l[2] ? 'line-' + l[2] : ''" />
-              <g
-                v-if="!isMove"
-                v-for="t in game.grid.tiles"
-                :key="'c' + t.key"
-                :transform="'translate(' + center(t) + ')'">
-                <transition name="scale-transition">
-                  <circle
-                    v-if="t.data"
-                    :r="game.grid.radius * game.grid.scale * 0.85 - 2"
-                    :class="{clickable: t.highlighted && !robotTurn, ['token-' + t.data]: true}"
-                    cx="0"
-                    cy="0"
-                    class="animate"
-                    @click="move(t)" />
-                </transition>
+
+              <g v-if="!isMove">
+                <g
+                  v-for="t in game.grid.tiles"
+                  :key="'c' + t.key"
+                  :transform="'translate(' + center(t) + ')'">
+                  <transition name="scale-transition">
+                    <circle
+                      v-if="t.data"
+                      :r="game.grid.radius * game.grid.scale * 0.85 - 2"
+                      :class="{clickable: t.highlighted && !robotTurn, ['token-' + t.data]: true}"
+                      cx="0"
+                      cy="0"
+                      class="animate"
+                      @click="move(t)" />
+                  </transition>
+                </g>
               </g>
               <g
-                v-if="isMove"
                 v-for="(t, k) in stones"
+                v-else
                 :key="'s' + k"
                 :style="{transform: 'translate(' + center(t.tile, 'px') + ')'}"
                 class="stone">
