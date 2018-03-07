@@ -1,0 +1,30 @@
+plasticTheme = {
+  tileFill: #1976D2,
+  possible: #4FC3F7,
+  tileStroke: #212121,
+  lineStroke: #212121,
+  waiting: #bdbdbd,
+  waitingDark: #616161,
+  tileWaiting: #0D47A1,
+  t1: #C62828,
+  t2: #FBC02D,
+  s1: #C62828,
+  so1: #C62828,
+  s2: #FBC02D,
+  so2: #FBC02D,
+  l1: rgba(0, 0, 0, .87),
+  l2: rgba(255, 255, 255, .87),
+  b1: #FFCDD2,
+  b2: #FFF9C4,
+  w1: #C62828,
+  w2: #FBC02D,
+}
+
+@require "./colors"
+
+colors(plasticTheme, '.plastic-theme')
+
+.plastic-theme
+  polyline
+  .theme--dark polyline
+    stroke: rgba(0,0,0,0.78)

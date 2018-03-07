@@ -1,0 +1,32 @@
+gomokuTheme = {
+  tileFill: #FFB74D,
+  possible: #FFB74D,
+  tileStroke: #212121,
+  lineStroke: #212121,
+  waiting: #bdbdbd,
+  waitingDark: #616161,
+  tileWaiting: #FFB74D,
+  t1: rgba(0, 0, 0, 1),
+  t2: rgba(255, 255, 255, 1),
+  s1: #212121,
+  so1: #212121,
+  s2: #FAFAFA,
+  so2: #212121,
+  l1: rgba(0, 0, 0, .87),
+  l2: rgba(255, 255, 255, .87),
+  b1: #FFE0B2,
+  b2: #FFE0B2,
+  w1: #F57C00,
+  w2: #F57C00,
+}
+
+@require "./colors"
+
+colors(gomokuTheme, '.gomoku-theme')
+
+.gomoku-theme
+  polyline
+    stroke: rgba(127,127,127,0.78)
+
+  .theme--dark polyline
+    stroke: rgba(127,127,127,0.78)

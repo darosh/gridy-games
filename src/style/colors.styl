@@ -1,0 +1,59 @@
+colors(theme, name)
+  {name}
+    polygon
+      fill: theme.tileFill
+      stroke: theme.tileStroke
+    line
+      stroke: theme.lineStroke
+
+    .possible
+      fill: theme.possible
+    .waiting
+      fill: theme.tileWaiting
+
+    .token-1
+      fill: theme.t1
+    .token-2
+      fill: theme.t2
+
+    .symbol-1
+      fill: theme.s1
+      stroke: theme.so1
+    .symbol-2
+      fill: theme.s2
+      stroke: theme.so2
+
+    .line-1
+      stroke: theme.l1
+    .line-2
+      stroke: theme.l2
+
+    .player-1
+      &.active .timer
+        background-color: theme.w1
+      &.win .timer
+        background-color: theme.w1
+    .player-2
+      &.active .timer
+        background-color: theme.w2
+      &.win .timer
+        background-color: theme.w2
+
+    .draw .timer
+    .player-1, .player-2
+      &.waiting .timer
+        background-color: theme.waiting
+
+  .theme--dark {name}
+
+    .draw .timer
+    .player-1, .player-2
+      &.waiting .timer
+        background-color: theme.waitingDark
+
+    .symbol-1
+      fill: theme.s1
+      stroke: theme.s1
+    .symbol-2
+      fill: theme.s2
+      stroke: theme.s2

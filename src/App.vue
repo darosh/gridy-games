@@ -1,54 +1,136 @@
 <template>
-  <div id="app">
-    <header>
-      <span>Vue.js PWA</span>
-    </header>
-    <main>
-      <img src="./assets/logo.png" alt="Vue.js PWA">
-      <router-view></router-view>
-    </main>
-  </div>
+  <v-app
+    id="app"
+    :dark="$store.state.dark">
+    <v-navigation-drawer
+      v-model="menu"
+      fixed
+      left
+      app
+      disable-resize-watcher
+      disable-route-watcher>
+      <app-menu/>
+    </v-navigation-drawer>
+    <v-navigation-drawer
+      v-model="drawer"
+      fixed
+      right
+      app
+      disable-resize-watcher
+      disable-route-watcher>
+      <settings v-if="!$route.meta.home && drawer" />
+    </v-navigation-drawer>
+    <v-toolbar
+      :class="{'elevation-0': !this.$route.meta.home, 'elevation-1': this.$route.meta.home}"
+      :color="this.$store.state.dark ? '' : !this.$route.meta.home ? 'grey lighten-5' : ''"
+      :style="{'background-color': this.$store.state.dark ? !this.$route.meta.home ? '#303030' : '' : ''}"
+      dense
+      app>
+      <v-btn
+        v-if="!$route.meta.home"
+        icon
+        to="/">
+        <v-icon>arrow_back</v-icon>
+      </v-btn>
+      <v-btn
+        v-else
+        icon
+        @click.stop="menu=!menu">
+        <v-icon>menu</v-icon>
+      </v-btn>
+      <v-toolbar-title :class="{'hidden-xs-only': !this.$route.meta.home}">{{ title }}</v-toolbar-title>
+      <v-spacer/>
+      <v-btn
+        v-if="!$route.meta.home"
+        icon
+        @click.stop="drawer = !drawer">
+        <v-icon>settings</v-icon>
+      </v-btn>
+    </v-toolbar>
+    <v-content :class="{'no-animation': $route.meta.home}">
+      <v-container
+        fluid="fluid"
+        class="pa-0">
+        <router-view/>
+      </v-container>
+    </v-content>
+    <v-snackbar
+      v-model="showUpdate"
+      :timeout="1e10"
+      color="grey darken-3"
+      left
+      bottom>
+      <v-flex
+        v-touch="{left: () => update = false, right: () => update = false}"
+        @click.native="update = false">Update ready!</v-flex>
+      <v-btn
+        flat
+        color="light-blue"
+        @click.native="reload()">Reload</v-btn>
+    </v-snackbar>
+  </v-app>
 </template>
 
 <script>
+import Settings from './components/Settings'
+import AppMenu from './components/Menu'
+import { Games } from './lib'
+
 export default {
-  name: 'app'
+  name: 'App',
+  components: {
+    AppMenu,
+    Settings
+  },
+  data () {
+    return {
+      drawer: false,
+      menu: false,
+      update: true
+    }
+  },
+  computed: {
+    title () {
+      return (
+        this.$route.meta.title ||
+        (this.$route.params.id && Games[this.$route.params.id + 'Game']
+          ? Games[this.$route.params.id + 'Game'].title
+          : '?')
+      )
+    },
+    showUpdate: {
+      get () {
+        return this.$store.state.update && this.update
+      },
+      set (value) {
+        this.update = value
+      }
+    }
+  },
+  watch: {
+    $route: function () {
+      this.drawer = false
+      this.menu = false
+      this.update = true
+    }
+  },
+  methods: {
+    reload () {
+      if (window.$registration && window.$registration.update) {
+        window.$registration.update()
+      }
+
+      window.location.reload(true)
+    }
+  }
 }
 </script>
 
 <style>
-body {
-  margin: 0;
+html {
+  overflow-y: auto !important;
 }
-
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-
-main {
-  text-align: center;
-  margin-top: 40px;
-}
-
-header {
-  margin: 0;
-  height: 56px;
-  padding: 0 16px 0 24px;
-  background-color: #35495E;
-  color: #ffffff;
-}
-
-header span {
-  display: block;
-  position: relative;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: .02em;
-  font-weight: 400;
-  box-sizing: border-box;
-  padding-top: 16px;
+.content.no-animation {
+  transition: none;
 }
 </style>

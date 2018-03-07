@@ -1,0 +1,37 @@
+qirkatTheme = {
+  tileFill: #B71C1C,
+  tileOdd: #EFEBE9,
+  possible: #fff,
+  tileStroke: #212121,
+  lineStroke: #212121,
+  waiting: #E0E0E0,
+  waitingDark: #616161,
+  tileWaiting: #A1887F,
+  t1: #212121,
+  t2: #fff,
+  s1: #212121,
+  so1: #212121,
+  s2: #fff,
+  so2: #212121,
+  l1: #3E2723,
+  l2: #3E2723,
+  b1: #D7CCC8,
+  b2: #D7CCC8,
+  w1: #3E2723,
+  w2: #3E2723,
+}
+
+@require "./colors"
+
+colors(qirkatTheme, '.qirkat-theme')
+
+.qirkat-theme
+  polygon
+    stroke-width: 1
+    stroke: qirkatTheme.tileFill
+
+  rect
+    stroke: #000
+    stroke-width: 6
+  rect.preview
+    stroke-width: 2
