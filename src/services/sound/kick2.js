@@ -2,42 +2,48 @@ import {
   tickStop
 } from './tick'
 
-import {latency} from './latency'
+import {
+  latency
+} from './latency'
 
 let env
 
-export function kick2Sound () {
-  const {
-    AmplitudeEnvelope,
-    Oscillator,
-    Panner,
-    supported
-  } = require('tone')
+export function kick2Sound() {
+  import ('tone').then(({
+    default: {
+      AmplitudeEnvelope,
+      Oscillator,
+      Panner,
+      supported
+    }
+  }) => {
 
-  if (!supported) {
-    return
-  }
 
-  if (!env) {
-    env = new Panner(1).connect(latency.master)
+    if (!supported) {
+      return
+    }
 
-    env = new AmplitudeEnvelope({
-      attack: 0.01,
-      decay: 0.4,
-      sustain: 0.1,
-      release: 0.4
-    }).connect(env)
+    if (!env) {
+      env = new Panner(1).toMaster()
 
-    env.attackCurve = 'exponential'
+      env = new AmplitudeEnvelope({
+        attack: 0.01,
+        decay: 0.4,
+        sustain: 0.1,
+        release: 0.4
+      }).connect(env)
 
-    new Oscillator({
-      type: 'sawtooth3',
-      frequency: 'D4',
-      volume: -12
-    }).connect(env).start()
-  }
+      env.attackCurve = 'exponential'
 
-  // latency.last = env
-  tickStop(latency.stop)
-  env.triggerAttackRelease(0.2, latency.start)
+      new Oscillator({
+        type: 'sawtooth3',
+        frequency: 'D4',
+        volume: -12
+      }).connect(env).start()
+    }
+
+    // latency.last = env
+    tickStop(latency.stop)
+    env.triggerAttackRelease(0.2, latency.start)
+  })
 }

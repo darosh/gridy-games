@@ -1,3 +1,4 @@
 /dist/
 /node_modules/
 /build/*/es5
+/plugins/icons.js

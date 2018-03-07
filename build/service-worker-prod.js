@@ -19,7 +19,6 @@
       navigator.serviceWorker.register('service-worker.js')
         .then(function (registration) {
           window.$registration = registration
-          console.info('service-worker', 'registration')
           // updatefound is fired if service-worker.js changes.
           registration.onupdatefound = function () {
             // updatefound is also fired the very first time the SW is installed,
@@ -37,9 +36,6 @@
                     // fresh content will have been added to the cache.
                     // It's the perfect time to display a "New content is
                     // available; please refresh." message in the page's interface.
-
-                    console.info('service-worker', 'installed')
-
                     if (window.$store) {
                       window.$store.commit('update', true)
                     } else {

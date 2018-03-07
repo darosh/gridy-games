@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Main from '@/components/Main'
-import Game from '@/components/Game'
+const Main = () => import('@/components/Main')
+const Game = () => import('@/components/Game')
 
 Vue.use(Router)
 

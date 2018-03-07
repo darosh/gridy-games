@@ -7,7 +7,7 @@ import router from './router'
 // import 'vuetify/dist/vuetify.min.css'
 import './style/index.styl'
 import store from './store'
-import * as icons from './services/icons'
+import * as icons from '../plugins/icons'
 
 import {
   Vuetify, // required
