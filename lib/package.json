@@ -1,0 +1,53 @@
+{
+  "name": "gridy-games-lib",
+  "description": "Board games library",
+  "version": "0.1.0",
+  "author": "Jan Forst <ensonador@gmail.com>",
+  "dependencies": {
+    "gridy": "github:darosh/gridy"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.1.3",
+    "@types/node": "^9.4.6",
+    "babel-core": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
+    "concurrently": "^3.5.1",
+    "del-cli": "^1.1.0",
+    "jest": "^22.3.0",
+    "rollup": "^0.56.2",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-commonjs": "^8.3.0",
+    "rollup-plugin-node-resolve": "^3.0.3",
+    "rollup-plugin-uglify": "^3.0.0",
+    "ts-jest": "^22.0.4",
+    "tslint": "^5.9.1",
+    "typedoc": "^0.10.0",
+    "typedoc-plugin-internal-external": "^1.0.10",
+    "typescript": "^2.7.2",
+    "uglify-js": "^3.3.10"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ]
+  },
+  "license": "MIT",
+  "main": "dist/games.js",
+  "module": "dist/es6/index.js",
+  "private": true,
+  "scripts": {
+    "build": "del-cli dist && tsc -d --declarationDir dist/types -p tsconfig.json --outDir dist/es6 && rollup -c rollup.config.js dist/es6/index.js -o dist/games.js -f umd -n Games",
+    "clean": "del-cli doc dist",
+    "dist": "del-cli dist && tsc -d --declarationDir dist/types -p tsconfig.json --outDir dist/es6 && rollup -c rollup.config.js dist/es6/index.js -o dist/games.js -f umd -n Games && uglifyjs dist/games.js > dist/games.min.js",
+    "doc": "del-cli doc && typedoc --hideGenerator --mode file --out doc src/ --name Games",
+    "lint": "tslint -p tsconfig.json --fix",
+    "test": "jest",
+    "watch": "npm run build && concurrently --raw --kill-others \"tsc --watch -d --declarationDir dist/types -p tsconfig.json --outDir dist/es6\" \"rollup -c rollup.config.js dist/es6/index.js -w -o dist/games.js -f umd -n Games\""
+  }
+}

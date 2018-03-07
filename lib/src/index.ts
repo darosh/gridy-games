@@ -1,0 +1,16 @@
+export { Move } from "./Move";
+export { GameProxy } from "./GameProxy";
+export { IGame } from "./IGame";
+export { IPLayer } from "./IPlayer";
+
+export * from "./games";
+export * from "./players";
+
+import * as games from "./games";
+export const Games = games;
+
+import * as players from "./players";
+export const Players = players;
+
+export { reset, stringify, update } from "./utils";
+export * from "./utils/actions";
