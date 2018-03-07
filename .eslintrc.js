@@ -2,7 +2,7 @@
 
 module.exports = {
   root: true,
-  // parser: 'babel-eslint',
+  parser: 'babel-eslint',
   parserOptions: {
     sourceType: 'module',
     allowImportExportEverywhere: true
@@ -11,11 +11,11 @@ module.exports = {
     browser: true,
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
-  extends: ["standard", "plugin:vue/recommended"],
+  extends: ["standard"/*, "plugin:vue/recommended"*/],
   // required to lint *.vue files
-  // plugins: [
-  //   'html'
-  // ],
+  plugins: [
+    'html'
+  ],
   // add your custom rules here
   'rules': {
     // allow paren-less arrow functions

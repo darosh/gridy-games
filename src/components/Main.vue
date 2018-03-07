@@ -51,10 +51,10 @@
 
 <script>
 import { Games } from '../lib'
-import Preview from './Preview'
 
 export default {
-  components: { preview: Preview },
+  name: 'Main',
+  components: { Preview: () => import('./Preview') },
   data () {
     return {
       games: Object.keys(Games).map(g => ({

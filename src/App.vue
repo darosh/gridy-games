@@ -21,6 +21,7 @@
       <settings v-if="!$route.meta.home && drawer" />
     </v-navigation-drawer>
     <v-toolbar
+      v-show="this.$route.name"
       :class="{'elevation-0': !this.$route.meta.home, 'elevation-1': this.$route.meta.home}"
       :color="this.$store.state.dark ? '' : !this.$route.meta.home ? 'grey lighten-5' : ''"
       :style="{'background-color': this.$store.state.dark ? !this.$route.meta.home ? '#303030' : '' : ''}"
@@ -33,7 +34,7 @@
         <v-icon>arrow_back</v-icon>
       </v-btn>
       <v-btn
-        v-else
+        v-else-if="$route.meta.home"
         icon
         @click.stop="menu=!menu">
         <v-icon>menu</v-icon>
@@ -51,7 +52,9 @@
       <v-container
         fluid="fluid"
         class="pa-0">
-        <router-view/>
+        <keep-alive :include="/Main/">
+          <router-view />
+        </keep-alive>
       </v-container>
     </v-content>
     <v-snackbar
@@ -72,15 +75,13 @@
 </template>
 
 <script>
-import Settings from './components/Settings'
-import AppMenu from './components/Menu'
 import { Games } from './lib'
 
 export default {
   name: 'App',
   components: {
-    AppMenu,
-    Settings
+    AppMenu: () => import('./components/Menu'),
+    Settings: () => import('./components/Settings')
   },
   data () {
     return {
@@ -95,7 +96,7 @@ export default {
         this.$route.meta.title ||
         (this.$route.params.id && Games[this.$route.params.id + 'Game']
           ? Games[this.$route.params.id + 'Game'].title
-          : '?')
+          : '')
       )
     },
     showUpdate: {

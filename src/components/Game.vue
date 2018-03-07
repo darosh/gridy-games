@@ -223,7 +223,6 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import Vue from 'vue'
 import {
   Games,
   initActions,

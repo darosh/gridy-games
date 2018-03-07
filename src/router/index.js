@@ -8,6 +8,7 @@ Vue.use(Router)
 export default new Router({
   routes: [{
     path: '/',
+    name: 'home',
     component: Main,
     meta: {
       title: 'Gridy Games',
