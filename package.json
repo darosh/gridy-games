@@ -1,7 +1,7 @@
 {
   "name": "gridy-games",
   "description": "Board games",
-  "version": "0.1.68",
+  "version": "0.1.69",
   "author": "darosh <ensonador@gmail.com>",
   "browserslist": [
     "> 1%",
@@ -80,7 +80,7 @@
   "scripts": {
     "clean": "del-cli dist/*.js dist/*.html dist/static",
     "build": "webpack --mode production -p",
-    "deploy": "npm --no-git-tag-version version patch && npm run build && deploy-to-gh-pages --local ./dist",
+    "deploy": "npm run clean && npm --no-git-tag-version version patch && npm run build && deploy-to-gh-pages --local ./dist",
     "dev": "webpack --mode development",
     "eslint": "eslint --fix --ext .js,.vue src",
     "install": "rollup -c rollup.config.js -f es -o plugins/icons.js plugins/icons.bundle.js && cross-env NODE_ENV=es5 babel build/vuetify/src --out-dir build/vuetify/es5 && node ./build/patch.js vuetify",
