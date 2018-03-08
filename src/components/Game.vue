@@ -161,7 +161,7 @@
                 :tiles="winning"
                 :center="center"
                 :size="game.grid.scale"
-                :delay="400" />
+                :delay="200" />
             </g>
           </svg>
         </div>

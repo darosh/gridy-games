@@ -4,12 +4,10 @@
 
 <script>
 import { scaleThreshold, scaleLinear } from "d3-scale";
-// import { autoPlay, Tween, Easing } from "es6-tween";
-// import  from "@tweenjs/tween.js";
 import TWEEN from "@tweenjs/tween.js";
-const { Tween, Easing } = TWEEN;
+import { start, stop } from "../services/tween";
 
-// autoPlay(true);
+const { Tween, Easing } = TWEEN;
 
 export default {
   props: {
@@ -37,7 +35,8 @@ export default {
   data() {
     return {
       points: "",
-      fixed: []
+      fixed: [],
+      pending: null
     };
   },
   watch: {
@@ -52,7 +51,16 @@ export default {
     }
   },
   methods: {
+    destroyed() {
+      this.stop()
+    },
+    stop() {
+      if (pending) {
+        this.pending.stop();
+      }
+    },
     line(tiles) {
+      this.points = ''
       const centers = tiles.map(t => this.center(t));
       let length = 0;
       let prev = null;
@@ -82,25 +90,14 @@ export default {
       const scales = new Map(entries);
       this.fixed = [centers[0]];
 
-      function animate(time) {
-        requestAnimationFrame(animate);
-        TWEEN.update(time);
-      }
-      requestAnimationFrame(animate);
+      start();
 
-      new Tween({ value: 0 })
+      this.pending = new Tween({ value: 0 })
         .to({ value: length }, this.duration)
-        // .on("update", ({value}) => {
+        .delay(this.delay)
         .onUpdate(({ value }) => {
-          value = Math.abs(value);
           const to = scale(value);
           const part = scales.get(to);
-
-          // if (!part) {
-          //   console.warn(value, length, lengths);
-          //   return;
-          // }
-
           const index = centers.indexOf(to);
 
           while (this.fixed.length < index) {
@@ -111,9 +108,8 @@ export default {
           this.points =
             this.fixed.map(p => p.toString()).join(",") + `,${end.x},${end.y}`;
         })
-        // .on('complete', () => {
-        //   autoPlay(false)
-        // })
+        .onStop(stop)
+        .onComplete(stop)
         .easing(Easing.Quartic.InOut)
         .start();
     }
