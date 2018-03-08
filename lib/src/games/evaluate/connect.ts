@@ -176,7 +176,7 @@ export function winning(move: any, player: number, min: number): AnyTile[] | und
 
   for (const n of move.links as any) {
     if (!done[-n[0]]) {
-      const result = [move];
+      const result = [];
       done[-n[0]] = true;
 
       let o: any = n[1];
