@@ -1,6 +1,6 @@
 import { AnyTile, Directions, TileMap, toMap } from "gridy";
 
-function maped(available: TileMap, selection: Directions<AnyTile>) {
+function mapped(available: TileMap, selection: Directions<AnyTile>) {
   return selection.filter((t) => available.has(t[1].key))
     .map((t) => [t[0], available.get(t[1].key)]) as Directions<AnyTile>;
 }
@@ -10,11 +10,11 @@ export function evaluateLines(t1: AnyTile[], free: Map<string, AnyTile>, min: nu
   const a1 = toMap(t1);
 
   for (const t of t1) {
-    const m = new Map(maped(a1, t.neighbors()));
-    const s = Array.from(m.keys()).filter((k) => (k > 0) && !m.has(t.oposite ? t.oposite(k) : -k));
+    const m = new Map(mapped(a1, t.neighbors()));
+    const s = Array.from(m.keys()).filter((k) => (k > 0) && !m.has(t.opposite ? t.opposite(k) : -k));
 
     if (!s.length) {
-      const mp = maped(free, t.neighbors());
+      const mp = mapped(free, t.neighbors());
       c = Math.max(c, mp.length / 8);
       continue;
     }
@@ -25,7 +25,7 @@ export function evaluateLines(t1: AnyTile[], free: Map<string, AnyTile>, min: nu
 
       while (i) {
         l.push(i);
-        i = new Map(maped(a1, i.neighbors())).get(k);
+        i = new Map(mapped(a1, i.neighbors())).get(k);
       }
 
       const v = l.length;
@@ -36,13 +36,13 @@ export function evaluateLines(t1: AnyTile[], free: Map<string, AnyTile>, min: nu
 
       let f = 0;
 
-      i = new Map(maped(free, l[0].neighbors())).get(-k);
+      i = new Map(mapped(free, l[0].neighbors())).get(-k);
 
       if (i) {
         f++;
       }
 
-      i = new Map(maped(free, l[l.length - 1].neighbors())).get(k);
+      i = new Map(mapped(free, l[l.length - 1].neighbors())).get(k);
 
       if (i) {
         f++;
@@ -71,7 +71,7 @@ export function evaluateLinked(tiles: AnyTile[], min: number, player: number): n
       if (u[0] > 0) {
         const to: any = u[1];
 
-        const from: any = t.links.get(t.oposite ? t.oposite(u[0]) : -u[0]);
+        const from: any = t.links.get(t.opposite ? t.opposite(u[0]) : -u[0]);
 
         if ((!from || from.data !== player) && (to.data === player)) {
           s.push(u[0]);
@@ -85,7 +85,7 @@ export function evaluateLinked(tiles: AnyTile[], min: number, player: number): n
     //     }
 
     //     const to: any = t.links.get(k);
-    //     const from: any = t.links.get(t.oposite ? t.oposite(k) : -k);
+    //     const from: any = t.links.get(t.opposite ? t.opposite(k) : -k);
 
     //     return to && (to.data === player) && (!from || from.data !== player);
     //   });
@@ -150,18 +150,20 @@ export function connections(move: any, player: number, min: number) {
       done[-n[0]] = true;
 
       let o: any = n[1];
-      let v = 0;
+      let v = 1;
 
       while (o && (o.data === player)) {
         v++;
         o = o.links.get(n[0]);
+        o = (o !== move) ? o : false;
       }
 
-      o = (n[1] as any).links.get(-n[0]);
+      o = (move as any).links.get(-n[0]);
 
       while (o && (o.data === player)) {
         v++;
         o = o.links.get(-n[0]);
+        o = (o !== move) ? o : false;
       }
 
       if (v >= min) {
@@ -176,24 +178,26 @@ export function winning(move: any, player: number, min: number): AnyTile[] | und
 
   for (const n of move.links as any) {
     if (!done[-n[0]]) {
-      const result = [];
+      const result = [move];
       done[-n[0]] = true;
 
       let o: any = n[1];
-      let v = 0;
+      let v = 1;
 
       while (o && (o.data === player)) {
         result.push(o);
         v++;
         o = o.links.get(n[0]);
+        o = (o !== move) ? o : false;
       }
 
-      o = (n[1] as any).links.get(-n[0]);
+      o = (move as any).links.get(-n[0]);
 
       while (o && (o.data === player)) {
         result.unshift(o);
         v++;
         o = o.links.get(-n[0]);
+        o = (o !== move) ? o : false;
       }
 
       if (v >= min) {

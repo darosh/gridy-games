@@ -3,11 +3,11 @@
 </template>
 
 <script>
-import { scaleThreshold, scaleLinear } from "d3-scale";
-import TWEEN from "@tweenjs/tween.js";
-import { start, stop } from "../services/tween";
+import { scaleThreshold, scaleLinear } from 'd3-scale'
+import TWEEN from '@tweenjs/tween.js'
+import { start, stop } from '../services/tween'
 
-const { Tween, Easing } = TWEEN;
+const { Tween, Easing } = TWEEN
 
 export default {
   props: {
@@ -32,51 +32,51 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
-      points: "",
+      points: '',
       fixed: [],
       pending: null
-    };
+    }
   },
   watch: {
-    size: function() {
-      this.line(this.tiles);
+    size: function () {
+      this.line(this.tiles)
     },
     tiles: {
       immediate: true,
-      handler: function(tiles) {
-        this.line(tiles);
+      handler: function (tiles) {
+        this.line(tiles)
       }
     }
   },
   methods: {
-    destroyed() {
+    destroyed () {
       this.stop()
     },
-    stop() {
-      if (pending) {
-        this.pending.stop();
+    stop () {
+      if (this.pending) {
+        this.pending.stop()
       }
     },
-    line(tiles) {
+    line (tiles) {
       this.points = ''
-      const centers = tiles.map(t => this.center(t));
-      let length = 0;
-      let prev = null;
+      const centers = tiles.map(t => this.center(t))
+      let length = 0
+      let prev = null
 
       const lengths = centers.map(t => {
-        prev = prev || t;
-        length += Math.pow(prev.x - t.x, 2) + Math.pow(prev.y - t.y, 2);
-        prev = t;
-        return length;
-      });
+        prev = prev || t
+        length += Math.sqrt(Math.pow(prev.x - t.x, 2) + Math.pow(prev.y - t.y, 2))
+        prev = t
+        return length
+      })
 
       const scale = scaleThreshold()
         .range(centers)
-        .domain(lengths);
+        .domain(lengths)
 
-      const entries = [];
+      const entries = []
 
       for (let i = 1; i < centers.length; i++) {
         entries.push([
@@ -84,35 +84,35 @@ export default {
           scaleLinear()
             .range([centers[i - 1], centers[i]])
             .domain([lengths[i - 1], lengths[i]])
-        ]);
+        ])
       }
 
-      const scales = new Map(entries);
-      this.fixed = [centers[0]];
+      const scales = new Map(entries)
+      this.fixed = [centers[0]]
 
-      start();
+      start()
 
       this.pending = new Tween({ value: 0 })
         .to({ value: length }, this.duration)
         .delay(this.delay)
         .onUpdate(({ value }) => {
-          const to = scale(value);
-          const part = scales.get(to);
-          const index = centers.indexOf(to);
+          const to = scale(value)
+          const part = scales.get(to)
+          const index = centers.indexOf(to)
 
           while (this.fixed.length < index) {
-            this.fixed.push(centers[this.fixed.length]);
+            this.fixed.push(centers[this.fixed.length])
           }
 
-          const end = part(value);
+          const end = part(value)
           this.points =
-            this.fixed.map(p => p.toString()).join(",") + `,${end.x},${end.y}`;
+            this.fixed.map(p => p.toString()).join(',') + `,${end.x},${end.y}`
         })
         .onStop(stop)
         .onComplete(stop)
-        .easing(Easing.Quartic.InOut)
-        .start();
+        .easing(Easing.Quintic.InOut)
+        .start()
     }
   }
-};
+}
 </script>

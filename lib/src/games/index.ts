@@ -1,4 +1,6 @@
 export { TicTacToeGame } from "./TicTacToeGame";
+export { CircularTicTacToeGame } from "./CircularTicTacToeGame";
+export { CircularFourInARowGame } from "./CircularFourInARow";
 
 export { TacTickleGame } from "./TacTickleGame";
 export { TacTickle4Game } from "./TacTickle4Game";

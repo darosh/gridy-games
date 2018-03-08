@@ -4,7 +4,7 @@ const THEMES = [
   ['gomoku', /Gomoku|in-a-row/],
   ['plastic', /Connect Four/],
   ['hex-checkers', /Hex .* Checkers/],
-  ['hex', /Hex|Tic Tac Toe/],
+  ['hex', /Hex|Tic Tac Toe|Circular Four/],
   ['checkers', /Checkers/],
   ['qirkat', null, /Misc/],
   ['mills', null, /Mills/]

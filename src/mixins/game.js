@@ -19,11 +19,15 @@ export default {
       this.game.grid.scale = 1
       let bounds = this.game.grid.bounds()
 
-      this.game.grid.scale = Math.round(
-        scaleToFit(bounds.maxX - bounds.minX, bounds.maxY - bounds.minY, this.frame[0], this.frame[1])
-      )
+      let scaled = scaleToFit(bounds.maxX - bounds.minX, bounds.maxY - bounds.minY, this.frame[0], this.frame[1])
 
-      this.game.grid.scale -= this.game.grid.scale % 2
+      if (!this.game.grid.irregular) {
+        this.game.grid.scale = Math.round(scaled)
+        this.game.grid.scale -= this.game.grid.scale % 2
+      } else {
+        this.game.grid.scale = scaled
+      }
+
       bounds = this.game.grid.bounds()
       this.size = [bounds.maxX - bounds.minX + this.margin, bounds.maxY - bounds.minY + this.margin]
 
@@ -38,11 +42,21 @@ export default {
       // if (this.frame[0] < this.frame[1] && this.size[0] > this.size[1]) {
       //   this.size.reverse()
       // }
+    },
+    path (tile) {
+      return this.game.grid
+        .path(tile)
+    },
+    irregularVertices (tile) {
+      return this.game.grid
+        .path(tile)
+        .map(p => p.x.toFixed(3) + ',' + p.y.toFixed(3))
+        .join(' ')
     }
   },
   computed: {
     vertices () {
-      return this.game.grid
+      return this.game.grid.irregular ? false : this.game.grid
         .vertices(undefined, this.game.scale ? (2 * Math.round(this.game.scale * this.game.grid.scale / 2)) : this.game.grid.scale, 1)
         .map(p => p.x.toFixed(3) + ',' + p.y.toFixed(3))
         .join(' ')

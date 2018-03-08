@@ -2,7 +2,9 @@ xs = '(max-width: 599px), (max-height: 599px)'
 bar = 3px
 
 style()
-  polygon
+  // polygon
+  // path
+  .tile
     stroke-width: 3
     @media xs
       stroke-width: 2
@@ -43,10 +45,12 @@ style()
     fill: none
 
   .preview
-    polygon
+    // polygon
+    .tile
     line
       stroke-width: 1
-      stroke-width: 1
+    path.tile
+      stroke-width: 0.5
 
   #stripes
   #stripes-30

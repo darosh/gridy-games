@@ -9,7 +9,7 @@
       :y="margin/2 + 0.5"
       :width="size[0] - margin"
       :height="size[1] - margin"
-      class="preview"/>
+      class="preview" />
     <g
       :transform="'translate('+ translate +')'"
       class="preview">
@@ -25,10 +25,18 @@
         v-for="t in game.grid.tiles"
         :key="t.key"
         :transform="'translate(' + center(t) + ')'">
+        <path
+          v-if="game.grid.irregular"
+          :d="path(t)"
+          :class="{['angle-' + Math.abs(game.grid.orientation * game.grid.angle)] : true, ['value-' + (t.data || 0)]: true, possible: t.highlighted, odd: t.odd, animate: true}"
+          :transform="'rotate(' + (game.grid.orientation * game.grid.angle) + ')'"
+          class="tile" />
         <polygon
-          :points="vertices"
-          :class="{possible: t.highlighted, odd: t.odd}"
-          :transform="'rotate(' + (game.grid.orientation * game.grid.angle) + ')'" />
+          v-else
+          :points="vertices || irregularVertices(t)"
+          :class="{['angle-' + Math.abs(game.grid.orientation * game.grid.angle)] : true, ['value-' + (t.data || 0)]: true, possible: t.highlighted, odd: t.odd, animate: true}"
+          :transform="'rotate(' + (game.grid.orientation * game.grid.angle) + ')'"
+          class="tile" />
       </g>
       <line
         v-for="(l, k) in rulers"

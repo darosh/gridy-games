@@ -108,11 +108,21 @@
                 v-for="t in game.grid.tiles"
                 :key="t.key"
                 :transform="'translate(' + center(t) + ')'">
-                <polygon
-                  :points="vertices"
+                <path
+                  v-if="game.grid.irregular"
+                  :d="path(t)"
                   :class="{['angle-' + Math.abs(game.grid.orientation * game.grid.angle)] : true, clickable: t.highlighted && !robotTurn, ['value-' + (t.data || 0)]: true, possible: t.highlighted, odd: t.odd, animate: true, waiting: t.highlighted && robotTurn}"
                   :transform="'rotate(' + (game.grid.orientation * game.grid.angle) + ')'"
-                  @click="move(t)" /> </g>
+                  class="tile"
+                  @click="move(t)" />
+                <polygon
+                  v-else
+                  :points="vertices || irregularVertices(t)"
+                  :class="{['angle-' + Math.abs(game.grid.orientation * game.grid.angle)] : true, clickable: t.highlighted && !robotTurn, ['value-' + (t.data || 0)]: true, possible: t.highlighted, odd: t.odd, animate: true, waiting: t.highlighted && robotTurn}"
+                  :transform="'rotate(' + (game.grid.orientation * game.grid.angle) + ')'"
+                  class="tile"
+                  @click="move(t)" />
+              </g>
               <line
                 v-for="(l, k) in rulers"
                 :key="'r' + k"
