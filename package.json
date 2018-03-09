@@ -1,7 +1,7 @@
 {
   "name": "gridy-games",
   "description": "Board games",
-  "version": "0.1.73",
+  "version": "0.1.78",
   "author": "darosh <ensonador@gmail.com>",
   "browserslist": [
     "> 1%",
@@ -44,7 +44,7 @@
     "eslint-plugin-html": "^4.0.2",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
     "eslint-plugin-vue": "^4.3.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
@@ -59,7 +59,7 @@
     "style-loader": "^0.20.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "sw-precache-webpack-plugin": "^0.11.4",
+    "sw-precache-webpack-plugin": "^0.11.5",
     "ts-loader": "^4.0.1",
     "tslint": "^5.9.1",
     "typescript": "^2.7.2",
