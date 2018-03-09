@@ -5,18 +5,15 @@
         <circle :class="'symbol-' + value" cx="12" cy="12" r="8" />
       </svg>
       <v-flex text-xs-center style="position: relative: top: 2px">
-        <transition v-if="game.player === value" name="count-transition" mode="out-in">
-          <span v-if="game.counter < 0" :key="game.counter"></span>
-          <div v-else-if="game.counter > 0" :key="game.counter" class="title">{{ game.counter }}</div>
-          <v-icon v-else :key="game.counter">timer_off</v-icon>
+        <transition name="count-transition" mode="out-in">
+          <div v-if="game.player === value && game.counter > 0" :key="game.counter" class="title">{{ game.counter }}</div>
+          <v-icon v-else-if="game.player === value && game.counter === 0" :key="game.counter">timer_off</v-icon>
+          <v-icon key="a" v-else-if="switcher" :color="$store.state.dark ? 'grey lighten-3' : 'grey darken-3'">swap_horiz</v-icon>
+          <v-icon key="b" v-else-if="!game.winner && game.player === value && waiting" :color="$store.state.dark ? 'grey lighten-3' : 'grey darken-3'" class="rotate-animation">hourglass_empty</v-icon>
+          <v-icon key="c" v-else-if="!game.winner && game.player === value" :color="$store.state.dark ? 'grey lighten-3' : 'grey darken-3'">play_arrow</v-icon>
+          <v-icon key="d" v-else-if="game.winner === value" :color="$store.state.dark ? 'grey lighten-3' : 'grey darken-3'">mood</v-icon>
+          <v-icon key="e" v-else-if="game.winner === -1" :color="$store.state.dark ? 'grey lighten-3' : 'grey darken-3'">sentiment_very_dissatisfied</v-icon>
         </transition>
-        <div v-if="game.counter < 0 || game.player !== value">
-          <v-icon v-if="switcher" :color="$store.state.dark ? 'grey lighten-3' : 'grey darken-3'">swap_horiz</v-icon>
-          <v-icon v-else-if="!game.winner && game.player === value && waiting" :color="$store.state.dark ? 'grey lighten-3' : 'grey darken-3'" class="rotate-animation">hourglass_empty</v-icon>
-          <v-icon v-else-if="!game.winner && game.player === value" :color="$store.state.dark ? 'grey lighten-3' : 'grey darken-3'">play_arrow</v-icon>
-          <v-icon v-else-if="game.winner === value" :color="$store.state.dark ? 'grey lighten-3' : 'grey darken-3'">mood</v-icon>
-          <v-icon v-else-if="game.winner === -1" :color="$store.state.dark ? 'grey lighten-3' : 'grey darken-3'">sentiment_very_dissatisfied</v-icon>
-        </div>
       </v-flex>
       <span v-if="game.score" class="px-2 body-2">{{ game.score[value] }}</span>
       <span v-else class="mx-3" />
@@ -120,6 +117,11 @@ body-2 {
   }
 }
 
+.count-transition-leave,
+.count-transition-leave-active,
+.count-transition-leave-to {
+  display: none;
+}
 .count-transition-enter {
   transform: scale(0.5);
   opacity: 0.5;
