@@ -7,19 +7,32 @@ import {
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
+const STORAGE = 'gridy-games'
 
-const state = {
+let value
+
+const state = ((value = localStorage.getItem(STORAGE)) && (JSON.parse(value))) || {
   player: defaultPlayers(),
-  update: window.$update,
   timer: 15000,
   sound: false,
   dark: false,
   vibration: true
 }
 
+state.update = window.$update
+
+function storage (store) {
+  store.subscribe((mutation, state) => {
+    const value = Object.assign({}, state)
+    delete value.update
+    localStorage.setItem(STORAGE, JSON.stringify(value))
+  })
+}
+
 const $store = new Vuex.Store({
   // modules: {},
   state,
+  plugins: [storage],
   getters: {
     player: state => state.player
   },
