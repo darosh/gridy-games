@@ -5,7 +5,7 @@ import {
 export default {
   data () {
     return {
-      game: null,
+      // game: null,
       translate: [],
       size: []
     }
@@ -63,8 +63,9 @@ export default {
     }
   },
   watch: {
-    frame () {
-      this.frameUpdate()
+    frame: {
+      handler: function () { this.frameUpdate() },
+      immediate: true
     }
   }
 }

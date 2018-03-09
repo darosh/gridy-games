@@ -24,10 +24,10 @@ export enum Phase {
   MODIFIED = 2,
 }
 
-export type Step = (IGameTile | ICompoudStep);
+export type Step = (IGameTile | ICompoundStep);
 export type Move = Step | Step[];
 
-export interface ICompoudStep extends Array<IGameTile | IGameTile[] | undefined> {
+export interface ICompoundStep extends Array<IGameTile | IGameTile[] | undefined> {
   [Phase.PLACE]: IGameTile;
   [Phase.REMOVED]?: IGameTile | IGameTile[];
   [Phase.MODIFIED]?: IGameTile | IGameTile[];
@@ -46,5 +46,9 @@ export interface IGameState {
 
 export interface IGridGame {
   grid: IGrid<IGameTile>;
+  scale?: number;
   actions?: IGameState[];
+  winning?: () => IGameTile[];
+  rulers?: () => IGameTile[];
+  links?: () => IGameTile[];
 }

@@ -130,7 +130,7 @@
       color="transparent">
       <v-subheader class="pl-3">Info</v-subheader>
     </v-toolbar>
-    <info :game="game" />
+    <g-info :game="game" />
   </div>
 </template>
 
@@ -140,11 +140,10 @@ import { Shared } from '../services/shared'
 import { Games, reset, stringify, update } from '../lib'
 import { Bus } from '../services/bus'
 import { kick1Sound } from '../services/sound/kick1'
-import Info from './Info'
 
 export default {
   components: {
-    Info
+    GInfo: () => import('./Info')
   },
   data () {
     return {

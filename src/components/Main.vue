@@ -17,7 +17,9 @@
           height="100%">
           <div
             v-if="game.wip"
-            class="px-3 py-2 red lighten-4 red--text text--darken-4 body-1"><i>Not implemented yet</i></div>
+            class="px-3 py-2 red lighten-4 red--text text--darken-4 body-1">
+            <i>Not implemented yet</i>
+          </div>
           <v-card-title>
             <div>
               <div class="headline">{{ game.data.title || game.id }}</div>
@@ -32,11 +34,11 @@
           <div
             class="text-xs-center"
             style="min-height: 112px">
-            <preview
-              v-if="game.show"
-              :value="game.name"
+            <g-board
+              :game="game.value"
               :frame="[164,96]"
-              :margin="4" />
+              :margin="4"
+              class="preview"/>
           </div>
           <v-card-text>
             <div
@@ -53,12 +55,14 @@
 import { Games } from '../lib'
 
 export default {
-  name: 'Main',
-  components: { Preview: () => import('./Preview') },
+  components: {
+    GBoard: () => import('./Board')
+  },
   data () {
     return {
       games: Object.keys(Games).map(g => ({
         name: g,
+        value: new Games[g](),
         id: g.replace('Game', ''),
         data: Games[g],
         wip: Games[g].wip,

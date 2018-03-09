@@ -9,7 +9,7 @@
       app
       disable-resize-watcher
       disable-route-watcher>
-      <app-menu/>
+      <g-menu/>
     </v-navigation-drawer>
     <v-navigation-drawer
       v-model="drawer"
@@ -18,7 +18,7 @@
       app
       disable-resize-watcher
       disable-route-watcher>
-      <settings v-if="!$route.meta.home && drawer" />
+      <g-settings v-if="!$route.meta.home && drawer" />
     </v-navigation-drawer>
     <v-toolbar
       v-show="this.$route.name"
@@ -78,10 +78,9 @@
 import { Games } from './lib'
 
 export default {
-  name: 'App',
   components: {
-    AppMenu: () => import('./components/Menu'),
-    Settings: () => import('./components/Settings')
+    GMenu: () => import('./components/Menu'),
+    GSettings: () => import('./components/Settings')
   },
   data () {
     return {

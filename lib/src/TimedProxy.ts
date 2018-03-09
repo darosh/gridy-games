@@ -20,7 +20,20 @@ export class TimedProxy implements IGame, IGridGame {
 
   constructor(game: IGame & IGridGame, opt = {}) {
     this.game = game;
+    this.constructor = game.constructor;
     Object.assign(this, opt);
+
+    if (this.game.winning) {
+      (this as any).winning = this.game.winning.bind(this.game);
+    }
+
+    if (this.game.links) {
+      (this as any).links = this.game.links.bind(this.game);
+    }
+
+    if (this.game.rulers) {
+      (this as any).rulers = this.game.rulers.bind(this.game);
+    }
   }
 
   public dispose() {
@@ -29,6 +42,10 @@ export class TimedProxy implements IGame, IGridGame {
 
   get grid() {
     return this.game.grid;
+  }
+
+  get scale() {
+    return this.game.scale;
   }
 
   get moves() {
@@ -50,6 +67,9 @@ export class TimedProxy implements IGame, IGridGame {
       this.start();
     } else {
       this.stop();
+      this.counter = -1;
+      this.counterSignal = -1;
+      this.expired  = false;
     }
   }
 
@@ -63,6 +83,18 @@ export class TimedProxy implements IGame, IGridGame {
 
   public get winner(): number {
     return this.timeoutWinner || this.game.winner;
+  }
+
+  public get score(): any {
+    return this.game.score;
+  }
+
+  public moveToString(move: any): string {
+    return (this.game as any).moveToString(move);
+  }
+
+  public stringToMove(move: string): any {
+    return (this.game as any).stringToMove(move);
   }
 
   private start() {
@@ -81,6 +113,7 @@ export class TimedProxy implements IGame, IGridGame {
 
     this.timer = setInterval(() => {
       this.stop(true);
+      this.counter = counter;
       this.timer = setInterval(() => {
         counter--;
 
