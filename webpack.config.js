@@ -1,25 +1,25 @@
-const path = require('path');
-const fs = require('fs');
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
+// const fs = require('fs')
+const webpack = require('webpack')
+// const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const loadMinified = require('./build/load-minified')
 
-const NODE_ENV = process.env.NODE_ENV;
+const NODE_ENV = process.env.NODE_ENV
 
 const setPath = function (folderName) {
-  return path.join(__dirname, folderName);
+  return path.join(__dirname, folderName)
 }
 
-function resolve(dir) {
+function resolve (dir) {
   return path.resolve(__dirname, dir)
 }
 
 const buildingForLocal = () => {
-  return (NODE_ENV === 'development');
-};
+  return (NODE_ENV === 'development')
+}
 
 // Not extracting CSS because its not compatible yet.
 // https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/701
@@ -43,8 +43,7 @@ const extractHTML = new HtmlWebpackPlugin({
   environment: process.env.NODE_ENV,
   isLocalBuild: buildingForLocal(),
   serviceWorkerLoader: `<script>${loadMinified(buildingForLocal() ? './build/service-worker-dev.js' : './build/service-worker-prod.js')}</script>`
-});
-
+})
 
 const config = {
   /**
@@ -63,8 +62,11 @@ const config = {
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
-      '@': resolve('src')
+      '@': resolve('src'),
       // 'vue$': 'vue/dist/vue.esm.js'
+      'Tone': 'tone/Tone',
+      'd3-color': resolve('plugins/dummy'),
+      'd3-format': resolve('plugins/dummy')
     }
   },
   output: {
@@ -73,7 +75,7 @@ const config = {
   optimization: {
     runtimeChunk: false,
     splitChunks: {
-      chunks: "all", //Taken from https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
+      chunks: 'all' // Taken from https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
     }
   },
   resolveLoader: {
@@ -108,47 +110,47 @@ const config = {
       logger: () => {},
       stripPrefix: 'dist/',
       runtimeCaching: [{
-          urlPattern: /^https:\/\/ajax\.googleapis\.com\//,
-          handler: 'cacheFirst'
-        },
-        {
-          urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
-          handler: 'cacheFirst'
-        },
-        {
-          urlPattern: /^https:\/\/fonts\.gstatic\.com\//,
-          handler: 'cacheFirst'
-        }
+        urlPattern: /^https:\/\/ajax\.googleapis\.com\//,
+        handler: 'cacheFirst'
+      },
+      {
+        urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
+        handler: 'cacheFirst'
+      },
+      {
+        urlPattern: /^https:\/\/fonts\.gstatic\.com\//,
+        handler: 'cacheFirst'
+      }
       ]
     })
   ],
   module: {
     rules: [{
-        test: /\.ts$/,
-        loaders: ['babel-loader', 'ts-loader'],
-        exclude: /node_modules/,
-        include: [resolve('lib')]
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          // postcss: [require('postcss-cssnext')()],
-          // options: {
-          //     extractCSS: true
-          // },
-          loaders: {
-            js: 'babel-loader'
-          }
+      test: /\.ts$/,
+      loaders: ['babel-loader', 'ts-loader'],
+      exclude: /node_modules/,
+      include: [resolve('lib')]
+    },
+    {
+      test: /\.vue$/,
+      loader: 'vue-loader',
+      options: {
+        // postcss: [require('postcss-cssnext')()],
+        // options: {
+        //     extractCSS: true
+        // },
+        loaders: {
+          js: 'babel-loader'
         }
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: [{
-          loader: "babel-loader"
-        }]
-      },
+      }
+    },
+    {
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: [{
+        loader: 'babel-loader'
+      }]
+    },
       // {
       //   test: /\.css$/,
       //   use: extractCSS.extract({
@@ -156,44 +158,44 @@ const config = {
       //     use: ["css-loader", "autoprefixer-loader"]
       //   })
       // },
-      {
-        test: /\.styl$/,
-        use:
-          /*!buildingForLocal() ?
-                      extractCSS.extract({
-                        fallback: "style-loader",
-                        use: ['css-loader', 'autoprefixer-loader', 'stylus-loader']
-                     }) :*/
-          [
-            {
-            loader: "style-loader" // creates style nodes from JS strings
+    {
+      test: /\.styl$/,
+      use:
+          /* buildingForLocal() ?
+          extractCSS.extract({
+            fallback: "style-loader",
+            use: ['css-loader', 'autoprefixer-loader', 'stylus-loader']
+          }) : */
+          [{
+            loader: 'style-loader' // creates style nodes from JS strings
           }, {
-            loader: "css-loader" // translates CSS into CommonJS
-          }, 
+            loader: 'css-loader' // translates CSS into CommonJS
+          },
           {
-            loader: "postcss-loader" // creates style nodes from JS strings
-          },{
-            loader: "stylus-loader" // compiles Stylus to CSS
+            loader: 'postcss-loader' // creates style nodes from JS strings
+          }, {
+            loader: 'stylus-loader' // compiles Stylus to CSS
           }
-        ]
-      },
-      {
-        test: /\.(png|jpg|gif)$/,
-        loader: 'file-loader',
-        query: {
-          name: '[name].[ext]?[hash]',
-          // useRelativePath: buildingForLocal()
-          useRelativePath: true
-        }
+          ]
+    },
+    {
+      test: /\.(png|jpg|gif)$/,
+      loader: 'file-loader',
+      query: {
+        name: '[name].[ext]?[hash]',
+        // useRelativePath: buildingForLocal()
+        useRelativePath: true
       }
+    }
     ]
-  },
-};
+  }
+}
 
 if (process.env.npm_config_report) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-  config.plugins.push(new BundleAnalyzerPlugin({defaultSizes: 'gzip'}))
+  config.plugins.push(new BundleAnalyzerPlugin({
+    defaultSizes: 'gzip'
+  }))
 }
 
-
-module.exports = config;
+module.exports = config

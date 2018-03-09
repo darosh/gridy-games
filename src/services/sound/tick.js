@@ -11,14 +11,12 @@ export function tickStop (value) {
 }
 
 export function tickSound () {
-  import('tone').then(({
-    default: {
-      AmplitudeEnvelope,
-      Oscillator,
-      supported
-    }
+  import('../../../plugins/tone').then(({
+    AmplitudeEnvelope,
+    Oscillator,
+    Tone
   }) => {
-    if (!supported) {
+    if (!Tone.supported) {
       return
     }
 

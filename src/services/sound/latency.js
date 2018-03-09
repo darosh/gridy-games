@@ -1,13 +1,10 @@
 class Latency {
   get latency () {
     if (isNaN(this._latency)) {
-      import('tone').then(({
-        default: {
-          supported,
-          context
-        }
+      import('../../../plugins/tone').then(({
+        Tone
       }) => {
-        this._latency = (supported && !isNaN(context.baseLatency)) ? context.baseLatency * 1000 * 2 : 25
+        this._latency = (Tone.supported && !isNaN(Tone.context.baseLatency)) ? Tone.context.baseLatency * 1000 * 2 : 25
       })
       this._latency = 100
     }

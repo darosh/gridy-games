@@ -3,7 +3,8 @@
 </template>
 
 <script>
-import { scaleThreshold, scaleLinear } from 'd3-scale'
+import scaleThreshold from 'd3-scale/src/threshold'
+import scaleLinear from 'd3-scale/src/linear'
 import TWEEN from '@tweenjs/tween.js'
 import { start, stop } from '../services/tween'
 

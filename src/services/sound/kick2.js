@@ -9,15 +9,13 @@ import {
 let env
 
 export function kick2Sound () {
-  import('tone').then(({
-    default: {
-      AmplitudeEnvelope,
-      Oscillator,
-      Panner,
-      supported
-    }
+  import('../../../plugins/tone').then(({
+    AmplitudeEnvelope,
+    Oscillator,
+    Panner,
+    Tone
   }) => {
-    if (!supported) {
+    if (!Tone.supported) {
       return
     }
 
