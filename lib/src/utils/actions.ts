@@ -33,7 +33,7 @@ export function initActions(game: IGridGame, moves: Move[], cursor: number = 0) 
   }
 
   game.actions = !cursor ? [] : game.actions;
-  game.actions.push({ highlighted });
+  (game.actions as any).push({ highlighted });
 }
 
 export function selectAction(game: IGridGame, tile: IGameTile) {

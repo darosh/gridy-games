@@ -1,5 +1,6 @@
 export { Move } from "./Move";
 export { GameProxy } from "./GameProxy";
+export { TimedProxy } from "./TimedProxy";
 export { IGame } from "./IGame";
 export { IPLayer } from "./IPlayer";
 

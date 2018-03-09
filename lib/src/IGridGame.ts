@@ -46,5 +46,5 @@ export interface IGameState {
 
 export interface IGridGame {
   grid: IGrid<IGameTile>;
-  actions: IGameState[];
+  actions?: IGameState[];
 }
