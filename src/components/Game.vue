@@ -258,14 +258,13 @@ import {
   failSound
 } from '../services/sound'
 import { kickVibration } from '../services/vibration'
-import GPolyLine from './PolyLine'
 
 const LATENCY = 2
 
 export default {
   components: {
     PlayerCard,
-    GPolyLine
+    GPolyLine: () => import('./PolyLine')
   },
   mixins: [game],
   data () {
