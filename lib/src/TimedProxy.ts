@@ -89,6 +89,10 @@ export class TimedProxy implements IGame, IGridGame {
     return this.game.score;
   }
 
+  public get landscape(): any {
+    return this.game.landscape;
+  }
+
   public moveToString(move: any): string {
     return (this.game as any).moveToString(move);
   }

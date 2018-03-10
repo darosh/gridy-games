@@ -47,6 +47,7 @@ export interface IGameState {
 export interface IGridGame {
   grid: IGrid<IGameTile>;
   scale?: number;
+  landscape?: boolean;
   actions?: IGameState[];
   winning?: () => IGameTile[];
   rulers?: () => IGameTile[];
