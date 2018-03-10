@@ -53,6 +53,7 @@
           :margin="margin"
           :move="move"
           :vertical="vertical"
+          :robot-turn="robotTurn"
           interactive/>
       </div>
     </v-layout>
