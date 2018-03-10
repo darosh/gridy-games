@@ -170,8 +170,8 @@ export default {
         this.snackbar = true
         this.update()
 
-        if($store.state.sound) {
-          setTimeout(() => {chordSound(value)}, 200 - latency.latency)
+        if (this.$store.state.sound) {
+          setTimeout(() => { chordSound(value) }, 200 - latency.latency)
         }
       }
     },

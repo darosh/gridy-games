@@ -53,7 +53,6 @@
 
 <script>
 import { Games } from '../lib'
-import { titled } from '../filters'
 
 export default {
   components: {
