@@ -2,7 +2,7 @@ import { Radial8Tile, RadialGrid, Shape } from "gridy";
 import { ConnectGameBase } from "./base/ConnectGameBase";
 
 export class CircularFourInARowGame extends ConnectGameBase {
-  public static title = "Circular Four\u2011in\u2011a\u2011row";
+  public static title = "Circular Four-in-a-row";
   public static type = "Connect";
 
   constructor() {

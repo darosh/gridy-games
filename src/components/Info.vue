@@ -14,7 +14,7 @@
           :href="game.wiki"
           target="_blank"
           rel="noopener"
-          class="light-blue--text">{{ game.title }}</a>
+          class="light-blue--text">{{ game.title | titled }}</a>
       </div>
       <div
         v-else-if="game.source"
@@ -23,11 +23,11 @@
           :href="game.source"
           target="_blank"
           rel="noopener"
-          class="light-blue--text">{{ game.title }}</a>
+          class="light-blue--text">{{ game.title | titled }}</a>
       </div>
       <div
         v-else
-        class="body-1">{{ game.title }}</div>
+        class="body-1">{{ game.title | titled }}</div>
     </v-layout>
     <v-layout
       row

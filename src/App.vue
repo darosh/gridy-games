@@ -39,7 +39,7 @@
         @click.stop="menu=!menu">
         <v-icon>menu</v-icon>
       </v-btn>
-      <v-toolbar-title :class="{'hidden-xs-only': !this.$route.meta.home}">{{ title }}</v-toolbar-title>
+      <v-toolbar-title :class="{'hidden-xs-only': !this.$route.meta.home}">{{ title | titled }}</v-toolbar-title>
       <v-spacer/>
       <v-btn
         v-if="!$route.meta.home"

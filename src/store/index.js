@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+// import createLogger from 'vuex/dist/logger'
 import {
   defaultPlayers
 } from '../services/players'
@@ -27,16 +28,29 @@ function storage (store) {
     delete value.update
     localStorage.setItem(STORAGE, JSON.stringify(value))
   })
+
+  window.addEventListener('storage', function (e) {
+    if (e.key === STORAGE && e.newValue !== e.oldValue) {
+      store.commit('assign', JSON.parse(e.newValue))
+    }
+  })
 }
+
+const plugins = [storage]
+
+// if (debug) {
+//   plugins.push(createLogger())
+// }
 
 const $store = new Vuex.Store({
   // modules: {},
   state,
-  plugins: [storage],
+  plugins,
   getters: {
     player: state => state.player
   },
   mutations: {
+    assign: (state, payload) => Object.assign(state, payload),
     dark: (state, payload) => (state.dark = payload),
     vibration: (state, payload) => (state.vibration = payload),
     sound: (state, payload) => (state.sound = payload),
@@ -47,7 +61,6 @@ const $store = new Vuex.Store({
   },
   actions: {},
   strict: debug
-  // plugins: debug ? [createLogger()] : []
 })
 
 window.$store = $store

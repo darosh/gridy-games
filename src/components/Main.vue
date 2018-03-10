@@ -22,7 +22,7 @@
           </div>
           <v-card-title>
             <div>
-              <div class="headline">{{ game.data.title || game.id }}</div>
+              <div class="headline">{{ game.data.title | titled }}</div>
               <span class="grey--text">{{ game.data.type }}</span>
             </div>
             <v-flex
@@ -53,6 +53,7 @@
 
 <script>
 import { Games } from '../lib'
+import { titled } from '../filters'
 
 export default {
   components: {
