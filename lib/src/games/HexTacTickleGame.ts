@@ -1,11 +1,7 @@
-// https://nrich.maths.org/1240
-// nrich.maths.org 2000
-// Lutz Tautenhahn 2005 www.lutanho.net/play/tictackle.html
-
 import { HexagonalGrid, HexagonalTile, Shape } from "gridy";
-import { TicTackleGameBase } from "./base/TicTackleGameBase";
+import { TacTickleGameBase } from "./base/TacTickleGameBase";
 
-export class HexTacTickleGame extends TicTackleGameBase {
+export class HexTacTickleGame extends TacTickleGameBase {
   public static title = "Hex Tac-tickle";
   public static type = "Connect";
 

@@ -1,7 +1,7 @@
 import { Rectangular8Tile, RectangularGrid, RectangularTile, Shape } from "gridy";
-import { TicTackleGameBase } from "./base/TicTackleGameBase";
+import { TacTickleGameBase } from "./base/TacTickleGameBase";
 
-export class TacTickleGame extends TicTackleGameBase {
+export class TacTickleGame extends TacTickleGameBase {
   public static title = "Tac-tickle";
   public static type = "Connect";
   public static authors = ["NRICH"];

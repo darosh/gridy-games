@@ -1,6 +1,6 @@
 const THEMES = [
   ['reversi', null, /Reversi/],
-  ['tacticle', /Tac-tickle/],
+  ['tactickle', /Tac-tickle/],
   ['gomoku', /Gomoku|in-a-row/],
   ['plastic', /Connect Four/],
   ['hex-checkers', /Hex .* Checkers/],

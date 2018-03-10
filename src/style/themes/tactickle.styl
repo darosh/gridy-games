@@ -1,4 +1,4 @@
-tacticleTheme = {
+tactickleTheme = {
   tileFill: #fff,
   possible: #BDBDBD,
   tileStroke: #212121,
@@ -22,9 +22,9 @@ tacticleTheme = {
 
 @require "./colors"
 
-colors(tacticleTheme, '.tacticle-theme')
+colors(tactickleTheme, '.tactickle-theme')
 
-.tacticle-theme
+.tactickle-theme
   .tile
     transition: none !important
   .possible.value-1
@@ -33,7 +33,7 @@ colors(tacticleTheme, '.tacticle-theme')
   .possible.value-2.angle-0
   .possible.value-1.angle-30
   .possible.value-2.angle-30
-    fill: tacticleTheme.tileFill;
+    fill: tactickleTheme.tileFill;
   .possible.angle-0
     fill: url(#stripes1);
   .possible.angle-30
@@ -41,20 +41,20 @@ colors(tacticleTheme, '.tacticle-theme')
   .possible.waiting
   .possible.waiting.angle-30
   .possible.waiting.angle-0
-    fill: tacticleTheme.tileFill;
+    fill: tactickleTheme.tileFill;
 
-.theme--dark .tacticle-theme
+.theme--dark .tactickle-theme
   polygon
     fill: #212121;
     stroke: #616161;
 
-.theme--dark .tacticle-theme
+.theme--dark .tactickle-theme
   .possible.angle-0
     fill: url(#stripes1);
   .possible.angle-30
     fill: url(#stripes2);
 
-.theme--dark .tacticle-theme
+.theme--dark .tactickle-theme
   .possible.value-1
   .possible.value-2
     fill: #212121;

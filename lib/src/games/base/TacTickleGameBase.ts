@@ -4,7 +4,7 @@ import { IGame } from "../../IGame";
 import { other, parsePositions, stringifyPositions } from "../../utils";
 import { connections, winning } from "../evaluate/connect";
 
-export class TicTackleGameBase implements IGame {
+export class TacTickleGameBase implements IGame {
   public static move: boolean = true;
 
   public moves: any[] = [];
