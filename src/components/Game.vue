@@ -52,6 +52,7 @@
           :frame="frame"
           :margin="margin"
           :move="move"
+          :vertical="vertical"
           interactive/>
       </div>
     </v-layout>
@@ -152,7 +153,6 @@ export default {
       fab: false,
       working: false,
       robotPlayer: {},
-      vertical: window.innerWidth < window.innerHeight,
       theme: null,
       snackbar: false
     }

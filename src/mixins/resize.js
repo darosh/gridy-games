@@ -1,4 +1,9 @@
 export default {
+  data () {
+    return {
+      vertical: window.innerWidth < window.innerHeight
+    }
+  },
   methods: {
     onResize () {
       let bounds = this.game.grid.bounds()
