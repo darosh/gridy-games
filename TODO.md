@@ -7,12 +7,11 @@
 - [ ] categorize games
 
 - [x] timeout wrapper
-- [x] use non wraping dashes in titles
+- [x] use non wrapping dashes in titles
 
 # UI
 
 - [ ] game search, filters ... hyperlinks?
-- [ ] winning chord
 - [ ] fix winning line start stone
 - [ ] chess pieces
 - [ ] draughts pieces
@@ -23,7 +22,7 @@
 - [ ] flip reversi animation
 - [ ] gomoku winning line inverted contract color style
 
-
+- [x] winning chord
 - [x] reduce hover listeners
 - [x] extract board, conditional v-on="clickable ? {click: move(t)} : null"
 - [x] vibrate on setting

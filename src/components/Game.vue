@@ -131,6 +131,7 @@ import { theme } from '../style/theme'
 import { Shared } from '../services/shared'
 import {
   latency,
+  chordSound,
   kick1Sound,
   kick2Sound
 } from '../services/sound'
@@ -168,6 +169,10 @@ export default {
       if (value) {
         this.snackbar = true
         this.update()
+
+        if($store.state.sound) {
+          setTimeout(() => {chordSound(value)}, 200 - latency.latency)
+        }
       }
     },
     '$store.state.player': {
