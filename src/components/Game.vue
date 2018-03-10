@@ -202,7 +202,7 @@ export default {
   },
   methods: {
     initTimer () {
-      this.game.limit = this.hotSeat ? $store.state.timer : 0
+      this.game.limit = this.hotSeat ? this.$store.state.timer : 0
     },
     ...mapMutations(['setPlayer']),
     initGame () {

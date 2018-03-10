@@ -31,29 +31,29 @@
             v-else-if="game.player === value && game.counter === 0"
             :key="game.counter">timer_off</v-icon>
           <v-icon
-            key="a"
             v-else-if="switcher"
+            key="a"
             :color="$store.state.dark ? 'grey lighten-3' : 'grey darken-3'">swap_horiz</v-icon>
           <v-icon
-            key="b"
             v-else-if="!game.winner && (game.player === value) && waiting"
+            key="b"
             :color="$store.state.dark ? 'grey lighten-3' : 'grey darken-3'"
             class="rotate-animation">hourglass_empty</v-icon>
           <v-icon
-            key="c"
             v-else-if="!game.winner && (game.player === value)"
+            key="c"
             :color="$store.state.dark ? 'grey lighten-3' : 'grey darken-3'">play_arrow</v-icon>
           <v-icon
-            key="d"
             v-else-if="game.winner === value"
+            key="d"
             :color="$store.state.dark ? 'grey lighten-3' : 'grey darken-3'">mood</v-icon>
           <v-icon
-            key="e"
             v-else-if="game.winner === -1"
+            key="e"
             :color="$store.state.dark ? 'grey lighten-3' : 'grey darken-3'">sentiment_very_dissatisfied</v-icon>
           <div
-            key="f"
-            v-else/>
+            v-else
+            key="f"/>
         </transition>
       </v-flex>
       <span

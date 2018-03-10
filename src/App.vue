@@ -71,6 +71,7 @@
         color="light-blue"
         @click.native="reload()">Reload</v-btn>
     </v-snackbar>
+    <g-patterns />
   </v-app>
 </template>
 
@@ -80,7 +81,8 @@ import { Games } from './lib'
 export default {
   components: {
     GMenu: () => import('./components/Menu'),
-    GSettings: () => import('./components/Settings')
+    GSettings: () => import('./components/Settings'),
+    GPatterns: () => import('./components/Patterns')
   },
   data () {
     return {

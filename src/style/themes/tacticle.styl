@@ -25,6 +25,8 @@ tacticleTheme = {
 colors(tacticleTheme, '.tacticle-theme')
 
 .tacticle-theme
+  .tile
+    transition: none !important
   .possible.value-1
   .possible.value-2
   .possible.value-1.angle-0
@@ -32,10 +34,10 @@ colors(tacticleTheme, '.tacticle-theme')
   .possible.value-1.angle-30
   .possible.value-2.angle-30
     fill: tacticleTheme.tileFill;
-  .possible
-    fill: url(#stripes);
+  .possible.angle-0
+    fill: url(#stripes1);
   .possible.angle-30
-    fill: url(#stripes-30);
+    fill: url(#stripes2);
   .possible.waiting
   .possible.waiting.angle-30
   .possible.waiting.angle-0
@@ -47,10 +49,10 @@ colors(tacticleTheme, '.tacticle-theme')
     stroke: #616161;
 
 .theme--dark .tacticle-theme
-  .possible
-    fill: url(#stripes);
+  .possible.angle-0
+    fill: url(#stripes1);
   .possible.angle-30
-    fill: url(#stripes-30);
+    fill: url(#stripes2);
 
 .theme--dark .tacticle-theme
   .possible.value-1
