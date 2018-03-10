@@ -1,5 +1,6 @@
 <template>
   <v-container
+    v-once
     grid-list-lg
     fluid>
     <v-layout

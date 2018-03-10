@@ -1,7 +1,7 @@
 <template>
   <div
     :style="{width: size[vertical ? 1 : 0] + 'px', height: size[vertical ? 0 : 1] + 'px'}"
-    :class="{vertical: vertical}"
+    :class="{vertical: vertical, 'read-only': !interactive}"
     class="d-inline-block">
     <svg
       :width="size[0]"
@@ -209,5 +209,9 @@ circle.scale-transition-enter-to {
 
 .clickable:hover {
   cursor: pointer;
+}
+
+.read-only {
+  pointer-events: none;
 }
 </style>

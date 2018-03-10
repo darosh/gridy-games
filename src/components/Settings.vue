@@ -140,6 +140,7 @@ import { Shared } from '../services/shared'
 import { Games, reset, stringify, update } from '../lib'
 import { Bus } from '../services/bus'
 import { kick1Sound } from '../services/sound/kick1'
+import { kickVibration } from '../services/vibration/index';
 
 export default {
   components: {
@@ -216,6 +217,10 @@ export default {
         return this.$store.state.vibration
       },
       set: function (value) {
+        if (value) {
+          setTimeout(kickVibration)
+        }
+
         this.$store.commit('vibration', value)
       }
     },

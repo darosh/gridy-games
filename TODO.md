@@ -12,10 +12,8 @@
 # UI
 
 - [ ] game search, filters ... hyperlinks?
-- [ ] extract board, conditional v-on="clickable ? {click: move(t)} : null"
 - [ ] winning chord
 - [ ] fix winning line start stone
-- [ ] vibrate on setting
 - [ ] chess pieces
 - [ ] draughts pieces
 - [ ] remove list from menu
@@ -25,6 +23,10 @@
 - [ ] flip reversi animation
 - [ ] gomoku winning line inverted contract color style
 
+
+- [x] reduce hover listeners
+- [x] extract board, conditional v-on="clickable ? {click: move(t)} : null"
+- [x] vibrate on setting
 - [x] board wrapper
 - [x] settings persistence
 - [x] test keep alive mounted RAF
