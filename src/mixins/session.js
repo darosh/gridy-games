@@ -7,7 +7,7 @@ export default {
     human: function () {
       return [undefined, isHuman(this.$store.state.player[1]), isHuman(this.$store.state.player[2])]
     },
-    robotTurn () {
+    waiting () {
       return !this.human[this.game.player] && !this.game.winner
     },
     canSwitch () {

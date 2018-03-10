@@ -55,14 +55,14 @@
           <path
             v-if="game.grid.irregular"
             :d="path(t)"
-            :class="{['angle-' + Math.abs(game.grid.orientation * game.grid.angle)] : true, clickable: t.highlighted && !robotTurn, ['value-' + (t.data || 0)]: true, possible: t.highlighted, odd: t.odd, animate: true, waiting: t.highlighted && robotTurn}"
+            :class="{['angle-' + Math.abs(game.grid.orientation * game.grid.angle)] : true, clickable: t.highlighted && !waiting, ['value-' + (t.data || 0)]: true, possible: t.highlighted, odd: t.odd, animate: true, waiting: t.highlighted && waiting}"
             :transform="'rotate(' + (game.grid.orientation * game.grid.angle) + ')'"
             class="tile"
             v-on="interactive ? {click: () => move(t)} : null" />
           <polygon
             v-else
             :points="vertices || irregularVertices(t)"
-            :class="{['angle-' + Math.abs(game.grid.orientation * game.grid.angle)] : true, clickable: t.highlighted && !robotTurn, ['value-' + (t.data || 0)]: true, possible: t.highlighted, odd: t.odd, animate: true, waiting: t.highlighted && robotTurn}"
+            :class="{['angle-' + Math.abs(game.grid.orientation * game.grid.angle)] : true, clickable: t.highlighted && !waiting, ['value-' + (t.data || 0)]: true, possible: t.highlighted, odd: t.odd, animate: true, waiting: t.highlighted && waiting}"
             :transform="'rotate(' + (game.grid.orientation * game.grid.angle) + ')'"
             class="tile"
             v-on="interactive ? {click: () => move(t)} : null" />
@@ -85,7 +85,7 @@
               <circle
                 v-if="t.data"
                 :r="game.grid.radius * game.grid.scale * 0.85 - 2"
-                :class="{clickable: t.highlighted && !robotTurn, ['token-' + t.data]: true}"
+                :class="{clickable: t.highlighted && !waiting, ['token-' + t.data]: true}"
                 cx="0"
                 cy="0"
                 class="animate"
@@ -102,7 +102,7 @@
           <!-- <transition name="scale-transition"> -->
           <circle
             :r="game.grid.radius * game.grid.scale * 0.85 - 2"
-            :class="{clickable: t.tile.highlighted && !robotTurn, ['token-' + t.data]: true}"
+            :class="{clickable: t.tile.highlighted && !waiting, ['token-' + t.data]: true}"
             cx="0"
             cy="0"
             class="animate"
@@ -142,7 +142,7 @@ export default {
       type: Boolean,
       default: false
     },
-    robotTurn: {
+    waiting: {
       type: Boolean,
       default: false
     },

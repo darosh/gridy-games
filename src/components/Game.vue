@@ -22,7 +22,7 @@
               v-if="game"
               :value="1"
               :game="game"
-              :waiting="robotTurn" />
+              :waiting="waiting" />
           </v-flex>
           <div
             style="min-width: 32px;"
@@ -41,7 +41,7 @@
               v-if="game"
               :value="2"
               :game="game"
-              :waiting="robotTurn"
+              :waiting="waiting"
               :switcher="canSwitch"
               :class="{clickable: canSwitch}"
               @click.native="canSwitch && switchPlayer()" />
@@ -53,7 +53,7 @@
           :margin="margin"
           :move="move"
           :vertical="vertical"
-          :robot-turn="robotTurn"
+          :waiting="waiting"
           interactive/>
       </div>
     </v-layout>
