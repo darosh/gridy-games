@@ -15,13 +15,13 @@
 - [ ] fix winning line start stone
 - [ ] chess pieces
 - [ ] draughts pieces
-- [ ] remove list from menu
 - [ ] disable content and toolbar background transition
 - [ ] show "based on" and rules
 - [ ] show ai stats
 - [ ] flip reversi animation
 - [ ] gomoku winning line inverted contract color style
 
+- [x] remove list from menu
 - [x] winning chord
 - [x] reduce hover listeners
 - [x] extract board, conditional v-on="clickable ? {click: move(t)} : null"
