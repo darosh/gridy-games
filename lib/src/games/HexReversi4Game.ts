@@ -7,6 +7,7 @@ import { ReversiGameBase } from "./base/ReversiGameBase";
 export class HexReversi4Game extends ReversiGameBase {
   public static title = "Hex Reversi 4×4";
   public static type = "Reversi";
+  public static original = "ReversiGame";
 
   constructor() {
     super(landscapeHex(new HexagonalGrid(1, undefined, Shape.Rhombus, 4)) as any);

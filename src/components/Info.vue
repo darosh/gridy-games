@@ -46,9 +46,7 @@
       <v-flex
         class="body-2 mr-3"
         xs3>Created</v-flex>
-      <div class="body-1">{{ Math.abs(game.created) }}
-        <span v-if="game.created < 0">BCE</span>
-      </div>
+      <div class="body-1">{{ game.created | era }}</div>
     </v-layout>
     <v-layout
       v-if="game.location"

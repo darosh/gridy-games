@@ -6,6 +6,7 @@ import { HexGameBase } from "./base/HexGameBase";
 export class Hex11Game extends HexGameBase {
   public static title = "Hex 11×11";
   public static type = "Hex";
+  public static original = "HexGame";
 
   constructor() {
     super(landscapeHex(new HexagonalGrid(1, undefined, Shape.Rhombus, 11)) as any);

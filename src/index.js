@@ -8,7 +8,7 @@ import router from './router'
 import './style/index.styl'
 import store from './store'
 import * as icons from '../plugins/icons'
-import { hyphenated, multiplied, titled } from './filters'
+import { era, hyphenated, multiplied, titled } from './filters'
 
 import {
   Vuetify, // required
@@ -22,8 +22,10 @@ import {
   VList,
   VGrid,
   VSubheader,
+  VProgressCircular,
   VSelect,
   VTextfield,
+  VTabs,
   VToolbar,
   VSwitch,
   VDivider,
@@ -47,8 +49,10 @@ Vue.use(Vuetify, {
     VList,
     VGrid,
     VSubheader,
+    VProgressCircular,
     VSelect,
     VTextfield,
+    VTabs,
     VToolbar,
     VSwitch,
     VDivider,
@@ -72,6 +76,7 @@ window.$icons = icons
 Vue.filter('hyphenated', hyphenated)
 Vue.filter('multiplied', multiplied)
 Vue.filter('titled', titled)
+Vue.filter('era', era)
 
 /* eslint-disable no-new */
 new Vue({

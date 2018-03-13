@@ -3,8 +3,11 @@
     margin-left: 8px !important;
   .toolbar .toolbar__content > .btn:last-child, .toolbar .toolbar__extension > .btn:last-child
     margin-right: 8px !important;
-.toolbar__title
-  margin-left: 0 !important;
+  .toolbar .toolbar__content > *:not(.btn):not(.menu):last-child:not(:only-child)
+    margin-right: 16px !important;
+
+// .toolbar__title
+//   margin-left: 0 !important;
 
 .theme--dark .icon
   fill: #fff;
@@ -18,3 +21,17 @@
 .grey--text.text--darken-3 {
   fill: #424242 !important;
 }
+
+th.column.sortable > i.icon
+  transform-origin: 8px 8px
+th.column.sortable > i.icon > svg
+  width: 16px
+  height: 16px
+  display: inline-block
+
+:focus
+  outline: none
+
+.content[data-booted="true"]
+// .toolbar[data-booted="true"]
+  transition: none !important

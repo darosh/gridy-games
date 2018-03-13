@@ -4,6 +4,7 @@ import { TacTickleGameBase } from "./base/TacTickleGameBase";
 export class Hex2TacTickleGame extends TacTickleGameBase {
   public static title = "Hex² Tac-tickle";
   public static type = "Connect";
+  public static original = "TacTickleGame";
 
   constructor() {
     const grid = new HexagonalGrid(1, true, Shape.Hexagonal, 4);

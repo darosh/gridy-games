@@ -1,8 +1,7 @@
 <template>
   <div
     :style="{width: size[vertical ? 1 : 0] + 'px', height: size[vertical ? 0 : 1] + 'px'}"
-    :class="{vertical: vertical, 'read-only': !interactive}"
-    class="d-inline-block">
+    :class="{vertical: vertical, 'read-only': !interactive}">
     <svg
       :width="size[0]"
       :height="size[1]"
@@ -60,7 +59,7 @@
             <transition name="scale-transition">
               <circle
                 v-if="t.data"
-                :r="game.grid.radius * game.grid.scale * 0.85 - 2"
+                :r="game.grid.radius * game.grid.scale * 0.85 - round * 2"
                 :class="{clickable: t.highlighted && !waiting, ['token-' + t.data]: true}"
                 cx="0"
                 cy="0"
@@ -77,7 +76,7 @@
           class="stone">
           <!-- <transition name="scale-transition"> -->
           <circle
-            :r="game.grid.radius * game.grid.scale * 0.85 - 2"
+            :r="game.grid.radius * game.grid.scale * 0.85 - round * 2"
             :class="{clickable: t.tile.highlighted && !waiting, ['token-' + t.data]: true}"
             cx="0"
             cy="0"
@@ -109,6 +108,10 @@ export default {
     game: {
       type: Object,
       required: true
+    },
+    round: {
+      type: Boolean,
+      default: true
     },
     interactive: {
       type: Boolean,

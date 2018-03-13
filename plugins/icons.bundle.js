@@ -3,6 +3,7 @@
 export {
   arrow_back,
   arrow_drop_down,
+  arrow_upward,
   chevron_right,
   chevron_left,
   close,
@@ -12,6 +13,7 @@ export {
   mood,
   play_arrow,
   refresh,
+  search,
   sentiment_very_dissatisfied,
   settings,
   swap_horiz,

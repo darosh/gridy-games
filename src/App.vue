@@ -3,7 +3,7 @@
     id="app"
     :dark="$store.state.dark">
     <v-navigation-drawer
-      v-model="menu"
+      v-model="Shared.menu"
       fixed
       left
       app
@@ -12,47 +12,20 @@
       <g-menu/>
     </v-navigation-drawer>
     <v-navigation-drawer
-      v-model="drawer"
+      v-model="Shared.drawer"
       fixed
       right
       app
       disable-resize-watcher
       disable-route-watcher>
-      <g-settings v-if="!$route.meta.home && drawer" />
+      <g-settings v-if="!$route.meta.home && Shared.drawer" />
     </v-navigation-drawer>
-    <v-toolbar
-      v-show="this.$route.name"
-      :class="{'elevation-0': !this.$route.meta.home, 'elevation-1': this.$route.meta.home}"
-      :color="this.$store.state.dark ? '' : !this.$route.meta.home ? 'grey lighten-5' : ''"
-      :style="{'background-color': this.$store.state.dark ? !this.$route.meta.home ? '#303030' : '' : ''}"
-      dense
-      app>
-      <v-btn
-        v-if="!$route.meta.home"
-        icon
-        to="/">
-        <v-icon>arrow_back</v-icon>
-      </v-btn>
-      <v-btn
-        v-else-if="$route.meta.home"
-        icon
-        @click.stop="menu=!menu">
-        <v-icon>menu</v-icon>
-      </v-btn>
-      <v-toolbar-title :class="{'hidden-xs-only': !this.$route.meta.home}">{{ title | titled }}</v-toolbar-title>
-      <v-spacer/>
-      <v-btn
-        v-if="!$route.meta.home"
-        icon
-        @click.stop="drawer = !drawer">
-        <v-icon>settings</v-icon>
-      </v-btn>
-    </v-toolbar>
+    <router-view name="toolbar" />
     <v-content :class="{'no-animation': $route.meta.home}">
       <v-container
         fluid="fluid"
         class="pa-0">
-        <keep-alive :include="/Main/">
+        <keep-alive :include="/Home/">
           <router-view />
         </keep-alive>
       </v-container>
@@ -77,6 +50,7 @@
 
 <script>
 import { Games } from './lib'
+import { Shared } from './services/shared'
 
 export default {
   components: {
@@ -86,8 +60,7 @@ export default {
   },
   data () {
     return {
-      drawer: false,
-      menu: false,
+      Shared,
       update: true
     }
   },
@@ -111,9 +84,10 @@ export default {
   },
   watch: {
     $route: function () {
-      this.drawer = false
-      this.menu = false
+      Shared.drawer = false
+      Shared.menu = false
       this.update = true
+      window.document.documentElement.style.overflowY = this.$route.meta.overflow
     }
   },
   methods: {
@@ -130,7 +104,7 @@ export default {
 
 <style>
 html {
-  overflow-y: auto !important;
+  overflow-y: auto;
 }
 .content.no-animation {
   transition: none;

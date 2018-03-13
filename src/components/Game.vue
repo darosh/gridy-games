@@ -111,6 +111,23 @@
         color="light-blue"
         @click.native="snackbar = false; reset()">Restart</v-btn>
     </v-snackbar>
+    <v-snackbar
+      v-model="rules"
+      :timeout="12000"
+      auto-height
+      color="grey darken-3"
+      class="info-snack"
+      bottom>
+      <v-flex>
+        <div
+          v-for="(r, k) in rulesText"
+          :key="k">{{ r }}</div>
+      </v-flex>
+      <v-btn
+        flat
+        color="light-blue"
+        @click.native="rules = false">OK</v-btn>
+    </v-snackbar>
   </div>
 </template>
 
@@ -126,9 +143,11 @@ import {
 } from '../lib'
 import { isHuman } from '../services/players'
 import { Bus } from '../services/bus'
-import { PlayerWorker } from '../worker'
+import { PlayerWorker } from '../worker/ai'
 import { theme } from '../style/theme'
 import { Shared } from '../services/shared'
+import { gameData } from '../services/utils'
+
 import {
   latency,
   chordSound,
@@ -156,7 +175,10 @@ export default {
       working: false,
       robotPlayer: {},
       theme: null,
-      snackbar: false
+      snackbar: false,
+      rules: false,
+      showRules: true,
+      rulesText: true
     }
   },
   watch: {
@@ -222,6 +244,15 @@ export default {
       this.game = Shared.game = timed
       this.theme = theme(Games[g])
       this.initTimer()
+
+      if (this.showRules) {
+        this.showRules = false
+
+        setTimeout(() => {
+          this.rulesText = gameData(game.constructor, 'rules')
+          this.rules = !!this.rulesText
+        }, 200)
+      }
     },
     switchPlayer () {
       this.setPlayer({
@@ -283,6 +314,8 @@ export default {
       }
     },
     move (tile) {
+      this.rules = false
+
       if (this.game.winner) {
         return
       }

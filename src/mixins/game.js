@@ -21,7 +21,7 @@ export default {
 
       let scaled = scaleToFit(bounds.maxX - bounds.minX, bounds.maxY - bounds.minY, this.frame[0], this.frame[1])
 
-      if (!this.game.grid.irregular) {
+      if (!this.game.grid.irregular && this.round) {
         this.game.grid.scale = Math.round(scaled)
         this.game.grid.scale -= this.game.grid.scale % 2
       } else {

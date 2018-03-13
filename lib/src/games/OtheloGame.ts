@@ -7,6 +7,8 @@ export class OtheloGame extends ReversiGameBase {
   public static created = 1971;
   public static authors = [" Goro Hasegawa"];
   public static wiki = "https://en.wikipedia.org/wiki/Reversi";
+  public static location = "Japan";
+  public static original = "ReversiGame";
 
   constructor() {
     super(new RectangularGrid(1, undefined, Shape.Even, 8, 8, Rectangular8Tile) as any, true);

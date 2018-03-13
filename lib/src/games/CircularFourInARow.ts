@@ -4,10 +4,11 @@ import { ConnectGameBase } from "./base/ConnectGameBase";
 export class CircularFourInARowGame extends ConnectGameBase {
   public static title = "Circular Four-in-a-row";
   public static type = "Connect";
+  public static rules: string[] = ["Connect 4"];
+  public static original = "TicTacToeGame";
 
   constructor() {
-    const grid = new RadialGrid(1, false, Shape.Even, 8, 12, Radial8Tile);
-    grid.tiles.splice(0, 12 * 2);
+    const grid = new RadialGrid(1, false, Shape.Even, 12, 8, Radial8Tile, 2);
     super(grid as any, 4);
   }
 }

@@ -10,6 +10,7 @@ export class HexGame extends HexGameBase {
   public static authors = ["Piet Hein", "John Nash"];
   public static aliases = ["Con-tac-tix"];
   public static wiki = "https://en.wikipedia.org/wiki/Hex_(board_game)";
+  public static rules: string[] = ["Connect edges"];
 
   constructor() {
     super(landscapeHex(new HexagonalGrid(1, undefined, Shape.Rhombus, 11)) as any);

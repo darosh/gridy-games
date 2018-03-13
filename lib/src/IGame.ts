@@ -12,3 +12,7 @@ export interface IGame {
   undo(): void;
   evaluate(): number;
 }
+
+export interface IGameConstructor {
+  new(): IGame;
+}

@@ -53,3 +53,20 @@ export interface IGridGame {
   rulers?: () => IGameTile[];
   links?: () => IGameTile[];
 }
+
+export interface IGridGameConstructor {
+  title: string;
+  type: string;
+
+  authors?: string[];
+  aliases?: string[];
+  original?: string;
+  rules?: string[];
+  created?: number;
+  location?: string;
+  wiki?: string;
+  source?: string;
+  landscape?: boolean;
+
+  new(): IGridGame;
+}

@@ -78,3 +78,28 @@ style()
 
 .stone
   transition: transform 0.2s ease-in-out
+  stroke-linejoin: round
+  // stroke-dasharray: 18,24
+  @media xs
+    stroke-width: 9
+    // stroke-dasharray: 9,12
+
+  .theme--dark polyline
+    stroke: rgba(255,255,255,0.78)
+
+.stone
+  transition: transform 0.2s ease-in-out
+
+.info-snack
+  padding-bottom: 20px !important
+  padding-left: 16px !important
+  padding-right: 16px !important
+.info-snack > *
+  border-radius: 9px !important
+  min-height: 60px !important
+
+.preview-mini .tile
+  stroke-width: 0 !important
+
+.preview-mini rect
+  stroke-width: 0 !important

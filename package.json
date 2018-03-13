@@ -1,7 +1,7 @@
 {
   "name": "gridy-games",
   "description": "Board games",
-  "version": "0.1.86",
+  "version": "0.1.87",
   "author": "darosh <ensonador@gmail.com>",
   "browserslist": [
     "> 1%",
@@ -12,6 +12,7 @@
     "@tweenjs/tween.js": "^17.2.0",
     "d3-scale": "^2.0.0",
     "gridy": "github:darosh/gridy",
+    "lunr": "^2.1.6",
     "material-icons-bundle": "github:darosh/material-icons-bundle",
     "tone": "^0.12.72",
     "vue": "^2.5.2",

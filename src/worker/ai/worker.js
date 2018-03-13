@@ -4,11 +4,11 @@ import {
   Games,
   update,
   reset
-} from '../lib'
+} from '../../lib'
 
 import {
   players
-} from '../services/players'
+} from '../../services/players'
 
 let player
 let game

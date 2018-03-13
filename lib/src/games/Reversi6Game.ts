@@ -6,6 +6,7 @@ import { ReversiGameBase } from "./base/ReversiGameBase";
 export class Reversi6Game extends ReversiGameBase {
   public static title = "Reversi 6×6";
   public static type = "Reversi";
+  public static original = "ReversiGame";
 
   constructor() {
     super(new RectangularGrid(1, undefined, Shape.Even, 6, 6, Rectangular8Tile) as any);

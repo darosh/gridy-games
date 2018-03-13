@@ -10,6 +10,7 @@ export class ConnectFourGame extends ConnectGameBase {
   public static wiki = "https://en.wikipedia.org/wiki/Connect_Four";
   public static alias = ["Captain's Mistress",
   "Four Up", "Plot Four", "Find Four", "Four in a Row", "Four in a Line", "Gravitrips"];
+  public static rules: string[] = ["Connect 4"];
 
   public landscape = true;
 
