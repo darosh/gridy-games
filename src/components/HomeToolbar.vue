@@ -30,7 +30,15 @@
       :search-input.sync="Shared.search"
       v-model="input"
       :class="this.$store.state.dark ? 'grey darken-3' : 'grey lighten-2'"
-      :append-icon-cb="() => {Shared.searching = !Shared.searching}" label="Search" class="mx-3" prepend-icon="search" append-icon="close" solo flat hide-details single-line />
+      :append-icon-cb="() => {Shared.searching = !Shared.searching}"
+      label="Search"
+      class="mx-3"
+      prepend-icon="search"
+      append-icon="close"
+      solo
+      flat
+      hide-details
+      single-line />
     <v-btn
       v-if="!Shared.searching"
       icon

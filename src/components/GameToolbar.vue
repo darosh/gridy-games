@@ -7,7 +7,8 @@
     app>
     <v-btn
       icon
-      to="/">
+      :href="homeLink"
+      @click.native="back">
       <v-icon>arrow_back</v-icon>
     </v-btn>
     <v-toolbar-title class="hidden-xs-only">{{ title | titled }}</v-toolbar-title>
@@ -21,13 +22,16 @@
 </template>
 
 <script>
-import {Shared} from '../services/shared'
-import {Games} from '../lib'
+import { Shared } from '../services/shared'
+import { Games } from '../lib'
+
+let prevIsHome
 
 export default {
   data () {
     return {
-      Shared
+      Shared,
+      homeLink: this.$router.resolve('/').href
     }
   },
   computed: {
@@ -35,6 +39,18 @@ export default {
       return this.$route.params.id && Games[this.$route.params.id + 'Game']
         ? Games[this.$route.params.id + 'Game'].title
         : ''
+    }
+  },
+  beforeRouteEnter (to, from, next) {
+    prevIsHome = from.meta.home
+    next()
+  },
+  methods: {
+    back (event) {
+      if (prevIsHome) {
+        event.preventDefault()
+        this.$router.go(-1)
+      }
     }
   }
 }
