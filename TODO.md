@@ -61,6 +61,7 @@
 - http://janinwise.blogspot.cz/search/label/medieval%20games?updated-max=2011-11-17T19:55:00-06:00&max-results=20&start=4&by-date=false
 - https://en.wikipedia.org/wiki/Circular_chess
 - mini draughts 5x5
+- circular reversi?
 
 # DEV
 
