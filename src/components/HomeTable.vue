@@ -12,16 +12,14 @@
         slot="items"
         slot-scope="props">
         <td>
-          <div class="pl-1" :style="props.item.wip ? 'border-left: 4px solid #B71C1C' : null">
           <g-icon
             :game="props.item.instance"
             :type="props.item.grid"/>
-          </div>
         </td>
         <td>
           <router-link
             :to="{name: 'game', params: {id: props.item.id}}"
-            class="light-blue--text">{{ props.item.title | titled }}</router-link>
+            :class="props.item.wip ? 'red--text' : 'light-blue--text'">{{ props.item.title | titled }}</router-link>
         </td>
         <td :class="{'grey--text': props.item.originals.original}">{{ props.item.original }}</td>
         <td>{{ props.item.type }}</td>

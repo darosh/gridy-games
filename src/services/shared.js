@@ -4,7 +4,7 @@ export const Shared = {
   game: null,
   drawer: false,
   menu: false,
-  search: '',
+  search: null,
   searching: false,
   loading: false,
   items: items,
