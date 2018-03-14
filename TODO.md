@@ -27,6 +27,7 @@
 - [ ] page title
 - [ ] disable pointer-events in previews
 - [ ] try table loader progress only 1st time
+- [ ] remove chord delay
 
 - [x] back should go browser back if possible
 - [x] disable content and toolbar background transition
