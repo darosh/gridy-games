@@ -12,20 +12,22 @@
 
 # UI
 
-- [ ] game search, filters ... hyperlinks?
+- [ ] game hyperlinks in info?
+- [ ] game rules in info?
+- [ ] show "based on" and rules
 - [ ] fix winning line start stone
 - [ ] chess pieces
 - [ ] draughts pieces
-- [ ] disable content and toolbar background transition
-- [ ] show "based on" and rules
 - [ ] show ai stats
 - [ ] flip reversi animation
 - [ ] gomoku winning line inverted contract color style
 - [ ] MD shadows?
 - [ ] open image
-- [ ] acknowledgement
 - [ ] reduce g elements in svg
+- [ ] page title
 
+- [x] disable content and toolbar background transition
+- [x] acknowledgement
 - [x] fix wip
 - [x] init possible
 - [x] NxN as x

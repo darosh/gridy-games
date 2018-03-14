@@ -51,6 +51,31 @@
           class="body-1">{{ m.value }}</div>
       </v-layout>
     </div>
+
+    <v-divider/>
+    <v-toolbar
+      dense
+      flat
+      color="transparent">
+      <v-subheader class="pl-3">Dependencies</v-subheader>
+    </v-toolbar>
+
+    <div class="mx-3 mb-3">
+      <v-layout
+        v-for="d in dependencies"
+        :key="d.text"
+        row
+        mx-3
+        align-center
+        mb-1>
+        <div
+          class="body-1"><a
+            :href="d.link"
+            target="_blank"
+            rel="noopener"
+            class="light-blue--text">{{ d.text }}</a></div>
+      </v-layout>
+    </div>
   </div>
 </template>
 
@@ -65,7 +90,15 @@ export default {
         {title: 'Build', value: new Date(process.APP_BUILD).toLocaleString('en')},
         {title: 'Games', value: Object.keys(Games).length},
         {title: 'Source', value: 'github.com', link: 'https://github.com/darosh/gridy-games'}
-      ]
+      ],
+      dependencies: Object.keys(process.APP_DEPENDENCIES).map((k) => {
+        const v = process.APP_DEPENDENCIES[k]
+
+        return {
+          link: v.startsWith('github') ? `https://github.com/${v.replace('github:', '')}` : `https://www.npmjs.com/package/${k}`,
+          text: k.replace(/@.*\//, '')
+        }
+      }).sort((a, b) => a.text.localeCompare(b.text))
     }
   },
   computed: {

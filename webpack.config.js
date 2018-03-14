@@ -94,7 +94,8 @@ const config = {
         NODE_ENV: '"' + NODE_ENV + '"'
       },
       'process.APP_VERSION': JSON.stringify(require('./package').version),
-      'process.APP_BUILD': JSON.stringify(new Date().toISOString())
+      'process.APP_BUILD': JSON.stringify(new Date().toISOString()),
+      'process.APP_DEPENDENCIES': JSON.stringify(require('./package').dependencies)
     }),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, 'static'),
