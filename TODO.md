@@ -68,4 +68,5 @@
 
 - [ ] readme goals
 - [ ] extract css?
-- [ ] app icon
+
+- [x] app icon
