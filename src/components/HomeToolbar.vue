@@ -42,7 +42,9 @@ export default {
       this.updateSearch(Shared.search);
     },
     "Shared.searching": function() {
-      this.updateSearch(Shared.searching ? Shared.search : "");
+      setTimeout(() => {
+        this.updateSearch(Shared.searching ? Shared.search : "");
+      }, 50)
     }
   },
   methods: {
