@@ -67,6 +67,7 @@ export interface IGridGameConstructor {
   wiki?: string;
   source?: string;
   landscape?: boolean;
+  wip?: boolean;
 
   new(): IGridGame;
 }

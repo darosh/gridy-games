@@ -24,9 +24,9 @@
 - [ ] MD shadows?
 - [ ] open image
 - [ ] acknowledgement
-- [ ] fix wip
 - [ ] reduce g elements in svg
 
+- [x] fix wip
 - [x] init possible
 - [x] NxN as x
 - [x] A2 as 2
@@ -56,4 +56,4 @@
 
 - [ ] readme goals
 - [ ] extract css?
-- [ ] icon
+- [ ] app icon

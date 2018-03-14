@@ -84,6 +84,7 @@ export function table(games: { [name: string]: IGridGameConstructor }): IDiction
     m.link = m.wiki || m.source;
     m.linkText = m.wikiText || m.sourceText;
     m.grid = GRIDS.get(m.instance.grid.constructor);
+    m.wip = a.wip;
     initActions(m.instance, m.instance.possible());
     Object.freeze(m.instance);
     Object.freeze(m);
