@@ -3,7 +3,7 @@ import { TacTickleGameBase } from "./base/TacTickleGameBase";
 
 export class TacTickleGame extends TacTickleGameBase {
   public static title = "Tac-tickle";
-  public static type = "Connect";
+  public static type = "Move to Connect";
   public static authors = ["NRICH"];
   public static source = "https://nrich.maths.org/1240";
   public static created = "2000";

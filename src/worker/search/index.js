@@ -44,3 +44,7 @@ export function search (text) {
     worker.postMessage(text)
   })
 }
+
+export function game (id) {
+  return all.find((g) => g.id === id)
+}

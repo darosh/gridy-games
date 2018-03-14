@@ -8,26 +8,24 @@
         class="body-2 mr-3"
         xs3>Title</v-flex>
       <div
-        v-if="game.wiki"
         class="body-1">
-        <a
-          :href="game.wiki"
-          target="_blank"
-          rel="noopener"
-          class="light-blue--text">{{ game.title | titled }}</a>
+        {{ game.title | titled }}
       </div>
+    </v-layout>
+    <v-layout
+      v-if="game.originalId"
+      row
+      mx-3
+      mb-3>
+      <v-flex
+        class="body-2 mr-3"
+        xs3>Original</v-flex>
       <div
-        v-else-if="game.source"
         class="body-1">
-        <a
-          :href="game.source"
-          target="_blank"
-          rel="noopener"
-          class="light-blue--text">{{ game.title | titled }}</a>
+        <router-link
+          :to="{name: 'game' , params: {id: game.originalId}}"
+          class="light-blue--text">{{ game.original | titled }}</router-link>
       </div>
-      <div
-        v-else
-        class="body-1">{{ game.title | titled }}</div>
     </v-layout>
     <v-layout
       row
@@ -59,28 +57,57 @@
       <div class="body-1">{{ game.location }}</div>
     </v-layout>
     <v-layout
-      v-if="game.authors"
+      v-if="game.authorsArray"
       row
       mx-3
       mb-3>
       <v-flex
         class="body-2 mr-3"
-        xs3>{{ game.authors.length > 1 ? 'Authors' : 'Author' }}</v-flex>
+        xs3>{{ game.authorsArray.length > 1 ? 'Authors' : 'Author' }}</v-flex>
       <div
         class="body-1"
-        v-html="game.authors.join(', <br/>')"/>
+        v-html="game.authorsArray.join(', <br/>')"/>
     </v-layout>
     <v-layout
-      v-if="game.aliases"
+      v-if="game.aliasesArray"
       row
       mx-3
       mb-3>
       <v-flex
         class="body-2 mr-3"
-        xs3>{{ game.aliases.length > 1 ? 'Aliases' : 'Alias' }}</v-flex>
+        xs3>{{ game.aliasesArray.length > 1 ? 'Aliases' : 'Alias' }}</v-flex>
       <div
         class="body-1"
-        v-html="game.aliases.join(', <br />')"/>
+        v-html="game.aliasesArray.join(', <br />')"/>
+    </v-layout>
+    <v-layout
+      v-if="game.link"
+      row
+      mx-3
+      mb-3>
+      <v-flex
+        class="body-2 mr-3"
+        xs3>Info</v-flex>
+      <div
+        class="body-1">
+        <a
+          :href="game.link"
+          class="light-blue--text"
+          target="_blank"
+          rel="noopener">{{ game.linkText }}</a>
+      </div>
+    </v-layout>
+    <v-layout
+      v-if="game.rulesArray"
+      row
+      mx-3
+      mb-3>
+      <v-flex
+        class="body-2 mr-3"
+        xs3>{{ game.rulesArray.length > 1 ? 'Rules' : 'Rule' }}</v-flex>
+      <div
+        class="body-1"
+        v-html="game.rulesArray.join(', <br />')"/>
     </v-layout>
   </div>
 </template>
@@ -89,8 +116,8 @@
 export default {
   props: {
     game: {
-      type: Function,
-      default: null
+      type: Object,
+      required: true
     }
   }
 }

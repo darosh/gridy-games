@@ -64,7 +64,7 @@ export default {
         { text: '', value: null, sortable: false, width: '48px' },
         { text: 'Title', value: 'title', width: '160px' },
         { text: 'Original', value: 'original', width: '160px' },
-        { text: 'Type', value: 'type', width: '80px' },
+        { text: 'Type', value: 'type', width: '120px' },
         { text: 'Created', value: 'created', width: '80px' },
         { text: 'Location', value: 'location', width: '80px' },
         { text: 'Authors', value: 'authors', width: '120px' },

@@ -39,6 +39,7 @@ const links = ["wiki", "source"];
 function merge(a: IDictionary, b: IDictionary): IDictionary {
   for (const k in a) {
     if (Array.isArray(a[k])) {
+      a[k + "Array"] = a[k];
       a[k] = a[k].join(", ");
     }
   }
@@ -51,7 +52,9 @@ function merge(a: IDictionary, b: IDictionary): IDictionary {
     }
 
     if (Array.isArray(b[k])) {
+      b[k + "Array"] = b[k];
       b[k] = b[k].join(", ");
+      a[k + "Array"] = b[k + "Array"];
     }
 
     a[k] = b[k];
@@ -74,9 +77,11 @@ export function table(games: { [name: string]: IGridGameConstructor }): IDiction
 
   for (const key of Object.keys(games)) {
     const a = games[key];
+    const originalId = a.original;
     const b = a.original ? games[a.original] : {} as IGridGameConstructor;
     const m = merge(copy(a), copy(b));
     m.id = id(key);
+    m.originalId = originalId ? id(originalId) : undefined;
     m.instance = new games[key]();
     m.tiles = m.instance.grid.tiles.length;
     m.original = b.title || a.title;

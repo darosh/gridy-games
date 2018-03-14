@@ -2,9 +2,9 @@
 
 - [ ] test game, pre filed
 - [ ] serialization interface and mixins
-- [ ] categorize games
 - [ ] add more rules
 
+- [x] categorize games
 - [x] add rules
 - [x] "original" metadata
 - [x] timeout wrapper
@@ -13,9 +13,6 @@
 
 # UI
 
-- [ ] game hyperlinks in info?
-- [ ] game rules in info?
-- [ ] show "based on" and rules
 - [ ] fix winning line start stone
 - [ ] chess pieces
 - [ ] draughts pieces
@@ -24,7 +21,11 @@
 - [ ] gomoku winning line inverted contract color style
 - [ ] MD shadows?
 - [ ] open image
+- [ ] variants/similar to info drawer
 
+- [x] game hyperlinks in info?
+- [x] game rules in info?
+- [x] show "based on" and rules
 - [x] remove chord delay
 - [x] page title
 - [x] try table loader progress only 1st time

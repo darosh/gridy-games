@@ -3,7 +3,7 @@ import { TacTickleGameBase } from "./base/TacTickleGameBase";
 
 export class HexTacTickleGame extends TacTickleGameBase {
   public static title = "Hex Tac-tickle";
-  public static type = "Connect";
+  public static type = "Move to Connect";
   public static original = "TacTickleGame";
 
   constructor() {

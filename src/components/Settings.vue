@@ -137,10 +137,11 @@
 <script>
 import { players, isHuman } from '../services/players'
 import { Shared } from '../services/shared'
-import { Games, reset, stringify, update } from '../lib'
+import { reset, stringify, update } from '../lib'
 import { Bus } from '../services/bus'
 import { kick1Sound } from '../services/sound/kick1'
 import { kickVibration } from '../services/vibration/index'
+import { game } from '../worker/search'
 
 export default {
   components: {
@@ -148,7 +149,7 @@ export default {
   },
   data () {
     return {
-      game: Games[this.$route.params.id + 'Game'],
+      game: game(this.$route.params.id),
       players: Object.keys(players).map(p => ({ text: p, value: p })),
       Shared,
       timers: [

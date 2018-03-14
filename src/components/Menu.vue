@@ -67,7 +67,7 @@
         row
         mx-3
         align-center
-        mb-1>
+        mb-3>
         <div
           class="body-1"><a
             :href="d.link"
