@@ -25,6 +25,8 @@
 - [ ] open image
 - [ ] reduce g elements in svg
 - [ ] page title
+- [ ] disable pointer-events in previews
+- [ ] back should go browser back if possible
 
 - [x] disable content and toolbar background transition
 - [x] acknowledgement

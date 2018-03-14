@@ -21,7 +21,7 @@
     <v-spacer v-if="!Shared.searching" />
     <v-select
       v-if="Shared.searching"
-      :browser-autocomplete="false"
+      browser-autocomplete="off"
       spellcheck="false"
       autocomplete
       :loading="Shared.loading"
@@ -29,8 +29,8 @@
       :items="Shared.words"
       :search-input.sync="Shared.search"
       v-model="input"
-      :class="this.$store.state.dark ? 'grey darken-3' : 'grey lighten-2'" 
-:append-icon-cb="() => {Shared.searching = !Shared.searching}" label="Search" class="mx-3" prepend-icon="search" append-icon="close" solo flat hide-details single-line />
+      :class="this.$store.state.dark ? 'grey darken-3' : 'grey lighten-2'"
+      :append-icon-cb="() => {Shared.searching = !Shared.searching}" label="Search" class="mx-3" prepend-icon="search" append-icon="close" solo flat hide-details single-line />
     <v-btn
       v-if="!Shared.searching"
       icon

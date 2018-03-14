@@ -29,8 +29,8 @@ worker.onmessage = function (event) {
   resolver({items, words})
 }
 
-export function search (text = '') {
-  text = text.trim().toLowerCase()
+export function search (text) {
+  text = (text || '').trim().toLowerCase()
 
   return new Promise((resolve) => {
     if (cache[text]) {
