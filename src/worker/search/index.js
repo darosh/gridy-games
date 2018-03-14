@@ -48,3 +48,7 @@ export function search (text) {
 export function game (id) {
   return all.find((g) => g.id === id)
 }
+
+export function similar (id, exclude) {
+  return all.filter((g) => g.originalId === id && g.id !== exclude)
+}

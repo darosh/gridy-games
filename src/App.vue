@@ -4,6 +4,7 @@
     :dark="$store.state.dark">
     <v-navigation-drawer
       v-model="Shared.menu"
+      class="pb-3"
       fixed
       left
       app
@@ -13,6 +14,7 @@
     </v-navigation-drawer>
     <v-navigation-drawer
       v-model="Shared.drawer"
+      class="pb-3"
       fixed
       right
       app

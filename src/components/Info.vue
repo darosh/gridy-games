@@ -13,21 +13,6 @@
       </div>
     </v-layout>
     <v-layout
-      v-if="game.originalId"
-      row
-      mx-3
-      mb-3>
-      <v-flex
-        class="body-2 mr-3"
-        xs3>Original</v-flex>
-      <div
-        class="body-1">
-        <router-link
-          :to="{name: 'game' , params: {id: game.originalId}}"
-          class="light-blue--text">{{ game.original | titled }}</router-link>
-      </div>
-    </v-layout>
-    <v-layout
       row
       mx-3
       mb-3>
@@ -109,15 +94,54 @@
         class="body-1"
         v-html="game.rulesArray.join(', <br />')"/>
     </v-layout>
+     <v-layout
+      v-if="game.originalId"
+      row
+      mx-3
+      mb-3>
+      <v-flex
+        class="body-2 mr-3"
+        xs3>Original</v-flex>
+      <div
+        class="body-1">
+        <router-link
+          :to="{name: 'game' , params: {id: game.originalId}}"
+          class="light-blue--text">{{ game.original | titled }}</router-link>
+      </div>
+    </v-layout>
+    <v-layout
+      v-if="game.rulesArray"
+      row
+      mx-3
+      mb-3>
+      <v-flex
+        class="body-2 mr-3"
+        xs3>Similar</v-flex>
+      <div
+        class="body-1">
+        <div v-for="s in similar" :key="s.id" class="pb-3">
+        <router-link
+          :to="{name: 'game' , params: {id: s.id}}"
+          class="light-blue--text">{{ s.title | titled }}</router-link>
+        </div>
+      </div>
+    </v-layout>
   </div>
 </template>
 
 <script>
+import {similar} from '../worker/search'
+
 export default {
   props: {
     game: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    similar () {
+      return similar(this.game.originalId || this.game.id, this.game.id)
     }
   }
 }
