@@ -27,7 +27,6 @@
 
 <script>
 import {theme} from '../style/theme'
-import {RectangularGrid, RadialGrid, HexagonalGrid} from 'gridy'
 
 export default {
   props: {

@@ -33,14 +33,14 @@
           </v-card-title>
           <div style="min-height: 112px">
             <div
-              v-show="show"
               v-observe-visibility="(isVisible, entry) => visibilityChanged(isVisible, entry, game.id)"
+              v-show="show"
               class="text-xs-center"
               style="min-height: 112px">
               <g-board
                 v-if="initialized[game.id]"
-                :game="game.instance"
                 v-once
+                :game="game.instance"
                 :frame="[164,96]"
                 :margin="4"
                 class="preview d-inline-block" />

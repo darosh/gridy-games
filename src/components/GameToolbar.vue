@@ -6,8 +6,8 @@
     dense
     app>
     <v-btn
-      icon
       :href="homeLink"
+      icon
       @click.native="back">
       <v-icon>arrow_back</v-icon>
     </v-btn>

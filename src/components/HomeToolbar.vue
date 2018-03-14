@@ -4,8 +4,8 @@
     :style="{'background-color': this.$store.state.dark ? !this.$route.meta.home ? '#303030' : '' : ''}"
     :dense="!Shared.searching"
     :extended="Shared.searching"
-    class="elevation-1"
     :height="Shared.searching ? 82 : null"
+    class="elevation-1"
     tabs
     scroll-off-screen
     app>
@@ -21,20 +21,20 @@
     <v-spacer v-if="!Shared.searching" />
     <v-select
       v-if="Shared.searching"
-      browser-autocomplete="off"
-      spellcheck="false"
-      autocomplete
-      :loading="Shared.loading"
-      cache-items
+      v-model="input"
       :items="Shared.words"
       :search-input.sync="Shared.search"
-      v-model="input"
       :class="this.$store.state.dark ? 'grey darken-3' : 'grey lighten-2'"
       :append-icon-cb="() => {Shared.searching = !Shared.searching}"
+      :loading="Shared.loading"
       label="Search"
       class="mx-3"
       prepend-icon="search"
       append-icon="close"
+      cache-items
+      browser-autocomplete="off"
+      spellcheck="false"
+      autocomplete
       solo
       flat
       hide-details
