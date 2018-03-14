@@ -52,12 +52,16 @@
       </v-layout>
     </div>
 
+    <div class="text-xs-center">
+    <img class="mb-3 mt-1" src="static/img/icons/icon.svg" alt="Logo" width="112" />
+    </div>
+
     <v-divider/>
     <v-toolbar
       dense
       flat
       color="transparent">
-      <v-subheader class="pl-3">Dependencies</v-subheader>
+      <v-subheader class="pl-3">Acknowledgement</v-subheader>
     </v-toolbar>
 
     <div class="mx-3 mb-3">
