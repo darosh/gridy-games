@@ -4,7 +4,7 @@ import { Move } from "../Move";
 import { ReversiGameBase } from "./base/ReversiGameBase";
 
 export class Reversi10Game extends ReversiGameBase {
-  public static title = "Reversi 10×10";
+  public static title = "Reversi 10x10";
   public static type = "Reversi";
   public static original = "ReversiGame";
 

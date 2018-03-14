@@ -25,9 +25,9 @@
 - [ ] open image
 - [ ] init possible
 - [ ] acknowledgement
-- [ ] NxN as x
-- [ ] A2 as 2
 
+- [x] NxN as x
+- [x] A2 as 2
 - [x] full codesplit
 - [x] autocomplete
 - [x] toolbar scroll

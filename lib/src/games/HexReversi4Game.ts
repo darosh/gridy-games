@@ -5,7 +5,7 @@ import { landscapeHex } from "../utils";
 import { ReversiGameBase } from "./base/ReversiGameBase";
 
 export class HexReversi4Game extends ReversiGameBase {
-  public static title = "Hex Reversi 4×4";
+  public static title = "Hex Reversi 4x4";
   public static type = "Reversi";
   public static original = "ReversiGame";
 

@@ -2,7 +2,7 @@ import { HexagonalGrid, HexagonalTile, normalize, Shape } from "gridy";
 import { TacTickleGameBase } from "./base/TacTickleGameBase";
 
 export class Hex2TacTickleGame extends TacTickleGameBase {
-  public static title = "Hex² Tac-tickle";
+  public static title = "Hex2 Tac-tickle";
   public static type = "Connect";
   public static original = "TacTickleGame";
 

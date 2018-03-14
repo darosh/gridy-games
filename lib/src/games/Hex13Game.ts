@@ -4,7 +4,7 @@ import { landscapeHex } from "../utils";
 import { HexGameBase } from "./base/HexGameBase";
 
 export class Hex13Game extends HexGameBase {
-  public static title = "Hex 13×13";
+  public static title = "Hex 13x13";
   public static type = "Hex";
   public static original = "HexGame";
 
