@@ -23,9 +23,11 @@
 - [ ] gomoku winning line inverted contract color style
 - [ ] MD shadows?
 - [ ] open image
-- [ ] init possible
 - [ ] acknowledgement
+- [ ] fix wip
+- [ ] reduce g elements in svg
 
+- [x] init possible
 - [x] NxN as x
 - [x] A2 as 2
 - [x] full codesplit
