@@ -11,10 +11,12 @@
       <template
         slot="items"
         slot-scope="props">
-        <td :style="props.item.wip ? 'border-right: 4px solid #B71C1C' : null">
+        <td>
+          <div class="pl-1" :style="props.item.wip ? 'border-left: 4px solid #B71C1C' : null">
           <g-icon
             :game="props.item.instance"
             :type="props.item.grid"/>
+          </div>
         </td>
         <td>
           <router-link

@@ -1,7 +1,7 @@
 <template>
   <v-toolbar
     v-show="this.$route.name"
-    :style="{'background-color': this.$store.state.dark ? !this.$route.meta.home ? '#303030' : '' : ''}"
+    :color="$store.state.dark ? 'grey darken-3' : 'grey lighten-3'"
     :dense="!Shared.searching"
     :extended="Shared.searching"
     :height="Shared.searching ? 82 : null"
@@ -24,7 +24,7 @@
       v-model="input"
       :items="Shared.words"
       :search-input.sync="Shared.search"
-      :class="this.$store.state.dark ? 'grey darken-3' : 'grey lighten-2'"
+      :class="this.$store.state.dark ? 'grey darken-1' : 'grey lighten-2'"
       :append-icon-cb="() => {Shared.searching = !Shared.searching}"
       :loading="Shared.loading"
       label="Search"

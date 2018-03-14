@@ -89,7 +89,7 @@
           row
           mx-3
           align-center>
-          <v-flex class="body-1">Dark theme</v-flex>
+          <v-flex class="body-1">Dark</v-flex>
           <div>
             <v-switch
               v-model="useDark"

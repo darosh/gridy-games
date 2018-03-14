@@ -15,7 +15,11 @@ export default new Router({
       title: 'Gridy Games',
       home: true,
       cards: true,
-      overflow: 'scroll'
+      overflow: 'scroll',
+      theme: {
+        true: '#212121',
+        false: '#f5f5f5'
+      }
     }
   },
   {
@@ -29,7 +33,11 @@ export default new Router({
       title: 'Gridy Games',
       home: true,
       table: true,
-      overflow: 'scroll'
+      overflow: 'scroll',
+      theme: {
+        true: '#212121',
+        false: '#f5f5f5'
+      }
     }
   },
   {
@@ -40,7 +48,11 @@ export default new Router({
       toolbar: () => import('@/components/GameToolbar')
     },
     meta: {
-      overflow: 'auto'
+      overflow: 'auto',
+      theme: {
+        true: '#303030',
+        false: '#fafafa'
+      }
     }
   }]
 })

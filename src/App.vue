@@ -88,6 +88,10 @@ export default {
       Shared.menu = false
       this.update = true
       window.document.documentElement.style.overflowY = this.$route.meta.overflow
+      this.updateTheme()
+    },
+    '$store.state.dark': function () {
+      this.updateTheme()
     }
   },
   methods: {
@@ -97,6 +101,9 @@ export default {
       }
 
       window.location.reload(true)
+    },
+    updateTheme() {
+      document.getElementsByName('theme-color')[0].setAttribute('content', this.$route.meta.theme[!!this.$store.state.dark])
     }
   }
 }
