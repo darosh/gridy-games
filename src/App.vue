@@ -51,6 +51,7 @@
 <script>
 import { Games } from './lib'
 import { Shared } from './services/shared'
+import { titled } from './filters/titled'
 
 export default {
   components: {
@@ -89,6 +90,8 @@ export default {
       this.update = true
       window.document.documentElement.style.overflowY = this.$route.meta.overflow
       this.updateTheme()
+      const title = this.$route.meta.title;
+      document.getElementsByTagName('title')[0].textContent = titled(title.call ? title.call(this) : title)
     },
     '$store.state.dark': function () {
       this.updateTheme()

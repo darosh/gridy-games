@@ -23,9 +23,9 @@
 - [ ] gomoku winning line inverted contract color style
 - [ ] MD shadows?
 - [ ] open image
-- [ ] page title
 - [ ] remove chord delay
 
+- [x] page title
 - [x] try table loader progress only 1st time
 - [x] disable animations previews
 - [x] disable pointer-events in previews
