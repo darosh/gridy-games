@@ -102,7 +102,7 @@ export default {
 
       window.location.reload(true)
     },
-    updateTheme() {
+    updateTheme () {
       document.getElementsByName('theme-color')[0].setAttribute('content', this.$route.meta.theme[!!this.$store.state.dark])
     }
   }

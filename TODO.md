@@ -25,10 +25,11 @@
 - [ ] open image
 - [ ] page title
 - [ ] remove chord delay
-- [ ] reduce g elements in svg
-- [ ] disable pointer-events in previews
-- [ ] try table loader progress only 1st time
 
+- [x] try table loader progress only 1st time
+- [x] disable animations previews
+- [x] disable pointer-events in previews
+- [x] reduce g elements in svg
 - [x] fix othello => othello
 - [x] sync toolbar, bg, and app bg colors
 - [x] back should go browser back if possible

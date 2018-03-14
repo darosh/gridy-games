@@ -30,14 +30,14 @@
           <path
             v-if="game.grid.irregular"
             :d="path(t)"
-            :class="{['angle-' + Math.abs(game.grid.orientation * game.grid.angle)] : true, clickable: t.highlighted && !waiting, ['value-' + (t.data || 0)]: true, possible: t.highlighted, odd: t.odd, animate: true, waiting: t.highlighted && waiting}"
+            :class="{['angle-' + Math.abs(game.grid.orientation * game.grid.angle)] : true, clickable: t.highlighted && !waiting, ['value-' + (t.data || 0)]: true, possible: t.highlighted, odd: t.odd, animate: interactive, waiting: t.highlighted && waiting}"
             :transform="'rotate(' + (game.grid.orientation * game.grid.angle) + ')'"
             class="tile"
             v-on="interactive ? {click: () => move(t)} : null" />
           <polygon
             v-else
             :points="vertices || irregularVertices(t)"
-            :class="{['angle-' + Math.abs(game.grid.orientation * game.grid.angle)] : true, clickable: t.highlighted && !waiting, ['value-' + (t.data || 0)]: true, possible: t.highlighted, odd: t.odd, animate: true, waiting: t.highlighted && waiting}"
+            :class="{['angle-' + Math.abs(game.grid.orientation * game.grid.angle)] : true, clickable: t.highlighted && !waiting, ['value-' + (t.data || 0)]: true, possible: t.highlighted, odd: t.odd, animate: interactive, waiting: t.highlighted && waiting}"
             :transform="'rotate(' + (game.grid.orientation * game.grid.angle) + ')'"
             class="tile"
             v-on="interactive ? {click: () => move(t)} : null" />
@@ -60,29 +60,24 @@
               <circle
                 v-if="t.data"
                 :r="game.grid.radius * game.grid.scale * 0.85 - round * 2"
-                :class="{clickable: t.highlighted && !waiting, ['token-' + t.data]: true}"
+                :class="{animate: interactive, clickable: t.highlighted && !waiting, ['token-' + t.data]: true}"
                 cx="0"
                 cy="0"
-                class="animate"
                 v-on="interactive ? {click: () => move(t)} : null" />
             </transition>
           </g>
         </g>
-        <g
-          v-for="(t, k) in stones"
-          v-else
-          :key="'s' + k"
-          :style="{transform: 'translate(' + center(t.tile, 'px') + ')'}"
-          class="stone">
-          <!-- <transition name="scale-transition"> -->
+        <g v-else>
           <circle
+            v-for="(t, k) in stones"
+            :key="'s' + k"
+            :style="{transform: 'translate(' + center(t.tile, 'px') + ')'}"
             :r="game.grid.radius * game.grid.scale * 0.85 - round * 2"
-            :class="{clickable: t.tile.highlighted && !waiting, ['token-' + t.data]: true}"
+            :class="{animate: interactive, clickable: t.tile.highlighted && !waiting, ['token-' + t.data]: true}"
+            class="stone"
             cx="0"
             cy="0"
-            class="animate"
             v-on="interactive ? {click: () => move(t.tile)} : null" />
-            <!-- </transition> -->
         </g>
         <g-poly-line
           v-if="winning"
@@ -194,6 +189,9 @@ export default {
 polygon.animate,
 circle.animate {
   transition: fill 0.2s ease-in-out;
+}
+.stone.animate {
+  transition: all 0.2s ease-in-out;
 }
 .vertical {
   transform-origin: 100% 0%;

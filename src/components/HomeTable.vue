@@ -73,19 +73,10 @@ export default {
       ]
     }
   },
-  watch: {
-    '$route.path': {
-      immediate: true,
-      handler () {
-        this.show = false
-
-        if (this.$route.meta.table) {
-          setTimeout(() => {
-            this.show = true
-          }, 500)
-        }
-      }
-    }
+  mounted () {
+    setTimeout(() => {
+      this.show = true
+    }, 500)
   }
 }
 </script>
