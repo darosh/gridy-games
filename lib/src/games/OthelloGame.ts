@@ -1,8 +1,8 @@
 import { Rectangular8Tile, RectangularGrid, Shape } from "gridy";
 import { ReversiGameBase } from "./base/ReversiGameBase";
 
-export class OtheloGame extends ReversiGameBase {
-  public static title = "Othelo";
+export class OthelloGame extends ReversiGameBase {
+  public static title = "Othello";
   public static type = "Reversi";
   public static created = 1971;
   public static authors = [" Goro Hasegawa"];

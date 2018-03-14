@@ -23,8 +23,8 @@ export { Reversi4Game } from "./Reversi4Game";
 export { Reversi6Game } from "./Reversi6Game";
 export { Reversi10Game } from "./Reversi10Game";
 
-export { OtheloGame } from "./OtheloGame";
-export { Othelo4Game } from "./Othelo4Game";
+export { OthelloGame } from "./OthelloGame";
+export { Othello4Game } from "./Othello4Game";
 
 export { HexReversiGame } from "./HexReversiGame";
 export { HexReversi4Game } from "./HexReversi4Game";

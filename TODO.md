@@ -29,6 +29,7 @@
 - [ ] disable pointer-events in previews
 - [ ] try table loader progress only 1st time
 
+- [x] fix othello => othello
 - [x] sync toolbar, bg, and app bg colors
 - [x] back should go browser back if possible
 - [x] disable content and toolbar background transition
