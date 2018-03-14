@@ -30,6 +30,10 @@
       <v-subheader class="pl-3">Application</v-subheader>
     </v-toolbar>
 
+    <div class="text-xs-center" style="margin: 0 0 16px 0">
+    <img class="gpu" src="/static/img/icons/icon-web.svg" alt="Logo" width="112" />
+    </div>
+
     <div class="mx-3 mb-3">
       <v-layout
         v-for="m in meta"
@@ -50,10 +54,6 @@
           v-else
           class="body-1">{{ m.value }}</div>
       </v-layout>
-    </div>
-
-    <div class="text-xs-center">
-    <img class="mb-3 mt-1 gpu" src="static/img/icons/icon.svg" alt="Logo" width="112" />
     </div>
 
     <v-divider/>

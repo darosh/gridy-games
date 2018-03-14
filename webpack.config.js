@@ -106,7 +106,7 @@ const config = {
     new SWPrecacheWebpackPlugin({
       cacheId: 'gridy-games',
       filename: 'service-worker.js',
-      staticFileGlobs: ['dist/**/*.{js,html,css}'],
+      staticFileGlobs: ['dist/**/*.{js,html,css}', 'dist/**/icon-web.svg'],
       minify: true,
       logger: () => {},
       stripPrefix: 'dist/',
