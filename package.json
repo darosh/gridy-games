@@ -1,7 +1,7 @@
 {
   "name": "gridy-games",
   "description": "Board games",
-  "version": "0.1.87",
+  "version": "0.1.99",
   "author": "darosh <ensonador@gmail.com>",
   "browserslist": [
     "> 1%",
@@ -12,10 +12,12 @@
     "@tweenjs/tween.js": "^17.2.0",
     "d3-scale": "^2.0.0",
     "gridy": "github:darosh/gridy",
+    "intersection-observer": "^0.5.0",
     "lunr": "^2.1.6",
     "material-icons-bundle": "github:darosh/material-icons-bundle",
     "tone": "^0.12.72",
     "vue": "^2.5.2",
+    "vue-observe-visibility": "^0.3.1",
     "vue-router": "^3.0.1",
     "vuetify": "^1.0.5",
     "vuex": "^3.0.1"
@@ -90,6 +92,6 @@
     "install": "rollup -c rollup.config.js -f es -o plugins/icons.js plugins/icons.bundle.js && cross-env NODE_ENV=es5 babel build/vuetify/src --out-dir build/vuetify/es5 && node ./build/patch.js vuetify",
     "lint:es": "eslint -f unix --fix --ext .js,.vue src",
     "lint:ts": "tslint --fix -p tsconfig.json",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --open"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --open --host 0.0.0.0 --useLocalIp"
   }
 }

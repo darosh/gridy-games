@@ -28,6 +28,7 @@ export default new Router({
     meta: {
       title: 'Gridy Games',
       home: true,
+      table: true,
       overflow: 'scroll'
     }
   },

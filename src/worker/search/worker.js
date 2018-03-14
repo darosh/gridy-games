@@ -2,7 +2,7 @@
 
 import {
   search
-} from './build'
+} from './search'
 
 self.onmessage = function (event) {
   const result = search(event.data)

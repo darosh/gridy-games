@@ -1,3 +1,4 @@
+import { HexagonalGrid, RadialGrid, RectangularGrid } from "gridy";
 import { IGridGameConstructor } from "../IGridGame";
 
 export const FIELDS = [
@@ -12,7 +13,12 @@ export const FIELDS = [
   "location",
   "tiles",
   "original",
+  "grid",
 ];
+
+const GRIDS = new Map<any, string>([
+  [RectangularGrid, "Rectangular"], [HexagonalGrid, "Hexagonal"], [RadialGrid, "Radial"],
+]);
 
 function copy(name: {}): {} {
   return Object.assign({}, name);
@@ -70,12 +76,14 @@ export function table(games: { [name: string]: IGridGameConstructor }): IDiction
     const b = a.original ? games[a.original] : {} as IGridGameConstructor;
     const m = merge(copy(a), copy(b));
     m.id = id(key);
-    m.instance = new games[key]();
+    m.instance = Object.freeze(new games[key]());
     m.tiles = m.instance.grid.tiles.length;
     m.original = b.title || a.title;
     m.originals.original = !b.title;
     m.link = m.wiki || m.source;
     m.linkText = m.wikiText || m.sourceText;
+    m.grid = GRIDS.get(m.instance.grid.constructor);
+    Object.freeze(m);
     result.push(m);
   }
 

@@ -6,7 +6,7 @@
       row
       wrap>
       <v-flex
-        v-for="game in items"
+        v-for="game in Shared.items"
         :key="game.id"
         xs12
         sm6
@@ -14,7 +14,8 @@
         lg2>
         <v-card
           :to="{name: 'game', params: {id: game.id}}"
-          height="100%">
+          height="100%"
+          style="transform: translate3d(0,0,0)">
           <div
             v-if="game.wip"
             class="px-3 py-2 red lighten-4 red--text text--darken-4 body-1">
@@ -30,22 +31,20 @@
               class="body-2 text-xs-right">{{ game.created | era }}
             </v-flex>
           </v-card-title>
-          <div
-            class="text-xs-center"
-            style="min-height: 112px">
-            <g-board
-              v-if="game.show"
-              :game="game.instance"
-              :frame="[164,96]"
-              :margin="4"
-              class="preview d-inline-block" />
-            <v-progress-circular
-              v-else
-              :width="2"
-              size="64"
-              color="light-blue"
-              indeterminate
-              style="margin-top: 18px"/>
+          <div style="min-height: 112px">
+            <div
+              v-show="show"
+              v-observe-visibility="(isVisible, entry) => visibilityChanged(isVisible, entry, game.id)"
+              class="text-xs-center"
+              style="min-height: 112px">
+              <g-board
+                v-if="initialized[game.id]"
+                :game="game.instance"
+                v-once
+                :frame="[164,96]"
+                :margin="4"
+                class="preview d-inline-block" />
+            </div>
           </div>
           <v-card-text>
             <div
@@ -59,43 +58,43 @@
 </template>
 
 <script>
-import games from '../mixins/games'
+import { Shared } from '../services/shared'
+import Vue from 'vue'
 
 export default {
+  name: 'HomeCards',
   components: {
     GBoard: () => import('./Board')
   },
-  mixins: [games],
+  data () {
+    return {
+      Shared,
+      initialized: {},
+      visible: {},
+      show: false
+    }
+  },
   watch: {
-    items: {
+    '$route.meta.cards': {
       immediate: true,
-      handler: function () {
-        const items = Math.ceil(
-          window.innerWidth * window.innerHeight / (250 * 250)
-        )
-
-        for (const item of this.items) {
-          item.show = false
-        }
-
-        let i = 0
-        const iter = () => {
-          if (!this.$route.meta.cards) {
-            return
-          }
-
-          if (i < this.items.length) {
-            for (let j = 0; j < items && i < this.items.length; j++) {
-              this.items[i++].show = true
-            }
-
-            requestAnimationFrame(iter)
-          }
-        }
-
+      handler (value) {
         setTimeout(() => {
-          requestAnimationFrame(iter)
-        }, 300)
+          this.show = value
+        }, value ? 600 : 0)
+      }
+    }
+  },
+  methods: {
+    visibilityChanged (isVisible, entry, id) {
+      if (!this.$route.meta.cards) {
+        return
+      }
+
+      if (isVisible) {
+        Vue.set(this.initialized, id, isVisible)
+        Vue.set(this.visible, id, isVisible)
+      } else {
+        Vue.set(this.visible, id, isVisible)
       }
     }
   }

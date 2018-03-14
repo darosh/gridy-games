@@ -1,69 +1,18 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+
+import 'intersection-observer'
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-// import Vuetify from 'vuetify'
-// import 'vuetify/dist/vuetify.min.css'
+import '../plugins/vuetify'
 import './style/index.styl'
 import store from './store'
 import * as icons from '../plugins/icons'
 import { era, hyphenated, multiplied, titled } from './filters'
 
-import {
-  Vuetify, // required
-  VApp, // required
-  VNavigationDrawer,
-  VCard,
-  VBtn,
-  VSpeedDial,
-  VSnackbar,
-  VIcon,
-  VList,
-  VGrid,
-  VSubheader,
-  VProgressCircular,
-  VSelect,
-  VTextfield,
-  VTabs,
-  VToolbar,
-  VSwitch,
-  VDivider,
-  transitions
-} from 'vuetify'
-import {
-  Ripple,
-  Resize,
-  Touch
-} from 'vuetify/es5/directives'
-
-Vue.use(Vuetify, {
-  components: {
-    VApp,
-    VNavigationDrawer,
-    VCard,
-    VBtn,
-    VSpeedDial,
-    VSnackbar,
-    VIcon,
-    VList,
-    VGrid,
-    VSubheader,
-    VProgressCircular,
-    VSelect,
-    VTextfield,
-    VTabs,
-    VToolbar,
-    VSwitch,
-    VDivider,
-    transitions
-  },
-  directives: {
-    Ripple,
-    Resize,
-    Touch
-  }
-})
+import VueObserveVisibility from 'vue-observe-visibility'
+Vue.use(VueObserveVisibility)
 
 require('vuetify/src/stylus/app.styl')
 

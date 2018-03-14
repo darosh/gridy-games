@@ -8,6 +8,7 @@
 
 - [x] timeout wrapper
 - [x] use non wrapping dashes in titles
+- [x] grid type
 
 # UI
 
@@ -20,7 +21,16 @@
 - [ ] show ai stats
 - [ ] flip reversi animation
 - [ ] gomoku winning line inverted contract color style
+- [ ] MD shadows?
+- [ ] open image
+- [ ] init possible
+- [ ] acknowledgement
+- [ ] NxN as x
+- [ ] A2 as 2
 
+- [x] full codesplit
+- [x] autocomplete
+- [x] toolbar scroll
 - [x] remove list from menu
 - [x] winning chord
 - [x] reduce hover listeners
@@ -44,3 +54,4 @@
 
 - [ ] readme goals
 - [ ] extract css?
+- [ ] icon

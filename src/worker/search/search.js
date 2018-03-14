@@ -7,6 +7,7 @@ import {
 import lunr from 'lunr'
 
 let idx
+let words
 
 export function build () {
   const items = table(Games)
@@ -24,17 +25,27 @@ export function build () {
 export function search (text) {
   if (!idx) {
     idx = build()
+    words = Object.keys(idx.invertedIndex).sort()
   }
 
-  const map = {}
+  let map = {}
 
   try {
-    idx.search(text).forEach((k) => {
-      map[k.ref] = true
-    })
+    if (!text) {
+      map = false
+    } else {
+      idx.search(text).forEach((k) => {
+        map[k.ref] = true
+      })
+    }
   } catch (ignore) {
-    return false
+    map = false
   }
 
-  return map
+  const autocomplete = text ? words.filter((w) => w.includes(text)) : words
+
+  return {
+    map,
+    autocomplete
+  }
 }
