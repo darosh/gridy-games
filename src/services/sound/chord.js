@@ -24,7 +24,7 @@ export function chordSound (type = 1) {
     }
 
     if (!env) {
-      env = new PolySynth(40).toMaster()
+      env = new PolySynth(4).toMaster()
       env.set({
         envelope: {
           attack: 0.01,
@@ -35,7 +35,7 @@ export function chordSound (type = 1) {
         oscillator: {
           type: 'sawtooth3'
         },
-        volume: -12
+        volume: -10
       })
     }
 

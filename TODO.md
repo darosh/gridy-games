@@ -1,11 +1,12 @@
 # LIB
 
 - [ ] test game, pre filed
-- [ ] "based on" metadata
-- [ ] add rules
 - [ ] serialization interface and mixins
 - [ ] categorize games
+- [ ] add more rules
 
+- [x] add rules
+- [x] "original" metadata
 - [x] timeout wrapper
 - [x] use non wrapping dashes in titles
 - [x] grid type
@@ -23,8 +24,8 @@
 - [ ] gomoku winning line inverted contract color style
 - [ ] MD shadows?
 - [ ] open image
-- [ ] remove chord delay
 
+- [x] remove chord delay
 - [x] page title
 - [x] try table loader progress only 1st time
 - [x] disable animations previews

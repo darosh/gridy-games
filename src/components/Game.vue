@@ -191,10 +191,6 @@ export default {
       if (value) {
         this.snackbar = true
         this.update()
-
-        if (this.$store.state.sound) {
-          setTimeout(() => { chordSound(value) }, 200 - latency.latency)
-        }
       }
     },
     '$store.state.player': {
@@ -284,7 +280,9 @@ export default {
     },
     kickSound () {
       if (this.$store.state.sound) {
-        if (this.game.player === 1) {
+        if(this.game.winner) {
+          chordSound(this.game.winner)
+        } else if (this.game.player === 1) {
           kick1Sound()
         } else {
           kick2Sound()
@@ -306,8 +304,8 @@ export default {
         player.select(this.game).then(move => {
           this.working = false
           undoAction(this.game)
-          this.kickSound()
           this.game.move(move.move)
+          this.kickSound()
           this.update()
           this.robot()
         })
@@ -326,12 +324,13 @@ export default {
         return
       }
 
-      this.kickSound()
-
       if (action) {
         undoAction(this.game)
         this.game.move(action)
+        this.kickSound()
         this.update()
+      } else {
+        this.kickSound()
       }
     },
     update () {
