@@ -53,7 +53,7 @@
     </div>
 
     <div class="text-xs-center">
-    <img class="mb-3 mt-1" src="static/img/icons/icon.svg" alt="Logo" width="112" />
+    <img class="mb-3 mt-1 gpu" src="static/img/icons/icon.svg" alt="Logo" width="112" />
     </div>
 
     <v-divider/>

@@ -15,7 +15,7 @@
         <v-card
           :to="{name: 'game', params: {id: game.id}}"
           height="100%"
-          style="transform: translate3d(0,0,0)">
+          class="gpu">
           <v-card-title>
             <div>
               <div class="headline">{{ game.title | titled }}</div>
