@@ -31,7 +31,7 @@
     </v-toolbar>
 
     <div class="text-xs-center" style="margin: 0 0 16px 0">
-    <img class="gpu" src="/static/img/icons/icon-web.svg" alt="Logo" width="112" />
+    <img class="gpu" src="static/img/icons/icon-web.svg" alt="Logo" width="112" />
     </div>
 
     <div class="mx-3 mb-3">
