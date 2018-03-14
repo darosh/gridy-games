@@ -69,11 +69,13 @@
         align-center
         mb-3>
         <div
-          class="body-1"><a
+          class="body-1 pr-3"><a
             :href="d.link"
             target="_blank"
             rel="noopener"
             class="light-blue--text">{{ d.text }}</a></div>
+        <v-divider></v-divider>
+        <div v-if="d.version" class="pl-3">{{d.version}}</div>
       </v-layout>
     </div>
   </div>
@@ -96,7 +98,8 @@ export default {
 
         return {
           link: v.startsWith('github') ? `https://github.com/${v.replace('github:', '')}` : `https://www.npmjs.com/package/${k}`,
-          text: k.replace(/@.*\//, '')
+          text: k.replace(/@.*\//, ''),
+          version: v.replace(/\^/, '').replace(/github:.*/, '')
         }
       }).sort((a, b) => a.text.localeCompare(b.text))
     }
