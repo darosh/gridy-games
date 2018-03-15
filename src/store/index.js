@@ -15,7 +15,8 @@ const state = ((value = localStorage.getItem(STORAGE)) && (JSON.parse(value))) |
   timer: 15000,
   sound: false,
   dark: false,
-  vibration: true
+  vibration: true,
+  full: true
 }
 
 state.update = window.$update
@@ -41,7 +42,6 @@ const plugins = [storage]
 // }
 
 const $store = new Vuex.Store({
-  // modules: {},
   state,
   plugins,
   getters: {
@@ -50,6 +50,7 @@ const $store = new Vuex.Store({
   mutations: {
     assign: (state, payload) => Object.assign(state, payload),
     dark: (state, payload) => (state.dark = payload),
+    full: (state, payload) => (state.full = payload),
     vibration: (state, payload) => (state.vibration = payload),
     sound: (state, payload) => (state.sound = payload),
     timer: (state, payload) => (state.timer = payload),

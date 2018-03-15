@@ -53,6 +53,7 @@
 <script>
 import { Games } from '../../plugins/lib'
 import { Shared } from '../services/shared'
+import { full } from "../services/full";
 import { titled } from '../filters/titled'
 
 export default {
@@ -93,11 +94,19 @@ export default {
       window.document.documentElement.style.overflowY = this.$route.meta.overflow
       this.updateTheme()
       const title = this.$route.meta.title
-      document.getElementsByTagName('title')[0].textContent = titled(title.call ? title.call(this) : title)
+      document.getElementsByTagName('title')[0].textContent = titled(
+        title.call ? title.call(this) : title
+      )
     },
     '$store.state.dark': function () {
       this.updateTheme()
     }
+  },
+  created () {
+    this.$router.beforeEach((to, from, next) => {
+      next()
+      full(this.$store.state.full)
+    })
   },
   methods: {
     reload () {
@@ -108,7 +117,12 @@ export default {
       window.location.reload(true)
     },
     updateTheme () {
-      document.getElementsByName('theme-color')[0].setAttribute('content', this.$route.meta.theme[!!this.$store.state.dark])
+      document
+        .getElementsByName('theme-color')[0]
+        .setAttribute(
+          'content',
+          this.$route.meta.theme[!!this.$store.state.dark]
+        )
     }
   }
 }

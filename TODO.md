@@ -21,9 +21,10 @@
 - [ ] gomoku winning line inverted contract color style
 - [ ] MD shadows?
 - [ ] open image
-- [ ] store only non player settings
+- [ ] fullscreen
 - [ ] fix robot workers, invalidate disposed workers
 - [ ] disable human click during robot turn
+- [ ] store only non player settings, or spilt setting to session and global?
 
 - [x] correct count route go back in game
 - [x] all games as singleton

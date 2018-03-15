@@ -21,6 +21,20 @@
           </div>
         </v-layout>
       </div>
+      <div class="mx-3">
+        <v-layout
+          row
+          mx-3
+          align-center>
+          <v-flex class="body-1">Fullscreen</v-flex>
+          <div>
+            <v-switch
+              v-model="useFullscreen"
+              hide-details
+              color="light-blue" />
+          </div>
+        </v-layout>
+      </div>
     </div>
     <v-divider/>
     <v-toolbar
@@ -95,6 +109,7 @@
 
 <script>
 import { Games } from '../../plugins/lib'
+import { full } from '../services/full'
 
 export default {
   data () {
@@ -123,6 +138,15 @@ export default {
       },
       set (value) {
         this.$store.commit('dark', value)
+      }
+    },
+    useFullscreen: {
+      get () {
+        return this.$store.state.full
+      },
+      set (value) {
+        this.$store.commit('full', value)
+        full(value)
       }
     }
   }

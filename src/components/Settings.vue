@@ -97,6 +97,18 @@
               color="light-blue" />
           </div>
         </v-layout>
+        <v-layout
+          row
+          mx-3
+          align-center>
+          <v-flex class="body-1">Fullscreen</v-flex>
+          <div>
+            <v-switch
+              v-model="useFullscreen"
+              hide-details
+              color="light-blue" />
+          </div>
+        </v-layout>
       </div>
     </div>
     <v-divider/>
@@ -137,11 +149,11 @@
 <script>
 import { players, isHuman } from '../services/players'
 import { Shared } from '../services/shared'
-import { reset, stringify, update } from '../../plugins/lib'
+import { Info, reset, stringify, update } from '../../plugins/lib'
 import { Bus } from '../services/bus'
 import { kick1Sound } from '../services/sound/kick1'
 import { kickVibration } from '../services/vibration/index'
-import { Info } from '../../plugins/lib'
+import { full } from '../services/full'
 
 export default {
   components: {
@@ -231,6 +243,15 @@ export default {
       },
       set (value) {
         this.$store.commit('dark', value)
+      }
+    },
+    useFullscreen: {
+      get () {
+        return this.$store.state.full
+      },
+      set (value) {
+        this.$store.commit('full', value)
+        full(value)
       }
     }
   },
