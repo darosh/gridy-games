@@ -3,6 +3,12 @@ import {
 } from '../services/utils'
 
 export default {
+  props: {
+    fixed: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       // game: null,
@@ -29,7 +35,12 @@ export default {
       }
 
       bounds = this.game.grid.bounds()
-      this.size = [bounds.maxX - bounds.minX + this.margin, bounds.maxY - bounds.minY + this.margin]
+
+      if (!this.fixed) {
+        this.size = [bounds.maxX - bounds.minX + this.margin, bounds.maxY - bounds.minY + this.margin]
+      } else {
+        this.size = [bounds.maxX - bounds.minX + this.margin, this.frame[1] + this.margin]
+      }
 
       const w = Math.floor(bounds.maxX - bounds.minX) % 2 ? 0 : 0.5
       const h = Math.floor(bounds.maxY - bounds.minY) % 2 ? 0 : 0.5
@@ -64,7 +75,9 @@ export default {
   },
   watch: {
     frame: {
-      handler: function () { this.frameUpdate() },
+      handler: function () {
+        this.frameUpdate()
+      },
       immediate: true
     }
   }

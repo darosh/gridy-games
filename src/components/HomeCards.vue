@@ -26,7 +26,7 @@
               class="body-2 text-xs-right">{{ game.created | era }}
             </v-flex>
           </v-card-title>
-          <div style="min-height: 112px">
+          <div style="min-height: 112px; position: relative">
             <div
               v-observe-visibility="(isVisible, entry) => visibilityChanged(isVisible, entry, game.id)"
               v-show="show"
@@ -35,10 +35,23 @@
               <g-board
                 v-if="initialized[game.id]"
                 v-once
+                v-model="rendered[game.id]"
                 :game="game.instance"
                 :frame="[164,96]"
                 :margin="4"
+                fixed
                 class="preview d-inline-block" />
+            </div>
+            <div
+              v-show="(!rendered[game.id] || !show)"
+              class="text-xs-center"
+              style="position: absolute; top: 0; left:0; right: 0">
+              <g-icon
+                :game="game.instance"
+                :type="game.grid"
+                :size="100"
+                :box="'2 2 21 21'"
+                class="preview preview-md d-inline-block" />
             </div>
           </div>
           <v-card-text :class="{'pt-4': game.wip}">
@@ -65,12 +78,14 @@ import Vue from 'vue'
 export default {
   name: 'HomeCards',
   components: {
-    GBoard: () => import('./Board')
+    GBoard: () => import('./Board'),
+    GIcon: () => import('./Icon')
   },
   data () {
     return {
       Shared,
       initialized: {},
+      rendered: {},
       visible: {},
       show: false
     }
@@ -83,6 +98,19 @@ export default {
           this.show = value
         }, value ? 600 : 0)
       }
+    },
+    'Shared.items': {
+      immediate: true,
+      handler (items) {
+        items.forEach((game) => {
+          if (this.initialized[game.id] === undefined) {
+            Vue.set(this.initialized, game.id, false)
+          }
+          if (this.visible[game.id] === undefined) {
+            Vue.set(this.visible, game.id, false)
+          }
+        })
+      }
     }
   },
   methods: {
@@ -91,7 +119,7 @@ export default {
         return
       }
 
-      if (isVisible) {
+      if (isVisible && !this.initialized[id]) {
         Vue.set(this.initialized, id, isVisible)
         Vue.set(this.visible, id, isVisible)
       } else {

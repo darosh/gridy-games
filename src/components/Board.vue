@@ -99,6 +99,10 @@ export default {
     GPolyLine: () => import('./PolyLine')
   },
   mixins: [game],
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   props: {
     game: {
       type: Object,
@@ -117,6 +121,10 @@ export default {
       default: false
     },
     waiting: {
+      type: Boolean,
+      default: false
+    },
+    value: {
       type: Boolean,
       default: false
     },
@@ -155,6 +163,10 @@ export default {
     'game.winner': function (value) {
       this.winning = value && this.game.winning ? this.game.winning() : null
     }
+  },
+  mounted () {
+    this.$emit('change', true)
+    // console.log(this.$el)
   },
   methods: {
     center (tile, units) {

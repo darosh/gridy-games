@@ -94,7 +94,7 @@
         class="body-1"
         v-html="game.rulesArray.join(', <br />')"/>
     </v-layout>
-     <v-layout
+    <v-layout
       v-if="game.originalId"
       row
       mx-3
@@ -119,10 +119,13 @@
         xs3>Similar</v-flex>
       <div
         class="body-1">
-        <div v-for="s in similar" :key="s.id" class="pb-3">
-        <router-link
-          :to="{name: 'game' , params: {id: s.id}}"
-          class="light-blue--text">{{ s.title | titled }}</router-link>
+        <div
+          v-for="s in similar"
+          :key="s.id"
+          class="pb-3">
+          <router-link
+            :to="{name: 'game' , params: {id: s.id}}"
+            class="light-blue--text">{{ s.title | titled }}</router-link>
         </div>
       </div>
     </v-layout>

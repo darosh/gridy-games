@@ -1,9 +1,9 @@
 <template>
   <svg
     :class="theme"
-    width="24"
-    height="24"
-    class="preview d-block">
+    :width="size"
+    :height="size"
+    :viewBox="box">
     <rect
       v-if="type === 'Rectangular'"
       width="20"
@@ -37,6 +37,14 @@ export default {
     type: {
       type: String,
       required: true
+    },
+    size: {
+      type: Number,
+      default: 24
+    },
+    box: {
+      type: String,
+      default: '0 0 24 24'
     }
   },
   computed: {

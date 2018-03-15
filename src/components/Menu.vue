@@ -30,8 +30,14 @@
       <v-subheader class="pl-3">Application</v-subheader>
     </v-toolbar>
 
-    <div class="text-xs-center" style="margin: 0 0 16px 0">
-    <img class="gpu" src="static/img/icons/icon-web.svg" alt="Logo" width="112" />
+    <div
+      class="text-xs-center"
+      style="margin: 0 0 16px 0">
+      <img
+        class="gpu"
+        src="static/img/icons/icon-web.svg"
+        alt="Logo"
+        width="112" >
     </div>
 
     <div class="mx-3 mb-3">
@@ -78,8 +84,10 @@
             target="_blank"
             rel="noopener"
             class="light-blue--text">{{ d.text }}</a></div>
-        <v-divider></v-divider>
-        <div v-if="d.version" class="pl-3">{{d.version}}</div>
+        <v-divider/>
+        <div
+          v-if="d.version"
+          class="pl-3">{{ d.version }}</div>
       </v-layout>
     </div>
   </div>

@@ -14,7 +14,8 @@
         <td>
           <g-icon
             :game="props.item.instance"
-            :type="props.item.grid"/>
+            :type="props.item.grid"
+            class="preview preview-md d-block" />
         </td>
         <td>
           <router-link
