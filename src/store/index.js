@@ -1,41 +1,32 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import createLogger from 'vuex/dist/logger'
 import { defaultPlayers } from '../services/players'
+import storage from './storage'
+// import createLogger from 'vuex/dist/logger'
+
+const STORAGE = 'gridy-games'
+const { state, plugin: storagePlugin } = storage(
+  {
+    sound: false,
+    dark: false,
+    vibration: true
+  },
+  {
+    player: defaultPlayers(),
+    timer: 15000,
+    full: false
+  },
+  {
+    update: window.$update || false
+  },
+  STORAGE
+)
 
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
-const STORAGE = 'gridy-games'
 
-let value
-
-const state = ((value = localStorage.getItem(STORAGE)) && (JSON.parse(value))) || {
-  player: defaultPlayers(),
-  timer: 15000,
-  sound: false,
-  dark: false,
-  vibration: true,
-  full: true
-}
-
-state.update = window.$update
-
-function storage (store) {
-  store.subscribe((mutation, state) => {
-    const value = Object.assign({}, state)
-    delete value.update
-    localStorage.setItem(STORAGE, JSON.stringify(value))
-  })
-
-  window.addEventListener('storage', function (e) {
-    if (e.key === STORAGE && e.newValue !== e.oldValue) {
-      store.commit('assign', JSON.parse(e.newValue))
-    }
-  })
-}
-
-const plugins = [storage]
+const plugins = [storagePlugin]
 
 // if (debug) {
 //   plugins.push(createLogger())
