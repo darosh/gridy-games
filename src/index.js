@@ -1,3 +1,4 @@
+import '../plugins/debug'
 import '../plugins/visibility'
 import '../plugins/vuetify'
 import * as icons from '../plugins/icons'

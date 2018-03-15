@@ -72,11 +72,16 @@ function merge(a: IDictionary, b: IDictionary): IDictionary {
   return a;
 }
 
-export function table(games: { [name: string]: IGridGameConstructor }): IDictionary[] {
+export function table(games: { [name: string]: IGridGameConstructor }, wip = false): IDictionary[] {
   const result: IDictionary[] = [];
 
   for (const key of Object.keys(games)) {
     const a = games[key];
+
+    if (!wip && a.wip) {
+      continue;
+    }
+
     const originalId = a.original;
     const b = a.original ? games[a.original] : {} as IGridGameConstructor;
     const m = merge(copy(a), copy(b));

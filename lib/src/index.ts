@@ -13,5 +13,7 @@ export const Games = games;
 import * as players from "./players";
 export const Players = players;
 
-export { FIELDS, Info, reset, stringify, table, update } from "./utils";
+export { FIELDS, reset, stringify, table, update } from "./utils";
 export * from "./utils/actions";
+
+export { Info } from "./Info";
