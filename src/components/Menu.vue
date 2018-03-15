@@ -61,7 +61,7 @@
         row
         mx-3
         align-center
-        mb-3>
+        mb-1>
         <v-flex class="body-2">{{ m.title }}</v-flex>
         <div
           v-if="m.link"
@@ -91,7 +91,7 @@
         row
         mx-3
         align-center
-        mb-3>
+        mb-1>
         <div
           class="body-1 pr-3"><a
             :href="d.link"
@@ -124,9 +124,9 @@ export default {
         const v = process.APP_DEPENDENCIES[k]
 
         return {
-          link: v.startsWith('github') ? `https://github.com/${v.replace('github:', '')}` : `https://www.npmjs.com/package/${k}`,
+          link: v.startsWith('github') ? `https://github.com/${v.replace('github:', '').replace(/:.*/, '')}` : `https://www.npmjs.com/package/${k}`,
           text: k.replace(/@.*\//, ''),
-          version: v.replace(/\^/, '').replace(/github:.*/, '')
+          version: v.replace(/\^/, '').replace(/github:.*:/, '')
         }
       }).sort((a, b) => a.text.localeCompare(b.text))
     }

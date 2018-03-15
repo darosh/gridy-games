@@ -1,9 +1,9 @@
 <template>
-  <div class="mx-3 mb-3">
+  <div class="mx-3 mb-1">
     <v-layout
       row
       mx-3
-      mb-3>
+      mb-1>
       <v-flex
         class="body-2 mr-3"
         xs3>Title</v-flex>
@@ -15,7 +15,7 @@
     <v-layout
       row
       mx-3
-      mb-3>
+      mb-1>
       <v-flex
         class="body-2 mr-3"
         xs3>Type</v-flex>
@@ -25,7 +25,7 @@
       v-if="game.created"
       row
       mx-3
-      mb-3>
+      mb-1>
       <v-flex
         class="body-2 mr-3"
         xs3>Created</v-flex>
@@ -35,7 +35,7 @@
       v-if="game.location"
       row
       mx-3
-      mb-3>
+      mb-1>
       <v-flex
         class="body-2 mr-3"
         xs3>Location</v-flex>
@@ -45,7 +45,7 @@
       v-if="game.authorsArray"
       row
       mx-3
-      mb-3>
+      mb-1>
       <v-flex
         class="body-2 mr-3"
         xs3>{{ game.authorsArray.length > 1 ? 'Authors' : 'Author' }}</v-flex>
@@ -57,7 +57,7 @@
       v-if="game.aliasesArray"
       row
       mx-3
-      mb-3>
+      mb-1>
       <v-flex
         class="body-2 mr-3"
         xs3>{{ game.aliasesArray.length > 1 ? 'Aliases' : 'Alias' }}</v-flex>
@@ -69,7 +69,7 @@
       v-if="game.link"
       row
       mx-3
-      mb-3>
+      mb-1>
       <v-flex
         class="body-2 mr-3"
         xs3>Info</v-flex>
@@ -86,7 +86,7 @@
       v-if="game.rulesArray"
       row
       mx-3
-      mb-3>
+      mb-1>
       <v-flex
         class="body-2 mr-3"
         xs3>{{ game.rulesArray.length > 1 ? 'Rules' : 'Rule' }}</v-flex>
@@ -98,7 +98,7 @@
       v-if="game.originalId"
       row
       mx-3
-      mb-3>
+      mb-1>
       <v-flex
         class="body-2 mr-3"
         xs3>Original</v-flex>
@@ -113,7 +113,7 @@
       v-if="similar.length"
       row
       mx-3
-      mb-3>
+      mb-1>
       <v-flex
         class="body-2 mr-3"
         xs3>Similar</v-flex>
@@ -122,7 +122,7 @@
         <div
           v-for="s in similar"
           :key="s.id"
-          class="pb-3">
+          class="pb-1">
           <router-link
             :to="{name: 'game' , params: {id: s.id}}"
             class="light-blue--text">{{ s.title | titled }}</router-link>

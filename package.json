@@ -1,7 +1,7 @@
 {
   "name": "gridy-games",
   "description": "Board games",
-  "version": "0.1.120",
+  "version": "0.1.121",
   "author": "darosh <ensonador@gmail.com>",
   "browserslist": [
     "> 1%",
