@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { Games } from '../../plugins/lib'
+import { Info } from '../../plugins/lib'
 import { full } from '../services/full'
 
 export default {
@@ -117,7 +117,7 @@ export default {
       meta: [
         {title: 'Version', value: process.APP_VERSION},
         {title: 'Build', value: new Date(process.APP_BUILD).toLocaleString('en')},
-        {title: 'Games', value: Object.keys(Games).length},
+        {title: 'Games', value: Info.games.length},
         {title: 'Source', value: 'github.com', link: 'https://github.com/darosh/gridy-games'}
       ],
       dependencies: Object.keys(process.APP_DEPENDENCIES).map((k) => {
