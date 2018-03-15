@@ -1,6 +1,4 @@
-import {
-  latency
-} from './latency'
+import { latency } from './latency'
 
 let env
 

@@ -1,6 +1,4 @@
-import {
-  isHuman
-} from '../services/players'
+import { isHuman } from '../services/players'
 
 export default {
   computed: {

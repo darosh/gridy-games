@@ -1,10 +1,4 @@
-import {
-  UctPlayer,
-  UctCachedPlayer,
-  AlphaBetaPlayer,
-  RandomPlayer,
-  MinimaxPlayer
-} from '../../plugins/lib'
+import { UctPlayer, UctCachedPlayer, AlphaBetaPlayer, RandomPlayer, MinimaxPlayer } from '../../plugins/lib'
 
 const HUMAN = 'Human'
 

@@ -1,6 +1,4 @@
-import {
-  stringify
-} from '../../../plugins/lib'
+import { stringify } from '../../../plugins/lib'
 
 const Work = require('worker-loader!./worker.js') // eslint-disable-line
 

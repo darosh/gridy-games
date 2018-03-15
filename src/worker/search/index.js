@@ -1,7 +1,4 @@
-import {
-  Games,
-  table
-} from '../../../plugins/lib'
+import { Games, table } from '../../../plugins/lib'
 
 const Work = require('worker-loader!./worker.js') // eslint-disable-line
 
@@ -16,7 +13,7 @@ export let words
 worker.onmessage = function (event) {
   const result = JSON.parse(event.data)
   const resolver = resolvers.pop()
-  const {map, autocomplete} = result
+  const { map, autocomplete } = result
 
   if (map) {
     items = Object.freeze(all.filter((i) => map[i.id]))
@@ -25,8 +22,8 @@ worker.onmessage = function (event) {
   }
 
   words = autocomplete
-  cache[last] = {items, words}
-  resolver({items, words})
+  cache[last] = { items, words }
+  resolver({ items, words })
 }
 
 export function search (text) {
@@ -36,7 +33,7 @@ export function search (text) {
     if (cache[text]) {
       items = cache[text].items
       words = cache[text].words
-      return resolve({items, words})
+      return resolve({ items, words })
     }
 
     last = text

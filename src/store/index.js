@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 // import createLogger from 'vuex/dist/logger'
-import {
-  defaultPlayers
-} from '../services/players'
+import { defaultPlayers } from '../services/players'
 
 Vue.use(Vuex)
 

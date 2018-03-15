@@ -1,10 +1,5 @@
-import {
-  tickStop
-} from './tick'
-
-import {
-  latency
-} from './latency'
+import { tickStop } from './tick'
+import { latency } from './latency'
 
 let env
 

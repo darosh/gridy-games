@@ -1,7 +1,7 @@
 import {
-  AnyTile, IGrid, link, Position, Rectangular8Tile,
-  RectangularGrid, RectangularTile, Shape, toMap,
+  AnyTile, IGrid, link, Position, Rectangular8Tile, RectangularGrid, RectangularTile, Shape, toMap,
 } from "gridy";
+
 import { IGame } from "../../IGame";
 
 function unlink(tile: any, remove = false) {

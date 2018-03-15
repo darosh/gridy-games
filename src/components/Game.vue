@@ -133,14 +133,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import {
-  Games,
-  TimedProxy,
-  initActions,
-  initHighlight,
-  selectAction,
-  undoAction
-} from '../../plugins/lib'
+import { Games, TimedProxy, initActions, initHighlight, selectAction, undoAction } from '../../plugins/lib'
 import { isHuman } from '../services/players'
 import { Bus } from '../services/bus'
 import { PlayerWorker } from '../worker/ai'

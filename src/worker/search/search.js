@@ -1,8 +1,4 @@
-import {
-  FIELDS,
-  Games,
-  table
-} from '../../../plugins/lib'
+import { FIELDS, Games, table } from '../../../plugins/lib'
 
 import lunr from 'lunr'
 

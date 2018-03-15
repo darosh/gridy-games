@@ -1,8 +1,6 @@
 /* globals self */
 
-import {
-  search
-} from './search'
+import { search } from './search'
 
 self.onmessage = function (event) {
   const result = search(event.data)

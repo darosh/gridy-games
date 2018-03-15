@@ -1,6 +1,4 @@
-import {
-  scaleToFit
-} from '../services/utils'
+import {scaleToFit} from '../services/utils'
 
 export default {
   props: {
