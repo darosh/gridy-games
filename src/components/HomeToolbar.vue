@@ -70,6 +70,9 @@ import { Shared } from '../services/shared'
 import { search } from '../worker/search'
 
 export default {
+  components: {
+    VSelect: () => import('vuetify/es5/components/VSelect')
+  },
   data () {
     return {
       Shared,
