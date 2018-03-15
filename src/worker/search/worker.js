@@ -1,5 +1,6 @@
 /* globals self */
 
+import '../../../plugins/debug'
 import { search } from './search'
 
 self.onmessage = function (event) {
