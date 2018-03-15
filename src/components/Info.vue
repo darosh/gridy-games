@@ -110,7 +110,7 @@
       </div>
     </v-layout>
     <v-layout
-      v-if="game.rulesArray"
+      v-if="similar.length"
       row
       mx-3
       mb-3>

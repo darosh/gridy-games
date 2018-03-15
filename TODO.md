@@ -21,7 +21,9 @@
 - [ ] gomoku winning line inverted contract color style
 - [ ] MD shadows?
 - [ ] open image
+- [ ] store only non player settings
 
+- [x] fix zero similar
 - [x] variants/similar to info drawer
 - [x] game hyperlinks in info?
 - [x] game rules in info?
