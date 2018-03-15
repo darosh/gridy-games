@@ -26,7 +26,7 @@
           row
           mx-3
           align-center>
-          <v-flex class="body-1">Fullscreen</v-flex>
+          <v-flex class="body-1">Full screen</v-flex>
           <div>
             <v-switch
               v-model="useFullscreen"
