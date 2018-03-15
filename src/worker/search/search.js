@@ -1,4 +1,4 @@
-import { FIELDS, Games, table } from '../../../plugins/lib'
+import { FIELDS, Info } from '../../../plugins/lib'
 
 import lunr from 'lunr'
 
@@ -6,7 +6,7 @@ let idx
 let words
 
 export function build () {
-  const items = table(Games)
+  const items = Info.games
 
   return lunr(function () {
     this.ref('id')

@@ -23,6 +23,9 @@
 - [ ] open image
 - [ ] store only non player settings
 
+- [x] all games as singleton
+- [x] unused filters
+- [x] externals as plugins
 - [x] fix zero similar
 - [x] variants/similar to info drawer
 - [x] game hyperlinks in info?

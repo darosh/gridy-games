@@ -1,4 +1,4 @@
-import { items } from '../worker/search'
+import { Info } from '../../plugins/lib'
 
 export const Shared = {
   game: null,
@@ -7,6 +7,6 @@ export const Shared = {
   search: null,
   searching: false,
   loading: false,
-  items: items,
+  items: Info.games,
   words: []
 }

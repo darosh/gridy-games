@@ -141,7 +141,7 @@ import { reset, stringify, update } from '../../plugins/lib'
 import { Bus } from '../services/bus'
 import { kick1Sound } from '../services/sound/kick1'
 import { kickVibration } from '../services/vibration/index'
-import { game } from '../worker/search'
+import { Info } from '../../plugins/lib'
 
 export default {
   components: {
@@ -149,7 +149,7 @@ export default {
   },
   data () {
     return {
-      game: game(this.$route.params.id),
+      game: Info.game(this.$route.params.id),
       players: Object.keys(players).map(p => ({ text: p, value: p })),
       Shared,
       timers: [

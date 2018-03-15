@@ -1,9 +1,9 @@
-import { Games, table } from '../../../plugins/lib'
+import { Info } from '../../../plugins/lib'
 
 const Work = require('worker-loader!./worker.js') // eslint-disable-line
 
 const worker = new Work()
-const all = Object.freeze(table(Games))
+const all = Info.games
 const cache = {}
 let last
 let resolvers = []
@@ -40,12 +40,4 @@ export function search (text) {
     resolvers.push(resolve)
     worker.postMessage(text)
   })
-}
-
-export function game (id) {
-  return all.find((g) => g.id === id)
-}
-
-export function similar (id, exclude) {
-  return all.filter((g) => g.originalId === id && g.id !== exclude)
 }

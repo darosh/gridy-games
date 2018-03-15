@@ -133,7 +133,7 @@
 </template>
 
 <script>
-import {similar} from '../worker/search'
+import {Info} from '../../plugins/lib'
 
 export default {
   props: {
@@ -144,7 +144,7 @@ export default {
   },
   computed: {
     similar () {
-      return similar(this.game.originalId || this.game.id, this.game.id)
+      return Info.similar(this.game.originalId || this.game.id, this.game.id)
     }
   }
 }
