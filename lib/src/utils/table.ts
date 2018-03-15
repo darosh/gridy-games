@@ -1,4 +1,4 @@
-import { HexagonalGrid, RadialGrid, RectangularGrid } from "gridy";
+import { HexagonalGrid, RadialGrid, RectangularGrid, TriangularGrid } from "gridy";
 import { IGridGameConstructor } from "../IGridGame";
 import { initActions } from "./actions";
 
@@ -18,7 +18,10 @@ export const FIELDS = [
 ];
 
 const GRIDS = new Map<any, string>([
-  [RectangularGrid, "Rectangular"], [HexagonalGrid, "Hexagonal"], [RadialGrid, "Radial"],
+  [RectangularGrid, "Rectangular"],
+  [HexagonalGrid, "Hexagonal"],
+  [RadialGrid, "Radial"],
+  [TriangularGrid, "Triangular"],
 ]);
 
 function copy(name: {}): {} {

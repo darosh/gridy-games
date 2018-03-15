@@ -1,11 +1,13 @@
 export { TicTacToeGame } from "./TicTacToeGame";
 export { CircularTicTacToeGame } from "./CircularTicTacToeGame";
+export { TriTicTacToeGame } from "./TriTicTacToeGame";
 
 export { TacTickleGame } from "./TacTickleGame";
 export { TacTickle4Game } from "./TacTickle4Game";
 export { HexTacTickleGame } from "./HexTacTickleGame";
 export { Hex2TacTickleGame } from "./Hex2TacTickleGame";
 export { CircularTacTickleGame } from "./CircularTacTickleGame";
+export { TriTacTickleGame } from "./TriTacTickleGame";
 
 export { ConnectFourGame } from "./ConnectFourGame";
 

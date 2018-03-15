@@ -36,13 +36,18 @@
             v-on="interactive ? {click: () => move(t)} : null" />
           <polygon
             v-else
-            :points="vertices || irregularVertices(t)"
+            :points="game.grid.tileTypes === 2 ? typedVertices(t) : (vertices || irregularVertices(t))"
             :class="{['angle-' + Math.abs(game.grid.orientation * game.grid.angle)] : true, clickable: t.highlighted && !waiting, ['value-' + (t.data || 0)]: true, possible: t.highlighted, odd: t.odd, animate: interactive, waiting: t.highlighted && waiting}"
             :transform="'rotate(' + (game.grid.orientation * game.grid.angle) + ')'"
             class="tile"
             v-on="interactive ? {click: () => move(t)} : null" />
-          <text v-if="coords" alignment-baseline="middle" text-anchor="middle" :font-size="game.grid.scale * 0.4" :dy="game.grid.scale * 0.04">
-            {{game.moveToString(t)}} </text>
+          <text
+            v-if="coords"
+            :font-size="game.grid.scale * 0.4"
+            :dy="game.grid.scale * 0.04"
+            alignment-baseline="middle"
+            text-anchor="middle">
+            {{ game.moveToString(t) }} </text>
         </g>
         <line
           v-for="(l, k) in rulers"

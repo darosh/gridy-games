@@ -22,6 +22,11 @@
       cx="12.5"
       cy="12.5"
       class="tile"/>
+    <polygon
+      v-else-if="type === 'Triangular'"
+      points="0,0 20,0 10,-17.321"
+      transform="translate(2.5,21.5)"
+      class="tile"/>
   </svg>
 </template>
 

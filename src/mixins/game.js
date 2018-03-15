@@ -1,4 +1,4 @@
-import {scaleToFit} from '../services/utils'
+import { scaleToFit } from '../services/utils'
 
 export default {
   props: {
@@ -59,6 +59,12 @@ export default {
     irregularVertices (tile) {
       return this.game.grid
         .path(tile)
+        .map(p => p.x.toFixed(3) + ',' + p.y.toFixed(3))
+        .join(' ')
+    },
+    typedVertices (tile) {
+      return this.game.grid
+        .vertices(tile, undefined, this.game.grid.getTileType(tile))
         .map(p => p.x.toFixed(3) + ',' + p.y.toFixed(3))
         .join(' ')
     }

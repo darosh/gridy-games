@@ -21,6 +21,7 @@
 - [ ] open image
 - [ ] fix robot workers, invalidate disposed workers
 - [ ] disable human click during robot turn
+- [ ] better wiki link text
 
 - [x] more vuetify code split
 - [x] WIP games excluded in production
@@ -74,6 +75,7 @@
 - https://en.wikipedia.org/wiki/Circular_chess
 - mini draughts 5x5
 - circular reversi?
+- triangular reversi?
 - gomoku is 19x19 and Renju 15x15?
 - https://en.wikipedia.org/wiki/TacTix
 -
