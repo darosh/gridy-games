@@ -34,7 +34,7 @@ export class TacTickleGameBase implements IGame {
       return "pass";
     }
 
-    const p = move.map(this.grid.toPoint);
+    const p = (Array.isArray(move) ? move : [move]).map(this.grid.toPoint);
     return stringifyPositions(p);
   }
 

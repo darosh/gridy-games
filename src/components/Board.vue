@@ -41,6 +41,8 @@
             :transform="'rotate(' + (game.grid.orientation * game.grid.angle) + ')'"
             class="tile"
             v-on="interactive ? {click: () => move(t)} : null" />
+          <text v-if="coords" alignment-baseline="middle" text-anchor="middle" :font-size="game.grid.scale * 0.4" :dy="game.grid.scale * 0.04">
+            {{game.moveToString(t)}} </text>
         </g>
         <line
           v-for="(l, k) in rulers"
@@ -125,6 +127,10 @@ export default {
       default: false
     },
     value: {
+      type: Boolean,
+      default: false
+    },
+    coords: {
       type: Boolean,
       default: false
     },

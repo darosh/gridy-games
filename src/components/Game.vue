@@ -49,6 +49,7 @@
         </v-layout>
         <g-board
           :game="game"
+          :coords="$store.state.coords"
           :frame="frame"
           :margin="margin"
           :move="move"

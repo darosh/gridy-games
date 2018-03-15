@@ -14,7 +14,8 @@ const { state, plugin: storagePlugin } = storage(
   {
     player: defaultPlayers(),
     timer: 15000,
-    full: false
+    full: false,
+    coords: false
   },
   {
     update: window.$update || false
@@ -42,6 +43,7 @@ const $store = new Vuex.Store({
     assign: (state, payload) => Object.assign(state, payload),
     dark: (state, payload) => (state.dark = payload),
     full: (state, payload) => (state.full = payload),
+    coords: (state, payload) => (state.coords = payload),
     vibration: (state, payload) => (state.vibration = payload),
     sound: (state, payload) => (state.sound = payload),
     timer: (state, payload) => (state.timer = payload),

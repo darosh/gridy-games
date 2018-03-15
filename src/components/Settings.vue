@@ -109,6 +109,18 @@
               color="light-blue" />
           </div>
         </v-layout>
+        <v-layout
+          row
+          mx-3
+          align-center>
+          <v-flex class="body-1">Coordinates</v-flex>
+          <div>
+            <v-switch
+              v-model="useCoords"
+              hide-details
+              color="light-blue" />
+          </div>
+        </v-layout>
       </div>
     </div>
     <v-divider/>
@@ -256,6 +268,14 @@ export default {
       set (value) {
         this.$store.commit('full', value)
         full(value)
+      }
+    },
+    useCoords: {
+      get () {
+        return this.$store.state.coords
+      },
+      set (value) {
+        this.$store.commit('coords', value)
       }
     }
   },
