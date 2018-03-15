@@ -140,7 +140,7 @@ import {
   initHighlight,
   selectAction,
   undoAction
-} from '../lib'
+} from '../../plugins/lib'
 import { isHuman } from '../services/players'
 import { Bus } from '../services/bus'
 import { PlayerWorker } from '../worker/ai'

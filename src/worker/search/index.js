@@ -1,7 +1,7 @@
 import {
   Games,
   table
-} from '../../lib'
+} from '../../../plugins/lib'
 
 const Work = require('worker-loader!./worker.js') // eslint-disable-line
 

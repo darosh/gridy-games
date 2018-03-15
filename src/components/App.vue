@@ -51,15 +51,15 @@
 </template>
 
 <script>
-import { Games } from './lib'
-import { Shared } from './services/shared'
-import { titled } from './filters/titled'
+import { Games } from '../../plugins/lib'
+import { Shared } from '../services/shared'
+import { titled } from '../filters/titled'
 
 export default {
   components: {
-    GMenu: () => import('./components/Menu'),
-    GSettings: () => import('./components/Settings'),
-    GPatterns: () => import('./components/Patterns')
+    GMenu: () => import('./Menu'),
+    GSettings: () => import('./Settings'),
+    GPatterns: () => import('./Patterns')
   },
   data () {
     return {

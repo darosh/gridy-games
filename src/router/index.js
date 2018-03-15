@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { Games } from '../lib'
+import { Games } from '../../plugins/lib'
 
 Vue.use(Router)
 
@@ -9,8 +9,8 @@ export default new Router({
     path: '/',
     name: 'home',
     components: {
-      default: () => import('@/components/HomeCards'),
-      toolbar: () => import('@/components/HomeToolbar')
+      default: () => import('../components/HomeCards'),
+      toolbar: () => import('../components/HomeToolbar')
     },
     meta: {
       title: 'Gridy Games',
@@ -27,8 +27,8 @@ export default new Router({
     path: '/table',
     name: 'table',
     components: {
-      default: () => import('@/components/HomeTable'),
-      toolbar: () => import('@/components/HomeToolbar')
+      default: () => import('../components/HomeTable'),
+      toolbar: () => import('../components/HomeToolbar')
     },
     meta: {
       title: 'Gridy Games',
@@ -45,8 +45,8 @@ export default new Router({
     path: '/game/:id',
     name: 'game',
     components: {
-      default: () => import('@/components/Game'),
-      toolbar: () => import('@/components/GameToolbar')
+      default: () => import('../components/Game'),
+      toolbar: () => import('../components/GameToolbar')
     },
     meta: {
       title () {

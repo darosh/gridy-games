@@ -4,7 +4,7 @@ import {
   AlphaBetaPlayer,
   RandomPlayer,
   MinimaxPlayer
-} from '../lib'
+} from '../../plugins/lib'
 
 const HUMAN = 'Human'
 

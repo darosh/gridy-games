@@ -23,7 +23,7 @@
 
 <script>
 import { Shared } from '../services/shared'
-import { Games } from '../lib'
+import { Games } from '../../plugins/lib'
 
 let prevIsHome
 

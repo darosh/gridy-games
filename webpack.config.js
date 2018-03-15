@@ -1,5 +1,4 @@
 const path = require('path')
-// const fs = require('fs')
 const webpack = require('webpack')
 // const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -46,24 +45,9 @@ const extractHTML = new HtmlWebpackPlugin({
 })
 
 const config = {
-  /**
-   * You can use these too for bigger projects. For now it is 0 conf mode for me!
-   */
-  // entry: {
-  //   build: path.join(setPath('src'), 'index.js'),
-  //   vendor: path.join(setPath('src'), 'vendor.js')
-  // },
-  // output: {
-  //   path: buildingForLocal() ? path.resolve(__dirname) : setPath('dist'), //this one sets the path to serve
-  //   publicPath: setPublicPath(),
-  //   filename: buildingForLocal() ? 'js/[name].js' : 'js/[name].[hash].js'
-  // },
-
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
-      '@': resolve('src'),
-      // 'vue$': 'vue/dist/vue.esm.js'
       'Tone': 'tone/Tone',
       'd3-color': resolve('plugins/dummy'),
       'd3-format': resolve('plugins/dummy')

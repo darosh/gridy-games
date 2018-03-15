@@ -4,7 +4,7 @@ import {
   Games,
   update,
   reset
-} from '../../lib'
+} from '../../../plugins/lib'
 
 import {
   players

@@ -137,7 +137,7 @@
 <script>
 import { players, isHuman } from '../services/players'
 import { Shared } from '../services/shared'
-import { reset, stringify, update } from '../lib'
+import { reset, stringify, update } from '../../plugins/lib'
 import { Bus } from '../services/bus'
 import { kick1Sound } from '../services/sound/kick1'
 import { kickVibration } from '../services/vibration/index'

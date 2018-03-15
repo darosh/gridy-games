@@ -1,4 +1,4 @@
-import { Games } from '../lib'
+import { Games } from '../../plugins/lib'
 
 export function scaleToFit (iw, ih, fw, fh) {
   return Math.min(fw / iw, fh / ih)

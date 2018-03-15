@@ -2,7 +2,7 @@ import {
   FIELDS,
   Games,
   table
-} from '../../lib'
+} from '../../../plugins/lib'
 
 import lunr from 'lunr'
 

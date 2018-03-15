@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import { Games } from '../lib'
+import { Games } from '../../plugins/lib'
 
 export default {
   data () {
