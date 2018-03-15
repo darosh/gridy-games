@@ -28,7 +28,7 @@
           </v-card-title>
           <div style="min-height: 112px; position: relative">
             <div
-              v-observe-visibility="(isVisible, entry) => visibilityChanged(isVisible, entry, game.id)"
+              v-observe-visibility="!show ? null : (isVisible, entry) => visibilityChanged(isVisible, entry, game.id)"
               v-show="show"
               class="text-xs-center"
               style="min-height: 112px">
@@ -43,7 +43,7 @@
                 class="preview d-inline-block" />
             </div>
             <div
-              v-show="(!rendered[game.id] || !show)"
+              v-show="!show || !rendered[game.id]"
               class="text-xs-center"
               style="position: absolute; top: 0; left:0; right: 0">
               <g-icon
@@ -86,44 +86,35 @@ export default {
       Shared,
       initialized: {},
       rendered: {},
-      visible: {},
       show: false
     }
   },
   watch: {
-    '$route.meta.cards': {
-      immediate: true,
-      handler (value) {
-        setTimeout(() => {
-          this.show = value
-        }, value ? 600 : 0)
-      }
-    },
     'Shared.items': {
       immediate: true,
       handler (items) {
-        items.forEach((game) => {
+        items.forEach(game => {
           if (this.initialized[game.id] === undefined) {
             Vue.set(this.initialized, game.id, false)
-          }
-          if (this.visible[game.id] === undefined) {
-            Vue.set(this.visible, game.id, false)
           }
         })
       }
     }
   },
+  activated () {
+    setTimeout(() => {
+      this.show = true
+    }, 600)
+  },
+  deactivated () {
+    setTimeout(() => {
+      this.show = false
+    }, 0)
+  },
   methods: {
     visibilityChanged (isVisible, entry, id) {
-      if (!this.$route.meta.cards) {
-        return
-      }
-
-      if (isVisible && !this.initialized[id]) {
+      if (this.show && isVisible && !this.initialized[id]) {
         Vue.set(this.initialized, id, isVisible)
-        Vue.set(this.visible, id, isVisible)
-      } else {
-        Vue.set(this.visible, id, isVisible)
       }
     }
   }
