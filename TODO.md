@@ -13,19 +13,21 @@
 
 # UI
 
-- [ ] fix winning line start stone
 - [ ] chess pieces
 - [ ] draughts pieces
 - [ ] show ai stats
 - [ ] flip reversi animation
 - [ ] gomoku winning line inverted contract color style
-- [ ] MD shadows?
 - [ ] open image
-- [ ] fullscreen
 - [ ] fix robot workers, invalidate disposed workers
 - [ ] disable human click during robot turn
-- [ ] store only non player settings, or spilt setting to session and global?
 
+- [x] more vuetify code split
+- [x] WIP games excluded in production
+- [x] IGNORED: fix winning line start stone
+- [x] MD shadows? No too slows previews, dark switch...
+- [x] fullscreen
+- [x] store only non player settings, or spilt setting to session and global?
 - [x] correct count route go back in game
 - [x] all games as singleton
 - [x] unused filters

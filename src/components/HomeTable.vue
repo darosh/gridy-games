@@ -54,6 +54,7 @@ export default {
   name: 'HomeTable',
   components: {
     VDataTable: () => import('vuetify/es5/components/VDataTable'),
+    VProgressCircular: () => import('vuetify/es5/components/VProgressCircular'),
     GBoard: () => import('./Board'),
     GIcon: () => import('./Icon')
   },

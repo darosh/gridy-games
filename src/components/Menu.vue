@@ -112,6 +112,11 @@ import { Info } from '../../plugins/lib'
 import { full } from '../services/full'
 
 export default {
+  components: {
+    VSwitch: () => import('vuetify/es5/components/VSwitch'),
+    VSubheader: () => import('vuetify/es5/components/VSubheader'),
+    VDivider: () => import('vuetify/es5/components/VDivider'),
+  },
   data () {
     return {
       meta: [

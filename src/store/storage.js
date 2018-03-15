@@ -30,8 +30,6 @@ export default function (global, session, temp, key) {
 
   function plugin (store) {
     store.subscribe((mutation, state) => {
-      console.log(mutation)
-
       if (global.hasOwnProperty(mutation.type)) {
         save(state, global, `${key}-global`)
       } else if (session.hasOwnProperty(mutation.type)) {
