@@ -22,7 +22,10 @@
 - [ ] MD shadows?
 - [ ] open image
 - [ ] store only non player settings
+- [ ] fix robot workers, invalidate disposed workers
+- [ ] disable human click during robot turn
 
+- [x] correct count route go back in game
 - [x] all games as singleton
 - [x] unused filters
 - [x] externals as plugins
