@@ -204,7 +204,7 @@ export default {
         return this.$store.state.player[1]
       },
       set: function (value) {
-        this.$store.commit('assignPlayer', { 1: value })
+        this.$store.commit('player', { 1: value, 2: this.$store.state.player[2] })
       }
     },
     player2: {
@@ -212,7 +212,7 @@ export default {
         return this.$store.state.player[2]
       },
       set: function (value) {
-        this.$store.commit('assignPlayer', { 2: value })
+        this.$store.commit('player', { 1: this.$store.state.player[1], 2: value })
       }
     },
     record: {
@@ -282,7 +282,7 @@ export default {
   methods: {
     isHuman,
     switchOponents () {
-      this.$store.commit('setPlayer', {
+      this.$store.commit('player', {
         1: this.$store.state.player[2],
         2: this.$store.state.player[1]
       })

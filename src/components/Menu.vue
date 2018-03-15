@@ -115,7 +115,7 @@ export default {
   components: {
     VSwitch: () => import('vuetify/es5/components/VSwitch'),
     VSubheader: () => import('vuetify/es5/components/VSubheader'),
-    VDivider: () => import('vuetify/es5/components/VDivider'),
+    VDivider: () => import('vuetify/es5/components/VDivider')
   },
   data () {
     return {

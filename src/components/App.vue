@@ -53,7 +53,7 @@
 <script>
 import { Games } from '../../plugins/lib'
 import { Shared } from '../services/shared'
-import { full } from "../services/full";
+import { full } from '../services/full'
 import { titled } from '../filters/titled'
 
 export default {

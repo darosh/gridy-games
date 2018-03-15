@@ -48,8 +48,8 @@ const $store = new Vuex.Store({
     sound: (state, payload) => (state.sound = payload),
     timer: (state, payload) => (state.timer = payload),
     update: (state, payload) => (state.update = payload),
-    setPlayer: (state, payload) => (state.player = payload),
-    assignPlayer: (state, payload) => Object.assign(state.player, payload)
+    player: (state, payload) => (state.player = payload)
+    // assignPlayer: (state, payload) => Object.assign(state.player, payload)
   },
   actions: {},
   strict: debug

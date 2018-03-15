@@ -133,7 +133,6 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
 import { Games, TimedProxy, initActions, initHighlight, selectAction, undoAction } from '../../plugins/lib'
 import { isHuman } from '../services/players'
 import { Bus } from '../services/bus'
@@ -222,7 +221,6 @@ export default {
     initTimer () {
       this.game.limit = this.hotSeat ? this.$store.state.timer : 0
     },
-    ...mapMutations(['setPlayer']),
     initGame () {
       if (!this.human[1] && this.human[2]) {
         this.switchPlayer()
@@ -246,7 +244,7 @@ export default {
       }
     },
     switchPlayer () {
-      this.setPlayer({
+      this.$store.commit('player', {
         1: this.$store.state.player[2],
         2: this.$store.state.player[1]
       })
