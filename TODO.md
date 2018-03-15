@@ -2,8 +2,8 @@
 
 - [ ] test game, pre filed
 - [ ] serialization interface and mixins
-- [ ] add more rules
 
+- [x] add more rules / metadata
 - [x] categorize games
 - [x] add rules
 - [x] "original" metadata
@@ -65,7 +65,9 @@
 - https://en.wikipedia.org/wiki/Circular_chess
 - mini draughts 5x5
 - circular reversi?
-
+- gomoku is 19x19 and Renju 15x15?
+- https://en.wikipedia.org/wiki/TacTix
+-
 # DEV
 
 - [ ] readme goals

@@ -5,6 +5,7 @@ import { ConnectGameBase } from "./base/ConnectGameBase";
 export class HexGomokuGame extends ConnectGameBase {
   public static title = "Hex Gomoku";
   public static type = "Connect";
+  public static original = "GomokuGame";
   public static player = () => new MinimaxPlayer(2);
 
   constructor() {

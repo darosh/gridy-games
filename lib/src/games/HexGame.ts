@@ -7,6 +7,7 @@ export class HexGame extends HexGameBase {
   public static title = "Hex";
   public static type = "Hex";
   public static created = 1942;
+  public static location = "Denmark";
   public static authors = ["Piet Hein", "John Nash"];
   public static aliases = ["Con-tac-tix"];
   public static wiki = "https://en.wikipedia.org/wiki/Hex_(board_game)";

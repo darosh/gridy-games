@@ -5,6 +5,8 @@ import { ConnectGameBase } from "./base/ConnectGameBase";
 export class FourInARow11Game extends ConnectGameBase {
   public static title = "Four-in-a-row";
   public static type = "Connect";
+  public static rules = ["Connect 4"];
+  public static wiki = "https://en.wikipedia.org/wiki/M,n,k-game";
   public static player = () => new MinimaxPlayer(2);
 
   constructor() {
