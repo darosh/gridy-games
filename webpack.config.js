@@ -20,6 +20,15 @@ const buildingForLocal = () => {
   return (NODE_ENV === 'development')
 }
 
+function deps () {
+  const d = require('./package').dependencies
+
+  return Object.keys(d).reduce((r, k) => {
+    r[k] = d[k].startsWith('github') ? d[k] + ':' + require(path.join(k, 'package.json')).version : d[k]
+    return r
+  }, {})
+}
+
 // Not extracting CSS because its not compatible yet.
 // https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/701
 // Should be working soon.
@@ -79,7 +88,7 @@ const config = {
       },
       'process.APP_VERSION': JSON.stringify(require('./package').version),
       'process.APP_BUILD': JSON.stringify(new Date().toISOString()),
-      'process.APP_DEPENDENCIES': JSON.stringify(require('./package').dependencies)
+      'process.APP_DEPENDENCIES': JSON.stringify(deps())
     }),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, 'static'),
@@ -92,7 +101,7 @@ const config = {
       filename: 'service-worker.js',
       staticFileGlobs: ['dist/**/*.{js,html,css}', 'dist/**/icon-web.svg'],
       minify: true,
-      logger: () => {},
+      logger: () => { },
       stripPrefix: 'dist/',
       runtimeCaching: [{
         urlPattern: /^https:\/\/ajax\.googleapis\.com\//,
@@ -136,32 +145,32 @@ const config = {
         loader: 'babel-loader'
       }]
     },
-      // {
-      //   test: /\.css$/,
-      //   use: extractCSS.extract({
-      //     fallback: "style-loader",
-      //     use: ["css-loader", "autoprefixer-loader"]
-      //   })
-      // },
+    // {
+    //   test: /\.css$/,
+    //   use: extractCSS.extract({
+    //     fallback: "style-loader",
+    //     use: ["css-loader", "autoprefixer-loader"]
+    //   })
+    // },
     {
       test: /\.styl$/,
       use:
-          /* buildingForLocal() ?
-          extractCSS.extract({
-            fallback: "style-loader",
-            use: ['css-loader', 'autoprefixer-loader', 'stylus-loader']
-          }) : */
-          [{
-            loader: 'style-loader' // creates style nodes from JS strings
-          }, {
-            loader: 'css-loader' // translates CSS into CommonJS
-          },
-          {
-            loader: 'postcss-loader' // creates style nodes from JS strings
-          }, {
-            loader: 'stylus-loader' // compiles Stylus to CSS
-          }
-          ]
+        /* buildingForLocal() ?
+        extractCSS.extract({
+          fallback: "style-loader",
+          use: ['css-loader', 'autoprefixer-loader', 'stylus-loader']
+        }) : */
+        [{
+          loader: 'style-loader' // creates style nodes from JS strings
+        }, {
+          loader: 'css-loader' // translates CSS into CommonJS
+        },
+        {
+          loader: 'postcss-loader' // creates style nodes from JS strings
+        }, {
+          loader: 'stylus-loader' // compiles Stylus to CSS
+        }
+        ]
     },
     {
       test: /\.(png|jpg|gif)$/,
