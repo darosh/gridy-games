@@ -1,7 +1,7 @@
 {
   "name": "gridy-games",
   "description": "Board games",
-  "version": "0.1.113",
+  "version": "0.1.114",
   "author": "darosh <ensonador@gmail.com>",
   "browserslist": [
     "> 1%",
@@ -19,7 +19,7 @@
     "vue": "^2.5.16",
     "vue-observe-visibility": "^0.3.1",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.0.7",
+    "vuetify": "^1.0.8",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
