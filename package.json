@@ -1,12 +1,17 @@
 {
   "name": "gridy-games",
   "description": "Board games",
-  "version": "0.1.116",
+  "version": "0.1.118",
   "author": "darosh <ensonador@gmail.com>",
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not ie <= 8"
+    "not ie <= 11",
+    "not op_mini all",
+    "not ie_mob <= 100",
+    "not op_mob <= 30",
+    "not android < 60",
+    "not samsung < 6"
   ],
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
