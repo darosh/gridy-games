@@ -21,11 +21,11 @@
 - [ ] open image
 - [ ] fix robot workers, invalidate disposed workers
 - [ ] disable human click during robot turn
-- [ ] simple cards? remove some meta?
 - [ ] link to type
 - [ ] better coord text color
 - [ ] minimal UI option
 
+- [x] simple cards? remove some meta?
 - [x] check Alquerque preview svg
 - [x] fix rect to bound
 - [x] tiles count in info
