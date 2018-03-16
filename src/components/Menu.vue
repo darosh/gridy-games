@@ -51,7 +51,7 @@
         class="gpu"
         src="static/img/icons/icon-web.svg"
         alt="Logo"
-        width="112" >
+        width="112">
     </div>
 
     <div class="mx-3 mb-3">
@@ -65,11 +65,13 @@
         <v-flex class="body-2">{{ m.title }}</v-flex>
         <div
           v-if="m.link"
-          class="body-1"><a
+          class="body-1">
+          <a
             :href="m.link"
             target="_blank"
             rel="noopener"
-            class="light-blue--text">{{ m.value }}</a></div>
+            class="light-blue--text">{{ m.value }}</a>
+        </div>
         <div
           v-else
           class="body-1">{{ m.value }}</div>
@@ -92,12 +94,13 @@
         mx-3
         align-center
         mb-1>
-        <div
-          class="body-1 pr-3"><a
+        <div class="body-1 pr-3">
+          <a
             :href="d.link"
             target="_blank"
             rel="noopener"
-            class="light-blue--text">{{ d.text }}</a></div>
+            class="light-blue--text">{{ d.text }}</a>
+        </div>
         <v-divider/>
         <div
           v-if="d.version"
@@ -120,20 +123,33 @@ export default {
   data () {
     return {
       meta: [
-        {title: 'Version', value: process.APP_VERSION},
-        {title: 'Build', value: new Date(process.APP_BUILD).toLocaleString('en')},
-        {title: 'Games', value: Info.games.length},
-        {title: 'Source', value: 'github.com', link: 'https://github.com/darosh/gridy-games'}
-      ],
-      dependencies: Object.keys(process.APP_DEPENDENCIES).map((k) => {
-        const v = process.APP_DEPENDENCIES[k]
-
-        return {
-          link: v.startsWith('github') ? `https://github.com/${v.replace('github:', '').replace(/:.*/, '')}` : `https://www.npmjs.com/package/${k}`,
-          text: k.replace(/@.*\//, ''),
-          version: v.replace(/\^/, '').replace(/github:.*:/, '')
+        { title: 'Version', value: process.APP_VERSION },
+        {
+          title: 'Build',
+          value: new Date(process.APP_BUILD).toLocaleString('en')
+        },
+        { title: 'Games', value: Info.games.length },
+        {
+          title: 'Source',
+          value: 'github.com',
+          link: 'https://github.com/darosh/gridy-games'
         }
-      }).sort((a, b) => a.text.localeCompare(b.text))
+      ],
+      dependencies: Object.keys(process.APP_DEPENDENCIES)
+        .map(k => {
+          const v = process.APP_DEPENDENCIES[k]
+
+          return {
+            link: v.startsWith('github')
+              ? `https://github.com/${v
+                .replace('github:', '')
+                .replace(/:.*/, '')}`
+              : `https://www.npmjs.com/package/${k}`,
+            text: k.replace(/@.*\//, ''),
+            version: v.replace(/\^/, '').replace(/github:.*:/, '')
+          }
+        })
+        .sort((a, b) => a.text.localeCompare(b.text))
     }
   },
   computed: {

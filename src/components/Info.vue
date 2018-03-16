@@ -79,7 +79,7 @@
           :href="game.link"
           class="light-blue--text"
           target="_blank"
-          rel="noopener">{{game.link | link}}</a>
+          rel="noopener">{{ game.link | link }}</a>
       </div>
     </v-layout>
     <v-layout
@@ -102,7 +102,7 @@
         class="body-2 mr-3"
         xs3>Tiles</v-flex>
       <div
-        class="body-1">{{game.tiles}}</div>
+        class="body-1">{{ game.tiles }}</div>
     </v-layout>
     <v-layout
       v-if="game.originalId"
