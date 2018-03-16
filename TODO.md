@@ -25,8 +25,9 @@
 - [ ] link to type
 - [ ] better coord text color
 - [ ] minimal UI option
-- [ ] fix rect to bound
 
+- [x] check Alquerque preview svg
+- [x] fix rect to bound
 - [x] tiles count in info
 - [x] coord vertical rotation
 - [x] better wiki link text
