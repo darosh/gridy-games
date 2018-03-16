@@ -23,6 +23,8 @@
 - [ ] disable human click during robot turn
 - [ ] simple cards? remove some meta?
 - [ ] link to type
+- [ ] better coord text color
+- [ ] minimal UI option
 - [ ] fix rect to bound
 
 - [x] tiles count in info

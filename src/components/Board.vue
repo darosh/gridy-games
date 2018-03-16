@@ -10,10 +10,10 @@
       version="1.1"
       class="d-block">
       <rect
-        :x="margin/2 + 0.5"
-        :y="margin/2 + 0.5"
-        :width="size[0] - margin"
-        :height="size[1] - margin" />
+        :x="(margin/2 + 0.5).toFixed(3)"
+        :y="((margin + size[1] - rect[1]) / 2 + 0.5).toFixed(3)"
+        :width="(rect[0] - margin).toFixed(3)"
+        :height="(rect[1] - margin).toFixed(3)" />
       <g :transform="'translate('+ translate +')'">
         <line
           v-for="(l, k) in lines"
@@ -99,14 +99,14 @@
 </template>
 
 <script>
-import game from '../mixins/game'
+import boardSize from '../mixins/board-size'
 import { theme } from '../style/theme'
 
 export default {
   components: {
     GPolyLine: () => import('./PolyLine')
   },
-  mixins: [game],
+  mixins: [boardSize],
   model: {
     prop: 'value',
     event: 'change'
@@ -178,12 +178,11 @@ export default {
   },
   mounted () {
     this.$emit('change', true)
-    // console.log(this.$el)
   },
   methods: {
     center (tile, units) {
       if (units) {
-        return this.game.grid.center(tile).value.map(t => `${t}${units}`)
+        return this.game.grid.center(tile).value.map(t => `${t.toFixed(3)}${units}`)
       }
 
       return this.game.grid.center(tile)

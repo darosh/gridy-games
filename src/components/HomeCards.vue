@@ -49,8 +49,8 @@
               <g-icon
                 :game="game.instance"
                 :type="game.grid"
-                :size="100"
-                :box="'2 2 21 21'"
+                :size="iconSize"
+                :box="iconBox"
                 class="preview preview-md d-inline-block" />
             </div>
           </div>
@@ -75,6 +75,14 @@
 import { Shared } from '../services/shared'
 import Vue from 'vue'
 
+const a = [0,24]
+const b = [2,19]
+const s = 101
+const m = 2.5
+const p = b[1] / (s - m*2) / 2
+
+const iconBox = `${b[0]-p*m*2} ${b[0]-p*m*2} ${b[1]+p*m*4} ${b[1]+p*m*4}`
+
 export default {
   name: 'HomeCards',
   components: {
@@ -83,7 +91,9 @@ export default {
   },
   data () {
     return {
+      iconSize: s,
       Shared,
+      iconBox,
       initialized: {},
       rendered: {},
       show: false

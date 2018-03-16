@@ -143,8 +143,8 @@ import { gameData } from '../services/utils'
 
 import { latency, chordSound, kick1Sound, kick2Sound } from '../services/sound'
 import { kickVibration } from '../services/vibration'
-import resize from '../mixins/resize'
-import session from '../mixins/session'
+import gameResize from '../mixins/game-resize'
+import gameSession from '../mixins/game-session'
 
 const LATENCY = 2
 
@@ -153,7 +153,7 @@ export default {
     GPlayer: () => import('./Player'),
     GBoard: () => import('./Board')
   },
-  mixins: [resize, session],
+  mixins: [gameResize, gameSession],
   data () {
     return {
       game: null,
