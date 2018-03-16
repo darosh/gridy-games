@@ -1,0 +1,91 @@
+xs = '(max-width: 599px), (max-height: 599px)'
+bar = 3px
+
+// polygon
+// path
+.tile
+  stroke-width: 3
+  stroke-linejoin: bevel
+  @media xs
+    stroke-width: 2
+line
+  stroke-width: 3
+
+.symbol-1
+.symbol-2
+  stroke-width: 2
+
+.line-1
+.line-2
+  stroke-width: 9
+  stroke-linecap: round
+  stroke-linejoin: round
+  @media xs
+    stroke-width: 5
+
+.timer
+  background-color: #fff
+  height: 0
+
+.theme--dark .timer
+  background-color: #424242
+
+.active, .win, .draw
+  .timer
+    height: bar
+
+.timer-wrap
+  background-color: #E0E0E0
+  overflow: hidden
+
+.theme--dark .timer-wrap
+  background-color: #757575
+
+rect
+  fill: none
+
+.preview
+  // polygon
+  .tile
+  line
+    stroke-width: 1
+  path.tile
+    stroke-width: 0.5
+
+#stripes1
+#stripes2
+  rect
+    fill: #212121
+.theme--dark
+  #stripes1
+  #stripes2
+    rect
+      fill: #757575
+
+polyline
+  fill: none
+  stroke-width: 18
+  stroke: rgba(0,0,0,0.78)
+  stroke-linecap: round
+  stroke-linejoin: round
+  // stroke-dasharray: 18,24
+  @media xs
+    stroke-width: 9
+    // stroke-dasharray: 9,12
+
+.theme--dark polyline
+  stroke: rgba(255,255,255,0.78)
+
+.stone
+  transition: transform 0.2s ease-in-out
+  stroke-linejoin: round
+  // stroke-dasharray: 18,24
+  @media xs
+    stroke-width: 9
+    // stroke-dasharray: 9,12
+
+  .theme--dark polyline
+    stroke: rgba(255,255,255,0.78)
+
+.stone
+  transition: transform 0.2s ease-in-out
