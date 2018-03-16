@@ -26,9 +26,9 @@
               <v-card-title>
                 <div>
                   <div
-                    class="headline"
                     :class="{'red--text': game.wip}"
-                    :style="{'text-decoration': game.wip ? 'line-through' : ''}">{{ game.title | titled }}</div>
+                    :style="{'text-decoration': game.wip ? 'line-through' : ''}"
+                    class="headline">{{ game.title | titled }}</div>
                   <span class="grey--text">{{ game.type }}</span>
                 </div>
               </v-card-title>
@@ -98,7 +98,7 @@
 import { Shared } from '../services/shared'
 import Vue from 'vue'
 
-const a = [0, 24]
+// const a = [0, 24]
 const b = [2, 19]
 const s = 101
 const m = 2.5
