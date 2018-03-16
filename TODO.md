@@ -24,7 +24,12 @@
 - [ ] link to type
 - [ ] better coord text color
 - [ ] minimal UI option
+- [ ] signal pass?
+- [ ] pass dialog?
+- [ ] reset timer on pass?
+- [ ] fix undo
 
+- [x] 15 sec to 10
 - [x] simple cards? remove some meta?
 - [x] check Alquerque preview svg
 - [x] fix rect to bound

@@ -183,7 +183,7 @@ export default {
       timers: [
         { text: 'No timer', value: 0 },
         { text: '5 seconds', value: 5000 },
-        { text: '15 seconds', value: 15000 },
+        { text: '10 seconds', value: 10000 },
         { text: '30 seconds', value: 30000 },
         { text: '1 minute', value: 60000 }
       ],

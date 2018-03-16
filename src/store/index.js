@@ -13,7 +13,7 @@ const { state, plugin: storagePlugin } = storage(
   },
   {
     player: defaultPlayers(),
-    timer: 15000,
+    timer: 10000,
     full: false,
     coords: false
   },
