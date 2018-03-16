@@ -33,7 +33,7 @@
             :href="props.item.link"
             class="light-blue--text"
             target="_blank"
-            rel="noopener">{{ props.item.linkText }}</a>
+            rel="noopener">{{ props.item.link | link }}</a>
         </td>
       </template>
     </v-data-table>

@@ -45,6 +45,7 @@
             v-if="coords"
             :font-size="game.grid.scale * 0.4"
             :dy="game.grid.scale * 0.04"
+            :transform="vertical ? 'rotate(-90)' : null"
             alignment-baseline="middle"
             text-anchor="middle">
             {{ game.moveToString(t) }} </text>

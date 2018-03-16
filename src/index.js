@@ -12,7 +12,7 @@ import App from './components/App'
 
 import './style/index.styl'
 
-import { era, titled } from './filters'
+import { era, link, titled } from './filters'
 
 require('vuetify/src/stylus/app.styl')
 
@@ -20,8 +20,9 @@ Vue.config.productionTip = false
 
 window.$icons = icons
 
-Vue.filter('titled', titled)
 Vue.filter('era', era)
+Vue.filter('link', link)
+Vue.filter('titled', titled)
 
 /* eslint-disable no-new */
 new Vue({

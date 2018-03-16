@@ -79,7 +79,7 @@
           :href="game.link"
           class="light-blue--text"
           target="_blank"
-          rel="noopener">{{ game.linkText }}</a>
+          rel="noopener">{{game.link | link}}</a>
       </div>
     </v-layout>
     <v-layout
@@ -93,6 +93,16 @@
       <div
         class="body-1"
         v-html="game.rulesArray.join(', <br />')"/>
+    </v-layout>
+    <v-layout
+      row
+      mx-3
+      mb-1>
+      <v-flex
+        class="body-2 mr-3"
+        xs3>Tiles</v-flex>
+      <div
+        class="body-1">{{game.tiles}}</div>
     </v-layout>
     <v-layout
       v-if="game.originalId"

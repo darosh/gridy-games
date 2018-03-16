@@ -21,8 +21,13 @@
 - [ ] open image
 - [ ] fix robot workers, invalidate disposed workers
 - [ ] disable human click during robot turn
-- [ ] better wiki link text
+- [ ] simple cards? remove some meta?
+- [ ] link to type
+- [ ] fix rect to bound
 
+- [x] tiles count in info
+- [x] coord vertical rotation
+- [x] better wiki link text
 - [x] more vuetify code split
 - [x] WIP games excluded in production
 - [x] IGNORED: fix winning line start stone
