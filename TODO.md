@@ -29,6 +29,7 @@
 - [ ] reset timer on pass?
 - [ ] fix undo
 - [ ] negative score minus filter
+- [ ] delay resize
 
 ## Done
 - [x] only maximized, remove player cards
