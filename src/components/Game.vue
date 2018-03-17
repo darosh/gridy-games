@@ -116,7 +116,6 @@ const LATENCY = 2
 
 export default {
   components: {
-    GPlayer: () => import('./Player'),
     GBoard: () => import('./Board')
   },
   mixins: [gameResize, gameSession, playerSwitch],
