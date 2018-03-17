@@ -56,7 +56,8 @@
           :move="move"
           :vertical="vertical"
           :waiting="waiting"
-          interactive/>
+          interactive
+          centered/>
       </div>
     </v-layout>
     <v-speed-dial
@@ -106,7 +107,6 @@
       auto-height
       top>
       <v-flex
-        v-touch="{left: () => snackbar = false, right: () => snackbar = false}"
         @click="snackbar = false">
         <span v-if="game.winner">{{ verdict }}</span>
       </v-flex>

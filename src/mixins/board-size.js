@@ -5,6 +5,10 @@ export default {
     fixed: {
       type: Boolean,
       default: false
+    },
+    centered: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -78,6 +82,9 @@ export default {
         .vertices(undefined, this.game.scale ? (2 * Math.round(this.game.scale * this.game.grid.scale / 2)) : this.game.grid.scale, 1)
         .map(p => p.x.toFixed(3) + ',' + p.y.toFixed(3))
         .join(' ')
+    },
+    shift () {
+      return (window.innerHeight - this.size[this.vertical ? 0 : 1]) / 2 - 64 + 10
     }
   },
   watch: {

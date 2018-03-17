@@ -1,6 +1,6 @@
 <template>
   <div
-    :style="{width: size[vertical ? 1 : 0] + 'px', height: size[vertical ? 0 : 1] + 'px'}"
+    :style="{width: size[vertical ? 1 : 0] + 'px', height: size[vertical ? 0 : 1] + 'px', 'margin-top': centered && (shift > 0) ? shift + 'px' : ''}"
     :class="{vertical: vertical, 'read-only': !interactive}">
     <svg
       :width="size[0]"
@@ -237,5 +237,6 @@ circle.scale-transition-enter-to {
 
 .read-only {
   pointer-events: none;
+  touch-action: none;
 }
 </style>

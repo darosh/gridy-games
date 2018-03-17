@@ -39,8 +39,7 @@
       left
       bottom>
       <v-flex
-        v-touch="{left: () => update = false, right: () => update = false}"
-        @click.native="update = false">Update ready!</v-flex>
+        @click="update = false">Update ready!</v-flex>
       <v-btn
         flat
         color="light-blue"

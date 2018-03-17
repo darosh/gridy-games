@@ -21,9 +21,9 @@
         </div>
       </div>
     </div>
-    <div v-show="canSwitch || game.expired" :style="{top: 0, transform: `translate3d(${-position}px,0,0)`}" :class="'player-' + other" class="absolute player">
+    <div v-show="canSwitch || game.expired" :style="{top: 0, transform: `translate3d(${-position}px,0,0)`}" :class="{['player-' + other]: true, clickable: canSwitch}" class="absolute player" @click="canSwitch && switchPlayer()">
       <div>
-        <svg height="64" width="64" class="d-block" :class="{clickable: canSwitch, [theme]: true}" @click="canSwitch && switchPlayer()">
+        <svg height="64" width="64" class="d-block" :class="{[theme]: true}">
           <circle :class="'symbol-' + other" cx="31" cy="31" r="16.5" />
         </svg>
         <div class="absolute info-position">
@@ -132,9 +132,10 @@ export default {
   cursor: pointer;
 }
 
-.player .icon {
+/* .player .icon {
   pointer-events: none;
-}
+  touch-action: none;
+} */
 
 .count-transition-leave,
 .count-transition-leave-active,
