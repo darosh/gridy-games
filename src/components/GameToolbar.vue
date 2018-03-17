@@ -11,9 +11,9 @@
       @click.native="back">
       <v-icon>arrow_back</v-icon>
     </v-btn>
-    <v-spacer v-if="$store.state.maximize"></v-spacer>
-    <g-players v-if="$store.state.maximize" />
-    <v-toolbar-title v-else class="hidden-xs-only">{{ title | titled }}</v-toolbar-title>
+    <v-spacer></v-spacer>
+    <g-players />
+    <!-- <v-toolbar-title v-else class="hidden-xs-only">{{ title | titled }}</v-toolbar-title> -->
     <v-spacer/>
     <v-btn
       icon

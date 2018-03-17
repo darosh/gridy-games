@@ -101,18 +101,6 @@
           row
           mx-3
           align-center>
-          <v-flex class="body-1">Maximize</v-flex>
-          <div>
-            <v-switch
-              v-model="useMaximize"
-              hide-details
-              color="light-blue" />
-          </div>
-        </v-layout>
-        <v-layout
-          row
-          mx-3
-          align-center>
           <v-flex class="body-1">Full screen</v-flex>
           <div>
             <v-switch
@@ -287,14 +275,6 @@ export default {
       },
       set (value) {
         this.$store.commit('coords', value)
-      }
-    },
-    useMaximize: {
-      get () {
-        return this.$store.state.maximize
-      },
-      set (value) {
-        this.$store.commit('maximize', value)
       }
     }
   },

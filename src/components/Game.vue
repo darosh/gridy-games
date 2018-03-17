@@ -8,46 +8,8 @@
       align-center
       align-content-center>
       <div
-        :class="$store.state.maximize ? 'mt-1-5' : 'mt-1'"
+        class="mt-1-5"
         style="text-align: center">
-        <v-layout
-          v-if="!$store.state.maximize"
-          row
-          mb-2
-          px-2
-          style="height: 48px">
-          <v-flex
-            xs6
-            class="pr-2">
-            <g-player
-              v-if="game"
-              :value="1"
-              :game="game"
-              :waiting="waiting" />
-          </v-flex>
-          <div
-            style="min-width: 32px;"
-            class="text-xs-center">
-            <div
-              v-if="game.score"
-              class="display-1">
-              <v-icon v-if="game.score[1] > game.score[2]">chevron_right</v-icon>
-              <v-icon v-else-if="game.score[1] < game.score[2]">chevron_left</v-icon>
-            </div>
-          </div>
-          <v-flex
-            xs6
-            class="pl-2">
-            <g-player
-              v-if="game"
-              :value="2"
-              :game="game"
-              :waiting="waiting"
-              :switcher="canSwitch"
-              :class="{clickable: canSwitch}"
-              @click.native="canSwitch && switchPlayer()" />
-          </v-flex>
-        </v-layout>
         <g-board
           :game="game"
           :coords="$store.state.coords"
@@ -102,7 +64,7 @@
     <v-snackbar
       v-model="snackbar"
       :timeout="12000"
-      :class="{'verdict-snack': $store.state.maximize}"
+      class="verdict-snack"
       color="grey darken-3"
       auto-height
       top>
