@@ -3,6 +3,7 @@
 - [ ] test game, pre filed
 - [ ] serialization interface and mixins
 
+## Done
 - [x] add more rules / metadata
 - [x] categorize games
 - [x] add rules
@@ -27,7 +28,10 @@
 - [ ] pass dialog?
 - [ ] reset timer on pass?
 - [ ] fix undo
+- [ ] negative score minus filter
+- [ ] delay resize
 
+## Done
 - [x] only maximized, remove player cards
 - [x] maximize UI option
 - [x] remove 5 seconds
@@ -93,10 +97,14 @@
 - triangular reversi?
 - gomoku is 19x19 and Renju 15x15?
 - https://en.wikipedia.org/wiki/TacTix
--
+- negative reversi
+- reversi no pass
+
 # DEV
 
 - [ ] readme goals
 - [ ] extract css?
+- [ ] add triangle to icon
 
+## Done
 - [x] app icon
