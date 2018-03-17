@@ -11,7 +11,7 @@
       @click.native="back">
       <v-icon>arrow_back</v-icon>
     </v-btn>
-    <v-spacer></v-spacer>
+    <v-spacer/>
     <g-players />
     <!-- <v-toolbar-title v-else class="hidden-xs-only">{{ title | titled }}</v-toolbar-title> -->
     <v-spacer/>

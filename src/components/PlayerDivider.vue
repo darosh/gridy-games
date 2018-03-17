@@ -1,20 +1,30 @@
 <template>
-   <svg
+  <svg
     :class="'divider-' + value"
     width="24"
     height="24"
     xmlns="http://www.w3.org/2000/svg"
     version="1.1">
-    <line class="l1" x1="12" y1="5" x2="12" y2="19" />
-    <line class="l2" x1="12" y1="5" x2="12" y2="19" />
-   </svg>
+    <line
+      class="l1"
+      x1="12"
+      y1="5"
+      x2="12"
+      y2="19" />
+    <line
+      class="l2"
+      x1="12"
+      y1="5"
+      x2="12"
+      y2="19" />
+  </svg>
 </template>
 
 <script>
 export default {
   props: {
     value: { type: Number, default: -1 }
-  },
+  }
 }
 </script>
 

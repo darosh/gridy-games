@@ -1,33 +1,97 @@
 <template>
-  <div :class="theme" class="relative text-xs-center" style="width: 64px; height: 48px">
-    <div v-if="game.moves.length && game.score" class="absolute subheading" style="right: 120px; top: 20px">{{game.score[1]}}</div>
-    <div v-if="game.moves.length && game.score" class="absolute subheading" style="left: 120px; top: 20px">{{game.score[2]}}</div>
-    <g-player-divider :value="divider" class="player-divider d-inline-block" style="margin-top: 19px" />
-    <div :style="{top: 0, transform: `translate(${position}px,0)`}" class="absolute player" :class="'player-' + value">
+  <div
+    :class="theme"
+    class="relative text-xs-center"
+    style="width: 64px; height: 48px">
+    <div
+      v-if="game.moves.length && game.score"
+      class="absolute subheading"
+      style="right: 120px; top: 20px">{{ game.score[1] }}</div>
+    <div
+      v-if="game.moves.length && game.score"
+      class="absolute subheading"
+      style="left: 120px; top: 20px">{{ game.score[2] }}</div>
+    <g-player-divider
+      :value="divider"
+      class="player-divider d-inline-block"
+      style="margin-top: 19px" />
+    <div
+      :style="{top: 0, transform: `translate(${position}px,0)`}"
+      :class="'player-' + value"
+      class="absolute player">
       <div>
-        <svg height="64" width="64" class="d-block">
-          <circle :class="'symbol-' + value" cx="31" cy="31" r="16.5" />
-          <circle :style="{'stroke-dashoffset': timer >= 0 ? timer : OFFSET, transition: `stroke-dashoffset ${transition}ms linear`}" class="player-timer" cx="31" cy="31" r="22.5" transform="rotate(-90 31 31)" />
+        <svg
+          height="64"
+          width="64"
+          class="d-block">
+          <circle
+            :class="'symbol-' + value"
+            cx="31"
+            cy="31"
+            r="16.5" />
+          <circle
+            :style="{'stroke-dashoffset': timer >= 0 ? timer : OFFSET, transition: `stroke-dashoffset ${transition}ms linear`}"
+            class="player-timer"
+            cx="31"
+            cy="31"
+            r="22.5"
+            transform="rotate(-90 31 31)" />
         </svg>
         <div class="absolute info-position">
-          <transition name="count-transition" mode="out-in">
-            <div style="width: 24px; margin-top: 2px; text-align: center" v-if="game.player === value && game.counter > 0" :key="game.counter" class="title counter">{{ game.counter }}</div>
-            <v-icon v-else-if="game.player === value && game.counter === 0" :key="game.counter" class="player-status">timer_off</v-icon>
-            <div v-else-if="waiting" key="b" style="transform: none"><div><v-icon class="player-status rotate-animation">hourglass_empty</v-icon></div></div>
-            <v-icon v-else-if="game.winner > 0 && game.winner === value" key="d" class="player-status">mood</v-icon>
-            <v-icon v-else-if="game.winner === -1" key="e" class="player-status">sentiment_very_dissatisfied</v-icon>
-            <v-icon v-else key="c" class="player-status">play_arrow</v-icon>
+          <transition
+            name="count-transition"
+            mode="out-in">
+            <div
+              v-if="game.player === value && game.counter > 0"
+              :key="game.counter"
+              style="width: 24px; margin-top: 2px; text-align: center"
+              class="title counter">{{ game.counter }}</div>
+            <v-icon
+              v-else-if="game.player === value && game.counter === 0"
+              :key="game.counter"
+              class="player-status">timer_off</v-icon>
+            <div
+              v-else-if="waiting"
+              key="b"
+              style="transform: none"><div><v-icon class="player-status rotate-animation">hourglass_empty</v-icon></div></div>
+            <v-icon
+              v-else-if="game.winner > 0 && game.winner === value"
+              key="d"
+              class="player-status">mood</v-icon>
+            <v-icon
+              v-else-if="game.winner === -1"
+              key="e"
+              class="player-status">sentiment_very_dissatisfied</v-icon>
+            <v-icon
+              v-else
+              key="c"
+              class="player-status">play_arrow</v-icon>
           </transition>
         </div>
       </div>
     </div>
-    <div v-show="canSwitch || game.expired" :style="{top: 0, transform: `translate3d(${-position}px,0,0)`}" :class="{['player-' + other]: true, clickable: canSwitch}" class="absolute player" @click="canSwitch && switchPlayer()">
+    <div
+      v-show="canSwitch || game.expired"
+      :style="{top: 0, transform: `translate3d(${-position}px,0,0)`}"
+      :class="{['player-' + other]: true, clickable: canSwitch}"
+      class="absolute player"
+      @click="canSwitch && switchPlayer()">
       <div>
-        <svg height="64" width="64" class="d-block" :class="{[theme]: true}">
-          <circle :class="'symbol-' + other" cx="31" cy="31" r="16.5" />
+        <svg
+          :class="{[theme]: true}"
+          height="64"
+          width="64"
+          class="d-block">
+          <circle
+            :class="'symbol-' + other"
+            cx="31"
+            cy="31"
+            r="16.5" />
         </svg>
         <div class="absolute info-position">
-          <v-icon v-if="canSwitch" class="player-status">swap_horiz</v-icon>
+          <v-icon
+            v-if="canSwitch"
+            class="player-status">swap_horiz</v-icon>
           <v-icon v-else-if="game.expired">timer_off</v-icon>
         </div>
       </div>
@@ -36,67 +100,67 @@
 </template>
 
 <script>
-import { Shared } from "../services/shared";
-import { theme } from "../style/theme";
-import playerSwitch from "../mixins/player-switch";
-import playerTimer from "../mixins/player-timer";
-import gameSession from "../mixins/game-session";
+import { Shared } from '../services/shared'
+import { theme } from '../style/theme'
+import playerSwitch from '../mixins/player-switch'
+import playerTimer from '../mixins/player-timer'
+import gameSession from '../mixins/game-session'
 
-const SIDE = 42;
-const OFFSET = 2 * Math.PI * 22.5;
+const SIDE = 42
+const OFFSET = 2 * Math.PI * 22.5
 
 export default {
-  mixins: [gameSession, playerSwitch, playerTimer],
   components: {
-    GPlayerDivider: () => import("./PlayerDivider")
+    GPlayerDivider: () => import('./PlayerDivider')
   },
-  data() {
+  mixins: [gameSession, playerSwitch, playerTimer],
+  data () {
     return {
       Shared,
       OFFSET
-    };
+    }
   },
   computed: {
-    game() {
-      return Shared.game;
+    game () {
+      return Shared.game
     },
-    value() {
-      return Shared.game.winner || Shared.game.player;
+    value () {
+      return Shared.game.winner || Shared.game.player
     },
-    other() {
-      return Shared.game.expired ? -1 : 3 - this.value;
+    other () {
+      return Shared.game.expired ? -1 : 3 - this.value
     },
-    theme() {
-      return theme(Shared.game.constructor);
+    theme () {
+      return theme(Shared.game.constructor)
     },
-    divider() {
+    divider () {
       if (Shared.game.moves.length && Shared.game.score) {
         if (Shared.game.score[1] > Shared.game.score[2]) {
-          return 1;
+          return 1
         } else if (Shared.game.score[1] < Shared.game.score[2]) {
-          return 2;
+          return 2
         } else {
-          return 0;
+          return 0
         }
       } else {
-        return -1;
+        return -1
       }
     },
-    position() {
+    position () {
       if (Shared.game.moves.length === 0) {
-        return -SIDE;
+        return -SIDE
       } else {
         if (this.value === 1) {
-          return -SIDE;
+          return -SIDE
         } else if (this.value === 2) {
-          return SIDE;
+          return SIDE
         } else {
-          return 0;
+          return 0
         }
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>
@@ -189,5 +253,3 @@ export default {
   left: 19px;
 }
 </style>
-
-

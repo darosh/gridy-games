@@ -110,7 +110,7 @@ import { latency, chordSound, kick1Sound, kick2Sound } from '../services/sound'
 import { kickVibration } from '../services/vibration'
 import gameResize from '../mixins/game-resize'
 import gameSession from '../mixins/game-session'
-import playerSwitch from "../mixins/player-switch";
+import playerSwitch from '../mixins/player-switch'
 
 const LATENCY = 2
 
