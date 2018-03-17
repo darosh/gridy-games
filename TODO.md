@@ -23,12 +23,14 @@
 - [ ] disable human click during robot turn
 - [ ] link to type
 - [ ] better coord text color
-- [ ] minimal UI option
 - [ ] signal pass?
 - [ ] pass dialog?
 - [ ] reset timer on pass?
 - [ ] fix undo
 
+- [x] only maximized, remove player cards
+- [x] maximize UI option
+- [x] remove 5 seconds
 - [x] 15 sec to 10
 - [x] simple cards? remove some meta?
 - [x] check Alquerque preview svg
