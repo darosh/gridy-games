@@ -181,7 +181,6 @@ import { full } from '../services/full'
 
 export default {
   components: {
-    VSelect: () => import('vuetify/es5/components/VSelect'),
     VSwitch: () => import('vuetify/es5/components/VSwitch'),
     VSubheader: () => import('vuetify/es5/components/VSubheader'),
     VDivider: () => import('vuetify/es5/components/VDivider'),
