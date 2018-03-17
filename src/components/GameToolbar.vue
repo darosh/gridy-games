@@ -11,7 +11,9 @@
       @click.native="back">
       <v-icon>arrow_back</v-icon>
     </v-btn>
-    <v-toolbar-title class="hidden-xs-only">{{ title | titled }}</v-toolbar-title>
+    <v-spacer v-if="$store.state.maximize"></v-spacer>
+    <g-players v-if="$store.state.maximize" />
+    <v-toolbar-title v-else class="hidden-xs-only">{{ title | titled }}</v-toolbar-title>
     <v-spacer/>
     <v-btn
       icon
@@ -43,6 +45,9 @@ function guard (to, from, next) {
 }
 
 export default {
+  components: {
+    GPlayers: () => import('./Players')
+  },
   data () {
     return {
       Shared,

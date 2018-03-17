@@ -8,8 +8,9 @@ const STORAGE = 'gridy-games'
 const { state, plugin: storagePlugin } = storage(
   {
     sound: false,
-    dark: false,
-    vibration: true
+    dark: true,
+    vibration: true,
+    maximize: true
   },
   {
     player: defaultPlayers(),
@@ -48,7 +49,8 @@ const $store = new Vuex.Store({
     sound: (state, payload) => (state.sound = payload),
     timer: (state, payload) => (state.timer = payload),
     update: (state, payload) => (state.update = payload),
-    player: (state, payload) => (state.player = payload)
+    player: (state, payload) => (state.player = payload),
+    maximize: (state, payload) => (state.maximize = payload)
   },
   actions: {},
   strict: debug

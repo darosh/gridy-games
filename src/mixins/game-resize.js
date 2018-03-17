@@ -4,6 +4,9 @@ export default {
       vertical: window.innerWidth < window.innerHeight
     }
   },
+  watch: {
+    '$store.state.maximize': function () { this.onResize() }
+  },
   methods: {
     onResize () {
       let bounds = this.game.grid.bounds()
@@ -15,12 +18,22 @@ export default {
         this.vertical = ratio > 1 && window.innerWidth < window.innerHeight
       }
 
-      if (this.vertical) {
-        this.frame = [window.innerHeight - 64 * 2 - 8, window.innerWidth - 40]
+      if (this.$store.state.maximize) {
+        if (this.vertical) {
+          this.frame = [window.innerHeight - 64 - 16, window.innerWidth - 32]
+        } else {
+          if (window.innerHeight < 800) {
+            this.frame = [window.innerWidth - 32, window.innerHeight - 64 - 16]
+          } else {
+            this.frame = [window.innerWidth - 32, window.innerHeight - 64 * 2]
+          }
+        }
+      } else if (this.vertical) {
+        this.frame = [window.innerHeight - 64 * 2 - 8, window.innerWidth - 32]
       } else {
         if (window.innerHeight < 800) {
           this.frame = [
-            window.innerWidth - 40,
+            window.innerWidth - 32,
             window.innerHeight - 64 * 2 - 16
           ]
         } else {

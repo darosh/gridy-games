@@ -8,9 +8,10 @@
       align-center
       align-content-center>
       <div
-        class="mt-1"
+        :class="$store.state.maximize ? 'mt-1-5' : 'mt-1'"
         style="text-align: center">
         <v-layout
+          v-if="!$store.state.maximize"
           row
           mb-2
           px-2
@@ -100,11 +101,13 @@
     <v-snackbar
       v-model="snackbar"
       :timeout="12000"
+      :class="{'verdict-snack': $store.state.maximize}"
       color="grey darken-3"
+      auto-height
       top>
       <v-flex
         v-touch="{left: () => snackbar = false, right: () => snackbar = false}"
-        @click.native="snackbar = false">
+        @click="snackbar = false">
         <span v-if="game.winner">{{ verdict }}</span>
       </v-flex>
       <v-btn
@@ -145,6 +148,7 @@ import { latency, chordSound, kick1Sound, kick2Sound } from '../services/sound'
 import { kickVibration } from '../services/vibration'
 import gameResize from '../mixins/game-resize'
 import gameSession from '../mixins/game-session'
+import playerSwitch from "../mixins/player-switch";
 
 const LATENCY = 2
 
@@ -153,7 +157,7 @@ export default {
     GPlayer: () => import('./Player'),
     GBoard: () => import('./Board')
   },
-  mixins: [gameResize, gameSession],
+  mixins: [gameResize, gameSession, playerSwitch],
   data () {
     return {
       game: null,
@@ -173,8 +177,6 @@ export default {
     'game.player': function () {
       this.robot()
     },
-    // "game.moves.length": function() {
-    // },
     'game.winner': function (value) {
       if (value) {
         this.snackbar = true
@@ -242,13 +244,6 @@ export default {
           this.rules = !!this.rulesText
         }, 200)
       }
-    },
-    switchPlayer () {
-      this.$store.commit('player', {
-        1: this.$store.state.player[2],
-        2: this.$store.state.player[1]
-      })
-      this.initRobots()
     },
     initRobot (robot) {
       return isHuman(robot)
@@ -357,5 +352,13 @@ export default {
 <style scoped>
 .clickable:hover {
   cursor: pointer;
+}
+
+.mt-1-5 {
+  margin-top: 5px;
+}
+
+.verdict-snack {
+  padding-top: 62px;
 }
 </style>

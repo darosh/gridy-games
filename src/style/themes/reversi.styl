@@ -28,3 +28,20 @@ colors(theme, '.reversi-theme')
   .symbol-1
     fill: #000
     stroke: #000
+
+.reversi-theme
+  .player-2 .player-status.icon
+    fill: #000
+
+  .player-2 .counter
+    color: #000
+
+.theme--dark .reversi-theme
+  .symbol-1
+    stroke: theme.s2
+
+.theme--light .reversi-theme .player-timer
+  stroke: theme.tileFill !important
+
+.theme--dark .reversi-theme .player-timer
+  stroke: theme.possible !important

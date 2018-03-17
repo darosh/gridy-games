@@ -101,6 +101,18 @@
           row
           mx-3
           align-center>
+          <v-flex class="body-1">Maximize</v-flex>
+          <div>
+            <v-switch
+              v-model="useMaximize"
+              hide-details
+              color="light-blue" />
+          </div>
+        </v-layout>
+        <v-layout
+          row
+          mx-3
+          align-center>
           <v-flex class="body-1">Full screen</v-flex>
           <div>
             <v-switch
@@ -182,10 +194,10 @@ export default {
       Shared,
       timers: [
         { text: 'No timer', value: 0 },
-        { text: '5 seconds', value: 5000 },
         { text: '10 seconds', value: 10000 },
         { text: '30 seconds', value: 30000 },
-        { text: '1 minute', value: 60000 }
+        { text: '1 minute', value: 60000 },
+        { text: '2 minutes', value: 120000 }
       ],
       canVibrate: !!window.navigator.vibrate
     }
@@ -276,6 +288,14 @@ export default {
       },
       set (value) {
         this.$store.commit('coords', value)
+      }
+    },
+    useMaximize: {
+      get () {
+        return this.$store.state.maximize
+      },
+      set (value) {
+        this.$store.commit('maximize', value)
       }
     }
   },
