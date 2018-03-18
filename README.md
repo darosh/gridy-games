@@ -6,6 +6,14 @@
 
 https://darosh.github.io/gridy-games/
 
+## Goals
+
+### Games
+
+### Application
+
+### Library
+
 ## Build Setup
 
 ``` bash
