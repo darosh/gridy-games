@@ -18,6 +18,12 @@ https://darosh.github.io/gridy-games/
 
 ### Application
 
+- progressive web application
+- add to home screen and use offline
+- material design
+- flat, Scalable Vector Graphics, pixel perfect without horizontal/vertical lines allias
+- traditional board themme colors using material design colors
+
 ### Library
 
 - usability test of [Gridy](https://github.com/darosh/gridy) library
