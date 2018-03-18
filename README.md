@@ -18,13 +18,14 @@ https://darosh.github.io/gridy-games/
 
 ### Application
 
-- two players hot seat or kid/casual single player engine
+- minimalistic design, game first, from mobile to large presentation electronic whiteboards
+- two players hot seat or kid/casual level single player engine
 - touch based interface (no mouse over)
 - progressive web application
 - add to home screen and use offline
 - material design
 - flat, Scalable Vector Graphics, pixel perfect without horizontal/vertical lines allias
-- traditional board themme colors using material design colors
+- traditional board theme colors using material design colors
 
 ### Library
 
