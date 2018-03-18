@@ -34,6 +34,7 @@
 - [ ] check setTimeouts, intervals vs destroy etc... use clearTimeout
 - [ ] remove transitions on resize
 - [ ] fix g-poly-line resize
+- [ ] smarter store getters generator? global mixin?
 
 ## Done
 - [x] icon manifest generator and versioning
