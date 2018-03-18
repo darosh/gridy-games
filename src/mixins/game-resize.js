@@ -1,5 +1,7 @@
 import { Shared } from '../services/shared'
 
+let resizeTimer = null
+
 export default {
   data () {
     return {
@@ -12,6 +14,19 @@ export default {
   },
   methods: {
     onResize () {
+      this.onResizeUpdated()
+
+      if (resizeTimer) {
+        clearTimeout(resizeTimer)
+        resizeTimer = null
+      }
+
+      resizeTimer = setTimeout(() => {
+        resizeTimer = null
+        this.onResizeUpdated()
+      }, 100)
+    },
+    onResizeUpdated () {
       let bounds = this.game.grid.bounds()
       const innerWidth = window.innerWidth - ((Shared.drawer && (window.innerWidth >= 1264)) ? 300 : 0)
       const innerHeight = window.innerHeight
