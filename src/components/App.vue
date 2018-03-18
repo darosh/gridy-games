@@ -38,8 +38,7 @@
       color="grey darken-3"
       left
       bottom>
-      <v-flex
-        @click="update = false">Update ready!</v-flex>
+      <v-flex @click="update = false">Update ready!</v-flex>
       <v-btn
         flat
         color="light-blue"
@@ -116,6 +115,15 @@ export default {
       window.location.reload(true)
     },
     updateTheme () {
+      const themes = ['background--light', 'background--dark']
+
+      if (this.$store.state.dark) {
+        themes.reverse()
+      }
+
+      document.firstElementChild.classList.add(themes[0])
+      document.firstElementChild.classList.remove(themes[1])
+
       document
         .getElementsByName('theme-color')[0]
         .setAttribute(
@@ -133,5 +141,13 @@ html {
 }
 .content.no-animation {
   transition: none;
+}
+
+.background--light {
+  background-color: #fafafa;
+}
+
+.background--dark {
+  background-color: #303030;
 }
 </style>
