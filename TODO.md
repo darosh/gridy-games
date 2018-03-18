@@ -29,6 +29,11 @@
 - [ ] reset timer on pass?
 - [ ] fix undo
 - [ ] negative score minus filter
+- [ ] move constants to Config
+- [ ] use theme enums
+- [ ] check setTimeouts, intervals vs destroy etc... use clearTimeout
+- [ ] remove transitions on resize
+- [ ] fix g-poly-line resize
 
 ## Done
 - [x] delay resize
