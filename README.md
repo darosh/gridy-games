@@ -1,6 +1,10 @@
-# gridy-games
+# Gridy Games
 
-> Board games
+> Board games Typescript library and web application
+
+## Demo
+
+https://darosh.github.io/gridy-games/
 
 ## Build Setup
 
