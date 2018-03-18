@@ -10,6 +10,8 @@ https://darosh.github.io/gridy-games/
 
 ### Games
 
+- abstract, two players, turn based 
+
 ### Application
 
 ### Library
