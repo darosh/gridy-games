@@ -26,10 +26,15 @@ https://darosh.github.io/gridy-games/
 - material design
 - flat, Scalable Vector Graphics, pixel perfect without horizontal/vertical lines allias
 - traditional board theme colors using material design colors
+- non blicked interface, engines running workers
+- vibration and audio API (tuned in G Major as in Gridy :-)
+
 
 ### Library
 
 - usability test of [Gridy](https://github.com/darosh/gridy) library
+- monte carlo tree search and minmax engines
+- unified franework like interfaces for view and engines
 
 
 ## Build Setup
