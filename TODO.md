@@ -29,9 +29,10 @@
 - [ ] reset timer on pass?
 - [ ] fix undo
 - [ ] negative score minus filter
-- [ ] delay resize
 
 ## Done
+- [x] delay resize
+- [x] add theme bg to root element
 - [x] only maximized, remove player cards
 - [x] maximize UI option
 - [x] remove 5 seconds

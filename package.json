@@ -1,7 +1,7 @@
 {
   "name": "gridy-games",
   "description": "Board games",
-  "version": "0.1.138",
+  "version": "0.1.140",
   "author": "darosh <ensonador@gmail.com>",
   "browserslist": [
     "> 1%",
@@ -61,7 +61,7 @@
     "fs-extra": "^5.0.0",
     "html-webpack-plugin": "github:webpack-contrib/html-webpack-plugin",
     "inject-loader": "^3.0.1",
-    "postcss-loader": "^2.1.1",
+    "postcss-loader": "^2.1.2",
     "recursive-readdir": "^2.2.2",
     "rollup": "^0.57.1",
     "rollup-plugin-node-resolve": "^3.3.0",
