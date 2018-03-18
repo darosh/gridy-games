@@ -36,6 +36,7 @@
 - [ ] fix g-poly-line resize
 
 ## Done
+- [x] icon manifest generator and versioning
 - [x] delay resize
 - [x] add theme bg to root element
 - [x] only maximized, remove player cards
@@ -110,7 +111,7 @@
 
 - [ ] readme goals
 - [ ] extract css?
-- [ ] add triangle to icon
 
 ## Done
+- [x] add triangle to icon
 - [x] app icon
