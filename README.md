@@ -11,6 +11,7 @@ https://darosh.github.io/gridy-games/
 
 ### Games
 
+- deterministic
 - abstract
 - two players
 - turn based 
