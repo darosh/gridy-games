@@ -52,6 +52,7 @@ export interface IGridGame {
   winning?: () => IGameTile[];
   rulers?: () => IGameTile[];
   links?: () => IGameTile[];
+  moveToString?(move: any): string;
 }
 
 export interface IGridGameConstructor {

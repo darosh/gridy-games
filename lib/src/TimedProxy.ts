@@ -69,7 +69,7 @@ export class TimedProxy implements IGame, IGridGame {
       this.stop();
       this.counter = -1;
       this.counterSignal = -1;
-      this.expired  = false;
+      this.expired = false;
     }
   }
 
@@ -94,7 +94,7 @@ export class TimedProxy implements IGame, IGridGame {
   }
 
   public moveToString(move: any): string {
-    return (this.game as any).moveToString(move);
+    return this.game.moveToString ? this.game.moveToString(move) : "";
   }
 
   public stringToMove(move: string): any {
