@@ -18,6 +18,8 @@ https://darosh.github.io/gridy-games/
 
 ### Application
 
+- two players hot seat or kid/casual single player engine
+- touch based interface (no mouse over)
 - progressive web application
 - add to home screen and use offline
 - material design
