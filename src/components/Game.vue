@@ -1,125 +1,75 @@
 <template>
-  <div
-    v-resize="onResize"
-    :class="theme">
-    <v-layout
-      column
-      wrap
-      align-center
-      align-content-center>
-      <div
-        class="mt-1-5"
-        style="text-align: center">
-        <g-board
-          :game="game"
-          :coords="$store.state.coords"
-          :frame="frame"
-          :margin="margin"
-          :move="move"
-          :vertical="vertical"
-          :waiting="waiting"
-          interactive
-          centered/>
+  <div v-resize="onResize" :class="theme">
+    <v-layout column wrap align-center align-content-center>
+      <div class="mt-1-5" style="text-align: center">
+        <g-board :game="game" :coords="$store.state.coords" :frame="frame" :margin="margin" :move="move" :vertical="vertical" :waiting="waiting" interactive centered/>
       </div>
     </v-layout>
-    <v-speed-dial
-      v-model="fab"
-      style="z-index: 9"
-      fixed
-      right
-      bottom
-      direction="top"
-      transition="slide-y-reverse-transition">
+    <v-layout justify-center v-if="game.moves.length && game.score" row class="text-xs-center" style="position: absolute; bottom: 12px; left:2px; right:0">
+      <v-flex class="subheading text-xs-right" style="width: 60px">{{ game.score[1] }}</v-flex>
+      <g-player-divider class="player-divider mx-3 d-block" />
+      <v-flex class="subheading text-xs-left" style="width: 60px">{{ game.score[2] }}</v-flex>
+    </v-layout>
+    <v-speed-dial v-model="fab" style="z-index: 9" fixed right bottom direction="top" transition="slide-y-reverse-transition">
       <v-fab-transition slot="activator">
-        <v-btn
-          v-if="game.moves.length"
-          v-model="fab"
-          :color="$store.state.dark ? 'grey darken-4' : 'grey darken-3'"
-          dark
-          fab
-          hover>
+        <v-btn v-if="game.moves.length" v-model="fab" :color="$store.state.dark ? 'grey darken-4' : 'grey darken-3'" dark fab hover>
           <v-icon class="white--text">gamepad</v-icon>
           <v-icon class="white--text">close</v-icon>
         </v-btn>
       </v-fab-transition>
-      <v-btn
-        v-if="game.moves.length"
-        fab
-        dark
-        small
-        color="grey darken-3"
-        @click.stop="undo()">
+      <v-btn v-if="game.moves.length" fab dark small color="grey darken-3" @click.stop="undo()">
         <v-icon class="white--text">undo</v-icon>
       </v-btn>
-      <v-btn
-        v-if="game.moves.length"
-        fab
-        dark
-        small
-        color="grey darken-3"
-        @click.stop="reset()">
+      <v-btn v-if="game.moves.length" fab dark small color="grey darken-3" @click.stop="reset()">
         <v-icon class="white--text">refresh</v-icon>
       </v-btn>
     </v-speed-dial>
-    <v-snackbar
-      v-model="snackbar"
-      :timeout="12000"
-      class="verdict-snack"
-      color="grey darken-3"
-      auto-height
-      top>
-      <v-flex
-        @click="snackbar = false">
+    <v-snackbar v-model="snackbar" :timeout="12000" class="verdict-snack" color="grey darken-3" auto-height top>
+      <v-flex @click="snackbar = false">
         <span v-if="game.winner">{{ verdict }}</span>
       </v-flex>
-      <v-btn
-        flat
-        color="light-blue"
-        @click.native="snackbar = false; reset()">Restart</v-btn>
+      <v-btn flat color="light-blue" @click.native="snackbar = false; reset()">Restart</v-btn>
     </v-snackbar>
-    <v-snackbar
-      v-model="rules"
-      :timeout="12000"
-      auto-height
-      color="grey darken-3"
-      class="info-snack"
-      bottom>
+    <v-snackbar v-model="rules" :timeout="12000" auto-height color="grey darken-3" class="info-snack" bottom>
       <v-flex>
-        <div
-          v-for="(r, k) in rulesText"
-          :key="k">{{ r }}</div>
+        <div v-for="(r, k) in rulesText" :key="k">{{ r }}</div>
       </v-flex>
-      <v-btn
-        flat
-        color="light-blue"
-        @click.native="rules = false">OK</v-btn>
+      <v-btn flat color="light-blue" @click.native="rules = false">OK</v-btn>
     </v-snackbar>
   </div>
 </template>
 
 <script>
-import { Games, TimedProxy, initActions, initHighlight, selectAction, undoAction } from '../../plugins/lib'
-import { isHuman } from '../services/players'
-import { Bus } from '../services/bus'
-import { PlayerWorker } from '../worker/ai'
-import { theme } from '../style/theme'
-import { Shared } from '../services/shared'
-import { gameData } from '../services/utils'
+import {
+  Games,
+  TimedProxy,
+  initActions,
+  initHighlight,
+  selectAction,
+  undoAction
+} from "../../plugins/lib";
+import { isHuman } from "../services/players";
+import { Bus } from "../services/bus";
+import { PlayerWorker } from "../worker/ai";
+import { theme } from "../style/theme";
+import { Shared } from "../services/shared";
+import { gameData } from "../services/utils";
 
-import { latency, chordSound, kick1Sound, kick2Sound } from '../services/sound'
-import { kickVibration } from '../services/vibration'
-import gameResize from '../mixins/game-resize'
-import gameSession from '../mixins/game-session'
-import playerSwitch from '../mixins/player-switch'
+import { latency, chordSound, kick1Sound, kick2Sound } from "../services/sound";
+import { kickVibration } from "../services/vibration";
+import gameResize from "../mixins/game-resize";
+import gameSession from "../mixins/game-session";
+import playerSwitch from "../mixins/player-switch";
 
-const LATENCY = 2
+const LATENCY = 2;
 
 export default {
   components: {
-    GBoard: () => import('./Board')
+    GBoard: () => import("./Board"),
+    GPlayerDivider: () => import("./PlayerDivider")
   },
   mixins: [gameResize, gameSession, playerSwitch],
-  data () {
+  data() {
     return {
       game: null,
       frame: null,
@@ -132,109 +82,109 @@ export default {
       rules: false,
       showRules: true,
       rulesText: true
-    }
+    };
   },
   watch: {
-    'game.player': function () {
-      this.robot()
+    "game.player": function() {
+      this.robot();
     },
-    'game.winner': function (value) {
+    "game.winner": function(value) {
       if (value) {
-        this.snackbar = true
-        this.update()
+        this.snackbar = true;
+        this.update();
       }
     },
-    '$store.state.player': {
-      handler: function () {
-        this.initRobots()
-        this.initTimer()
-        this.robot()
+    "$store.state.player": {
+      handler: function() {
+        this.initRobots();
+        this.initTimer();
+        this.robot();
       },
       deep: true
     },
-    '$store.state.timer': function (value) {
-      this.initTimer()
+    "$store.state.timer": function(value) {
+      this.initTimer();
     },
-    '$route.params.id': function (value) {
-      this.initGame()
-      this.initRobots()
-      this.onResize()
-      this.update()
+    "$route.params.id": function(value) {
+      this.initGame();
+      this.initRobots();
+      this.onResize();
+      this.update();
     }
   },
-  mounted () {
-    document.body.scrollTop = document.documentElement.scrollTop = 0
+  mounted() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
-  created () {
-    this.initGame()
-    this.initRobots()
-    this.onResize()
-    this.update()
-    Bus.$on('game', this.update)
+  created() {
+    this.initGame();
+    this.initRobots();
+    this.onResize();
+    this.update();
+    Bus.$on("game", this.update);
   },
-  destroyed () {
-    Bus.$off('game', this.update)
-    this.destroyRobots()
+  destroyed() {
+    Bus.$off("game", this.update);
+    this.destroyRobots();
 
     if (this.game.dispose) {
-      this.game.dispose()
+      this.game.dispose();
     }
   },
   methods: {
-    initTimer () {
-      this.game.limit = this.hotSeat ? this.$store.state.timer : 0
+    initTimer() {
+      this.game.limit = this.hotSeat ? this.$store.state.timer : 0;
     },
-    initGame () {
+    initGame() {
       if (!this.human[1] && this.human[2]) {
-        this.switchPlayer()
+        this.switchPlayer();
       }
 
-      const g = this.$route.params.id + 'Game'
-      const game = new Games[g]()
-      initHighlight(game)
-      const timed = new TimedProxy(game)
-      this.game = Shared.game = timed
-      this.theme = theme(Games[g])
-      this.initTimer()
+      const g = this.$route.params.id + "Game";
+      const game = new Games[g]();
+      initHighlight(game);
+      const timed = new TimedProxy(game);
+      this.game = Shared.game = timed;
+      this.theme = theme(Games[g]);
+      this.initTimer();
 
       if (this.showRules) {
-        this.showRules = false
+        this.showRules = false;
 
         setTimeout(() => {
-          this.rulesText = gameData(game.constructor, 'rules')
-          this.rules = !!this.rulesText
-        }, 200)
+          this.rulesText = gameData(game.constructor, "rules");
+          this.rules = !!this.rulesText;
+        }, 200);
       }
     },
-    initRobot (robot) {
+    initRobot(robot) {
       return isHuman(robot)
         ? false
-        : new PlayerWorker(robot, this.$route.params.id)
+        : new PlayerWorker(robot, this.$route.params.id);
     },
-    destroyRobots () {
+    destroyRobots() {
       if (this.robotPlayer[1]) {
-        this.robotPlayer[1].terminate()
+        this.robotPlayer[1].terminate();
       }
 
       if (this.robotPlayer[2]) {
-        this.robotPlayer[2].terminate()
+        this.robotPlayer[2].terminate();
       }
     },
-    initRobots () {
-      this.destroyRobots()
+    initRobots() {
+      this.destroyRobots();
       this.robotPlayer = {
         1: this.initRobot(this.$store.state.player[1]),
         2: this.initRobot(this.$store.state.player[2])
-      }
+      };
     },
-    kickSound () {
+    kickSound() {
       if (this.$store.state.sound) {
         if (this.game.winner) {
-          chordSound(this.game.winner)
+          chordSound(this.game.winner);
         } else if (this.game.player === 1) {
-          kick1Sound()
+          kick1Sound();
         } else {
-          kick2Sound()
+          kick2Sound();
         }
       }
 
@@ -242,72 +192,72 @@ export default {
         kickVibration(
           50,
           this.$store.state.sound ? LATENCY * latency.latency : 0
-        )
+        );
       }
     },
-    robot () {
-      const player = this.robotPlayer[this.game.player]
+    robot() {
+      const player = this.robotPlayer[this.game.player];
 
       if (!this.working && !this.game.winner && player) {
-        this.working = true
+        this.working = true;
         player.select(this.game).then(move => {
-          this.working = false
-          undoAction(this.game)
-          this.game.move(move.move)
-          this.kickSound()
-          this.update()
-          this.robot()
-        })
+          this.working = false;
+          undoAction(this.game);
+          this.game.move(move.move);
+          this.kickSound();
+          this.update();
+          this.robot();
+        });
       }
     },
-    move (tile) {
-      this.rules = false
+    move(tile) {
+      this.rules = false;
 
       if (this.game.winner) {
-        return
+        return;
       }
 
-      const action = selectAction(this.game, tile)
+      const action = selectAction(this.game, tile);
 
       if (action === false) {
-        return
+        return;
       }
 
       if (action) {
-        undoAction(this.game)
-        this.game.move(action)
-        this.kickSound()
-        this.update()
+        undoAction(this.game);
+        this.game.move(action);
+        this.kickSound();
+        this.update();
       } else {
-        this.kickSound()
+        this.kickSound();
       }
     },
-    update () {
-      undoAction(this.game)
+    update() {
+      undoAction(this.game);
 
       if (this.game.winner) {
-        return
+        return;
       }
 
-      initActions(this.game, this.game.possible())
+      initActions(this.game, this.game.possible());
     },
-    undo () {
-      this.snackbar = false
-      this.game.undo()
-      this.game.undo()
-      this.update()
+    undo() {
+      this.snackbar = false;
+      this.game.undo();
+      this.game.undo();
+      this.update();
     },
-    reset () {
-      this.fab = false
-      this.snackbar = false
-      this.initGame()
-      this.onResize()
-      this.initRobots()
-      this.update()
-      this.robot()
+    reset() {
+      this.fab = false;
+      this.snackbar = false;
+      this.initGame();
+      this.onResize();
+      this.initRobots();
+      this.update();
+      this.robot();
     }
   }
-}
+};
 </script>
 
 <style scoped>

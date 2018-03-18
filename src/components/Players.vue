@@ -3,16 +3,8 @@
     :class="theme"
     class="relative text-xs-center"
     style="width: 64px; height: 48px">
-    <div
-      v-if="game.moves.length && game.score"
-      class="absolute subheading"
-      style="right: 120px; top: 20px">{{ game.score[1] }}</div>
-    <div
-      v-if="game.moves.length && game.score"
-      class="absolute subheading"
-      style="left: 120px; top: 20px">{{ game.score[2] }}</div>
     <g-player-divider
-      :value="divider"
+      :value="false"
       class="player-divider d-inline-block"
       style="margin-top: 19px" />
     <div
@@ -132,19 +124,6 @@ export default {
     },
     theme () {
       return theme(Shared.game.constructor)
-    },
-    divider () {
-      if (Shared.game.moves.length && Shared.game.score) {
-        if (Shared.game.score[1] > Shared.game.score[2]) {
-          return 1
-        } else if (Shared.game.score[1] < Shared.game.score[2]) {
-          return 2
-        } else {
-          return 0
-        }
-      } else {
-        return -1
-      }
     },
     position () {
       if (Shared.game.moves.length === 0) {
