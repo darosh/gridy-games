@@ -50,7 +50,15 @@ const extractHTML = new HtmlWebpackPlugin({
   template: setPath('/src/index.ejs'),
   environment: process.env.NODE_ENV,
   isLocalBuild: buildingForLocal(),
-  serviceWorkerLoader: `<script>${loadMinified(buildingForLocal() ? './build/service-worker-dev.js' : './build/service-worker-prod.js')}</script>`
+  serviceWorkerLoader: `<script>${loadMinified(buildingForLocal() ? './build/service-worker-dev.js' : './build/service-worker-prod.js')}</script>`,
+  iconVersion: require('./package').iconVersion
+})
+
+const compileManifest = new HtmlWebpackPlugin({
+  filename: 'static/manifest.json',
+  inject: false,
+  template: setPath('/src/manifest.ejs'),
+  iconVersion: require('./package').iconVersion
 })
 
 const config = {
@@ -81,6 +89,7 @@ const config = {
   },
   plugins: [
     extractHTML,
+    compileManifest,
     // extractCSS,
     new webpack.DefinePlugin({
       'process.env': {

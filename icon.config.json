@@ -1,0 +1,60 @@
+{
+	"masterPicture": "static/img/vector/icon-fav.svg",
+	"iconsPath": "/",
+	"design": {
+		"ios": {
+			"pictureAspect": "backgroundAndMargin",
+			"backgroundColor": "#2e7d32",
+			"margin": "18%",
+			"assets": {
+				"ios6AndPriorIcons": false,
+				"ios7AndLaterIcons": true,
+				"precomposedIcons": false,
+				"declareOnlyDefaultIcon": true
+			}
+		},
+		"desktopBrowser": {},
+		"windows": {
+			"masterPicture": "static/img/vector/icon-shape.svg",
+			"pictureAspect": "whiteSilhouette",
+			"backgroundColor": "#8bc34a",
+			"onConflict": "override",
+			"assets": {
+				"windows80Ie10Tile": false,
+				"windows10Ie11EdgeTiles": {
+					"small": false,
+					"medium": true,
+					"big": false,
+					"rectangle": false
+				}
+			}
+		},
+		"androidChrome": {
+			"masterPicture": "static/img/vector/icon-web.svg",
+			"pictureAspect": "noChange",
+			"themeColor": "#ffffff",
+			"manifest": {
+				"display": "standalone",
+				"orientation": "notSet",
+				"onConflict": "override",
+				"declared": true
+			},
+			"assets": {
+				"legacyIcon": true,
+				"lowResolutionIcons": true
+			}
+		},
+		"safariPinnedTab": {
+			"masterPicture": "static/img/vector/icon-shape.svg",
+			"pictureAspect": "silhouette",
+			"themeColor": "#8bc34a"
+		}
+	},
+	"settings": {
+		"scalingAlgorithm": "Mitchell",
+		"errorOnImageTooSmall": false,
+		"readmeFile": false,
+		"htmlCodeFile": false,
+		"usePathAsIs": false
+	}
+}

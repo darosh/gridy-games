@@ -49,7 +49,7 @@
       style="margin: 0 0 16px 0">
       <img
         class="gpu"
-        src="static/img/icons/icon-web.svg"
+        src="static/img/vector/icon-web.svg"
         alt="Logo"
         width="112">
     </div>
