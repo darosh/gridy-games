@@ -8,13 +8,19 @@ https://darosh.github.io/gridy-games/
 
 ## Goals
 
+
 ### Games
 
-- abstract, two players, turn based 
+- abstract
+- two players
+- turn based 
 
 ### Application
 
 ### Library
+
+- usability test of [Gridy](https://github.com/darosh/gridy) library
+
 
 ## Build Setup
 
