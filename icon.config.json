@@ -1,23 +1,23 @@
 {
-	"masterPicture": "static/img/vector/icon-fav.svg",
+	"masterPicture": "static/img/vector/icon-web.svg",
 	"iconsPath": "/",
 	"design": {
 		"ios": {
 			"pictureAspect": "backgroundAndMargin",
-			"backgroundColor": "#2e7d32",
+			"backgroundColor": "#fff",
 			"margin": "18%",
 			"assets": {
 				"ios6AndPriorIcons": false,
-				"ios7AndLaterIcons": true,
+				"ios7AndLaterIcons": false,
 				"precomposedIcons": false,
 				"declareOnlyDefaultIcon": true
 			}
 		},
 		"desktopBrowser": {},
 		"windows": {
-			"masterPicture": "static/img/vector/icon-shape.svg",
+			"masterPicture": "static/img/vector/icon-flat.svg",
 			"pictureAspect": "whiteSilhouette",
-			"backgroundColor": "#8bc34a",
+			"backgroundColor": "#03a9f4",
 			"onConflict": "override",
 			"assets": {
 				"windows80Ie10Tile": false,
@@ -45,9 +45,9 @@
 			}
 		},
 		"safariPinnedTab": {
-			"masterPicture": "static/img/vector/icon-shape.svg",
+			"masterPicture": "static/img/vector/icon-flat.svg",
 			"pictureAspect": "silhouette",
-			"themeColor": "#8bc34a"
+			"themeColor": "#03a9f4"
 		}
 	},
 	"settings": {
