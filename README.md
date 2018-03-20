@@ -2,6 +2,8 @@
 
 > Board games Typescript library and web application
 
+<img src="https://darosh.github.io/gridy-games/static/img/vector/icon-web.svg" width="112">
+
 ## Demo
 
 https://darosh.github.io/gridy-games/
@@ -14,7 +16,7 @@ https://darosh.github.io/gridy-games/
 - deterministic
 - abstract
 - two players
-- turn based 
+- turn based
 
 ### Application
 
