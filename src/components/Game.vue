@@ -33,7 +33,7 @@
     <v-dialog :value="rules" max-width="320px">
       <v-card>
         <v-toolbar dense flat color="transparent">
-          <span class="title">{{game.constructor.title | titled}}</span>
+          <span class="title ml-3">{{game.constructor.title | titled}}</span>
           <v-spacer></v-spacer>
           <v-btn icon @click="rules = false"><v-icon>close</v-icon></v-btn>
         </v-toolbar>
