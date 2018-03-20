@@ -30,19 +30,21 @@
       </v-flex>
       <v-btn flat color="light-blue" @click.native="snackbar = false; reset()">Restart</v-btn>
     </v-snackbar>
-    <v-dialog :value="rules" max-width="320px">
+    <v-dialog :value="rules" max-width="280px">
       <v-card>
-        <v-toolbar dense flat color="transparent">
-          <span class="title ml-3">{{game.constructor.title | titled}}</span>
-          <v-spacer></v-spacer>
-          <v-btn icon @click="rules = false"><v-icon>close</v-icon></v-btn>
-        </v-toolbar>
-        <v-card-text>
-          <div v-for="(r, k) in rulesText" :key="k">{{ r }}</div>
+        <v-card-title>
+          <span class="title pa-2">{{game.constructor.title | titled}}</span>
+        </v-card-title>
+        <v-card-text class="pt-0 pb-4">
+          <div class="px-2" v-for="(r, k) in rulesText" :key="k">{{ r }}</div>
         </v-card-text>
-        <v-card-text class="text-xs-center pb-5">
+        <div class="text-xs-center">
           <g-board :game="sample" :frame="[240,164]" :margin="4" class="preview d-inline-block"></g-board>
-        </v-card-text>
+        </div>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn flat @click="rules = false">Ok</v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
