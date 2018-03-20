@@ -37,6 +37,11 @@
 - [ ] smarter store getters generator? global mixin?
 
 ## Done
+- [x] Remove unused icon sizes
+- [x] CANCELED Try green UI
+- [x] CANCELED Try blue UI
+- [x] Try blue icon
+- [x] Symbol icon colors
 - [x] icon manifest generator and versioning
 - [x] delay resize
 - [x] add theme bg to root element
@@ -120,17 +125,12 @@
 # IDEAS
 
 ```
-Symbol icon colors
 Border color of symbol
 Restart dialog longer
 Bigger icon radius
 Storage versioning
-Remove unused icon sizes
 Better verdict message
 Try verdict dialog
-Try green UI
-Try blue UI
-Try blue icon
 Remove search suggestions, add auto wild card
 Check lunr query parser
 Just add wildcard to lunr search :)
@@ -139,7 +139,7 @@ Add check for update button
 Game view has no theme colors
 Clickable shadow on swap symbol
 Thin radial lines are stupid
-Icon hex should be combined with circle? For shadows... 
+Icon hex should be combined with circle? For shadows...
 Black on yellow is too Black.
 Most of the toasts should be dialogs
 Winning dialog should be bold
@@ -156,6 +156,6 @@ Remove app icon from menu.
 Remove touch directive
 Disable touch gesture for disabled drawers
 Mark mobile friendly, tablet friends
-Yellow symbol is good enough for white icon
+- [x] Yellow symbol is good enough for white icon
 Underline only external links
 ```
