@@ -34,7 +34,7 @@
         </div>
         <div v-else class="body-1">{{ m.value }}</div>
       </v-layout>
-      <div v-if="updatable" class="px-3 mb-3 mt-3">
+      <div v-if="$store.state.registration" class="px-3 mb-3 mt-3">
         <v-btn flat color="light-blue" small block @click="checkForUpdate()">Check for update</v-btn>
       </div>
     </div>
@@ -115,9 +115,6 @@ export default {
         this.$store.commit("full", value);
         full(value);
       }
-    },
-    updatable() {
-      return !!window.$registration;
     }
   },
   methods: {

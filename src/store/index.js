@@ -19,7 +19,8 @@ const { state, plugin: storagePlugin } = storage(
     coords: false
   },
   {
-    update: window.$update || false
+    update: window.$update || false,
+    registration: !!window.$registration || false
   },
   STORAGE
 )
@@ -49,6 +50,7 @@ const $store = new Vuex.Store({
     sound: (state, payload) => (state.sound = payload),
     timer: (state, payload) => (state.timer = payload),
     update: (state, payload) => (state.update = payload),
+    registration: (state, payload) => (state.registration = payload),
     player: (state, payload) => (state.player = payload)
   },
   actions: {},
