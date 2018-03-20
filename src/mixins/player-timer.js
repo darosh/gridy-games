@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { tickSound, failSound } from '../services/sound'
 
 export default {
@@ -8,7 +9,7 @@ export default {
     }
   },
   watch: {
-    'game.player': function () {
+    'game.moves.length': function () {
       this.updateTimer()
     },
     'game.pending': function () {
@@ -29,13 +30,15 @@ export default {
   methods: {
     updateTimer () {
       if (this.game.pending && this.value === this.game.player) {
-        this.timer = -1
         this.transition = 0
+        this.timer = -1
 
-        setTimeout(() => {
-          this.timer = 0
-          this.transition = this.game.limit
-        }, 50)
+        Vue.nextTick(() => {
+          requestAnimationFrame(() => {
+            this.timer = 0
+            this.transition = this.game.limit
+          })
+        })
       } else {
         this.timer = -1
         this.transition = 0

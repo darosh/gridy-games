@@ -171,6 +171,7 @@ export default {
   components: {
     VSwitch: () => import('vuetify/es5/components/VSwitch'),
     VSubheader: () => import('vuetify/es5/components/VSubheader'),
+    VTextField: () => import('vuetify/es5/components/VTextField'),
     VDivider: () => import('vuetify/es5/components/VDivider'),
     GInfo: () => import('./Info')
   },

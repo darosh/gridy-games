@@ -8,7 +8,7 @@
       class="player-divider d-inline-block"
       style="margin-top: 19px" />
     <div
-      :style="{top: 0, transform: `translate(${position}px,0)`}"
+      :style="{transition: starting ? 'none' : null, top: 0, transform: `translate(${position}px,0)`}"
       :class="'player-' + value"
       class="absolute player">
       <div>
@@ -17,6 +17,7 @@
           width="64"
           class="d-block">
           <circle
+            :style="{transition: starting ? 'none' : null}"
             :class="'symbol-' + value"
             cx="31"
             cy="31"
@@ -45,7 +46,11 @@
             <div
               v-else-if="waiting"
               key="b"
-              style="transform: none"><div><v-icon class="player-status rotate-animation">hourglass_empty</v-icon></div></div>
+              style="transform: none">
+              <div>
+                <v-icon class="player-status rotate-animation">hourglass_empty</v-icon>
+              </div>
+            </div>
             <v-icon
               v-else-if="game.winner > 0 && game.winner === value"
               key="d"
@@ -53,7 +58,7 @@
             <v-icon
               v-else-if="game.winner === -1"
               key="e"
-              class="player-status">sentiment_very_dissatisfied</v-icon>
+              class="player-draw-status">sentiment_very_dissatisfied</v-icon>
             <v-icon
               v-else
               key="c"
@@ -92,6 +97,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import { Shared } from '../services/shared'
 import { theme } from '../style/theme'
 import playerSwitch from '../mixins/player-switch'
@@ -109,7 +115,8 @@ export default {
   data () {
     return {
       Shared,
-      OFFSET
+      OFFSET,
+      starting: true
     }
   },
   computed: {
@@ -135,6 +142,21 @@ export default {
           return SIDE
         } else {
           return 0
+        }
+      }
+    }
+  },
+  watch: {
+    'game.moves.length': {
+      immediate: true,
+      handler (value) {
+        if (!value) {
+          this.starting = true
+          Vue.nextTick(() => {
+            this.starting = false
+          })
+        } else {
+          this.starting = false
         }
       }
     }

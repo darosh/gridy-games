@@ -31,12 +31,14 @@
 - [ ] negative score minus filter
 - [ ] move constants to Config
 - [ ] use theme enums
-- [ ] check setTimeouts, intervals vs destroy etc... use clearTimeout
 - [ ] remove transitions on resize
 - [ ] fix g-poly-line resize
 - [ ] smarter store getters generator? global mixin?
 
 ## Done
+- [x] Use nextick instead of settimeout
+- [x] Underline only external links
+- [x] check setTimeouts, intervals vs destroy etc... use clearTimeout
 - [x] Check for update button.
 - [x] Storage versioning
 - [x] Remove search suggestions, add auto wild card
@@ -150,11 +152,9 @@ Clickable shadow on swap symbol
 Most of the toasts should be dialogs
 Winning dialog should be bold
 On the other hand winning lines should be visible?
-Use nextickk instead of settimeout
 Rules info could have finished game preview :)
 Time travel controls (from FAB to bottom sheet)
 Current toasts: update, verdict, rules.
 Only update should be toast? And with contrast bg?
 Mark mobile friendly, tablet friends
-Underline only external links
 ```

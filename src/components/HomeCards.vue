@@ -107,6 +107,8 @@ const p = b[1] / (s - m * 2) / 2
 const iconBox = `${b[0] - p * m * 2} ${b[0] - p * m * 2} ${b[1] +
   p * m * 4} ${b[1] + p * m * 4}`
 
+let timeout
+
 export default {
   name: 'HomeCards',
   components: {
@@ -136,16 +138,24 @@ export default {
     }
   },
   activated () {
-    setTimeout(() => {
+    this.cancelTimeout()
+    timeout = setTimeout(() => {
       this.show = true
     }, 600)
   },
   deactivated () {
-    setTimeout(() => {
+    this.cancelTimeout()
+    timeout = setTimeout(() => {
       this.show = false
     }, 0)
   },
   methods: {
+    cancelTimeout() {
+      if(timeout) {
+        clearTimeout(timeout)
+        timeout = null
+      }
+    },
     visibilityChanged (isVisible, entry, id) {
       if (this.show && isVisible && !this.initialized[id]) {
         Vue.set(this.initialized, id, isVisible)

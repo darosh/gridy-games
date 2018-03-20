@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import { Shared } from '../services/shared'
 import { search } from '../worker/search'
 
@@ -80,9 +81,9 @@ export default {
       this.updateSearch(Shared.search)
     },
     'Shared.searching': function () {
-      setTimeout(() => {
+      Vue.nextTick(() => {
         this.updateSearch(Shared.searching ? Shared.search : '')
-      }, 50)
+      })
     }
   },
   methods: {
