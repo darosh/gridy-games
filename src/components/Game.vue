@@ -43,7 +43,7 @@
         </div>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat @click="rules = false">Ok</v-btn>
+          <v-btn flat @click="rules = false" style="min-width: 0">Ok</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
