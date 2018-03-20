@@ -153,7 +153,9 @@ export default {
         if (!value) {
           this.starting = true
           Vue.nextTick(() => {
-            this.starting = false
+            requestAnimationFrame(() => {
+              this.starting = false
+            })
           })
         } else {
           this.starting = false
