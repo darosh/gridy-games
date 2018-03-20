@@ -9,52 +9,33 @@ theme = {
   t1: rgba(0, 0, 0, 1),
   t2: rgba(255, 255, 255, 1),
   s1: #000,
-  so1: #000,
   s2: #fff,
-  so2: #fff,
   l1: rgba(0, 0, 0, .87),
   l2: rgba(255, 255, 255, .87),
-  b1: #8bc34a,
-  b2: #8bc34a,
-  w1: #2e7d32,
-  w2: #2e7d32,
 }
 
 @require "./colors"
 
 colors(theme, '.reversi-theme')
 
-.theme--dark .reversi-theme
-  .symbol-1
+.theme--dark .reversi-theme .symbol-1
     fill: #000
-    stroke: #000
 
 .reversi-theme
   .player-2 .player-status.icon
-    fill: #000
-
+    fill: rgba(0,0,0,0.87)
   .player-2 .counter
-    color: #000
+    color: rgba(0,0,0,0.87)
 
 .theme--light .reversi-theme
   .symbol-2
-    stroke: #000
-    stroke-opacity: 0.5
-    stroke-width: 1
-    // filter: url(#shadow1)
-.theme--dark .reversi-theme
-  // .symbol-1
-  //   stroke: rgba(255,255,255,0.12)
-    // stroke-opacity: 0.333
+    fill: #E0E0E0
 
+.theme--dark .reversi-theme
   .symbol-2
-    stroke: #fff
-    stroke-opacity: 1
-    stroke-width: 0
-    // filter: url(#shadow1)
+    stroke: theme.s2
 
 .theme--light .reversi-theme .player-timer
   stroke: theme.tileFill !important
-
 .theme--dark .reversi-theme .player-timer
   stroke: theme.possible !important

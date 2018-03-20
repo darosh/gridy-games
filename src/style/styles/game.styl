@@ -1,8 +1,5 @@
 xs = '(max-width: 599px), (max-height: 599px)'
-bar = 3px
 
-// polygon
-// path
 .tile
   stroke-width: 3
   stroke-linejoin: bevel
@@ -13,7 +10,7 @@ line
 
 .symbol-1
 .symbol-2
-  stroke-width: 1
+  stroke-width: 0
 
 .line-1
 .line-2
@@ -23,29 +20,10 @@ line
   @media xs
     stroke-width: 5
 
-.timer
-  background-color: #fff
-  height: 0
-
-.theme--dark .timer
-  background-color: #424242
-
-.active, .win, .draw
-  .timer
-    height: bar
-
-.timer-wrap
-  background-color: #E0E0E0
-  overflow: hidden
-
-.theme--dark .timer-wrap
-  background-color: #757575
-
 rect
   fill: none
 
 .preview
-  // polygon
   .tile
   line
     stroke-width: 1
@@ -100,3 +78,6 @@ polyline
   fill: #fafafa
 .theme--dark .symbol--1
   fill: #303030
+
+.theme--light .player-score
+  color: rgba(0,0,0,0.54)

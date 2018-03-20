@@ -26,14 +26,15 @@
       v-if="game.moves.length && game.score"
       row
       justify-center
-      class="text-xs-center"
+      align-center
+      class="text-xs-center player-score"
       style="position: absolute; bottom: 12px; left:2px; right:0">
       <v-flex
-        class="subheading text-xs-right"
+        class="title text-xs-right"
         style="width: 60px">{{ game.score[1] }}</v-flex>
       <g-player-divider class="player-divider mx-3 d-block" />
       <v-flex
-        class="subheading text-xs-left"
+        class="title text-xs-left"
         style="width: 60px">{{ game.score[2] }}</v-flex>
     </v-layout>
     <v-speed-dial

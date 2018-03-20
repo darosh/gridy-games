@@ -9,15 +9,9 @@ gomokuTheme = {
   t1: rgba(0, 0, 0, 1),
   t2: rgba(255, 255, 255, 1),
   s1: #000,
-  so1: #000,
   s2: #fff,
-  so2: #fff,
   l1: rgba(0, 0, 0, .87),
   l2: rgba(255, 255, 255, .87),
-  b1: #FFE0B2,
-  b2: #FFE0B2,
-  w1: #F57C00,
-  w2: #F57C00,
 }
 
 @require "./colors"
@@ -32,23 +26,17 @@ colors(gomokuTheme, '.gomoku-theme')
     stroke: rgba(127,127,127,0.78)
 
   .player-2 .player-status.icon
-    fill: #000
+    fill: rgba(0,0,0,0.87)
 
   .player-2 .counter
-    color: #000
+    color: rgba(0,0,0,0.87)
 
 .theme--light .gomoku-theme
   .symbol-2
-    stroke: #000
-    stroke-opacity: 0.5
-    stroke-width: 1
-    // filter: url(#shadow1)
+    fill: #E0E0E0
 .theme--dark .gomoku-theme
   .symbol-2
-    stroke: #fff
-    stroke-opacity: 1
-    stroke-width: 0
-    // filter: url(#shadow1)
+    stroke: gomokuTheme.s2
 
 .theme--light .gomoku-theme .player-timer
   stroke: gomokuTheme.w1 !important
