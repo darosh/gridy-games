@@ -4,6 +4,7 @@
     :dark="$store.state.dark">
     <v-navigation-drawer
       v-model="Shared.menu"
+      :touchless="!$route.meta.home"
       class="pb-3"
       fixed
       left
@@ -14,6 +15,7 @@
     </v-navigation-drawer>
     <v-navigation-drawer
       v-model="Shared.drawer"
+      :touchless="$route.meta.home"
       class="pb-3"
       fixed
       right

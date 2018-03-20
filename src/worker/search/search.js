@@ -3,7 +3,6 @@ import { FIELDS, Info } from '../../../plugins/lib'
 import lunr from 'lunr'
 
 let idx
-let words
 
 export function build () {
   const items = Info.games
@@ -21,7 +20,6 @@ export function build () {
 export function search (text) {
   if (!idx) {
     idx = build()
-    words = Object.keys(idx.invertedIndex).sort()
   }
 
   let map = {}
@@ -38,10 +36,7 @@ export function search (text) {
     map = false
   }
 
-  const autocomplete = text ? words.filter((w) => w.includes(text)) : words
-
   return {
-    map,
-    autocomplete
+    map
   }
 }

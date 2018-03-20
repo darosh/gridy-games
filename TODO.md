@@ -37,6 +37,22 @@
 - [ ] smarter store getters generator? global mixin?
 
 ## Done
+- [x] Remove search suggestions, add auto wild card
+- [x] Check lunr query parser
+- [x] Just add wildcard to lunr search :)
+- [x] Check timer digit color
+- [x] Game view has no theme colors
+- [x] Search box needs drop shadow? Or blue toolbar?
+- [x] Thin radial lines are stupid
+- [x] Icon hex should be combined with circle? For shadows...
+- [x] CANCELED Black on yellow is too Black.
+- [x] App toolbar could be blue
+- [x] Remove app icon from menu.
+- [x] Remove touch directive
+- [x] Disable touch gesture for disabled drawers
+- [x] Border color of symbol
+- [x] Bigger icon radius
+- [x] Yellow symbol is good enough for white icon
 - [x] Remove unused icon sizes
 - [x] CANCELED Try green UI
 - [x] CANCELED Try blue UI
@@ -125,37 +141,21 @@
 # IDEAS
 
 ```
-Border color of symbol
 Restart dialog longer
-Bigger icon radius
 Storage versioning
 Better verdict message
 Try verdict dialog
-Remove search suggestions, add auto wild card
-Check lunr query parser
-Just add wildcard to lunr search :)
-Check timer digit color
 Add check for update button
-Game view has no theme colors
 Clickable shadow on swap symbol
-Thin radial lines are stupid
-Icon hex should be combined with circle? For shadows...
-Black on yellow is too Black.
 Most of the toasts should be dialogs
 Winning dialog should be bold
 On the other hand winning lines should be visible?
-App toolbar could be blue
 Use nextickk instead of settimeout
-Search box needs drop shadow? Or blue toolbar?
 Rules info could have finished game preview :)
 Time travel controls (from FAB to bottom sheet)
 Current toasts: update, verdict, rules.
 Only update should be toast? And with contrast bg?
 Check for update button.
-Remove app icon from menu.
-Remove touch directive
-Disable touch gesture for disabled drawers
 Mark mobile friendly, tablet friends
-- [x] Yellow symbol is good enough for white icon
 Underline only external links
 ```

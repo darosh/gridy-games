@@ -23,8 +23,8 @@ import {
 
 import {
   Ripple,
-  Resize,
-  Touch
+  Resize
+  // Touch
 } from 'vuetify/es5/directives'
 
 Vue.use(Vuetify, {

@@ -44,16 +44,6 @@
       <v-subheader class="pl-3">Application</v-subheader>
     </v-toolbar>
 
-    <div
-      class="text-xs-center"
-      style="margin: 0 0 16px 0">
-      <img
-        class="gpu"
-        src="static/img/vector/icon-web.svg"
-        alt="Logo"
-        width="112">
-    </div>
-
     <div class="mx-3 mb-3">
       <v-layout
         v-for="m in meta"

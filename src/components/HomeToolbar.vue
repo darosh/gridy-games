@@ -19,16 +19,13 @@
       v-if="!Shared.searching"
       class="hidden-xs-only">Gridy Games</v-toolbar-title>
     <v-spacer v-if="!Shared.searching" />
-    <v-select
+    <v-text-field
       v-if="Shared.searching"
       v-model="Shared.search"
-      :items="Shared.words"
-      :search-input.sync="input"
       :class="this.$store.state.dark ? 'grey darken-1' : 'white'"
       :append-icon-cb="() => {Shared.searching = !Shared.searching}"
       :loading="Shared.loading"
       label="Search"
-      combobox
       class="mx-3"
       prepend-icon="search"
       append-icon="close"
@@ -36,7 +33,6 @@
       spellcheck="false"
       autocomplete
       solo
-      flat
       hide-details
       single-line />
     <v-btn
@@ -77,9 +73,6 @@ export default {
     }
   },
   watch: {
-    'input': function (n, o) {
-      this.updateSearch(this.input || Shared.search)
-    },
     'Shared.search': function () {
       this.updateSearch(Shared.search)
     },
@@ -92,8 +85,7 @@ export default {
   methods: {
     updateSearch (value, oldValue) {
       Shared.loading = true
-      search(value).then(({ items, words }) => {
-        Shared.words = words
+      search(value).then(({ items }) => {
         Shared.items = items
         Shared.loading = false
       })
