@@ -37,6 +37,8 @@
 - [ ] smarter store getters generator? global mixin?
 
 ## Done
+- [x] Check for update button.
+- [x] Storage versioning
 - [x] Remove search suggestions, add auto wild card
 - [x] Check lunr query parser
 - [x] Just add wildcard to lunr search :)
@@ -142,10 +144,8 @@
 
 ```
 Restart dialog longer
-Storage versioning
 Better verdict message
 Try verdict dialog
-Add check for update button
 Clickable shadow on swap symbol
 Most of the toasts should be dialogs
 Winning dialog should be bold
@@ -155,7 +155,6 @@ Rules info could have finished game preview :)
 Time travel controls (from FAB to bottom sheet)
 Current toasts: update, verdict, rules.
 Only update should be toast? And with contrast bg?
-Check for update button.
 Mark mobile friendly, tablet friends
 Underline only external links
 ```

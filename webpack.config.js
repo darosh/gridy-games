@@ -96,6 +96,7 @@ const config = {
         NODE_ENV: '"' + NODE_ENV + '"'
       },
       'process.APP_VERSION': JSON.stringify(require('./package').version),
+      'process.APP_STORAGE_VERSION': JSON.stringify(require('./package').storageVersion),
       'process.APP_BUILD': JSON.stringify(new Date().toISOString()),
       'process.APP_DEPENDENCIES': JSON.stringify(deps())
     }),

@@ -66,6 +66,9 @@ import { Shared } from '../services/shared'
 import { search } from '../worker/search'
 
 export default {
+  components: {
+    VTextField: () => import('vuetify/es5/components/VTextField')
+  },
   data () {
     return {
       Shared,
