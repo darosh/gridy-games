@@ -172,8 +172,9 @@ export default {
     'game.moves.length': function () {
       this.updateStones()
     },
-    'game.winner': function (value) {
+    'game.winner': {immediate: true, handler (value) {
       this.winning = value && this.game.winning ? this.game.winning() : null
+    }
     }
   },
   mounted () {

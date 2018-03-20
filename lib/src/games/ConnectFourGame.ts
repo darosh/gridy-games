@@ -11,6 +11,7 @@ export class ConnectFourGame extends ConnectGameBase {
   public static alias = ["Captain's Mistress",
   "Four Up", "Plot Four", "Find Four", "Four in a Row", "Four in a Line", "Gravitrips"];
   public static rules: string[] = ["Connect 4"];
+  public static sample = "c1, d1, c2, e1, b1, f1, g1, d2, d3, c3, e2, e3, e4";
 
   public landscape = true;
 
