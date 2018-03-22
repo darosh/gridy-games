@@ -10,7 +10,7 @@
         :class="{[theme]: true}"
         class="text-xs-center mb-2">
         <div
-          :class="{['player-' + game.winner]: true}"
+          :class="{['player-' + game.winner]: true, [verdictIcon === -1 ? 'shift' : 'shake']: true}"
           class="d-inline-block relative player"
           style="height: 120px; width: 120px">
           <svg
@@ -111,5 +111,37 @@ export default {
 
 .absolute {
   position: absolute;
+}
+
+.shake {
+  animation: shake-animation 1s ease-in-out infinite;
+}
+
+@keyframes shake-animation {
+  0% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(-15deg);
+  }
+}
+
+.shift {
+  animation: shift-animation 1s ease-in-out infinite;
+}
+
+@keyframes shift-animation {
+  0% {
+    transform: translate(-16px);
+  }
+  50% {
+    transform: translate(16px);
+  }
+  100% {
+    transform: translate(-16px);
+  }
 }
 </style>
