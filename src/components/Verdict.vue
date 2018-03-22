@@ -114,34 +114,28 @@ export default {
 }
 
 .shake {
-  animation: shake-animation 1s ease-in-out infinite;
+  animation: shake-animation alternate 0.6s ease-in-out infinite;
 }
 
 @keyframes shake-animation {
   0% {
     transform: rotate(-15deg);
   }
-  50% {
-    transform: rotate(15deg);
-  }
   100% {
-    transform: rotate(-15deg);
+    transform: rotate(15deg);
   }
 }
 
 .shift {
-  animation: shift-animation 1s ease-in-out infinite;
+  animation: shift-animation alternate 0.6s ease-in-out infinite;
 }
 
 @keyframes shift-animation {
   0% {
     transform: translate(-16px);
   }
-  50% {
-    transform: translate(16px);
-  }
   100% {
-    transform: translate(-16px);
+    transform: translate(16px);
   }
 }
 </style>
