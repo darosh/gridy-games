@@ -34,8 +34,20 @@
 - [ ] remove transitions on resize
 - [ ] fix g-poly-line resize
 - [ ] smarter store getters generator? global mixin?
+- [ ] Time travel controls (from FAB to bottom sheet)
+- [ ] Mark mobile friendly, tablet friends
 
 ## Done
+- [x] Restart dialog longer
+- [x] Better verdict message
+- [x] Try verdict dialog
+- [x] Only update should be toast?
+- [x] IGNORED: And with contrast bg?
+- [x] IGNORED: Clickable shadow on swap symbol
+- [x] Most of the toasts should be dialogs
+- [x] Winning dialog should be bold
+- [x] IGNORED: On the other hand winning lines should be visible?
+- [x] Rules info could have finished game preview :)
 - [x] Use nextick instead of settimeout
 - [x] Underline only external links
 - [x] check setTimeouts, intervals vs destroy etc... use clearTimeout
@@ -141,20 +153,3 @@
 ## Done
 - [x] add triangle to icon
 - [x] app icon
-
-# IDEAS
-
-```
-Restart dialog longer
-Better verdict message
-Try verdict dialog
-Clickable shadow on swap symbol
-Most of the toasts should be dialogs
-Winning dialog should be bold
-On the other hand winning lines should be visible?
-Rules info could have finished game preview :)
-Time travel controls (from FAB to bottom sheet)
-Current toasts: update, verdict, rules.
-Only update should be toast? And with contrast bg?
-Mark mobile friendly, tablet friends
-```
