@@ -5,6 +5,19 @@ export default {
     verdictIcon () {
       return this.game.winner ? (this.game.winner > 0 ? 1 : -1) : null
     },
+    verdictAnimation () {
+      const h1 = this.human[1]
+      const h2 = this.human[2]
+
+      if (this.game.winner === -1) {
+        return 'shift'
+      } else if ((h1 && !h2 && this.game.winner === 1) ||
+      (!h1 && h2 && this.game.winner === 2)) {
+        return 'jump'
+      } else {
+        return 'shake'
+      }
+    },
     verdict () {
       const h1 = this.human[1]
       const h2 = this.human[2]

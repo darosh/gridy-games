@@ -10,7 +10,7 @@
         :class="{[theme]: true}"
         class="text-xs-center mb-2">
         <div
-          :class="{['player-' + game.winner]: true, [verdictIcon === -1 ? 'shift' : 'shake']: true}"
+          :class="{['player-' + game.winner]: true, [verdictAnimation]: true}"
           class="d-inline-block relative player"
           style="height: 120px; width: 120px">
           <svg
@@ -136,6 +136,19 @@ export default {
   }
   100% {
     transform: translate(16px);
+  }
+}
+
+.jump {
+  animation: jump-animation alternate 0.3s ease-out infinite;
+}
+
+@keyframes jump-animation {
+  0% {
+    transform: translateY(12px);
+  }
+  100% {
+    transform: translateY(-12px);
   }
 }
 </style>
