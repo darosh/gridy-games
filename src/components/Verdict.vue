@@ -2,7 +2,7 @@
   <v-dialog
     :value="value"
     max-width="288px">
-    <v-card ref="dlg">
+    <v-card ref="dlg" v-if="game.winner">
       <v-card-title>
         <span class="title pa-2">{{ verdict }}</span>
       </v-card-title>
