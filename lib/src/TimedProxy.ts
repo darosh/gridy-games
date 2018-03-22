@@ -63,7 +63,7 @@ export class TimedProxy implements IGame, IGridGame {
   public move(m: any): void {
     this.game.move(m);
 
-    if (!this.game.winner) {
+    if (!this.game.winner && this.game.moves[this.game.moves.length - 1]) {
       this.start();
     } else {
       this.stop();

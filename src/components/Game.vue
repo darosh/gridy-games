@@ -112,6 +112,25 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <v-dialog
+      :value="passConfirm"
+      max-width="280px"
+      persistent>
+      <v-card>
+        <v-card-title>
+          <span class="title pa-2">No moves available</span>
+        </v-card-title>
+        <v-card-actions>
+          <v-spacer/>
+          <v-btn
+            flat
+            style="min-width: 0"
+            @click="game.start(); passConfirm = false">Pass</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
   </div>
 </template>
 
@@ -160,7 +179,8 @@ export default {
       showVerdict: false,
       rules: false,
       showRules: true,
-      rulesText: true
+      rulesText: true,
+      passConfirm: false
     }
   },
   computed: {
@@ -179,6 +199,11 @@ export default {
       if (value) {
         this.showVerdict = true
         this.update()
+      }
+    },
+    'game.moves.length': function (value) {
+      if(value && this.hotSeat && !this.game.moves[value - 1]) {
+        this.passConfirm = true
       }
     },
     '$store.state.player': {

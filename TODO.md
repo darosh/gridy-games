@@ -32,14 +32,14 @@
 
 - [ ] fix robot workers, invalidate disposed workers
 - [ ] disable human click during robot turn
-- [ ] signal pass?
-- [ ] pass dialog?
-- [ ] reset timer on pass?
 - [ ] fix undo
 - [ ] remove transitions on resize
 - [ ] fix g-poly-line resize
 
 ## Done
+- [x] IGNORED: signal pass?
+- [x] pass dialog?
+- [x] reset/stop timer on pass?
 - [x] gomoku winning line inverted contract color style
 - [x] better coord text color
 - [x] use theme enums
