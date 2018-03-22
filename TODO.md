@@ -23,14 +23,12 @@
 - [ ] fix robot workers, invalidate disposed workers
 - [ ] disable human click during robot turn
 - [ ] link to type
-- [ ] better coord text color
 - [ ] signal pass?
 - [ ] pass dialog?
 - [ ] reset timer on pass?
 - [ ] fix undo
 - [ ] negative score minus filter
 - [ ] move constants to Config
-- [ ] use theme enums
 - [ ] remove transitions on resize
 - [ ] fix g-poly-line resize
 - [ ] smarter store getters generator? global mixin?
@@ -38,6 +36,8 @@
 - [ ] Mark mobile friendly, tablet friends
 
 ## Done
+- [x] better coord text color
+- [x] use theme enums
 - [x] Restart dialog longer
 - [x] Better verdict message
 - [x] Try verdict dialog
