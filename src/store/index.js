@@ -10,7 +10,8 @@ const { state, plugin: storagePlugin } = storage(
   {
     sound: false,
     dark: true,
-    vibration: true
+    vibration: true,
+    rules: true
   },
   {
     player: defaultPlayers(),
@@ -51,7 +52,8 @@ const $store = new Vuex.Store({
     timer: (state, payload) => (state.timer = payload),
     update: (state, payload) => (state.update = payload),
     registration: (state, payload) => (state.registration = payload),
-    player: (state, payload) => (state.player = payload)
+    player: (state, payload) => (state.player = payload),
+    rules: (state, payload) => (state.rules = payload)
   },
   actions: {},
   strict: debug

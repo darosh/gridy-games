@@ -121,6 +121,18 @@
               color="light-blue" />
           </div>
         </v-layout>
+        <v-layout
+          row
+          mx-3
+          align-center>
+          <v-flex class="body-1">Rules</v-flex>
+          <div>
+            <v-switch
+              v-model="useRules"
+              hide-details
+              color="light-blue" />
+          </div>
+        </v-layout>
       </div>
     </div>
     <v-divider/>
@@ -276,6 +288,14 @@ export default {
       },
       set (value) {
         this.$store.commit('coords', value)
+      }
+    },
+    useRules: {
+      get () {
+        return this.$store.state.rules
+      },
+      set (value) {
+        this.$store.commit('rules', value)
       }
     }
   },

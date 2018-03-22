@@ -234,7 +234,7 @@ export default {
       this.theme = theme(Games[g])
       this.initTimer()
 
-      if (this.showRules && !this.robotMatch) {
+      if (this.showRules && !this.robotMatch && this.$store.state.rules) {
         this.showRules = false
 
         setTimeout(() => {
