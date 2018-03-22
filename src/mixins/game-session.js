@@ -16,6 +16,9 @@ export default {
     },
     robotMatch () {
       return !this.human[1] && !this.human[2]
+    },
+    other () {
+      return 3 - this.game.player
     }
   }
 }
