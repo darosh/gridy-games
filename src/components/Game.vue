@@ -76,21 +76,13 @@
         <v-icon class="white--text">refresh</v-icon>
       </v-btn>
     </v-speed-dial>
-    <v-snackbar
-      v-model="snackbar"
-      :timeout="12000"
-      class="verdict-snack"
-      color="grey darken-3"
-      auto-height
-      top>
-      <v-flex @click="snackbar = false">
-        <span v-if="game.winner">{{ verdict }}</span>
-      </v-flex>
-      <v-btn
-        flat
-        color="light-blue"
-        @click.native="snackbar = false; reset()">Restart</v-btn>
-    </v-snackbar>
+
+    <g-verdict
+      v-model="showVerdict"
+      :reset="reset"
+      :game="game"
+      :theme="theme"/>
+
     <v-dialog
       :value="rules"
       max-width="280px">
@@ -109,7 +101,7 @@
             :game="sample"
             :frame="[240,164]"
             :margin="4"
-            class="preview d-inline-block"/>
+            class="preview d-inline-block" />
         </div>
         <v-card-actions>
           <v-spacer/>
@@ -152,6 +144,7 @@ export default {
   components: {
     GBoard: () => import('./Board'),
     GPlayerDivider: () => import('./PlayerDivider'),
+    GVerdict: () => import('./Verdict'),
     VDialog: () => import('vuetify/es5/components/VDialog')
   },
   mixins: [gameResize, gameSession, playerSwitch],
@@ -164,7 +157,7 @@ export default {
       working: false,
       robotPlayer: {},
       theme: null,
-      snackbar: false,
+      showVerdict: false,
       rules: false,
       showRules: true,
       rulesText: true
@@ -184,7 +177,7 @@ export default {
     },
     'game.winner': function (value) {
       if (value) {
-        this.snackbar = true
+        this.showVerdict = true
         this.update()
       }
     },
@@ -241,7 +234,7 @@ export default {
       this.theme = theme(Games[g])
       this.initTimer()
 
-      if (this.showRules) {
+      if (this.showRules && !this.robotMatch) {
         this.showRules = false
 
         setTimeout(() => {
@@ -336,14 +329,14 @@ export default {
       initActions(this.game, this.game.possible())
     },
     undo () {
-      this.snackbar = false
+      this.showVerdict = false
       this.game.undo()
       this.game.undo()
       this.update()
     },
     reset () {
       this.fab = false
-      this.snackbar = false
+      this.showVerdict = false
       this.initGame()
       this.onResize()
       this.initRobots()
@@ -361,9 +354,5 @@ export default {
 
 .mt-1-5 {
   margin-top: 5px;
-}
-
-.verdict-snack {
-  padding-top: 62px;
 }
 </style>

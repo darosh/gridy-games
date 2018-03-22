@@ -4,7 +4,7 @@
     class="relative text-xs-center"
     style="width: 64px; height: 48px">
     <g-player-divider
-      :value="false"
+      :value="game.winner === -1 ? '0' : '-1'"
       class="player-divider d-inline-block"
       style="margin-top: 19px" />
     <div
@@ -55,10 +55,10 @@
               v-else-if="game.winner > 0 && game.winner === value"
               key="d"
               class="player-status">mood</v-icon>
-            <v-icon
+            <div
               v-else-if="game.winner === -1"
               key="e"
-              class="player-draw-status">sentiment_very_dissatisfied</v-icon>
+              class="player-draw-status"/>
             <v-icon
               v-else
               key="c"

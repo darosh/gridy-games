@@ -1,8 +1,9 @@
 <template>
   <svg
-    :class="'divider-' + (value ? divider : '-1')"
+    :class="'divider-' + (value || divider)"
     width="24"
     height="24"
+    viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
     version="1.1">
     <line
@@ -26,7 +27,7 @@ import playerDivider from '../mixins/player-divider'
 export default {
   mixins: [playerDivider],
   props: {
-    value: { type: Boolean, default: true }
+    value: { type: String, default: '' }
   }
 }
 </script>

@@ -16,28 +16,6 @@ export default {
     },
     robotMatch () {
       return !this.human[1] && !this.human[2]
-    },
-    verdict () {
-      const h1 = this.human[1]
-      const h2 = this.human[2]
-
-      if (
-        (h1 && !h2 && this.game.winner === 1) ||
-        (!h1 && h2 && this.game.winner === 2)
-      ) {
-        return 'You won!'
-      } else if (
-        (h1 && !h2 && this.game.winner === 2) ||
-        (!h1 && h2 && this.game.winner === 1)
-      ) {
-        return 'You lost'
-      } else if (h1 !== h2 && this.game.winner === -1) {
-        return `It's draw`
-      } else if (h1 && h2 && this.expired) {
-        return 'Time out'
-      } else {
-        return 'Game over!'
-      }
     }
   }
 }
