@@ -89,6 +89,8 @@
         </g>
         <g-poly-line
           v-if="winning"
+          :class="'winner-' + game.winner"
+          :style="{'stroke-width': Math.round((game.grid.radius * game.grid.scale * 0.85 - round * 2) * .5)}"
           :tiles="winning"
           :center="center"
           :size="game.grid.scale"
@@ -172,9 +174,10 @@ export default {
     'game.moves.length': function () {
       this.updateStones()
     },
-    'game.winner': {immediate: true, handler (value) {
-      this.winning = value && this.game.winning ? this.game.winning() : null
-    }
+    'game.winner': {immediate: true,
+      handler (value) {
+        this.winning = value && this.game.winning ? this.game.winning() : null
+      }
     }
   },
   mounted () {

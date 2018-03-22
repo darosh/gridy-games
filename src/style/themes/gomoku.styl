@@ -19,9 +19,14 @@ gomokuTheme = {
 
 colors(gomokuTheme, '.gomoku-theme')
 
+.preview .gomoku-theme polyline
+  stroke-width: 2
+
 .gomoku-theme
-  polyline
-    stroke: rgba(127,127,127,0.78)
+  polyline.winner-1
+    stroke: gomokuTheme.t2
+  polyline.winner-2
+    stroke: gomokuTheme.t1
 
   .theme--dark polyline
     stroke: rgba(127,127,127,0.78)

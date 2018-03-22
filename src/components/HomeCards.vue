@@ -150,8 +150,8 @@ export default {
     }, 0)
   },
   methods: {
-    cancelTimeout() {
-      if(timeout) {
+    cancelTimeout () {
+      if (timeout) {
         clearTimeout(timeout)
         timeout = null
       }

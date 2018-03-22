@@ -15,7 +15,7 @@ export { FourInARow11Game } from "./FourInARow11Game";
 export { CircularFourInARowGame } from "./CircularFourInARow";
 
 export { GomokuGame } from "./GomokuGame";
-export { Gomoku7Game } from "./Gomoku7Game";
+// export { Gomoku7Game } from "./Gomoku7Game";
 export { Gomoku9Game } from "./Gomoku9Game";
 export { Gomoku11Game } from "./Gomoku11Game";
 export { HexGomokuGame } from "./HexGomokuGame";
