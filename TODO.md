@@ -14,28 +14,33 @@
 
 # UI
 
+## Todo
+
 - [ ] chess pieces
 - [ ] draughts pieces
 - [ ] show ai stats
 - [ ] flip reversi animation
-- [ ] gomoku winning line inverted contract color style
 - [ ] open image
-- [ ] fix robot workers, invalidate disposed workers
-- [ ] disable human click during robot turn
 - [ ] link to type
-- [ ] signal pass?
-- [ ] pass dialog?
-- [ ] reset timer on pass?
-- [ ] fix undo
 - [ ] negative score minus filter
 - [ ] move constants to Config
-- [ ] remove transitions on resize
-- [ ] fix g-poly-line resize
 - [ ] smarter store getters generator? global mixin?
 - [ ] Time travel controls (from FAB to bottom sheet)
 - [ ] Mark mobile friendly, tablet friends
 
+## Bugs
+
+- [ ] fix robot workers, invalidate disposed workers
+- [ ] disable human click during robot turn
+- [ ] signal pass?
+- [ ] pass dialog?
+- [ ] reset timer on pass?
+- [ ] fix undo
+- [ ] remove transitions on resize
+- [ ] fix g-poly-line resize
+
 ## Done
+- [x] gomoku winning line inverted contract color style
 - [x] better coord text color
 - [x] use theme enums
 - [x] Restart dialog longer
