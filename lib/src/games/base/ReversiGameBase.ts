@@ -1,6 +1,7 @@
 import { AnyTile, IGrid, link, Position, toMap } from "gridy";
 import { IGame } from "../../IGame";
 import { Move } from "../../Move";
+import { Theme } from "../../Theme";
 import { other, parsePosition, stringifyPosition } from "../../utils";
 
 export interface IState {
@@ -8,6 +9,8 @@ export interface IState {
 }
 
 export class ReversiGameBase implements IGame {
+  public static theme = Theme.Reversi;
+
   public grid: IGrid<AnyTile>;
   public player = 1;
   public moves: Move[] = [];

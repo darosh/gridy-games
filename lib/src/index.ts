@@ -17,3 +17,4 @@ export { FIELDS, reset, stringify, table, update } from "./utils";
 export * from "./utils/actions";
 
 export { Info } from "./Info";
+export { Theme, Stones, StoneNames } from "./Theme";

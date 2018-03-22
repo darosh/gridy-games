@@ -3,8 +3,10 @@ import {
 } from "gridy";
 
 import { IGame } from "../../IGame";
+import { Theme } from "../../Theme";
 
 export class CatchTheHareGameBase implements IGame {
+  public static theme = Theme.Qirkat;
   public static wip: boolean = true;
 
   public moves: any[] = [];

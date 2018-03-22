@@ -3,6 +3,7 @@ import {
 } from "gridy";
 
 import { IGame } from "../../IGame";
+import { Theme } from "../../Theme";
 
 function unlink(tile: any, remove = false) {
   for (const k of tile.links.keys()) {
@@ -18,6 +19,7 @@ function unlink(tile: any, remove = false) {
 }
 
 export class MorrisGameBase implements IGame {
+  public static theme = Theme.Mills;
   public static wip: boolean = true;
 
   public moves: any[] = [];

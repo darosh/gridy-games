@@ -1,9 +1,11 @@
 import { Rectangular8Tile, RectangularGrid, Shape } from "gridy";
 import { Move } from "../Move";
+import { Theme } from "../Theme";
 import { ConnectGameBase } from "./base/ConnectGameBase";
 
 export class ConnectFourGame extends ConnectGameBase {
   public static title = "Connect Four";
+  public static theme = Theme.Plastic;
   public static type = "Connect";
   public static authors = ["Howard Wexler", "Ned Strongin"];
   public static created = 1974;

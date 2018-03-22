@@ -1,10 +1,12 @@
 import { AnyTile, Directions, IGrid, link, Position, toMap } from "gridy";
 import { Move } from "../..";
 import { IGame } from "../../IGame";
+import { Theme } from "../../Theme";
 import { other, parsePositions, stringifyPositions } from "../../utils";
 import { connections, winning } from "../evaluate/connect";
 
 export class TacTickleGameBase implements IGame {
+  public static theme = Theme.TacTickle;
   public static move: boolean = true;
 
   public moves: any[] = [];

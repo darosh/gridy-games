@@ -1,8 +1,10 @@
 import { Rectangular8Tile, RectangularGrid, Shape } from "gridy";
+import { Theme } from "../Theme";
 import { ConnectGameBase } from "./base/ConnectGameBase";
 
 export class TicTacToeGame extends ConnectGameBase {
   public static title = "Tic Tac Toe";
+  public static theme = Theme.Hex;
   public static type = "Connect";
   public static aliases = ["Noughts and Crosses", "Xs and Os", "Exy-ozys"];
   public static created = -1300;

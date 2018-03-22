@@ -1,7 +1,9 @@
 import { AnyTile, IGrid, Position, toMap } from "gridy";
 import { IGame } from "../../IGame";
+import { Theme } from "../../Theme";
 
 export class CheckersGameBase implements IGame {
+  public static theme = Theme.Checkers;
   public static wip: boolean = true;
 
   public moves: any[] = [];

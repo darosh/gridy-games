@@ -1,10 +1,13 @@
 import { AnyTile, IGrid, ITile, link, Search, toArray, toMap } from "gridy";
 import { IGame } from "../../IGame";
 import { Move } from "../../Move";
+import { Theme } from "../../Theme";
 import { other, parsePosition, parseRecord, stringifyPosition } from "../../utils";
 import { connections, evaluateLines, evaluateLinked, winning } from "../evaluate/connect";
 
 export class ConnectGameBase implements IGame {
+  public static theme = Theme.Gomoku;
+
   public grid: IGrid<AnyTile>;
   public min: number;
   public moves: Move[] = [];
