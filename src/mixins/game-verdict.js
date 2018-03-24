@@ -6,8 +6,8 @@ export default {
       return this.game.winner ? (this.game.winner > 0 ? 1 : -1) : null
     },
     verdictAnimation () {
-      const h1 = this.human[1]
-      const h2 = this.human[2]
+      const h1 = this.sessionHuman[1]
+      const h2 = this.sessionHuman[2]
 
       if (this.game.winner === -1) {
         return 'shift'
@@ -19,8 +19,8 @@ export default {
       }
     },
     verdict () {
-      const h1 = this.human[1]
-      const h2 = this.human[2]
+      const h1 = this.sessionHuman[1]
+      const h2 = this.sessionHuman[2]
 
       if (
         (h1 && !h2 && this.game.winner === 1) ||

@@ -2,22 +2,22 @@ import { isHuman } from '../services/players'
 
 export default {
   computed: {
-    human: function () {
+    sessionHuman: function () {
       return [undefined, isHuman(this.$store.state.player[1]), isHuman(this.$store.state.player[2])]
     },
-    waiting () {
-      return !this.human[this.game.player] && !this.game.winner
+    sessionWaiting () {
+      return !this.sessionHuman[this.game.player] && !this.game.winner
     },
-    canSwitch () {
-      return !this.game.moves.length && this.human[1] && !this.human[2]
+    sessionCanSwitch () {
+      return !this.game.moves.length && this.sessionHuman[1] && !this.sessionHuman[2]
     },
-    hotSeat () {
-      return this.human[1] && this.human[2]
+    sessionHotSeat () {
+      return this.sessionHuman[1] && this.sessionHuman[2]
     },
-    robotMatch () {
-      return !this.human[1] && !this.human[2]
+    sessionRobotMatch () {
+      return !this.sessionHuman[1] && !this.sessionHuman[2]
     },
-    other () {
+    sessionOther () {
       return 3 - this.game.player
     }
   }

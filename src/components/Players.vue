@@ -44,7 +44,7 @@
               :key="game.counter"
               class="player-status">timer_off</v-icon>
             <div
-              v-else-if="waiting"
+              v-else-if="sessionWaiting"
               key="b"
               style="transform: none">
               <div>
@@ -68,11 +68,11 @@
       </div>
     </div>
     <div
-      v-show="canSwitch || game.expired"
+      v-show="sessionCanSwitch || game.expired"
       :style="{top: 0, transform: `translate3d(${-position}px,0,0)`}"
-      :class="{['player-' + other]: true, clickable: canSwitch}"
+      :class="{['player-' + other]: true, clickable: sessionCanSwitch}"
       class="absolute player"
-      @click="canSwitch && playerSwitch()">
+      @click="sessionCanSwitch && playerSwitch()">
       <div>
         <svg
           :class="{[theme]: true}"
@@ -87,7 +87,7 @@
         </svg>
         <div class="absolute info-position">
           <v-icon
-            v-if="canSwitch"
+            v-if="sessionCanSwitch"
             class="player-status">swap_horiz</v-icon>
           <v-icon v-else-if="game.expired">timer_off</v-icon>
         </div>

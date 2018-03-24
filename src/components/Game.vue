@@ -17,7 +17,7 @@
           :margin="margin"
           :move="move"
           :vertical="vertical"
-          :waiting="waiting"
+          :waiting="sessionWaiting"
           interactive
           centered/>
       </div>
@@ -125,7 +125,7 @@
           :class="{[theme]: true}"
           class="text-xs-center">
           <div
-            :class="{['player-' + other]: true}"
+            :class="{['player-' + sessionOther]: true}"
             class="d-inline-block relative player"
             style="height: 120px; width: 120px">
             <svg
@@ -133,7 +133,7 @@
               width="120"
               class="d-block absolute">
               <circle
-                :class="'symbol-' + other"
+                :class="'symbol-' + sessionOther"
                 cx="60"
                 cy="60"
                 r="60" />
@@ -222,7 +222,7 @@ export default {
       }
     },
     'game.moves.length': function (value) {
-      if (value && this.hotSeat && !this.game.moves[value - 1]) {
+      if (value && this.sessionHotSeat && !this.game.moves[value - 1]) {
         this.passConfirm = true
       }
     },
@@ -264,10 +264,10 @@ export default {
   },
   methods: {
     initTimer () {
-      this.game.limit = this.hotSeat ? this.$store.state.timer : 0
+      this.game.limit = this.sessionHotSeat ? this.$store.state.timer : 0
     },
     initGame () {
-      if (!this.human[1] && this.human[2]) {
+      if (!this.sessionHuman[1] && this.sessionHuman[2]) {
         this.playerSwitch()
       }
 
@@ -279,7 +279,7 @@ export default {
       this.theme = theme(Games[g])
       this.initTimer()
 
-      if (this.showRules && !this.robotMatch && this.$store.state.rules) {
+      if (this.showRules && !this.sessionRobotMatch && this.$store.state.rules) {
         this.showRules = false
 
         setTimeout(() => {
@@ -320,7 +320,7 @@ export default {
         }
       }
 
-      if (this.$store.state.vibration && !this.robotMatch) {
+      if (this.$store.state.vibration && !this.sessionRobotMatch) {
         kickVibration(
           50,
           this.$store.state.sound ? LATENCY * latency.latency : 0
