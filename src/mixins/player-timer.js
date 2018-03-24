@@ -5,7 +5,7 @@ export default {
   data () {
     return {
       timer: -1,
-      transition: 0
+      timerTransition: 0
     }
   },
   watch: {
@@ -30,18 +30,18 @@ export default {
   methods: {
     updateTimer () {
       if (this.game.pending && this.value === this.game.player) {
-        this.transition = 0
+        this.timerTransition = 0
         this.timer = -1
 
         Vue.nextTick(() => {
           requestAnimationFrame(() => {
             this.timer = 0
-            this.transition = this.game.limit
+            this.timerTransition = this.game.limit
           })
         })
       } else {
         this.timer = -1
-        this.transition = 0
+        this.timerTransition = 0
       }
     }
   }

@@ -268,7 +268,7 @@ export default {
     },
     initGame () {
       if (!this.human[1] && this.human[2]) {
-        this.switchPlayer()
+        this.playerSwitch()
       }
 
       const g = this.$route.params.id + 'Game'

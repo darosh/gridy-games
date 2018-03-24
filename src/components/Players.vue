@@ -23,7 +23,7 @@
             cy="31"
             r="16.5" />
           <circle
-            :style="{'stroke-dashoffset': timer >= 0 ? timer : OFFSET, transition: `stroke-dashoffset ${transition}ms linear`}"
+            :style="{'stroke-dashoffset': timer >= 0 ? timer : OFFSET, transition: `stroke-dashoffset ${timerTransition}ms linear`}"
             class="player-timer"
             cx="31"
             cy="31"
@@ -72,7 +72,7 @@
       :style="{top: 0, transform: `translate3d(${-position}px,0,0)`}"
       :class="{['player-' + other]: true, clickable: canSwitch}"
       class="absolute player"
-      @click="canSwitch && switchPlayer()">
+      @click="canSwitch && playerSwitch()">
       <div>
         <svg
           :class="{[theme]: true}"

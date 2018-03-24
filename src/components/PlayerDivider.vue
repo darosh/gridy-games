@@ -1,6 +1,6 @@
 <template>
   <svg
-    :class="'divider-' + (value || divider)"
+    :class="'divider-' + (value || playerDivider)"
     class="player-divider"
     width="24"
     height="24"
