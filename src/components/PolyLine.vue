@@ -68,7 +68,9 @@ export default {
 
       const lengths = centers.map(t => {
         prev = prev || t
-        length += Math.sqrt(Math.pow(prev.x - t.x, 2) + Math.pow(prev.y - t.y, 2))
+        length += Math.sqrt(
+          Math.pow(prev.x - t.x, 2) + Math.pow(prev.y - t.y, 2)
+        )
         prev = t
         return length
       })
@@ -89,7 +91,6 @@ export default {
       }
 
       const scales = new Map(entries)
-      this.fixed = [centers[0]]
 
       start()
 
@@ -100,6 +101,8 @@ export default {
           const to = scale(value)
           const part = scales.get(to)
           const index = centers.indexOf(to)
+
+          this.fixed = [centers[0]]
 
           while (this.fixed.length < index) {
             this.fixed.push(centers[this.fixed.length])

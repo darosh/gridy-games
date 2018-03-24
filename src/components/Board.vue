@@ -81,7 +81,7 @@
             :key="'s' + k"
             :style="{transform: 'translate(' + center(t.tile, 'px') + ')'}"
             :r="game.grid.radius * game.grid.scale * 0.85 - round * 2"
-            :class="{animate: interactive, clickable: t.tile.highlighted && !waiting, ['token-' + t.data]: true}"
+            :class="{animate: interactive && !resizing, clickable: t.tile.highlighted && !waiting, ['token-' + t.data]: true}"
             class="stone"
             cx="0"
             cy="0"

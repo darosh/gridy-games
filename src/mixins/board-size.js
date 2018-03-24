@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { scaleToFit } from '../services/utils'
 
 export default {
@@ -16,7 +17,8 @@ export default {
       // game: null,
       translate: [],
       size: [],
-      rect: []
+      rect: [],
+      resizing: false
     }
   },
   methods: {
@@ -90,7 +92,14 @@ export default {
   watch: {
     frame: {
       handler: function () {
+        this.resizing = true
         this.frameUpdate()
+
+        Vue.nextTick(() => {
+          setTimeout(() => {
+            this.resizing = false
+          }, 200)
+        })
       },
       immediate: true
     }

@@ -33,11 +33,11 @@
 - [ ] fix robot workers, invalidate disposed workers
 - [ ] disable human click during robot turn
 - [ ] fix undo
-- [ ] remove transitions on resize
-- [ ] fix g-poly-line resize
 - [ ] deleting moves should not start timer?
 
 ## Done
+- [x] remove transitions on resize
+- [x] fix g-poly-line resize
 - [x] IGNORED: signal pass?
 - [x] pass dialog?
 - [x] reset/stop timer on pass?
