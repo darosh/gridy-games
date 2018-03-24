@@ -58,9 +58,9 @@ import { titled } from '../filters/titled'
 
 export default {
   components: {
-    GMenu: () => import('./Menu'),
-    GSettings: () => import('./Settings'),
-    GPatterns: () => import('./Patterns')
+    GMenu: () => import('./HomeMenu'),
+    GSettings: () => import('./GameSettings'),
+    GPatterns: () => import('./BoardPatterns')
   },
   data () {
     return {
