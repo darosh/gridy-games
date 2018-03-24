@@ -1,5 +1,6 @@
 import { HexagonalGrid, RadialGrid, RectangularGrid, TriangularGrid } from "gridy";
-import { IGridGameConstructor } from "../IGridGame";
+import { IGame } from "../IGame";
+import { IGridGame, IGridGameConstructor } from "../IGridGame";
 import { initActions } from "./actions";
 
 export const FIELDS = [
@@ -90,29 +91,39 @@ export function table(games: { [name: string]: IGridGameConstructor }, wip = fal
     const m = merge(copy(a), copy(b));
     m.id = id(key);
     m.originalId = originalId ? id(originalId) : undefined;
-    m.instance = new games[key]();
-    m.tiles = m.instance.grid.tiles.length;
 
-    // Object.defineProperty(m, "instance", {
-    //   get() {
-    //     return new games[key]();
-    //   },
-    // });
+    let instance: IGridGame;
 
-    // Object.defineProperty(m, "tiles", {
-    //   get() {
-    //     return this.instance.grid.tiles.length;
-    //   },
-    // });
+    Object.defineProperty(m, "instance", {
+      get() {
+        if (instance) {
+          return instance;
+        }
+
+        instance = new games[key]();
+        initActions(instance, (instance as any as IGame).possible());
+        return Object.freeze(instance);
+      },
+    });
+
+    Object.defineProperty(m, "tiles", {
+      get() {
+        return m.instance.grid.tiles.length;
+      },
+    });
+
+    Object.defineProperty(m, "grid", {
+      get() {
+        return GRIDS.get(m.instance.grid.constructor);
+      },
+    });
 
     m.original = b.title || a.title;
     m.originals.original = !b.title;
     m.link = m.wiki || m.source;
     m.linkText = m.wikiText || m.sourceText;
-    m.grid = GRIDS.get(m.instance.grid.constructor);
     m.wip = a.wip;
-    initActions(m.instance, m.instance.possible());
-    Object.freeze(m.instance);
+
     Object.freeze(m);
     result.push(m);
   }
