@@ -32,7 +32,7 @@
       <v-flex
         class="title text-xs-right"
         style="width: 60px">{{ game.score[1] }}</v-flex>
-      <g-player-divider class="player-divider mx-3 d-block" />
+      <g-player-divider class="mx-3 d-block" />
       <v-flex
         class="title text-xs-left"
         style="width: 60px">{{ game.score[2] }}</v-flex>

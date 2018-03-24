@@ -29,7 +29,7 @@
           <g-player-divider
             v-if="verdictIcon === -1"
             value="0"
-            class="absolute player-divider d-block divider-large" />
+            class="absolute d-block divider-large" />
           <v-icon
             v-else-if="verdictIcon === 1"
             class="absolute player-status icon-large">mood</v-icon>

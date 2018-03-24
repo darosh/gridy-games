@@ -5,7 +5,7 @@
     style="width: 64px; height: 48px">
     <g-player-divider
       :value="game.winner === -1 ? '0' : '-1'"
-      class="player-divider d-inline-block"
+      class="d-inline-block"
       style="margin-top: 19px" />
     <div
       :style="{transition: starting ? 'none' : null, top: 0, transform: `translate(${position}px,0)`}"
@@ -238,15 +238,11 @@ export default {
     transform: rotate(180deg);
   }
 }
-</style>
 
-<style>
-.theme--light .player-divider line,
 .theme--light .player-timer {
   stroke: #848484;
 }
 
-.theme--dark .player-divider line,
 .theme--dark .player-timer {
   stroke: #fff;
 }

@@ -1,6 +1,7 @@
 <template>
   <svg
     :class="'divider-' + (value || divider)"
+    class="player-divider"
     width="24"
     height="24"
     viewBox="0 0 24 24"
@@ -60,5 +61,13 @@ export default {
 
 .divider-2 .l2 {
   transform: rotate(45deg)  translate(-4px, -2px);
+}
+
+.theme--light .player-divider line {
+  stroke: #848484;
+}
+
+.theme--dark .player-divider line {
+  stroke: #fff;
 }
 </style>

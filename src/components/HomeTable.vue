@@ -7,7 +7,7 @@
       :items="Shared.items"
       hide-actions
       disable-initial-sort
-      class="elevation-1 ma-3">
+      class="elevation-1 ma-3 table--fixed">
       <template
         slot="items"
         slot-scope="props">
@@ -83,8 +83,8 @@ export default {
 }
 </script>
 
-<style>
-table {
+<style scoped>
+.table--fixed >>> .table {
   table-layout: fixed !important;
 }
 </style>
