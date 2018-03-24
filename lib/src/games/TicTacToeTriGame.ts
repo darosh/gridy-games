@@ -2,8 +2,8 @@ import { Shape, TriangularGrid } from "gridy";
 import { Theme } from "../Theme";
 import { ConnectGameBase } from "./base/ConnectGameBase";
 
-export class TriTicTacToeGame extends ConnectGameBase {
-  public static title = "Tri Tic Tac Toe";
+export class TicTacToeTriGame extends ConnectGameBase {
+  public static title = "Tic Tac Toe Tri";
   public static theme = Theme.Hex;
   public static type = "Connect";
   public static original = "TicTacToeGame";

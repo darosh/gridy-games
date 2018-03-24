@@ -1,8 +1,8 @@
 import { Shape, TriangularGrid, TriangularTile } from "gridy";
 import { TacTickleGameBase } from "./base/TacTickleGameBase";
 
-export class TriTacTickleGame extends TacTickleGameBase {
-  public static title = "Tri Tac-tickle";
+export class TacTickleTriGame extends TacTickleGameBase {
+  public static title = "Tac-tickle Tri";
   public static type = "Move to Connect";
   public static original = "TacTickleGame";
 

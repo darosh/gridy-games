@@ -1,8 +1,8 @@
 import { Radial8Tile, RadialGrid, Shape } from "gridy";
 import { ConnectGameBase } from "./base/ConnectGameBase";
 
-export class CircularFourInARowGame extends ConnectGameBase {
-  public static title = "Circular Four-in-a-row";
+export class FourInARowRoundGame extends ConnectGameBase {
+  public static title = "Four-in-a-row Round";
   public static type = "Connect";
   public static rules: string[] = ["Connect 4"];
   public static original = "TicTacToeGame";

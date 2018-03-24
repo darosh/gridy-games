@@ -1,8 +1,8 @@
 import { HexagonalGrid, HexagonalTile, normalize, Shape } from "gridy";
 import { TacTickleGameBase } from "./base/TacTickleGameBase";
 
-export class Hex2TacTickleGame extends TacTickleGameBase {
-  public static title = "Hex2 Tac-tickle";
+export class TacTickleHex2Game extends TacTickleGameBase {
+  public static title = "Tac-tickle Hex2";
   public static type = "Move to Connect";
   public static original = "TacTickleGame";
   // tslint:disable-next-line:max-line-length

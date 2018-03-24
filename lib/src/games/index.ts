@@ -1,35 +1,36 @@
 export { TicTacToeGame } from "./TicTacToeGame";
-export { CircularTicTacToeGame } from "./CircularTicTacToeGame";
-export { TriTicTacToeGame } from "./TriTicTacToeGame";
+export { TicTacToeRoundGame } from "./TicTacToeRoundGame";
+export { TicTacToeTriGame } from "./TicTacToeTriGame";
 
 export { TacTickleGame } from "./TacTickleGame";
 export { TacTickle4Game } from "./TacTickle4Game";
-export { HexTacTickleGame } from "./HexTacTickleGame";
-export { Hex2TacTickleGame } from "./Hex2TacTickleGame";
-export { CircularTacTickleGame } from "./CircularTacTickleGame";
-export { TriTacTickleGame } from "./TriTacTickleGame";
+export { TacTickleHexGame } from "./TacTickleHexGame";
+export { TacTickleHex2Game } from "./TacTickleHex2Game";
+export { TacTickleRoundGame } from "./TacTickleRoundGame";
+export { TacTickleTriGame } from "./TacTickleTriGame";
 
 export { ConnectFourGame } from "./ConnectFourGame";
 
 export { FourInARow11Game } from "./FourInARow11Game";
-export { CircularFourInARowGame } from "./CircularFourInARow";
+export { FourInARowRoundGame } from "./FourInARowRoundGame";
 
 export { GomokuGame } from "./GomokuGame";
 // export { Gomoku7Game } from "./Gomoku7Game";
 export { Gomoku9Game } from "./Gomoku9Game";
 export { Gomoku11Game } from "./Gomoku11Game";
-export { HexGomokuGame } from "./HexGomokuGame";
+export { GomokuHexGame } from "./GomokuHexGame";
+
+export { OthelloGame } from "./OthelloGame";
+export { Othello4Game } from "./Othello4Game";
 
 export { ReversiGame } from "./ReversiGame";
 export { Reversi4Game } from "./Reversi4Game";
 export { Reversi6Game } from "./Reversi6Game";
 export { Reversi10Game } from "./Reversi10Game";
 
-export { OthelloGame } from "./OthelloGame";
-export { Othello4Game } from "./Othello4Game";
-
-export { HexReversiGame } from "./HexReversiGame";
-export { HexReversi4Game } from "./HexReversi4Game";
+export { ReversiHexGame } from "./ReversiGameHex";
+export { ReversiHex4Game } from "./ReversiHex4Game";
+export { ReversiHex6Game } from "./ReversiHex6Game";
 
 export { HexGame } from "./HexGame";
 export { Hex5Game } from "./Hex5Game";

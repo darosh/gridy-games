@@ -4,8 +4,8 @@ import { Move } from "../Move";
 import { landscapeHex } from "../utils";
 import { ReversiGameBase } from "./base/ReversiGameBase";
 
-export class HexReversiGame extends ReversiGameBase {
-  public static title = "Hex Reversi";
+export class ReversiHexGame extends ReversiGameBase {
+  public static title = "Reversi Hex";
   public static type = "Reversi";
   public static original = "ReversiGame";
   // tslint:disable-next-line:max-line-length

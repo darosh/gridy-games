@@ -2,8 +2,8 @@ import { Radial8Tile, RadialGrid, Shape } from "gridy";
 import { Theme } from "../Theme";
 import { ConnectGameBase } from "./base/ConnectGameBase";
 
-export class CircularTicTacToeGame extends ConnectGameBase {
-  public static title = "Circular Tic Tac Toe";
+export class TicTacToeRoundGame extends ConnectGameBase {
+  public static title = "Tic Tac Toe Round";
   public static theme = Theme.Hex;
   public static type = "Connect";
   public static original = "TicTacToeGame";
