@@ -35,6 +35,7 @@
 - [ ] fix undo
 - [ ] remove transitions on resize
 - [ ] fix g-poly-line resize
+- [ ] deleting moves should not start timer?
 
 ## Done
 - [x] IGNORED: signal pass?
@@ -154,6 +155,9 @@
 
 - [ ] readme goals
 - [ ] extract css?
+- [ ] remove export defaults
+- [ ] remove ts-loader from webpack
+- [ ] https://vuejs.org/v2/style-guide/
 
 ## Done
 - [x] add triangle to icon

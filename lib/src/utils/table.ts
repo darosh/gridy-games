@@ -92,6 +92,19 @@ export function table(games: { [name: string]: IGridGameConstructor }, wip = fal
     m.originalId = originalId ? id(originalId) : undefined;
     m.instance = new games[key]();
     m.tiles = m.instance.grid.tiles.length;
+
+    // Object.defineProperty(m, "instance", {
+    //   get() {
+    //     return new games[key]();
+    //   },
+    // });
+
+    // Object.defineProperty(m, "tiles", {
+    //   get() {
+    //     return this.instance.grid.tiles.length;
+    //   },
+    // });
+
     m.original = b.title || a.title;
     m.originals.original = !b.title;
     m.link = m.wiki || m.source;
