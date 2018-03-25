@@ -38,18 +38,24 @@ export default {
         this.vertical = ratio > 1 && innerWidth < innerHeight
       }
 
-      if (this.vertical) {
-        this.frame = [innerHeight - 64 - 16, innerWidth - 32]
-      } else {
-        if (innerHeight < 800) {
-          this.frame = [innerWidth - 32, innerHeight - 64 - 16]
-        } else {
-          this.frame = [innerWidth - 32, innerHeight - 64 * 2]
-        }
-      }
+      this.frame = getFrame(this.vertical, innerHeight, innerWidth)
 
-      this.frame[0] = Math.max(180, this.frame[0])
-      this.frame[1] = Math.max(180, this.frame[1])
+      minimalFrame(this.frame)
     }
   }
+}
+
+function getFrame (vertical, innerHeight, innerWidth) {
+  if (vertical) {
+    return [innerHeight - 64 - 16, innerWidth - 32]
+  } else if (innerHeight < 800) {
+    return [innerWidth - 32, innerHeight - 64 - 16]
+  } else {
+    return [innerWidth - 32, innerHeight - 64 * 2]
+  }
+}
+
+function minimalFrame (frame) {
+  frame[0] = Math.max(180, frame[0])
+  frame[1] = Math.max(180, frame[1])
 }
