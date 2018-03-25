@@ -6,13 +6,9 @@ export default {
       return this.game.winner ? (this.game.winner > 0 ? 1 : -1) : null
     },
     verdictAnimation () {
-      const h1 = this.sessionHuman[1]
-      const h2 = this.sessionHuman[2]
-
       if (this.game.winner === -1) {
         return 'shift'
-      } else if ((h1 && !h2 && this.game.winner === 1) ||
-      (!h1 && h2 && this.game.winner === 2)) {
+      } else if (this.sessionHumanWin) {
         return 'jump'
       } else {
         return 'shake'
