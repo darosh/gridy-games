@@ -20,41 +20,45 @@ export function evaluateLines(t1: AnyTile[], free: Map<string, AnyTile>, min: nu
     }
 
     for (const k of s) {
-      const l = [];
-      let i: AnyTile | undefined = t;
-
-      while (i) {
-        l.push(i);
-        i = new Map(mapped(a1, i.neighbors())).get(k);
-      }
-
-      const v = l.length;
-
-      if (v === min) {
-        return Infinity;
-      }
-
-      let f = 0;
-
-      i = new Map(mapped(free, l[0].neighbors())).get(-k);
-
-      if (i) {
-        f++;
-      }
-
-      i = new Map(mapped(free, l[l.length - 1].neighbors())).get(k);
-
-      if (i) {
-        f++;
-      }
-
-      if (!f) {
-        continue;
-      }
-
-      c = Math.max(c, Math.pow(min, v) - Math.pow(min, v - 1) * (2 - f));
+      c = evaluate(c, a1, k, free, min, t);
     }
   }
 
   return c;
+}
+
+function evaluate(c: number, a1: Map<string, AnyTile>, k: number, free: Map<string, AnyTile>, min: number, t: AnyTile) {
+  const l = [];
+  let i: AnyTile | undefined = t;
+
+  while (i) {
+    l.push(i);
+    i = new Map(mapped(a1, i.neighbors())).get(k);
+  }
+
+  const v = l.length;
+
+  if (v === min) {
+    return Infinity;
+  }
+
+  let f = 0;
+
+  i = new Map(mapped(free, l[0].neighbors())).get(-k);
+
+  if (i) {
+    f++;
+  }
+
+  i = new Map(mapped(free, l[l.length - 1].neighbors())).get(k);
+
+  if (i) {
+    f++;
+  }
+
+  if (!f) {
+    return c;
+  }
+
+  return Math.max(c, Math.pow(min, v) - Math.pow(min, v - 1) * (2 - f));
 }
