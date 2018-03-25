@@ -157,8 +157,9 @@
 - [ ] extract css?
 - [ ] remove export defaults
 - [ ] remove ts-loader from webpack
-- [ ] https://vuejs.org/v2/style-guide/
 
 ## Done
 - [x] add triangle to icon
 - [x] app icon
+- [x] https://vuejs.org/v2/style-guide/
+- [x] code climate
