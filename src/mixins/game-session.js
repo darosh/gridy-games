@@ -25,19 +25,22 @@ export default {
       return 3 - this.game.player
     },
     sessionHumanWin () {
-      const h1 = this.sessionHuman[1]
-      const h2 = this.sessionHuman[2]
-
-      return (h1 && !h2 && this.game.winner === 1) || (!h1 && h2 && this.game.winner === 2)
+      return humanResult(this.sessionHuman, this.winner, true)
     },
     sessionHumanLost () {
-      const h1 = this.sessionHuman[1]
-      const h2 = this.sessionHuman[2]
-
-      return (h1 && !h2 && this.game.winner === 2) || (!h1 && h2 && this.game.winner === 1)
+      return humanResult(false)
     },
     sessionNames () {
       return StoneNames[ThemeStones[this.game.constructor.theme]]
     }
   }
+}
+
+function humanResult (sessionHuman, winner, win) {
+  const h1 = sessionHuman[1]
+  const h2 = sessionHuman[2]
+  const r1 = win ? 1 : 2
+  const r2 = win ? 2 : 1
+
+  return (h1 && !h2 && winner === r1) || (!h1 && h2 && winner === r2)
 }
