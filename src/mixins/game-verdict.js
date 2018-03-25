@@ -22,15 +22,9 @@ export default {
       const h1 = this.sessionHuman[1]
       const h2 = this.sessionHuman[2]
 
-      if (
-        (h1 && !h2 && this.game.winner === 1) ||
-        (!h1 && h2 && this.game.winner === 2)
-      ) {
+      if (this.sessionHumanWin) {
         return 'You won!'
-      } else if (
-        (h1 && !h2 && this.game.winner === 2) ||
-        (!h1 && h2 && this.game.winner === 1)
-      ) {
+      } else if (this.sessionHumanLost) {
         return 'You lost'
       } else if (h1 !== h2 && this.game.winner === -1) {
         return `It's draw`
