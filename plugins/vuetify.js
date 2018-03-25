@@ -1,55 +1,43 @@
 import Vue from 'vue'
 
 import {
-  Vuetify, // required
-  VApp, // required
-  VNavigationDrawer,
-  VCard,
+  VApp,
   VBtn,
-  VSpeedDial,
-  VSnackbar,
-  VIcon,
+  VCard,
   VGrid,
-  // VSubheader,
-  // VProgressCircular,
+  VIcon,
+  VNavigationDrawer,
   VSelect,
-  // VTextfield,
+  VSnackbar,
+  VSpeedDial,
   VTabs,
   VToolbar,
-  // VSwitch,
-  // VDivider,
+  Vuetify,
   transitions
 } from 'vuetify'
 
 import {
   Ripple,
   Resize
-  // Touch
 } from 'vuetify/es5/directives'
 
 Vue.use(Vuetify, {
   components: {
     VApp,
-    VNavigationDrawer,
-    VCard,
     VBtn,
-    VSpeedDial,
-    VSnackbar,
-    VIcon,
+    VCard,
     VGrid,
-    // VSubheader,
-    // VProgressCircular,
+    VIcon,
+    VNavigationDrawer,
     VSelect,
-    // VTextfield,
+    VSnackbar,
+    VSpeedDial,
     VTabs,
     VToolbar,
-    // VSwitch,
-    // VDivider,
     transitions
   },
   directives: {
     Ripple,
-    Resize,
-    Touch
+    Resize
   }
 })
