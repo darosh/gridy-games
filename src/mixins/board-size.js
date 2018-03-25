@@ -27,18 +27,7 @@ export default {
         return
       }
 
-      this.game.grid.scale = 1
-
-      let bounds = this.game.grid.bounds()
-      let scaled = scaleToFit(bounds.maxX - bounds.minX, bounds.maxY - bounds.minY, this.frame[0], this.frame[1])
-
-      if (!this.game.grid.irregular && this.round) {
-        this.game.grid.scale = Math.floor(scaled / 2) * 2
-      } else {
-        this.game.grid.scale = scaled
-      }
-
-      bounds = this.game.grid.bounds()
+      let bounds = this.rescaleToFrame()
 
       this.rect = [bounds.maxX - bounds.minX + this.margin, bounds.maxY - bounds.minY + this.margin]
 
@@ -65,6 +54,19 @@ export default {
         .vertices(tile, undefined, this.game.grid.getTileType(tile))
         .map(p => p.x.toFixed(3) + ',' + p.y.toFixed(3))
         .join(' ')
+    },
+    rescaleToFrame () {
+      this.game.grid.scale = 1
+      let bounds = this.game.grid.bounds()
+      let scaled = scaleToFit(bounds.maxX - bounds.minX, bounds.maxY - bounds.minY, this.frame[0], this.frame[1])
+
+      if (!this.game.grid.irregular && this.round) {
+        this.game.grid.scale = Math.floor(scaled / 2) * 2
+      } else {
+        this.game.grid.scale = scaled
+      }
+
+      return this.game.grid.bounds()
     }
   },
   computed: {
