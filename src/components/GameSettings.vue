@@ -47,6 +47,7 @@
           v-if="isHuman(this.$store.state.player[1]) && isHuman(this.$store.state.player[2])"
           row
           mx-3
+          mb-1
           align-center
           style="margin-top: -16px">
           <v-flex class="body-1">Timer</v-flex>
@@ -63,6 +64,7 @@
         <v-layout
           row
           mx-3
+          mb-1
           align-center>
           <v-flex class="body-1">Sound</v-flex>
           <div>
@@ -76,6 +78,7 @@
           v-if="canVibrate"
           row
           mx-3
+          mb-1
           align-center>
           <v-flex class="body-1">Vibration</v-flex>
           <div>
@@ -88,6 +91,7 @@
         <v-layout
           row
           mx-3
+          mb-1
           align-center>
           <v-flex class="body-1">Dark</v-flex>
           <div>
@@ -100,6 +104,7 @@
         <v-layout
           row
           mx-3
+          mb-1
           align-center>
           <v-flex class="body-1">Full screen</v-flex>
           <div>
@@ -112,6 +117,7 @@
         <v-layout
           row
           mx-3
+          mb-1
           align-center>
           <v-flex class="body-1">Coordinates</v-flex>
           <div>
