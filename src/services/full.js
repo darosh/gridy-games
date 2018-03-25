@@ -5,14 +5,16 @@ function isFull () {
 }
 
 export function full (value) {
-  if (fscreen.fullscreenEnabled) {
-    if (value && !isFull()) {
-      try {
-        fscreen.requestFullscreen(document.firstElementChild)
-      } catch (ignore) {
-      }
-    } else if (!value && isFull()) {
-      fscreen.exitFullscreen()
+  if (!fscreen.fullscreenEnabled) {
+    return
+  }
+
+  if (value && !isFull()) {
+    try {
+      fscreen.requestFullscreen(document.firstElementChild)
+    } catch (ignore) {
     }
+  } else if (!value && isFull()) {
+    fscreen.exitFullscreen()
   }
 }
