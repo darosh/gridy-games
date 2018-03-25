@@ -57,6 +57,9 @@ export interface IGridGame {
 
 export interface IGridMappedGame extends IGridGame {
   tileMap: Map<string, IGameTile>;
+  freeTileMap: Map<string, IGameTile>;
+  playerTiles: { [i: number]: IGameTile[] };
+  finished: boolean;
 }
 
 export interface IGridGameConstructor {

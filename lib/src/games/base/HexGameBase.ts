@@ -1,7 +1,7 @@
 import { AnyTile, Float3, IGrid, link, Position, toArray, toMap } from "gridy";
 import { IGame } from "../../IGame";
 import { Move } from "../../Move";
-import { moveToString, stringToMove } from "../../SerializableGame";
+import { moveToString, stringToMove, undo } from "../../SerializableGame";
 import { Theme } from "../../Theme";
 import { other, parsePosition, stringifyPosition } from "../../utils";
 
@@ -16,6 +16,7 @@ export class HexGameBase implements IGame {
 
   public moveToString = moveToString.bind(this);
   public stringToMove = stringToMove.bind(this);
+  public undo = undo.bind(this);
 
   private grid: IGrid<AnyTile>;
   private tileMap: Map<string, AnyTile>;
@@ -65,17 +66,6 @@ export class HexGameBase implements IGame {
     }
   }
 
-  public undo(): void {
-    const move = this.moves.pop();
-    move.data = null;
-
-    this.freeTileMap.set(move.key, move);
-    this.player = other(this.player);
-    this.finished = false;
-    this.winner = 0;
-
-    this.playerTiles[this.player].pop();
-  }
   public evaluate(): number {
     throw new Error("Method not implemented.");
   }

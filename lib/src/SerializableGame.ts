@@ -1,6 +1,7 @@
 import { AnyTile, IGrid } from "gridy/dist/types";
+import { IGame } from "./IGame";
 import { IGameTile, IGridMappedGame, Move } from "./IGridGame";
-import { parsePosition, parsePositions, stringifyPosition, stringifyPositions } from "./utils";
+import { other, parsePosition, parsePositions, stringifyPosition, stringifyPositions } from "./utils";
 
 export function moveToString(this: IGridMappedGame, move: Move): string {
   if (!move) {
@@ -42,4 +43,16 @@ export function stringsToMove(this: IGridMappedGame, move: string): Move | null 
     const t = this.grid.tile.apply(this.grid, pp);
     return this.tileMap.get(t.key);
   });
+}
+
+export function undo(this: IGridMappedGame & IGame): void {
+  const move = this.moves.pop();
+  move.data = null;
+
+  this.freeTileMap.set(move.key, move);
+  this.player = other(this.player);
+  this.finished = false;
+  this.winner = 0;
+
+  this.playerTiles[this.player].pop();
 }

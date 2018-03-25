@@ -2,7 +2,7 @@ import { AnyTile, IGrid, ITile, link, Search, toArray, toMap } from "gridy";
 import { IGame } from "../../IGame";
 import { IGameTile } from "../../IGridGame";
 import { Move } from "../../Move";
-import { moveToString, stringToMove } from "../../SerializableGame";
+import { moveToString, stringToMove, undo } from "../../SerializableGame";
 import { Theme } from "../../Theme";
 import { other, parsePosition, parseRecord, stringifyPosition } from "../../utils";
 import { connections, evaluateLines, evaluateLinked, winning } from "../evaluate/connect";
@@ -23,6 +23,7 @@ export class ConnectGameBase implements IGame {
 
   public moveToString = moveToString.bind(this);
   public stringToMove = stringToMove.bind(this);
+  public undo = undo.bind(this);
 
   constructor(grid: IGrid<IGameTile>, min: number) {
     this.grid = grid;
@@ -59,18 +60,6 @@ export class ConnectGameBase implements IGame {
     // return arr;
 
     return toArray(this.freeTileMap);
-  }
-
-  public undo(): void {
-      const move = this.moves.pop();
-      move.data = null;
-
-      this.freeTileMap.set(move.key, move);
-      this.player = other(this.player);
-      this.finished = false;
-      this.winner = 0;
-
-      this.playerTiles[this.player].pop();
   }
 
   public move(m: Move): void {
