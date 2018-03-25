@@ -128,11 +128,7 @@ export class ReversiGameBase implements IGame {
 
   public move(m: any, fake = false): void {
     if (!m) {
-      this.player = (this.player % 2) + 1;
-      this.moves.push(m);
-      this.history.push({});
-      this.updatePossible();
-      this.winner = this.getWinner();
+      this.movePass(m);
       return;
     }
 
@@ -149,6 +145,30 @@ export class ReversiGameBase implements IGame {
 
     this.moves.push(m);
 
+    const state: IState = this.getState(m);
+
+    this.history.push(state);
+    this.updatePossible();
+    this.winner = this.getWinner();
+  }
+
+  public evaluate(): number {
+    return - this.score[this.player] + this.score[other(this.player)];
+  }
+
+  public getWinner(): number {
+    return !this.finished ? 0 : this.score[1] === this.score[2] ? -1 : this.score[1] > this.score[2] ? 1 : 2;
+  }
+
+  private movePass(m: any) {
+    this.player = (this.player % 2) + 1;
+    this.moves.push(m);
+    this.history.push({});
+    this.updatePossible();
+    this.winner = this.getWinner();
+  }
+
+  private getState(m: any) {
     const state: IState = {};
 
     for (const d of m.links.keys()) {
@@ -170,16 +190,6 @@ export class ReversiGameBase implements IGame {
       }
     }
 
-    this.history.push(state);
-    this.updatePossible();
-    this.winner = this.getWinner();
-  }
-
-  public evaluate(): number {
-    return - this.score[this.player] + this.score[other(this.player)];
-  }
-
-  public getWinner(): number {
-    return !this.finished ? 0 : this.score[1] === this.score[2] ? -1 : this.score[1] > this.score[2] ? 1 : 2;
+    return state;
   }
 }
