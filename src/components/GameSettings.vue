@@ -47,7 +47,6 @@
           v-if="isHuman(this.$store.state.player[1]) && isHuman(this.$store.state.player[2])"
           row
           mx-3
-          mb-1
           align-center
           style="margin-top: -16px">
           <v-flex class="body-1">Timer</v-flex>
@@ -64,8 +63,8 @@
         <v-layout
           row
           mx-3
-          mb-1
-          align-center>
+          align-center
+          class="touch-bottom">
           <v-flex class="body-1">Sound</v-flex>
           <div>
             <v-switch
@@ -78,8 +77,8 @@
           v-if="canVibrate"
           row
           mx-3
-          mb-1
-          align-center>
+          align-center
+          class="touch-bottom">
           <v-flex class="body-1">Vibration</v-flex>
           <div>
             <v-switch
@@ -91,8 +90,8 @@
         <v-layout
           row
           mx-3
-          mb-1
-          align-center>
+          align-center
+          class="touch-bottom">
           <v-flex class="body-1">Dark</v-flex>
           <div>
             <v-switch
@@ -104,8 +103,8 @@
         <v-layout
           row
           mx-3
-          mb-1
-          align-center>
+          align-center
+          class="touch-bottom">
           <v-flex class="body-1">Full screen</v-flex>
           <div>
             <v-switch
@@ -117,8 +116,8 @@
         <v-layout
           row
           mx-3
-          mb-1
-          align-center>
+          align-center
+          class="touch-bottom">
           <v-flex class="body-1">Coordinates</v-flex>
           <div>
             <v-switch
@@ -130,7 +129,8 @@
         <v-layout
           row
           mx-3
-          align-center>
+          align-center
+          class="touch-bottom">
           <v-flex class="body-1">Rules</v-flex>
           <div>
             <v-switch
@@ -316,3 +316,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@media screen and (max-width: 1263px) {
+  .touch-bottom {
+    margin-bottom: 14px;
+  }
+}
+</style>

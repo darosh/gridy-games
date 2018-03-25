@@ -11,7 +11,8 @@
         <v-layout
           row
           mx-3
-          align-center>
+          align-center
+          class="touch-bottom">
           <v-flex class="body-1">Dark</v-flex>
           <div>
             <v-switch
@@ -178,3 +179,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@media screen and (max-width: 1263px) {
+  .touch-bottom {
+    margin-bottom: 14px;
+  }
+}
+</style>
