@@ -2,7 +2,7 @@
 
 import { IGame } from "../IGame";
 
-class UctNode {
+export class UctNode {
   public action: any;
   public parentNode?: UctNode;
   public children: UctNode[];
@@ -10,8 +10,10 @@ class UctNode {
   public visits: number;
   public unexamined: UctNode[];
   public activePlayer: number;
+  public depth: number;
 
   constructor(game: IGame, parentNode?: UctNode, action?: any) {
+    this.depth = game.moves.length;
     this.action = action;
     this.parentNode = parentNode;
     this.children = [];
@@ -71,15 +73,28 @@ export class UctPlayer {
     const root = new UctNode(game);
     const startTime = Date.now();
     const timeLimit = startTime + this.maxTime;
-    let nodesVisted = 0;
+
+    let nodesVisited = 0;
 
     if (root.unexamined.length === 1) {
       return {
         duration: Date.now() - startTime,
         move: root.unexamined[0],
-        nodesVisted,
+        nodesVisited,
       };
     }
+
+    nodesVisited = this.iterate(game, root, timeLimit);
+
+    return {
+      duration: Date.now() - startTime,
+      move: root.mostVisitedChild().action,
+      nodesVisited,
+    };
+  }
+
+  protected iterate(game: IGame, root: UctNode, timeLimit: number): number {
+    let nodesVisited = 0;
 
     for (let iterations = 0;
       iterations < this.maxIterations && Date.now() < timeLimit;
@@ -106,7 +121,7 @@ export class UctPlayer {
 
         while (actions.length > 0) {
           game.move(actions[Math.floor(Math.random() * actions.length)]);
-          ++nodesVisted;
+          ++nodesVisited;
           actions = game.possible();
         }
 
@@ -124,10 +139,6 @@ export class UctPlayer {
       }
     }
 
-    return {
-      duration: Date.now() - startTime,
-      move: root.mostVisitedChild().action,
-      nodesVisted,
-    };
+    return nodesVisited;
   }
 }
