@@ -32,6 +32,12 @@ export default {
     },
     sessionNames () {
       return StoneNames[ThemeStones[this.game.constructor.theme]]
+    },
+    sessionSoloDraw () {
+      return this.sessionSolo && this.game.winner === -1
+    },
+    sessionTimedOut () {
+      return this.sessionHotSeat && this.game.expired
     }
   }
 }

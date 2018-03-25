@@ -17,9 +17,9 @@ export default {
         return 'You won!'
       } else if (this.sessionHumanLost) {
         return 'You lost'
-      } else if (this.sessionSolo && this.game.winner === -1) {
+      } else if (this.sessionSoloDraw) {
         return `It's draw`
-      } else if (this.sessionHotSeat && this.game.expired) {
+      } else if (this.sessionTimedOut) {
         return `Time out, ${this.sessionNames[this.game.winner - 1]} won!`
       } else if (this.game.winner > 0) {
         return `${this.sessionNames[this.game.winner - 1]} won!`
