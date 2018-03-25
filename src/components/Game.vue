@@ -178,6 +178,7 @@ import gameSession from '../mixins/game-session'
 import playerSwitch from '../mixins/player-switch'
 
 const LATENCY = 2
+let JOB_ID = 0
 
 export default {
   components: {
@@ -296,10 +297,12 @@ export default {
     destroyRobots () {
       if (this.robotPlayer[1]) {
         this.robotPlayer[1].terminate()
+        this.working = false
       }
 
       if (this.robotPlayer[2]) {
         this.robotPlayer[2].terminate()
+        this.working = false
       }
     },
     initRobots () {
@@ -332,20 +335,28 @@ export default {
 
       if (!this.working && !this.game.winner && player) {
         this.working = true
-        player.select(this.game).then(move => {
-          this.working = false
-          undoAction(this.game)
-          this.game.move(move.move)
-          this.kickSound()
-          this.update()
-          this.robot()
-        })
+        JOB_ID++
+        this.runRobot(player, JOB_ID)
       }
+    },
+    runRobot (player, jobId) {
+      player.select(this.game).then(move => {
+        if (jobId !== JOB_ID) {
+          return
+        }
+
+        this.working = false
+        undoAction(this.game)
+        this.game.move(move.move)
+        this.kickSound()
+        this.update()
+        this.robot()
+      })
     },
     move (tile) {
       this.rules = false
 
-      if (this.game.winner) {
+      if (this.game.winner || this.working) {
         return
       }
 

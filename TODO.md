@@ -30,12 +30,12 @@
 
 ## Bugs
 
-- [ ] fix robot workers, invalidate disposed workers
-- [ ] disable human click during robot turn
 - [ ] fix undo
 - [ ] deleting moves should not start timer?
 
 ## Done
+- [x] fix robot workers, invalidate disposed workers
+- [x] disable human click during robot turn
 - [x] remove transitions on resize
 - [x] fix g-poly-line resize
 - [x] IGNORED: signal pass?
