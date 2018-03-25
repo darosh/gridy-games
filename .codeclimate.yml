@@ -26,10 +26,10 @@ checks:
       threshold: 6
   similar-code:
     config:
-      threshold: 60
+      threshold: 40
   identical-code:
     config:
-      threshold: 30
+      threshold: 20
 exclude_patterns:
   - "build/vuetify/"
   - "lib/tests/"
