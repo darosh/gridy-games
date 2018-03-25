@@ -23,17 +23,9 @@ export class TimedProxy implements IGame, IGridGame {
     this.constructor = game.constructor;
     Object.assign(this, opt);
 
-    if (this.game.winning) {
-      (this as any).winning = this.game.winning.bind(this.game);
-    }
-
-    if (this.game.links) {
-      (this as any).links = this.game.links.bind(this.game);
-    }
-
-    if (this.game.rulers) {
-      (this as any).rulers = this.game.rulers.bind(this.game);
-    }
+    this.bind("winning");
+    this.bind("links");
+    this.bind("rulers");
   }
 
   public dispose() {
@@ -144,6 +136,12 @@ export class TimedProxy implements IGame, IGridGame {
     if (this.timer) {
       clearInterval(this.timer);
       this.timer = null;
+    }
+  }
+
+  private bind(prop: string) {
+    if ((this.game as any) [prop]) {
+      (this as any)[prop] = (this.game as any)[prop].bind(this.game);
     }
   }
 }
