@@ -26,10 +26,10 @@ checks:
       threshold: 6
   similar-code:
     config:
-      threshold: 50
+      threshold: 60
   identical-code:
     config:
-      threshold: # language-specific defaults. an override will affect all languages.
+      threshold: 30
 exclude_patterns:
   - "build/vuetify/"
   - "lib/tests/"
