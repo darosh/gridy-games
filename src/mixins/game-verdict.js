@@ -1,5 +1,3 @@
-import { ThemeStones, StoneNames } from '../../plugins/lib'
-
 export default {
   computed: {
     verdictIcon () {
@@ -15,28 +13,18 @@ export default {
       }
     },
     verdict () {
-      const h1 = this.sessionHuman[1]
-      const h2 = this.sessionHuman[2]
-
       if (this.sessionHumanWin) {
         return 'You won!'
       } else if (this.sessionHumanLost) {
         return 'You lost'
-      } else if (h1 !== h2 && this.game.winner === -1) {
+      } else if (this.sessionSolo && this.game.winner === -1) {
         return `It's draw`
-      } else if (h1 && h2 && this.game.expired) {
-        const names = StoneNames[ThemeStones[this.game.constructor.theme]]
-        return `Time out, ${names[this.game.winner - 1]} won!`
-      } else if (this.game.winner) {
-        const names = StoneNames[ThemeStones[this.game.constructor.theme]]
-
-        if (this.game.winner > 0) {
-          return `${names[this.game.winner - 1]} won!`
-        } else {
-          return `It's draw`
-        }
-      } else {
-        return ''
+      } else if (this.sessionHotSeat && this.game.expired) {
+        return `Time out, ${this.sessionNames[this.game.winner - 1]} won!`
+      } else if (this.game.winner > 0) {
+        return `${this.sessionNames[this.game.winner - 1]} won!`
+      } else if (this.game.winner === -1) {
+        return `It's draw`
       }
     }
   }

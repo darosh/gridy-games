@@ -1,4 +1,5 @@
 import { isHuman } from '../services/players'
+import { ThemeStones, StoneNames } from '../../plugins/lib'
 
 export default {
   computed: {
@@ -13,6 +14,9 @@ export default {
     },
     sessionHotSeat () {
       return this.sessionHuman[1] && this.sessionHuman[2]
+    },
+    sessionSolo () {
+      return this.sessionHuman[1] !== this.sessionHuman[2]
     },
     sessionRobotMatch () {
       return !this.sessionHuman[1] && !this.sessionHuman[2]
@@ -31,6 +35,9 @@ export default {
       const h2 = this.sessionHuman[2]
 
       return (h1 && !h2 && this.game.winner === 2) || (!h1 && h2 && this.game.winner === 1)
+    },
+    sessionNames () {
+      return StoneNames[ThemeStones[this.game.constructor.theme]]
     }
   }
 }
