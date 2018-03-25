@@ -48,6 +48,18 @@ function merge(a: IDictionary, b: IDictionary): IDictionary {
     }
   }
 
+  a.originals = getOriginals(a, b);
+
+  links.forEach((l) => {
+    if (a[l]) {
+      a[`${l}Text`] = domain(a[l]);
+    }
+  });
+
+  return a;
+}
+
+function getOriginals(a: any, b: any) {
   const originals: IDictionary = {};
 
   for (const k in b) {
@@ -65,15 +77,7 @@ function merge(a: IDictionary, b: IDictionary): IDictionary {
     originals[k] = true;
   }
 
-  a.originals = originals;
-
-  links.forEach((l) => {
-    if (a[l]) {
-      a[`${l}Text`] = domain(a[l]);
-    }
-  });
-
-  return a;
+  return originals;
 }
 
 export function table(games: { [name: string]: IGridGameConstructor }, wip = false): IDictionary[] {
