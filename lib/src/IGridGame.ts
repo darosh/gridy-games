@@ -55,6 +55,10 @@ export interface IGridGame {
   moveToString?(move: any): string;
 }
 
+export interface IGridMappedGame extends IGridGame {
+  tileMap: Map<string, IGameTile>;
+}
+
 export interface IGridGameConstructor {
   title: string;
   type: string;

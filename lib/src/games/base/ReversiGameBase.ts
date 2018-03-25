@@ -1,6 +1,7 @@
 import { AnyTile, IGrid, link, Position, toMap } from "gridy";
 import { IGame } from "../../IGame";
 import { Move } from "../../Move";
+import { moveToString, stringToMove } from "../../SerializableGame";
 import { Theme } from "../../Theme";
 import { other, parsePosition, stringifyPosition } from "../../utils";
 
@@ -17,8 +18,11 @@ export class ReversiGameBase implements IGame {
   public score: { [index: number]: number } = { 1: 0, 2: 0 };
   public winner: number = 0;
 
+  public moveToString = moveToString.bind(this);
+  public stringToMove = stringToMove.bind(this);
+
   protected finished: boolean = false;
-  protected tilesMap: Map<string, AnyTile>;
+  protected tileMap: Map<string, AnyTile>;
   protected empty: Map<string, AnyTile>;
   protected history: IState[] = [];
   protected center: any[];
@@ -26,47 +30,27 @@ export class ReversiGameBase implements IGame {
 
   constructor(grid: IGrid<AnyTile>, center: boolean = false) {
     this.grid = grid;
-    this.tilesMap = toMap(grid.tiles);
+    this.tileMap = toMap(grid.tiles);
     const x1 = Math.floor(grid.x / 2 - .5);
     const x2 = Math.ceil(grid.x / 2 - .5);
     const y1 = Math.floor(grid.y / 2 - .5);
     const y2 = Math.ceil(grid.y / 2 - .5);
 
     this.center = [
-      this.tilesMap.get((grid as any).tile(x1, y1).key),
-      this.tilesMap.get((grid as any).tile(x1, y2).key),
-      this.tilesMap.get((grid as any).tile(x2, y2).key),
-      this.tilesMap.get((grid as any).tile(x2, y1).key),
+      this.tileMap.get((grid as any).tile(x1, y1).key),
+      this.tileMap.get((grid as any).tile(x1, y2).key),
+      this.tileMap.get((grid as any).tile(x2, y2).key),
+      this.tileMap.get((grid as any).tile(x2, y1).key),
     ];
 
     this.empty = toMap(this.grid.tiles);
-    link(this.tilesMap);
+    link(this.tileMap);
 
     if (center) {
       this.center.forEach((t) => this.move(t, true));
     }
 
     this.updatePossible();
-  }
-
-  public moveToString(move: Move): string {
-    if (!move) {
-      return "pass";
-    }
-
-    const p = this.grid.toPoint(move);
-    return stringifyPosition(p);
-  }
-
-  public stringToMove(move: string): Move {
-    const p = parsePosition(move);
-
-    if (!p) {
-      return p;
-    }
-
-    const t = this.grid.tile.apply(this.grid, p);
-    return this.tilesMap.get(t.key);
   }
 
   public possible(): any[] {
@@ -132,7 +116,7 @@ export class ReversiGameBase implements IGame {
 
     for (const k in h) {
       if (h.hasOwnProperty(k)) {
-        const d = (this.tilesMap.get(k) as any);
+        const d = (this.tileMap.get(k) as any);
         this.score[d.data]--;
         d.data = h[k];
         this.score[d.data]++;

@@ -30,7 +30,7 @@ export class ConnectFourGame extends ConnectGameBase {
 
     for (let x = 0; x < this.grid.x; x++) {
       for (let y = 0; y < this.grid.y; y++) {
-        const m = this.tilesMap.get([x, y].toString()) as Move;
+        const m = this.tileMap.get([x, y].toString()) as Move;
 
         if (!m.data) {
           moves.push(m);

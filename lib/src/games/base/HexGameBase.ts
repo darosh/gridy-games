@@ -1,6 +1,7 @@
 import { AnyTile, Float3, IGrid, link, Position, toArray, toMap } from "gridy";
 import { IGame } from "../../IGame";
 import { Move } from "../../Move";
+import { moveToString, stringToMove } from "../../SerializableGame";
 import { Theme } from "../../Theme";
 import { other, parsePosition, stringifyPosition } from "../../utils";
 
@@ -13,15 +14,18 @@ export class HexGameBase implements IGame {
   public winner: number = 0;
   public playerTiles: { [i: number]: AnyTile[] } = { 1: [], 2: [] };
 
+  public moveToString = moveToString.bind(this);
+  public stringToMove = stringToMove.bind(this);
+
   private grid: IGrid<AnyTile>;
   private tileMap: Map<string, AnyTile>;
-  private freeTilesMap: Map<string, AnyTile>;
+  private freeTileMap: Map<string, AnyTile>;
   private finished: boolean = false;
 
   constructor(grid: IGrid<AnyTile>, lines: number = 3, skip: number = 2) {
     this.grid = grid;
     this.tileMap = toMap(grid.tiles);
-    this.freeTilesMap = toMap(grid.tiles);
+    this.freeTileMap = toMap(grid.tiles);
     link(this.tileMap);
     this.markLine(this.grid.tile(0, 0), this.grid.tile(0, this.grid.y - 1), 1, "begin");
     this.markLine(this.grid.tile(this.grid.x - 1, 0), this.grid.tile(this.grid.x - 1, this.grid.y - 1), 1, "end");
@@ -35,7 +39,7 @@ export class HexGameBase implements IGame {
       return [];
     }
 
-    return toArray(this.freeTilesMap);
+    return toArray(this.freeTileMap);
   }
 
   public links(): any[] {
@@ -52,7 +56,7 @@ export class HexGameBase implements IGame {
     this.playerTiles[this.player].push(m);
     this.player = other(this.player);
     this.moves.push(m);
-    this.freeTilesMap.delete(m.key);
+    this.freeTileMap.delete(m.key);
 
     this.winner = this.getWinner();
 
@@ -60,30 +64,12 @@ export class HexGameBase implements IGame {
       this.finished = true;
     }
   }
-  public moveToString(move: Move): string {
-    if (!move) {
-      return "pass";
-    }
 
-    const p = this.grid.toPoint(move);
-    return stringifyPosition(p);
-  }
-
-  public stringToMove(move: string): Move {
-    const p = parsePosition(move);
-
-    if (!p) {
-      return p;
-    }
-
-    const t = this.grid.tile.apply(this.grid, p);
-    return this.tileMap.get(t.key);
-  }
   public undo(): void {
     const move = this.moves.pop();
     move.data = null;
 
-    this.freeTilesMap.set(move.key, move);
+    this.freeTileMap.set(move.key, move);
     this.player = other(this.player);
     this.finished = false;
     this.winner = 0;

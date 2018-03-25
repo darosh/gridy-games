@@ -1,6 +1,7 @@
 import { AnyTile, Directions, IGrid, link, Position, toMap } from "gridy";
 import { Move } from "../..";
 import { IGame } from "../../IGame";
+import { movesToString, stringsToMove } from "../../SerializableGame";
 import { Theme } from "../../Theme";
 import { other, parsePositions, stringifyPositions } from "../../utils";
 import { connections, winning } from "../evaluate/connect";
@@ -17,6 +18,10 @@ export class TacTickleGameBase implements IGame {
   public playerTiles: { [i: number]: AnyTile[] } = { 1: [], 2: [] };
 
   public grid: IGrid<AnyTile>;
+
+  public moveToString = movesToString.bind(this);
+  public stringToMove = stringsToMove.bind(this);
+
   private tileMap: Map<string, AnyTile>;
   private min: number;
   private directions: number[];
@@ -29,28 +34,6 @@ export class TacTickleGameBase implements IGame {
     this.min = min;
     this.init(lines);
     this.directions = directions.map(([d]) => d);
-  }
-
-  public moveToString(move: Move[]): string {
-    if (!move) {
-      return "pass";
-    }
-
-    const p = (Array.isArray(move) ? move : [move]).map(this.grid.toPoint);
-    return stringifyPositions(p);
-  }
-
-  public stringToMove(move: string): Move {
-    const p = parsePositions(move);
-
-    if (!p) {
-      return p;
-    }
-
-    return p.map((pp) => {
-      const t = this.grid.tile.apply(this.grid, pp);
-      return this.tileMap.get(t.key);
-    });
   }
 
   public possible(): any[] {
