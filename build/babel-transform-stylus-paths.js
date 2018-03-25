@@ -2,7 +2,7 @@ var wrapListener = require('babel-plugin-detective/wrap-listener')
 
 module.exports = wrapListener(listener, 'transform-stylus-paths')
 
-function listener (path, file) {
+function listener (path) {
   const regex = /((?:\.\.?\/)+)/gi
   if (path.isLiteral() && path.node.value.endsWith('.styl')) {
     const matches = regex.exec(path.node.value)
