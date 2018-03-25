@@ -86,47 +86,50 @@ export function table(games: { [name: string]: IGridGameConstructor }, wip = fal
       continue;
     }
 
-    const originalId = a.original;
-    const b = a.original ? games[a.original] : {} as IGridGameConstructor;
-    const m = merge(copy(a), copy(b));
-    m.id = id(key);
-    m.originalId = originalId ? id(originalId) : undefined;
-
-    let instance: IGridGame;
-
-    Object.defineProperty(m, "instance", {
-      get() {
-        if (instance) {
-          return instance;
-        }
-
-        instance = new games[key]();
-        initActions(instance, (instance as any as IGame).possible());
-        return Object.freeze(instance);
-      },
-    });
-
-    Object.defineProperty(m, "tiles", {
-      get() {
-        return m.instance.grid.tiles.length;
-      },
-    });
-
-    Object.defineProperty(m, "grid", {
-      get() {
-        return GRIDS.get(m.instance.grid.constructor);
-      },
-    });
-
-    m.original = b.title || a.title;
-    m.originals.original = !b.title;
-    m.link = m.wiki || m.source;
-    m.linkText = m.wikiText || m.sourceText;
-    m.wip = a.wip;
+    const m = row(a, games, key);
 
     Object.freeze(m);
     result.push(m);
   }
 
   return result;
+}
+
+function row(a: IGridGameConstructor, games: { [name: string]: IGridGameConstructor; }, key: string) {
+  const originalId = a.original;
+  const b = a.original ? games[a.original] : {} as IGridGameConstructor;
+  const m = merge(copy(a), copy(b));
+  m.id = id(key);
+  m.originalId = originalId ? id(originalId) : undefined;
+
+  let instance: IGridGame;
+
+  Object.defineProperty(m, "instance", {
+    get() {
+      if (instance) {
+        return instance;
+      }
+      instance = new games[key]();
+      initActions(instance, (instance as any as IGame).possible());
+      return Object.freeze(instance);
+    },
+  });
+  Object.defineProperty(m, "tiles", {
+    get() {
+      return m.instance.grid.tiles.length;
+    },
+  });
+  Object.defineProperty(m, "grid", {
+    get() {
+      return GRIDS.get(m.instance.grid.constructor);
+    },
+  });
+
+  m.original = b.title || a.title;
+  m.originals.original = !b.title;
+  m.link = m.wiki || m.source;
+  m.linkText = m.wikiText || m.sourceText;
+  m.wip = a.wip;
+
+  return m;
 }
