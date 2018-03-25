@@ -180,32 +180,34 @@ export function winning(move: any, player: number, min: number): AnyTile[] | und
   const done: { [direction: number]: boolean } = {};
 
   for (const n of move.links as any) {
-    if (!done[-n[0]]) {
-      const result = [move];
-      done[-n[0]] = true;
+    if (done[-n[0]]) {
+      continue;
+    }
 
-      let o: any = n[1];
-      let v = 1;
+    const result = [move];
+    done[-n[0]] = true;
 
-      while (o && (o.data === player)) {
-        result.push(o);
-        v++;
-        o = o.links.get(n[0]);
-        o = (o !== move) ? o : false;
-      }
+    let o: any = n[1];
+    let v = 1;
 
-      o = (move as any).links.get(-n[0]);
+    while (o && (o.data === player)) {
+      result.push(o);
+      v++;
+      o = o.links.get(n[0]);
+      o = (o !== move) ? o : false;
+    }
 
-      while (o && (o.data === player)) {
-        result.unshift(o);
-        v++;
-        o = o.links.get(-n[0]);
-        o = (o !== move) ? o : false;
-      }
+    o = (move as any).links.get(-n[0]);
 
-      if (v >= min) {
-        return result;
-      }
+    while (o && (o.data === player)) {
+      result.unshift(o);
+      v++;
+      o = o.links.get(-n[0]);
+      o = (o !== move) ? o : false;
+    }
+
+    if (v >= min) {
+      return result;
     }
   }
 }
