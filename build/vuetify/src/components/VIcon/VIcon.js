@@ -35,6 +35,7 @@ export default {
     xLarge: Boolean
   },
 
+  // eslint-disable-next-line max-statements
   render (h, { props, data, children = [] }) {
     const { small, medium, large, xLarge } = props
     const sizes = { small, medium, large, xLarge }
