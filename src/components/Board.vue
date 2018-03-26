@@ -10,7 +10,7 @@
       version="1.1"
       class="d-block">
       <rect
-        :x="(margin/2 + 0.5).toFixed(3)"
+        :x="(margin/2).toFixed(3)"
         :y="((margin + size[1] - rect[1]) / 2 + 0.5).toFixed(3)"
         :width="(rect[0] - margin).toFixed(3)"
         :height="(rect[1] - margin).toFixed(3)" />
@@ -41,14 +41,6 @@
             :transform="'rotate(' + (game.grid.orientation * game.grid.angle) + ')'"
             class="tile"
             v-on="interactive ? {click: () => move(t)} : null" />
-          <text
-            v-if="coords"
-            :font-size="game.grid.scale * 0.4"
-            :dy="game.grid.scale * 0.04"
-            :transform="vertical ? 'rotate(-90)' : null"
-            alignment-baseline="middle"
-            text-anchor="middle">
-            {{ game.moveToString(t) }} </text>
         </g>
         <line
           v-for="(l, k) in rulers"
@@ -58,7 +50,19 @@
           :x2="center(l[1]).x"
           :y2="center(l[1]).y"
           :class="l[2] ? 'line-' + l[2] : ''" />
-
+        <g
+          v-for="t in game.grid.tiles"
+          :key="'text' + t.key"
+          :transform="'translate(' + center(t) + ')'">
+          <text
+            v-if="coords"
+            :font-size="game.grid.scale * 0.4"
+            :dy="game.grid.scale * 0.04"
+            :transform="vertical ? 'rotate(-90)' : null"
+            alignment-baseline="middle"
+            text-anchor="middle">
+            {{ game.moveToString(t) }} </text>
+        </g>
         <g v-if="!isMove">
           <g
             v-for="t in game.grid.tiles"
@@ -77,8 +81,8 @@
         </g>
         <g v-else>
           <circle
-            v-for="(t, k) in stones"
-            :key="'s' + k"
+            v-for="t in stones"
+            :key="'s' + t.id"
             :style="{transform: 'translate(' + center(t.tile, 'px') + ')'}"
             :r="game.grid.radius * game.grid.scale * 0.85 - round * 2"
             :class="{animate: interactive && !resizing, clickable: t.tile.highlighted && !waiting, ['token-' + t.data]: true}"
@@ -96,6 +100,12 @@
           :size="game.grid.scale"
           :delay="200" />
       </g>
+      <rect
+        :x="(margin/2).toFixed(3)"
+        :y="((margin + size[1] - rect[1]) / 2 + 0.5).toFixed(3)"
+        :width="(rect[0] - margin).toFixed(3)"
+        :height="(rect[1] - margin).toFixed(3)"
+        style="fill: none"/>
     </svg>
   </div>
 </template>
@@ -197,7 +207,7 @@ export default {
       if (this.isMove) {
         for (const tile of this.game.grid.tiles) {
           if (tile.data) {
-            this.stones.push({ tile, data: tile.data })
+            this.stones.push({ tile, data: tile.data, id: this.stones.length })
           }
         }
       }
@@ -205,7 +215,21 @@ export default {
     updateStones () {
       if (this.isMove && this.game.moves.length) {
         const action = this.game.moves[this.game.moves.length - 1]
-        this.stones.find(s => s.tile === action[0]).tile = action[1]
+
+        const first = action[0];
+        let last = action[action.length - 1]
+        last = Array.isArray(last) ? last[0] : last
+
+        this.stones.find(s => s.tile === first).tile = last
+
+        for(let i = 0; i < action.length; i++) {
+          if(Array.isArray(action[i])) {
+            if(action[i][1]) {
+              const index = this.stones.findIndex(s => s.tile === action[i][1])
+              this.stones.splice(index, 1)
+            }
+          }
+        }
       }
     }
   }
@@ -215,7 +239,7 @@ export default {
 <style scoped>
 polygon.animate,
 circle.animate {
-  transition: fill 0.2s ease-in-out;
+  transition: fill 0.2s ease-in-out, stroke 0.2s ease-in-out, stroke-width 0.2s ease-in-out;
 }
 .stone.animate {
   transition: all 0.2s ease-in-out;
