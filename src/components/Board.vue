@@ -114,6 +114,8 @@
 import boardSize from '../mixins/board-size'
 import { theme } from '../style/theme'
 
+let STONE_ID = 0
+
 export default {
   components: {
     GPolyLine: () => import('./PolyLine')
@@ -181,10 +183,15 @@ export default {
         this.initStones()
       }
     },
-    'game.moves.length': function () {
-      this.updateStones()
+    'game.moves.length': function (value, old) {
+      if(value === (old + 1)) {
+        this.updateStones()
+      } else {
+        this.initStones()
+      }
     },
-    'game.winner': {immediate: true,
+    'game.winner': {
+      immediate: true,
       handler (value) {
         this.winning = value && this.game.winning ? this.game.winning() : null
       }
@@ -207,7 +214,7 @@ export default {
       if (this.isMove) {
         for (const tile of this.game.grid.tiles) {
           if (tile.data) {
-            this.stones.push({ tile, data: tile.data, id: this.stones.length })
+            this.stones.push({ tile, data: tile.data, id: ++STONE_ID })
           }
         }
       }

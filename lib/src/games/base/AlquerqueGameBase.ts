@@ -2,31 +2,24 @@ import {
   AnyTile, IGrid, link, Position, Rectangular8Tile, RectangularGrid, RectangularTile, Shape, toMap,
 } from "gridy";
 
-import { IGame } from "../IGame";
-import { jumpsToString, stringsToJump } from "../SerializableGame";
-import { getMovePlace, other } from "../utils";
-import { CatchTheHareGameBase } from "./base/CatchTheHareGameBase";
+import { IGame } from "../../IGame";
+import { jumpsToString, stringsToJump } from "../../SerializableGame";
+import { getMovePlace, other } from "../../utils";
+import { CatchTheHareGameBase } from "./CatchTheHareGameBase";
 
 // TODO Zamma https://en.wikipedia.org/wiki/Zamma
 
-export class AlquerqueGame extends CatchTheHareGameBase {
-  public static title = "Alquerque";
-  public static type = "Misc";
-  public static created = 950;
-  public static wip = true;
-  public static aliases = ["Qirkat"];
-  public static location = "Middle East";
-  public static wiki = "https://en.wikipedia.org/wiki/Alquerque";
-
+export class AlquerqueGameBase extends CatchTheHareGameBase {
   public moveToString = jumpsToString.bind(this);
   public stringToMove = stringsToJump.bind(this);
 
   public score: { [player: number]: number };
   public finished: boolean = false;
 
-  constructor() {
-    super(new RectangularGrid(1, false, Shape.Even, 5, 5, Rectangular8Tile) as any);
-    const stones = (5 * 5 - 1) / 2;
+  constructor(grid: IGrid<AnyTile>) {
+    super(grid);
+
+    const stones = (grid.tiles.length - 1) / 2;
     this.score = { 1: stones, 2: stones };
   }
 
@@ -64,7 +57,7 @@ export class AlquerqueGame extends CatchTheHareGameBase {
 
     const o = other(last.data);
 
-    for (let i = this.moves.length - 1; i > 0; i--) {
+    for (let i = m.length - 1; i > 0; i--) {
       const n = m[i];
 
       if (Array.isArray(n)) {
@@ -83,7 +76,7 @@ export class AlquerqueGame extends CatchTheHareGameBase {
       return 2;
     } else if (!this.score[2]) {
       return 1;
-    } else if (this.moves.length === (this.grid.tiles.length * 2)) {
+    } else if (this.moves.length === (this.grid.tiles.length * 3)) {
       return -1;
     } else {
       return 0;

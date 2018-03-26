@@ -11,6 +11,9 @@ export { TacTickleTriGame } from "./TacTickleTriGame";
 
 export { ConnectFourGame } from "./ConnectFourGame";
 
+export { CatchTheHareGame } from "./CatchTheHareGame";
+export { AlquerqueSimpleGame } from "./AlquerqueSimpleGame";
+
 export { FourInARow11Game } from "./FourInARow11Game";
 export { FourInARowRoundGame } from "./FourInARowRoundGame";
 
@@ -39,9 +42,6 @@ export { Hex9Game } from "./Hex9Game";
 export { Hex11Game } from "./Hex11Game";
 export { Hex13Game } from "./Hex13Game";
 export { Hex14Game } from "./Hex14Game";
-
-export { CatchTheHareGame } from "./CatchTheHareGame";
-export { AlquerqueGame } from "./AlquerqueGame";
 
 export { CzechCheckersGame } from "./CzechCheckersGame";
 export { InternationalCheckersGame } from "./InternationalCheckersGame";
