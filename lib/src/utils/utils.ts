@@ -99,3 +99,13 @@ export function update(game: IGame, record: string) {
     game.move((game as any).stringToMove(records[game.moves.length]));
   }
 }
+
+export function undoFor(game: IGame, player: number) {
+  if ((game.player === player) && game.moves.length) {
+    game.undo();
+  }
+
+  while ((game.player !== player) && game.moves.length) {
+    game.undo();
+  }
+}

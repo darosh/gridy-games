@@ -160,9 +160,11 @@ import {
   TimedProxy,
   initActions,
   initHighlight,
+  other,
   selectAction,
   undoAction,
-  update
+  update,
+  undoFor
 } from '../../plugins/lib'
 import { isHuman } from '../services/players'
 import { Bus } from '../services/bus'
@@ -386,8 +388,8 @@ export default {
     },
     undo () {
       this.showVerdict = false
-      this.game.undo()
-      this.game.undo()
+      const target = this.sessionHotSeat ? other(this.game.player) : this.game.player
+      undoFor(this.game, target)
       this.update()
     },
     reset () {

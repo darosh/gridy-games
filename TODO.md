@@ -30,10 +30,10 @@
 
 ## Bugs
 
-- [ ] fix undo
 - [ ] deleting moves should not start timer?
 
 ## Done
+- [x] fix undo
 - [x] fix robot workers, invalidate disposed workers
 - [x] disable human click during robot turn
 - [x] remove transitions on resize
