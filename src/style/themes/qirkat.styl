@@ -1,12 +1,13 @@
 qirkatTheme = {
   tileFill: #B71C1C,
+  text: darken(#B71C1C, 50%)
   tileOdd: #EFEBE9,
-  possible: #fff,
+  possible: #FF5252,
   tileStroke: #212121,
   lineStroke: #212121,
   waiting: #E0E0E0,
   waitingDark: #616161,
-  tileWaiting: #A1887F,
+  tileWaiting: #B71C1C,
   t1: #212121,
   t2: #fff,
   s1: #212121,
@@ -20,14 +21,42 @@ qirkatTheme = {
 colors(qirkatTheme, '.qirkat-theme')
 
 .qirkat-theme
-  .tile
+  .tile:not(.possible)
     stroke-width: 0
+
+  .tile.possible:not(.waiting)
+    stroke-width: 1
+    stroke: qirkatTheme.possible
+
+  .tile
     stroke: qirkatTheme.tileFill
 
   rect
-    stroke: #000
-    stroke-width: 6
+    stroke: qirkatTheme.lineStroke
+    stroke-width: 3
     fill: qirkatTheme.tileFill
 
 .preview .qirkat-theme rect
-  stroke-width: 3
+  stroke-width: 1
+
+.theme--dark .qirkat-theme .symbol-1
+    fill: #000
+
+.qirkat-theme
+  .player-2 .player-status.icon
+    fill: rgba(0,0,0,0.87)
+  .player-2 .counter
+    color: rgba(0,0,0,0.87)
+
+.theme--light .qirkat-theme
+  .symbol-2
+    fill: #E0E0E0
+
+.theme--dark .qirkat-theme
+  .symbol-2
+    stroke: qirkatTheme.s2
+
+.theme--light .qirkat-theme .player-timer
+  stroke: qirkatTheme.tileFill !important
+.theme--dark .qirkat-theme .player-timer
+  stroke: qirkatTheme.possible !important

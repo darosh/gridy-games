@@ -3,6 +3,8 @@ import {
 } from "gridy";
 
 import { IGame } from "../IGame";
+import { jumpsToString, stringsToJump } from "../SerializableGame";
+import { getMovePlace, other } from "../utils";
 import { CatchTheHareGameBase } from "./base/CatchTheHareGameBase";
 
 // TODO Zamma https://en.wikipedia.org/wiki/Zamma
@@ -11,25 +13,136 @@ export class AlquerqueGame extends CatchTheHareGameBase {
   public static title = "Alquerque";
   public static type = "Misc";
   public static created = 950;
+  public static wip = true;
   public static aliases = ["Qirkat"];
   public static location = "Middle East";
   public static wiki = "https://en.wikipedia.org/wiki/Alquerque";
 
+  public moveToString = jumpsToString.bind(this);
+  public stringToMove = stringsToJump.bind(this);
+
+  public score: { [player: number]: number };
+  public finished: boolean = false;
+
   constructor() {
     super(new RectangularGrid(1, false, Shape.Even, 5, 5, Rectangular8Tile) as any);
+    const stones = (5 * 5 - 1) / 2;
+    this.score = { 1: stones, 2: stones };
+  }
+
+  public move(m: any): void {
+    const first = m[0];
+    let last = m[m.length - 1];
+    last = Array.isArray(last) ? last[0] : last;
+
+    for (let i = 1; i < m.length; i++) {
+      if (Array.isArray(m[i])) {
+        this.score[m[i][1].data]--;
+        m[i][1].data = null;
+      }
+    }
+
+    last.data = first.data;
+    first.data = null;
+
+    this.player = other(this.player);
+    this.moves.push(m);
+
+    this.winner = this.getWinner();
+
+    if (this.winner) {
+      this.finished = true;
+    }
+  }
+
+  public undo(): void {
+    const m = this.moves.pop();
+
+    const first = m[0];
+    let last = m[m.length - 1];
+    last = Array.isArray(last) ? last[0] : last;
+
+    const o = other(last.data);
+
+    for (let i = this.moves.length - 1; i > 0; i--) {
+      const n = m[i];
+
+      if (Array.isArray(n)) {
+        n[1].data = o;
+      }
+    }
+
+    first.data = last.data;
+    last.data = null;
+
+    this.player = other(this.player);
+  }
+
+  public getWinner() {
+    if (!this.score[1]) {
+      return 2;
+    } else if (!this.score[2]) {
+      return 1;
+    } else if (this.moves.length === (this.grid.tiles.length * 2)) {
+      return -1;
+    } else {
+      return 0;
+    }
   }
 
   public possible(): any {
-    this.grid.tiles.filter((t) => {
-      if ((t as any).data === this.player) {
-        return;
+    let result: any[] = this.jumpsPossible();
+
+    if (!result.length) {
+      result = this.simplePossible();
+    }
+
+    return result;
+  }
+
+  private jumpsPossible() {
+    const o = other(this.player);
+
+    return this.grid.tiles.reduce((r: any[], t: any) => {
+      if ((t as any).data !== this.player) {
+        return r;
       }
 
-      // for (const n of t.links) {
+      r = r.concat(this.jumpPossible(t, this.player, o));
 
-      // }
-    });
+      return r;
+    }, []);
+  }
 
-    return [];
+  private jumpPossible(t: any, p: number, o: number) {
+    const result: any[] = [];
+
+    for (const [n, m] of t.links) {
+      if ((m as any).data === o) {
+        const d = (m as any).links.get(n);
+
+        if (d && !d.data) {
+          result.push([t, [d, m]]);
+        }
+      }
+    }
+
+    return result;
+  }
+
+  private simplePossible(): any[] {
+    return this.grid.tiles.reduce((r: any[], t: any) => {
+      if ((t as any).data !== this.player) {
+        return r;
+      }
+
+      for (const [n, m] of t.links) {
+        if (!(m as any).data) {
+          r.push([t, m]);
+        }
+      }
+
+      return r;
+    }, []);
   }
 }

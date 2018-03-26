@@ -7,7 +7,7 @@ import { Theme } from "../../Theme";
 
 export class CatchTheHareGameBase implements IGame {
   public static theme = Theme.Qirkat;
-  public static wip: boolean = true;
+  public static move: boolean = true;
 
   public moves: any[] = [];
   public player: number = 1;
@@ -25,16 +25,12 @@ export class CatchTheHareGameBase implements IGame {
 
     let i = 0;
     const mid = (this.grid.tiles.length - 1) / 2;
-    for (const t of this.grid.tiles as any) {
-      for (const l of (t as any).links) {
-        const keys = [t.key, l[1].key];
-        keys.sort();
 
-        if ((t.x % 2 && t.y % 2) || (l[1].x === t.x) || (l[1].y === t.y)) {
-          // m.set(keys.toString(), [t, l[1]]);
-        } else {
-          t.links.delete(l[0]);
-          // l[1].links.delete(-l[0]);
+    for (const t of this.grid.tiles as any) {
+      for (const [n, m] of (t as any).links) {
+        if (this.isDiagonalCenter(m, t)) {
+          t.links.delete(n);
+          m.links.delete(-n);
         }
       }
 
@@ -46,6 +42,18 @@ export class CatchTheHareGameBase implements IGame {
 
       i++;
     }
+  }
+
+  public isDiagonal(a: any, b: any) {
+    return (a.x !== b.x && a.y !== b.y);
+  }
+
+  public isDiagonalCenter(a: any, b: any) {
+    return this.isDiagonal(a, b) && (this.isCenter(a) || this.isCenter(b));
+  }
+
+  public isCenter(a: any) {
+    return ((a.x % 2) && !(a.y % 2));
   }
 
   public rulers() {

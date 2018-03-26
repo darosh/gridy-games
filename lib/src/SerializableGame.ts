@@ -32,6 +32,44 @@ export function movesToString(this: IGridMappedGame, move: Move[]): string {
   return stringifyPositions(p as any);
 }
 
+export function jumpsToString(this: IGridMappedGame, move: Move[]): string {
+  if (!move) {
+    return "pass";
+  }
+
+  const p = (Array.isArray(move) ? move : [move]).reduce((r: any[], t) => {
+    const a = (Array.isArray(t) ? t.slice() : [t]) as any[];
+    a.reverse();
+    a.forEach((d) => r.push(d));
+    return r;
+  }, []).map(this.grid.toPoint as any);
+  return stringifyPositions(p as any);
+}
+
+export function stringsToJump(this: IGridMappedGame, move: string): Move | null {
+  const p = parsePositions(move);
+
+  if (!p) {
+    return p;
+  }
+
+  const m = [getTile.call(this, p.shift())] as any;
+
+  if (p.length === 1) {
+    m.push(getTile.call(this, p.shift()));
+  } else {
+    const a = getTile.call(this, p.pop());
+    const b = getTile.call(this, p.shift());
+    m.push([a, b]);
+  }
+
+  return m;
+}
+
+function getTile(this: IGridMappedGame, t: any): any {
+  return this.tileMap.get(this.grid.tile.apply(this.grid, t).key);
+}
+
 export function stringsToMove(this: IGridMappedGame, move: string): Move | null {
   const p = parsePositions(move);
 
