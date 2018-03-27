@@ -25,9 +25,9 @@
     </v-layout>
 
     <v-footer
+      v-if="game.moves.length && game.score"
       app
       fixed
-      v-if="game.moves.length && game.score"
       height="auto"
       color="transparent"
       class="pb-2">

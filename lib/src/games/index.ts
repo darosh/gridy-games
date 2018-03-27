@@ -33,17 +33,20 @@ export { Reversi4Game } from "./Reversi4Game";
 export { Reversi6Game } from "./Reversi6Game";
 export { Reversi10Game } from "./Reversi10Game";
 
-export { ReversiHexGame } from "./ReversiGameHex";
+export { ReversiHexGame } from "./ReversiHexGame";
 export { ReversiHex4Game } from "./ReversiHex4Game";
 export { ReversiHex6Game } from "./ReversiHex6Game";
+export { ReversiHex10Game } from "./ReversiHex10Game";
+
+export { AntiReversiGame } from "./AntiReversiGame";
+export { AntiReversiHexGame } from "./AntiReversiHexGame";
 
 export { HexGame } from "./HexGame";
 export { Hex5Game } from "./Hex5Game";
-export { Hex6Game } from "./Hex6Game";
+export { Hex7Game } from "./Hex7Game";
 export { Hex9Game } from "./Hex9Game";
-export { Hex11Game } from "./Hex11Game";
 export { Hex13Game } from "./Hex13Game";
-export { Hex14Game } from "./Hex14Game";
+// export { Hex14Game } from "./Hex14Game";
 
 // export { CzechCheckersGame } from "./CzechCheckersGame";
 // export { InternationalCheckersGame } from "./InternationalCheckersGame";

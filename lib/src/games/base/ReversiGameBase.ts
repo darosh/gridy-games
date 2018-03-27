@@ -27,8 +27,10 @@ export class ReversiGameBase implements IGame {
   protected history: IState[] = [];
   protected center: any[];
   protected knownPossible?: any[];
+  protected anti: boolean;
 
-  constructor(grid: IGrid<AnyTile>, center: boolean = false) {
+  constructor(grid: IGrid<AnyTile>, center: boolean = false, anti: boolean = false) {
+    this.anti = anti;
     this.grid = grid;
     this.tileMap = toMap(grid.tiles);
     const x1 = Math.floor(grid.x / 2 - .5);
@@ -157,7 +159,13 @@ export class ReversiGameBase implements IGame {
   }
 
   public getWinner(): number {
-    return !this.finished ? 0 : this.score[1] === this.score[2] ? -1 : this.score[1] > this.score[2] ? 1 : 2;
+    return !this.finished
+      ? 0
+      : this.score[1] === this.score[2]
+        ? -1
+        : this.score[1] > this.score[2]
+          ? this.anti ? 2 : 1
+          : this.anti ? 1 : 2;
   }
 
   private movePass(m: any) {
