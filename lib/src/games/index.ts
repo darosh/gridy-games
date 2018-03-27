@@ -13,7 +13,7 @@ export { ConnectFourGame } from "./ConnectFourGame";
 
 export { AlquerqueGame } from "./AlquerqueGame";
 export { Alquerque3Game } from "./Alquerque3Game";
-export { CatchTheHareGame } from "./CatchTheHareGame";
+// export { CatchTheHareGame } from "./CatchTheHareGame";
 
 export { FourInARow11Game } from "./FourInARow11Game";
 export { FourInARowRoundGame } from "./FourInARowRoundGame";
@@ -44,12 +44,12 @@ export { Hex11Game } from "./Hex11Game";
 export { Hex13Game } from "./Hex13Game";
 export { Hex14Game } from "./Hex14Game";
 
-export { CzechCheckersGame } from "./CzechCheckersGame";
-export { InternationalCheckersGame } from "./InternationalCheckersGame";
-export { HexCheckCheckersGame } from "./HexCheckCheckersGame";
+// export { CzechCheckersGame } from "./CzechCheckersGame";
+// export { InternationalCheckersGame } from "./InternationalCheckersGame";
+// export { HexCheckCheckersGame } from "./HexCheckCheckersGame";
 
-export { NineMensMorrisGame } from "./NineMensMorrisGame";
-export { TwelveMensMorrisGame } from "./TwelveMensMorrisGame";
-export { SixMensMorrisGame } from "./SixMensMorrisGame";
-export { ThreeMensMorrisGame } from "./ThreeMensMorrisGame";
-export { ThreeDiagonalMensMorrisGame } from "./ThreeDiagonalMensMorrisGame";
+// export { NineMensMorrisGame } from "./NineMensMorrisGame";
+// export { TwelveMensMorrisGame } from "./TwelveMensMorrisGame";
+// export { SixMensMorrisGame } from "./SixMensMorrisGame";
+// export { ThreeMensMorrisGame } from "./ThreeMensMorrisGame";
+// export { ThreeDiagonalMensMorrisGame } from "./ThreeDiagonalMensMorrisGame";
