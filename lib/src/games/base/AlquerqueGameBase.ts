@@ -85,12 +85,45 @@ export class AlquerqueGameBase extends CatchTheHareGameBase {
 
   public possible(): any {
     let result: any[] = this.jumpsPossible();
+    result = this.topJumps(result);
+    result = this.leavesToMoves(result);
 
     if (!result.length) {
       result = this.simplePossible();
     }
 
     return result;
+  }
+
+  private leavesToMoves(r: any[]) {
+    return r.map(this.leaveToMove);
+  }
+
+  private leaveToMove(node: any) {
+    const result = [];
+
+    while (node) {
+      if (node.parent) {
+        result.unshift([node.tile, node.removed]);
+      } else {
+        result.unshift(node.tile);
+      }
+
+      node = node.parent;
+    }
+
+    return result;
+  }
+
+  private topJumps(r: any[]) {
+    if (!r.length) {
+      return r;
+    }
+
+    r.sort((a, b) => b.depth - a.depth);
+    const d = r[0].depth;
+
+    return r.filter((t) => t.depth === d);
   }
 
   private jumpsPossible() {
@@ -101,10 +134,34 @@ export class AlquerqueGameBase extends CatchTheHareGameBase {
         return r;
       }
 
-      r = r.concat(this.jumpPossible(t, this.player, o));
+      const leaves: any[] = this.multiJumps({ tile: t }, o);
+      r = r.concat(leaves);
 
       return r;
     }, []);
+  }
+
+  private multiJumps(parent: any, o: number, leaves: any[] = [], depth: number = 0, removed: any[] = []): any[] {
+    const t = parent.tile;
+    parent.jumps = [];
+
+    for (const [n, m] of t.links) {
+      if (((m as any).data === o) && (removed.indexOf(m) === -1)) {
+        const d = (m as any).links.get(n);
+
+        if (d && !d.data) {
+          const r: any = { tile: d, removed: m, depth, parent };
+          parent.jumps.push(r);
+          this.multiJumps(r, o, leaves, depth + 1, removed.concat([m]));
+        }
+      }
+    }
+
+    if (!parent.jumps.length && depth) {
+      leaves.push(parent);
+    }
+
+    return leaves;
   }
 
   private jumpPossible(t: any, p: number, o: number) {
