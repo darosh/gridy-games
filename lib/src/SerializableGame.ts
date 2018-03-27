@@ -58,9 +58,11 @@ export function stringsToJump(this: IGridMappedGame, move: string): Move | null 
   if (p.length === 1) {
     m.push(getTile.call(this, p.shift()));
   } else {
-    const a = getTile.call(this, p.pop());
-    const b = getTile.call(this, p.shift());
-    m.push([a, b]);
+    while (p.length) {
+      const b = getTile.call(this, p.shift());
+      const a = getTile.call(this, p.shift());
+      m.push([a, b]);
+    }
   }
 
   return m;
