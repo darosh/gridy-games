@@ -1,4 +1,20 @@
 import { Shared } from '../services/shared'
+import { Constants } from '../services/constants'
+
+const {
+  FIRST_INDEX,
+  SECOND_INDEX,
+  MINIMAL_GAME_BOARD,
+  MOBILE_BREAKPOINT,
+  RESIZE_REFRESH_DELAY,
+  SQUARE_RATIO,
+  DRAWER_WIDTH,
+  ZERO_WIDTH,
+  SHORT_BREAKPOINT,
+  GAME_MARGIN_X,
+  GAME_MARGIN_Y,
+  GAME_MARGIN_Y_SHORT
+} = Constants
 
 let resizeTimer = null
 
@@ -24,18 +40,18 @@ export default {
       resizeTimer = setTimeout(() => {
         resizeTimer = null
         this.onResizeUpdated()
-      }, 100)
+      }, RESIZE_REFRESH_DELAY)
     },
     onResizeUpdated () {
       let bounds = this.game.grid.bounds()
-      const innerWidth = window.innerWidth - ((Shared.drawer && (window.innerWidth >= 1264)) ? 300 : 0)
+      const innerWidth = window.innerWidth - ((Shared.drawer && (window.innerWidth >= MOBILE_BREAKPOINT)) ? DRAWER_WIDTH : ZERO_WIDTH)
       const innerHeight = window.innerHeight
 
       if (this.game.landscape) {
         this.vertical = false
       } else {
         const ratio = (bounds.maxX - bounds.minX) / (bounds.maxY - bounds.minY)
-        this.vertical = ratio > 1 && innerWidth < innerHeight
+        this.vertical = ratio > SQUARE_RATIO && innerWidth < innerHeight
       }
 
       this.frame = getFrame(this.vertical, innerHeight, innerWidth)
@@ -47,15 +63,15 @@ export default {
 
 function getFrame (vertical, innerHeight, innerWidth) {
   if (vertical) {
-    return [innerHeight - 64 - 16, innerWidth - 32]
-  } else if (innerHeight < 800) {
-    return [innerWidth - 32, innerHeight - 64 - 16]
+    return [innerHeight - GAME_MARGIN_Y_SHORT, innerWidth - GAME_MARGIN_X]
+  } else if (innerHeight < SHORT_BREAKPOINT) {
+    return [innerWidth - GAME_MARGIN_X, innerHeight - GAME_MARGIN_Y_SHORT]
   } else {
-    return [innerWidth - 32, innerHeight - 64 * 2]
+    return [innerWidth - GAME_MARGIN_X, innerHeight - GAME_MARGIN_Y]
   }
 }
 
 function minimalFrame (frame) {
-  frame[0] = Math.max(180, frame[0])
-  frame[1] = Math.max(180, frame[1])
+  frame[FIRST_INDEX] = Math.max(MINIMAL_GAME_BOARD, frame[FIRST_INDEX])
+  frame[SECOND_INDEX] = Math.max(MINIMAL_GAME_BOARD, frame[SECOND_INDEX])
 }
