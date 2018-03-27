@@ -8,8 +8,8 @@ import { AlquerqueGameBase } from "./base/AlquerqueGameBase";
 
 const SIZE = 3;
 
-export class AlquerqueSimpleGame extends AlquerqueGameBase {
-  public static title = "Alquerque Simple";
+export class Alquerque3Game extends AlquerqueGameBase {
+  public static title = "Alquerque 3x3";
   public static type = "Misc";
   public static created = 950;
   public static aliases = ["Qirkat"];

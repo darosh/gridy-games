@@ -12,7 +12,7 @@ export { TacTickleTriGame } from "./TacTickleTriGame";
 export { ConnectFourGame } from "./ConnectFourGame";
 
 export { CatchTheHareGame } from "./CatchTheHareGame";
-export { AlquerqueSimpleGame } from "./AlquerqueSimpleGame";
+export { Alquerque3Game } from "./Alquerque3Game";
 
 export { FourInARow11Game } from "./FourInARow11Game";
 export { FourInARowRoundGame } from "./FourInARowRoundGame";
