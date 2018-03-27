@@ -24,7 +24,7 @@
       </div>
     </v-layout>
 
-    <v-footer app fixed v-if="game.moves.length && game.score" height="auto" color="transparent">
+    <v-footer app fixed v-if="game.moves.length && game.score" height="auto" color="transparent" class="pb-2">
       <v-flex
         class="title text-xs-right"
         style="width: 60px">{{ game.score[1] }}</v-flex>
