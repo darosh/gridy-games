@@ -10,7 +10,8 @@ export const Constants = {
   SHORT_BREAKPOINT: 800,
   GAME_MARGIN_X: 32,
   GAME_MARGIN_Y: 128,
-  GAME_MARGIN_Y_SHORT: 48
+  GAME_MARGIN_Y_SHORT: 80,
+  GAME_FOOTER: 16
 }
 
 Object.freeze(Constants)

@@ -13,7 +13,8 @@ const {
   SHORT_BREAKPOINT,
   GAME_MARGIN_X,
   GAME_MARGIN_Y,
-  GAME_MARGIN_Y_SHORT
+  GAME_MARGIN_Y_SHORT,
+  GAME_FOOTER
 } = Constants
 
 let resizeTimer = null
@@ -54,18 +55,18 @@ export default {
         this.vertical = ratio > SQUARE_RATIO && innerWidth < innerHeight
       }
 
-      this.frame = getFrame(this.vertical, innerHeight, innerWidth)
+      this.frame = getFrame(this.vertical, innerHeight, innerWidth, this.game.score ? GAME_FOOTER : 0)
 
       minimalFrame(this.frame)
     }
   }
 }
 
-function getFrame (vertical, innerHeight, innerWidth) {
+function getFrame (vertical, innerHeight, innerWidth, footer) {
   if (vertical) {
-    return [innerHeight - GAME_MARGIN_Y_SHORT, innerWidth - GAME_MARGIN_X]
+    return [innerHeight - GAME_MARGIN_Y_SHORT - footer, innerWidth - GAME_MARGIN_X]
   } else if (innerHeight < SHORT_BREAKPOINT) {
-    return [innerWidth - GAME_MARGIN_X, innerHeight - GAME_MARGIN_Y_SHORT]
+    return [innerWidth - GAME_MARGIN_X, innerHeight - GAME_MARGIN_Y_SHORT - footer]
   } else {
     return [innerWidth - GAME_MARGIN_X, innerHeight - GAME_MARGIN_Y]
   }

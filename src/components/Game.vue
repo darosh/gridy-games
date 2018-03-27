@@ -3,6 +3,7 @@
     v-resize="onResize"
     :class="theme">
     <v-layout
+      style="margin-bottom: -36px"
       column
       wrap
       align-center
@@ -22,13 +23,8 @@
           centered/>
       </div>
     </v-layout>
-    <v-layout
-      v-if="game.moves.length && game.score"
-      row
-      justify-center
-      align-center
-      class="text-xs-center player-score"
-      style="position: absolute; bottom: 12px; left:2px; right:0">
+
+    <v-footer app fixed v-if="game.moves.length && game.score" height="auto" color="transparent">
       <v-flex
         class="title text-xs-right"
         style="width: 60px">{{ game.score[1] }}</v-flex>
@@ -36,7 +32,8 @@
       <v-flex
         class="title text-xs-left"
         style="width: 60px">{{ game.score[2] }}</v-flex>
-    </v-layout>
+    </v-footer>
+
     <v-speed-dial
       v-model="fab"
       style="z-index: 9"
@@ -342,17 +339,21 @@ export default {
       }
     },
     runRobot (player, jobId) {
-      player.select(this.game).then(move => {
-        if (jobId !== JOB_ID) {
-          return
-        }
+      const start = Date.now()
 
-        this.working = false
-        undoAction(this.game)
-        this.game.move(move.move)
-        this.kickSound()
-        this.update()
-        this.robot()
+      player.select(this.game).then(move => {
+        setTimeout(() => {
+          if (jobId !== JOB_ID) {
+            return
+          }
+
+          this.working = false
+          undoAction(this.game)
+          this.game.move(move.move)
+          this.kickSound()
+          this.update()
+          this.robot()
+        }, Math.max(0, 400 - Date.now() + start))
       })
     },
     move (tile) {
