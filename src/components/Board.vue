@@ -184,7 +184,7 @@ export default {
       }
     },
     'game.moves.length': function (value, old) {
-      if(value === (old + 1)) {
+      if (value === (old + 1)) {
         this.updateStones()
       } else {
         this.initStones()
@@ -223,15 +223,15 @@ export default {
       if (this.isMove && this.game.moves.length) {
         const action = this.game.moves[this.game.moves.length - 1]
 
-        const first = action[0];
+        const first = action[0]
         let last = action[action.length - 1]
         last = Array.isArray(last) ? last[0] : last
 
         this.stones.find(s => s.tile === first).tile = last
 
-        for(let i = 0; i < action.length; i++) {
-          if(Array.isArray(action[i])) {
-            if(action[i][1]) {
+        for (let i = 0; i < action.length; i++) {
+          if (Array.isArray(action[i])) {
+            if (action[i][1]) {
               const index = this.stones.findIndex(s => s.tile === action[i][1])
               this.stones.splice(index, 1)
             }

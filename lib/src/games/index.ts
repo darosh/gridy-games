@@ -13,6 +13,7 @@ export { ConnectFourGame } from "./ConnectFourGame";
 
 export { AlquerqueGame } from "./AlquerqueGame";
 export { Alquerque3Game } from "./Alquerque3Game";
+export { Alquerque7Game } from "./Alquerque7Game";
 // export { CatchTheHareGame } from "./CatchTheHareGame";
 
 export { FourInARow11Game } from "./FourInARow11Game";
