@@ -7,6 +7,7 @@ export class TicTacToeTriGame extends ConnectGameBase {
   public static theme = Theme.Hex;
   public static type = "Connect";
   public static original = "TicTacToeGame";
+  public static sample = "a2, b2, b1, a1, c1";
 
   public landscape = true;
 
