@@ -2,8 +2,8 @@ import { Shared } from '../services/shared'
 import { Constants } from '../services/constants'
 
 const {
-  FIRST_INDEX,
-  SECOND_INDEX,
+  AXE_X,
+  AXE_Y,
   MINIMAL_GAME_BOARD,
   MOBILE_BREAKPOINT,
   RESIZE_REFRESH_DELAY,
@@ -73,6 +73,6 @@ function getFrame (vertical, innerHeight, innerWidth, footer) {
 }
 
 function minimalFrame (frame) {
-  frame[FIRST_INDEX] = Math.max(MINIMAL_GAME_BOARD, frame[FIRST_INDEX])
-  frame[SECOND_INDEX] = Math.max(MINIMAL_GAME_BOARD, frame[SECOND_INDEX])
+  frame[AXE_X] = Math.max(MINIMAL_GAME_BOARD, frame[AXE_X])
+  frame[AXE_Y] = Math.max(MINIMAL_GAME_BOARD, frame[AXE_Y])
 }
