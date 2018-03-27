@@ -7,7 +7,7 @@ export class Hex7Game extends HexGameBase {
   public static title = "Hex 7x7";
   public static type = "Hex";
   public static original = "HexGame";
-  public static sample = "f2, d5, c3, e2, d3, e3, d4, e4, e1, f1, c6, d6";
+  public static sample = "c7, c6, c5, a4, f1, e7, c3, g4, g3, g2, a6, e2, d5, f5, f4, d3, e4, g7, b5";
 
   constructor() {
     super(landscapeHex(new HexagonalGrid(1, undefined, Shape.Rhombus, 7)) as any);
