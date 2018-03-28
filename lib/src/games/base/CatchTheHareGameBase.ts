@@ -1,9 +1,9 @@
 import {
-  AnyTile, IGrid, link, Position, Rectangular8Tile, RectangularGrid, RectangularTile, Shape, toMap,
-} from "gridy";
+  AnyTile, IGrid, link, Position, Rectangular8Tile, RectangularGrid, RectangularTile, Shape, toMap
+} from 'gridy';
 
-import { IGame } from "../../IGame";
-import { Theme } from "../../Theme";
+import { IGame } from '../../IGame';
+import { Theme } from '../../Theme';
 
 export class CatchTheHareGameBase implements IGame {
   public static theme = Theme.Qirkat;
@@ -11,7 +11,7 @@ export class CatchTheHareGameBase implements IGame {
 
   public moves: any[] = [];
   public player: number = 1;
-  public score?: { [player: number]: number; };
+  public score?: { [player: number]: number };
   public scale: number = 1;
   public winner: number = 0;
 
@@ -26,8 +26,8 @@ export class CatchTheHareGameBase implements IGame {
     let i = 0;
     const mid = (this.grid.tiles.length - 1) / 2;
 
-    for (const t of this.grid.tiles as any) {
-      for (const [n, m] of (t as any).links) {
+    for (const t of <any>this.grid.tiles) {
+      for (const [n, m] of (t).links) {
         if (this.isDiagonalCenter(m, t)) {
           t.links.delete(n);
           m.links.delete(-n);
@@ -59,8 +59,8 @@ export class CatchTheHareGameBase implements IGame {
   public rulers() {
     const m = new Map();
 
-    for (const t of this.grid.tiles as any) {
-      for (const l of (t as any).links) {
+    for (const t of <any>this.grid.tiles) {
+      for (const l of (t).links) {
         const keys = [t.key, l[1].key];
         keys.sort();
         m.set(keys.toString(), [t, l[1]]);
@@ -74,12 +74,12 @@ export class CatchTheHareGameBase implements IGame {
     return [];
   }
   public move(m: any): void {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   public undo(): void {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   public evaluate(): number {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 }

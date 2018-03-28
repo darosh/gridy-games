@@ -1,11 +1,11 @@
-import { IAction, ICompoundStep, IGameTile, IGridGame, Move } from "../IGridGame";
+import { IAction, ICompoundStep, IGameTile, IGridGame, Move } from '../IGridGame';
 
 export function getMovePlace(move: Move, cursor: number = 0): IGameTile | undefined {
   if (Array.isArray(move)) {
     if (Array.isArray(move[cursor])) {
-      return (move[cursor] as any)[0];
+      return (<any>move[cursor])[0];
     } else {
-      return move[cursor] as any;
+      return <any>move[cursor];
     }
   } else if (!cursor) {
     return move;
@@ -33,7 +33,7 @@ export function initActions(game: IGridGame, moves: Move[], cursor: number = 0) 
   }
 
   game.actions = !cursor ? [] : game.actions;
-  (game.actions as any).push({ highlighted });
+  (<any>game.actions).push({ highlighted });
 }
 
 export function selectAction(game: IGridGame, tile: IGameTile) {

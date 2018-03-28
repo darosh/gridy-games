@@ -1,8 +1,8 @@
-import { AnyTile, Directions, TileMap, toMap } from "gridy";
+import { AnyTile, Directions, TileMap, toMap } from 'gridy';
 
 function mapped(available: TileMap, selection: Directions<AnyTile>) {
-  return selection.filter((t) => available.has(t[1].key))
-    .map((t) => [t[0], available.get(t[1].key)]) as Directions<AnyTile>;
+  return <Directions<AnyTile>>selection.filter((t) => available.has(t[1].key))
+    .map((t) => [t[0], available.get(t[1].key)]);
 }
 
 export function evaluateLines(t1: AnyTile[], free: Map<string, AnyTile>, min: number): number {

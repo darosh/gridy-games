@@ -10,7 +10,7 @@ export class InternationalCheckersGame extends CheckersGameBase {
   constructor() {
     super(new RectangularGrid(1, undefined, Shape.Even, 10, 10, Rectangular8Tile) as any, 4);
 
-    for (const t of this.grid.tiles as any) {
+    for (const t of <any>this.grid.tiles) {
       t.even = (t.x % 2) === (t.y % 2);
       t.odd = !t.even;
     }

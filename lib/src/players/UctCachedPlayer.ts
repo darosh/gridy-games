@@ -1,7 +1,7 @@
 // Based on https://github.com/OMerkel/UCThello
 
-import { IGame } from "../IGame";
-import { UctNode, UctPlayer } from "./UctPlayer";
+import { IGame } from '../IGame';
+import { UctNode, UctPlayer } from './UctPlayer';
 
 // tslint:disable-next-line:max-classes-per-file
 export class UctCachedPlayer extends UctPlayer {
@@ -23,7 +23,7 @@ export class UctCachedPlayer extends UctPlayer {
     return {
       duration: Date.now() - startTime,
       move: this.cachedRoot.action,
-      nodesVisited,
+      nodesVisited
     };
   }
 

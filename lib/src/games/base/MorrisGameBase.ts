@@ -41,7 +41,7 @@ export class MorrisGameBase implements IGame {
     this.tileMap = toMap(this.grid.tiles);
     link(this.tileMap);
 
-    this.grid.tiles = (this.grid.tiles as any).filter((t: any) => {
+    this.grid.tiles = (<any>this.grid.tiles).filter((t: any) => {
       let v;
       let r;
       const x = Math.abs(t.x - mid);
@@ -73,7 +73,7 @@ export class MorrisGameBase implements IGame {
     const m = new Map();
 
     for (const t of this.grid.tiles) {
-      for (const l of (t as any).links) {
+      for (const l of (<any>t).links) {
         const keys = [t.key, l[1].key];
         keys.sort();
         m.set(keys.toString(), [t, l[1]]);

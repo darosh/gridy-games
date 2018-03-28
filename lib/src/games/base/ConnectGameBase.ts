@@ -1,11 +1,12 @@
-import { AnyTile, IGrid, ITile, link, Search, toArray, toMap } from "gridy";
-import { IGame } from "../../IGame";
-import { IGameTile } from "../../IGridGame";
-import { Move } from "../../Move";
-import { moveToString, stringToMove, undo } from "../../SerializableGame";
-import { Theme } from "../../Theme";
-import { other, parsePosition, parseRecord, stringifyPosition } from "../../utils";
-import { connections, evaluateLines, evaluateLinked, winning } from "../evaluate/connect";
+import { AnyTile, IGrid, ITile, link, Search, toArray, toMap } from 'gridy';
+import { IGame } from '../../IGame';
+import { IGameTile } from '../../IGridGame';
+import { Move } from '../../Move';
+import { Theme } from '../../Theme';
+import { other, parseRecord } from '../../utils';
+import { connections, evaluateLinked, winning } from '../utils/connect';
+import { moveToString, stringToMove} from '../utils/serialization';
+import {undo} from '../utils/undo';
 
 export class ConnectGameBase implements IGame {
   public static theme = Theme.Gomoku;
@@ -95,6 +96,7 @@ export class ConnectGameBase implements IGame {
 
   public winning(): AnyTile[] | undefined {
     const m = this.moves[this.moves.length - 1];
+
     return winning(m, m.data, this.min);
   }
 }

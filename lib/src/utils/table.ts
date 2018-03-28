@@ -1,32 +1,32 @@
-import { HexagonalGrid, RadialGrid, RectangularGrid, TriangularGrid } from "gridy";
-import { IGame } from "../IGame";
-import { IGridGame, IGridGameConstructor } from "../IGridGame";
-import { initActions } from "./actions";
+import {HexagonalGrid, RadialGrid, RectangularGrid, TriangularGrid} from 'gridy';
+import {IGame} from '../IGame';
+import {IGridGame, IGridGameConstructor} from '../IGridGame';
+import {initActions} from './actions';
 
 export const FIELDS = [
-  "title",
-  "type",
-  "items",
-  "linkText",
-  "authors",
-  "aliases",
-  "rules",
-  "created",
-  "location",
-  "tiles",
-  "original",
-  "grid",
+  'title',
+  'type',
+  'items',
+  'linkText',
+  'authors',
+  'aliases',
+  'rules',
+  'created',
+  'location',
+  'tiles',
+  'original',
+  'grid'
 ];
 
 const GRIDS = new Map<any, string>([
-  [RectangularGrid, "Rectangular"],
-  [HexagonalGrid, "Hexagonal"],
-  [RadialGrid, "Radial"],
-  [TriangularGrid, "Triangular"],
+  [RectangularGrid, 'Rectangular'],
+  [HexagonalGrid, 'Hexagonal'],
+  [RadialGrid, 'Radial'],
+  [TriangularGrid, 'Triangular']
 ]);
 
 function copy(name: {}): {} {
-  return Object.assign({}, name);
+  return {...name};
 }
 
 function domain(link: string) {
@@ -34,17 +34,20 @@ function domain(link: string) {
 }
 
 function id(key: string) {
-  return key.replace("Game", "");
+  return key.replace('Game', '');
 }
 
-interface IDictionary { [k: string]: any; }
-const links = ["wiki", "source"];
+interface IDictionary {
+  [k: string]: any;
+}
+
+const links = ['wiki', 'source'];
 
 function merge(a: IDictionary, b: IDictionary): IDictionary {
   for (const k in a) {
     if (Array.isArray(a[k])) {
-      a[k + "Array"] = a[k];
-      a[k] = a[k].join(", ");
+      a[k + 'Array'] = a[k];
+      a[k] = a[k].join(', ');
     }
   }
 
@@ -68,9 +71,9 @@ function getOriginals(a: any, b: any) {
     }
 
     if (Array.isArray(b[k])) {
-      b[k + "Array"] = b[k];
-      b[k] = b[k].join(", ");
-      a[k + "Array"] = b[k + "Array"];
+      b[k + 'Array'] = b[k];
+      b[k] = b[k].join(', ');
+      a[k + 'Array'] = b[k + 'Array'];
     }
 
     a[k] = b[k];
@@ -108,7 +111,8 @@ function row(a: IGridGameConstructor, games: { [name: string]: IGridGameConstruc
 
   let instance: IGridGame;
 
-  Object.defineProperty(m, "instance", {
+  Object.defineProperty(m, 'instance', {
+    // tslint:disable-next-line:no-reserved-keywords
     get() {
       if (instance) {
         return instance;
@@ -116,17 +120,19 @@ function row(a: IGridGameConstructor, games: { [name: string]: IGridGameConstruc
       instance = new games[key]();
       initActions(instance, (instance as any as IGame).possible());
       return Object.freeze(instance);
-    },
+    }
   });
-  Object.defineProperty(m, "tiles", {
+  Object.defineProperty(m, 'tiles', {
+    // tslint:disable-next-line:no-reserved-keywords
     get() {
       return m.instance.grid.tiles.length;
-    },
+    }
   });
-  Object.defineProperty(m, "grid", {
+  Object.defineProperty(m, 'grid', {
+    // tslint:disable-next-line:no-reserved-keywords
     get() {
       return GRIDS.get(m.instance.grid.constructor);
-    },
+    }
   });
 
   m.original = b.title || a.title;

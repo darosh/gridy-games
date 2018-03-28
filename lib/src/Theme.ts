@@ -7,13 +7,13 @@ export enum Theme {
   Plastic,
   Qirkat,
   Reversi,
-  TacTickle,
+  TacTickle
 }
 
 export enum Stones {
   BlackWhite,
   OrangeBlue,
-  RedYellow,
+  RedYellow
 }
 
 export const ThemeStones = {
@@ -25,11 +25,11 @@ export const ThemeStones = {
   [Theme.Plastic]: Stones.RedYellow,
   [Theme.Qirkat]: Stones.BlackWhite,
   [Theme.Reversi]: Stones.BlackWhite,
-  [Theme.TacTickle]: Stones.OrangeBlue,
+  [Theme.TacTickle]: Stones.OrangeBlue
 };
 
 export const StoneNames = {
-  [Stones.BlackWhite]: ["Black", "White"],
-  [Stones.OrangeBlue]: ["Orange", "Blue"],
-  [Stones.RedYellow]: ["Red", "Yellow"],
+  [Stones.BlackWhite]: ['Black', 'White'],
+  [Stones.OrangeBlue]: ['Orange', 'Blue'],
+  [Stones.RedYellow]: ['Red', 'Yellow']
 };

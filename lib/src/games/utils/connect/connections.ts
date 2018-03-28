@@ -1,9 +1,9 @@
-import { AnyTile, Directions, TileMap, toMap } from "gridy";
+import { AnyTile, Directions, TileMap, toMap } from 'gridy';
 
 export function connections(move: any, player: number, min: number) {
   const done: { [direction: number]: boolean } = {};
 
-  for (const [n, m] of move.links as any) {
+  for (const [n, m] of move.links) {
     // const opposite = move.opposite ? move.opposite(n) : -n;
     const opposite = -n;
 
@@ -19,7 +19,7 @@ export function connections(move: any, player: number, min: number) {
         o = (o !== move) ? o : false;
       }
 
-      o = (move as any).links.get(opposite);
+      o = (move).links.get(opposite);
 
       while (o && (o.data === player)) {
         v++;

@@ -1,11 +1,9 @@
-import { AnyTile, IGrid } from "gridy/dist/types";
-import { IGame } from "./IGame";
-import { IGameTile, IGridMappedGame, Move } from "./IGridGame";
-import { other, parsePosition, parsePositions, stringifyPosition, stringifyPositions } from "./utils";
+import {IGameTile, IGridMappedGame, Move} from '../../../IGridGame';
+import {parsePosition, parsePositions, stringifyPosition, stringifyPositions} from '../../../utils/index';
 
 export function moveToString(this: IGridMappedGame, move: Move): string {
   if (!move) {
-    return "pass";
+    return 'pass';
   }
 
   const p = this.grid.toPoint(move as IGameTile);
@@ -25,16 +23,16 @@ export function stringToMove(this: IGridMappedGame, move: string): Move | null {
 
 export function movesToString(this: IGridMappedGame, move: Move[]): string {
   if (!move) {
-    return "pass";
+    return 'pass';
   }
 
-  const p = (Array.isArray(move) ? move : [move]).map(this.grid.toPoint as any);
-  return stringifyPositions(p as any);
+  const p = (Array.isArray(move) ? move : [move]).map(<any>this.grid.toPoint);
+  return stringifyPositions(<any>p);
 }
 
 export function jumpsToString(this: IGridMappedGame, move: Move[]): string {
   if (!move) {
-    return "pass";
+    return 'pass';
   }
 
   const p = (Array.isArray(move) ? move : [move]).reduce((r: any[], t) => {
@@ -42,8 +40,8 @@ export function jumpsToString(this: IGridMappedGame, move: Move[]): string {
     a.reverse();
     a.forEach((d) => r.push(d));
     return r;
-  }, []).map(this.grid.toPoint as any);
-  return stringifyPositions(p as any);
+  },                                                     []).map(<any>this.grid.toPoint);
+  return stringifyPositions(<any>p);
 }
 
 export function stringsToJump(this: IGridMappedGame, move: string): Move | null {
@@ -79,20 +77,8 @@ export function stringsToMove(this: IGridMappedGame, move: string): Move | null 
     return p;
   }
 
-  return (p as any).map((pp: any) => {
+  return (<any>p).map((pp: any) => {
     const t = this.grid.tile.apply(this.grid, pp);
     return this.tileMap.get(t.key);
   });
-}
-
-export function undo(this: IGridMappedGame & IGame): void {
-  const move = this.moves.pop();
-  move.data = null;
-
-  this.freeTileMap.set(move.key, move);
-  this.player = other(this.player);
-  this.finished = false;
-  this.winner = 0;
-
-  this.playerTiles[this.player].pop();
 }

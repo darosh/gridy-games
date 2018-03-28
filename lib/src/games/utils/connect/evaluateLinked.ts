@@ -1,9 +1,9 @@
-import { AnyTile, Directions, TileMap, toMap } from "gridy";
+import { AnyTile, Directions, TileMap, toMap } from 'gridy';
 
 export function evaluateLinked(tiles: AnyTile[], min: number, player: number): number {
   let c: number = 0;
 
-  for (const t of tiles as any) {
+  for (const t of <any>tiles) {
     const s = [];
 
     for (const u of t.links) {
@@ -44,9 +44,9 @@ function evaluate(t: AnyTile, k: number, min: number, player: number) {
 
   while (i) {
     l.push(i);
-    i = (i as any).links.get(k);
+    i = (i).links.get(k);
 
-    if (!i || ((i as any).data !== player)) {
+    if (!i || ((i).data !== player)) {
       break;
     }
   }

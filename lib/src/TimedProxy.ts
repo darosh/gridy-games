@@ -1,6 +1,6 @@
-import { IGame } from "./IGame";
-import { IGridGame } from "./IGridGame";
-import { other } from "./utils";
+import { IGame } from './IGame';
+import { IGridGame } from './IGridGame';
+import { other } from './utils';
 
 export class TimedProxy implements IGame, IGridGame {
   public game: IGame & IGridGame;
@@ -23,9 +23,9 @@ export class TimedProxy implements IGame, IGridGame {
     this.constructor = game.constructor;
     Object.assign(this, opt);
 
-    this.bind("winning");
-    this.bind("links");
-    this.bind("rulers");
+    this.bind('winning');
+    this.bind('links');
+    this.bind('rulers');
   }
 
   public dispose() {
@@ -86,11 +86,11 @@ export class TimedProxy implements IGame, IGridGame {
   }
 
   public moveToString(move: any): string {
-    return this.game.moveToString ? this.game.moveToString(move) : "";
+    return this.game.moveToString ? this.game.moveToString(move) : '';
   }
 
   public stringToMove(move: string): any {
-    return (this.game as any).stringToMove(move);
+    return (this.game).stringToMove(move);
   }
 
   private start() {
@@ -125,9 +125,9 @@ export class TimedProxy implements IGame, IGridGame {
             this.expired = true;
             this.timeoutWinner = other(this.game.player);
           }
-        }, this.signalDelay);
-      }, 1000);
-    }, this.limit - counter * 1000 - this.signalDelay);
+        },         this.signalDelay);
+      },                       1000);
+    },                       this.limit - counter * 1000 - this.signalDelay);
   }
 
   private stop(pending = false) {
@@ -140,8 +140,8 @@ export class TimedProxy implements IGame, IGridGame {
   }
 
   private bind(prop: string) {
-    if ((this.game as any) [prop]) {
-      (this as any)[prop] = (this.game as any)[prop].bind(this.game);
+    if ((this.game) [prop]) {
+      (<any>this)[prop] = (this.game)[prop].bind(this.game);
     }
   }
 }

@@ -1,9 +1,9 @@
-import { AnyTile, IGrid, link, Position, toMap } from "gridy";
-import { IGame } from "../../IGame";
-import { Move } from "../../Move";
-import { moveToString, stringToMove } from "../../SerializableGame";
-import { Theme } from "../../Theme";
-import { other, parsePosition, stringifyPosition } from "../../utils";
+import { AnyTile, IGrid, link, Position, toMap } from 'gridy';
+import { IGame } from '../../IGame';
+import { Move } from '../../Move';
+import { Theme } from '../../Theme';
+import { other, parsePosition, stringifyPosition } from '../../utils';
+import { moveToString, stringToMove } from '../utils/serialization';
 
 export interface IState {
   [index: string]: number;
@@ -33,16 +33,16 @@ export class ReversiGameBase implements IGame {
     this.anti = anti;
     this.grid = grid;
     this.tileMap = toMap(grid.tiles);
-    const x1 = Math.floor(grid.x / 2 - .5);
-    const x2 = Math.ceil(grid.x / 2 - .5);
-    const y1 = Math.floor(grid.y / 2 - .5);
-    const y2 = Math.ceil(grid.y / 2 - .5);
+    const x1 = Math.floor(grid.x / 2 - 0.5);
+    const x2 = Math.ceil(grid.x / 2 - 0.5);
+    const y1 = Math.floor(grid.y / 2 - 0.5);
+    const y2 = Math.ceil(grid.y / 2 - 0.5);
 
     this.center = [
-      this.tileMap.get((grid as any).tile(x1, y1).key),
-      this.tileMap.get((grid as any).tile(x1, y2).key),
-      this.tileMap.get((grid as any).tile(x2, y2).key),
-      this.tileMap.get((grid as any).tile(x2, y1).key),
+      this.tileMap.get((<any>grid).tile(x1, y1).key),
+      this.tileMap.get((<any>grid).tile(x1, y2).key),
+      this.tileMap.get((<any>grid).tile(x2, y2).key),
+      this.tileMap.get((<any>grid).tile(x2, y1).key)
     ];
 
     this.empty = toMap(this.grid.tiles);
@@ -56,7 +56,7 @@ export class ReversiGameBase implements IGame {
   }
 
   public possible(): any[] {
-    return this.knownPossible as any;
+    return <any>this.knownPossible;
   }
 
   public updatePossible() {
@@ -79,8 +79,8 @@ export class ReversiGameBase implements IGame {
     }
 
     for (const m of this.empty.values() as any) {
-      for (const d of (m as any).links.keys()) {
-        let node = (m as any).links.get(d);
+      for (const d of (m).links.keys()) {
+        let node = (m).links.get(d);
         let nodes = 0;
 
         while (node && node.data && (node.data !== pl)) {

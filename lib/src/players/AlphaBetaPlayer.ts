@@ -1,6 +1,6 @@
 // based on https://medium.freecodecamp.org/simple-chess-ai-step-by-step-1d55a9266977
 
-import { IGame, IPLayer, Move } from "../";
+import { IGame, IPLayer, Move } from '../';
 
 export class AlphaBetaPlayer implements IPLayer {
   public count = 0;
@@ -55,6 +55,7 @@ export class AlphaBetaPlayer implements IPLayer {
 
         if (beta <= alpha) {
           this.hit++;
+
           return bestMove;
         }
       }
@@ -71,6 +72,7 @@ export class AlphaBetaPlayer implements IPLayer {
 
         if (beta <= alpha) {
           this.hit++;
+
           return bestMove;
         }
       }

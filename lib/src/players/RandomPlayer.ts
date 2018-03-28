@@ -1,4 +1,4 @@
-import { IGame, IPLayer, Move } from "../";
+import { IGame, IPLayer, Move } from '../';
 
 export class RandomPlayer implements IPLayer {
   public select(game: IGame): Move {

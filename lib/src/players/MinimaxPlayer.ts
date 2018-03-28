@@ -1,6 +1,6 @@
 // based on https://medium.freecodecamp.org/simple-chess-ai-step-by-step-1d55a9266977
 
-import { IGame, IPLayer, Move } from "../";
+import { IGame, IPLayer, Move } from '../';
 
 export class MinimaxPlayer implements IPLayer {
   public count = 0;

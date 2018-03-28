@@ -1,9 +1,10 @@
-import { AnyTile, Float3, IGrid, link, Position, toArray, toMap } from "gridy";
-import { IGame } from "../../IGame";
-import { Move } from "../../Move";
-import { moveToString, stringToMove, undo } from "../../SerializableGame";
-import { Theme } from "../../Theme";
-import { other, parsePosition, stringifyPosition } from "../../utils";
+import { AnyTile, Float3, IGrid, link, Position, toArray, toMap } from 'gridy';
+import { IGame } from '../../IGame';
+import { Move } from '../../Move';
+import { Theme } from '../../Theme';
+import { other, parsePosition, stringifyPosition } from '../../utils';
+import { moveToString, stringToMove} from '../utils/serialization';
+import {undo} from '../utils/undo';
 
 export class HexGameBase implements IGame {
   public static theme = Theme.Hex;
@@ -28,10 +29,10 @@ export class HexGameBase implements IGame {
     this.tileMap = toMap(grid.tiles);
     this.freeTileMap = toMap(grid.tiles);
     link(this.tileMap);
-    this.markLine(this.grid.tile(0, 0), this.grid.tile(0, this.grid.y - 1), 1, "begin");
-    this.markLine(this.grid.tile(this.grid.x - 1, 0), this.grid.tile(this.grid.x - 1, this.grid.y - 1), 1, "end");
-    this.markLine(this.grid.tile(0, 0), this.grid.tile(this.grid.x - 1, 0), 2, "begin");
-    this.markLine(this.grid.tile(0, this.grid.y - 1), this.grid.tile(this.grid.x - 1, this.grid.y - 1), 2, "end");
+    this.markLine(this.grid.tile(0, 0), this.grid.tile(0, this.grid.y - 1), 1, 'begin');
+    this.markLine(this.grid.tile(this.grid.x - 1, 0), this.grid.tile(this.grid.x - 1, this.grid.y - 1), 1, 'end');
+    this.markLine(this.grid.tile(0, 0), this.grid.tile(this.grid.x - 1, 0), 2, 'begin');
+    this.markLine(this.grid.tile(0, this.grid.y - 1), this.grid.tile(this.grid.x - 1, this.grid.y - 1), 2, 'end');
   }
 
   public possible(): any[] {
@@ -48,7 +49,7 @@ export class HexGameBase implements IGame {
       [this.grid.tile(-1, 1), this.grid.tile(- 1, this.grid.y - 1), 1],
       [this.grid.tile(this.grid.x, 0), this.grid.tile(this.grid.x, this.grid.y - 2), 1],
       [this.grid.tile(1, -1), this.grid.tile(this.grid.x - 1, -1), 2],
-      [this.grid.tile(0, this.grid.y), this.grid.tile(this.grid.x - 2, this.grid.y), 2],
+      [this.grid.tile(0, this.grid.y), this.grid.tile(this.grid.x - 2, this.grid.y), 2]
     ];
   }
 
@@ -67,7 +68,7 @@ export class HexGameBase implements IGame {
   }
 
   public evaluate(): number {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
   public winning(): AnyTile[] | undefined {
@@ -82,13 +83,13 @@ export class HexGameBase implements IGame {
     while (i < a.length) {
       const t = a[i].tile;
 
-      if (t["begin" + v]) {
+      if (t[`begin${v}`]) {
         begin = begin || a[i];
 
         // if (!end) {
         //   continue;
         // }
-      } else if (t["end" + v]) {
+      } else if (t[`end${v}`]) {
         end = end || a[i];
 
         // if (!begin) {
@@ -166,13 +167,13 @@ export class HexGameBase implements IGame {
     while (i < a.length) {
       const t = a[i];
 
-      if (t["begin" + v]) {
+      if (t[`begin${v}`]) {
         begin = true;
 
         // if (!end) {
         //   continue;
         // }
-      } else if (t["end" + v]) {
+      } else if (t[`end${v}`]) {
         end = true;
 
         // if (!begin) {

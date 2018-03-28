@@ -1,4 +1,4 @@
-import { AnyTile, IGrid } from "gridy";
+import { AnyTile, IGrid } from 'gridy';
 
 export type TileData = number | string | null | undefined;
 
@@ -21,7 +21,7 @@ export interface IGameTile extends AnyTile {
 export enum Phase {
   PLACE = 0,
   REMOVED = 1,
-  MODIFIED = 2,
+  MODIFIED = 2
 }
 
 export type Step = (IGameTile | ICompoundStep);
@@ -49,9 +49,9 @@ export interface IGridGame {
   scale?: number;
   landscape?: boolean;
   actions?: IGameState[];
-  winning?: () => IGameTile[];
-  rulers?: () => IGameTile[];
-  links?: () => IGameTile[];
+  winning?(): IGameTile[];
+  rulers?(): IGameTile[];
+  links?(): IGameTile[];
   moveToString?(move: any): string;
 }
 

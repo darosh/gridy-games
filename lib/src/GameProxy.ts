@@ -1,4 +1,4 @@
-import { IGame } from "./IGame";
+import { IGame } from './IGame';
 
 export class GameProxy implements IGame {
   public game: IGame;

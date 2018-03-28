@@ -1,10 +1,10 @@
-import { AnyTile, Directions, IGrid, link, Position, toMap } from "gridy";
-import { Move } from "../..";
-import { IGame } from "../../IGame";
-import { movesToString, stringsToMove } from "../../SerializableGame";
-import { Theme } from "../../Theme";
-import { other, parsePositions, stringifyPositions } from "../../utils";
-import { connections, winning } from "../evaluate/connect";
+import { AnyTile, Directions, IGrid, link, Position, toMap } from 'gridy';
+import { Move } from '../..';
+import { IGame } from '../../IGame';
+import { Theme } from '../../Theme';
+import { other, parsePositions, stringifyPositions } from '../../utils';
+import { connections, winning } from '../utils/connect';
+import { movesToString, stringsToMove } from '../utils/serialization';
 
 export class TacTickleGameBase implements IGame {
   public static theme = Theme.TacTickle;
@@ -12,7 +12,7 @@ export class TacTickleGameBase implements IGame {
 
   public moves: any[] = [];
   public player: number = 1;
-  public score?: { [player: number]: number; };
+  public score?: { [player: number]: number };
   public winner: number = 0;
 
   public playerTiles: { [i: number]: AnyTile[] } = { 1: [], 2: [] };
@@ -54,7 +54,7 @@ export class TacTickleGameBase implements IGame {
       }
 
       return r;
-    }, []);
+    },                            []);
   }
   public move(m: any): void {
     m[1].data = m[0].data;
@@ -81,18 +81,19 @@ export class TacTickleGameBase implements IGame {
     this.winner = 0;
   }
   public evaluate(): number {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
   public winning(): AnyTile[] | undefined {
     const m = this.moves[this.moves.length - 1];
+
     return winning(m[1], m[1].data, this.min);
   }
 
   private init(lines = [[0, 0, 1], [0, this.grid.y - 1, 0]]) {
     for (const [xx, y, skip] of lines) {
       for (let x: number = xx; x < xx + 4; x++) {
-        const t = (this.tileMap.get((this.grid as any).tile(x, y).key) as any);
+        const t = (<any>this.tileMap.get((<any>this.grid).tile(x, y).key));
         const p = (x + skip) % 2 + 1;
         if (!t) { continue; }
         t.data = p;

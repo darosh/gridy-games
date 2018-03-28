@@ -1,5 +1,5 @@
-import * as games from "./games";
-import { table } from "./utils";
+import * as games from './games';
+import { table } from './utils';
 
 export class Info {
   public static set wip(value: boolean) {
@@ -11,10 +11,10 @@ export class Info {
 
   public static get games(): ReadonlyArray<any> {
     if (!Info.gamesValue) {
-      Info.gamesValue = Object.freeze(table(games as any, this.wipValue));
+      Info.gamesValue = Object.freeze(table(<any>games, this.wipValue));
     }
 
-    return Info.gamesValue as ReadonlyArray<any>;
+    return Info.gamesValue;
   }
 
   public static game(id: string) {

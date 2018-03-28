@@ -38,7 +38,7 @@ export class CheckersGameBase implements IGame {
     for (const n of [[0, lines, "1"], [this.grid.y - lines, this.grid.y, "2"] as any]) {
       for (let line: number = n[0]; line < n[1]; line++) {
         for (let x: number = skip === 1 ? 0 : line % 2; x < this.grid.x; x += skip) {
-          (this.tileMap.get((this.grid as any).tile(x, line).key) as any).data = n[2];
+          (this.tileMap.get((<any>this.grid).tile(x, line).key) as any).data = n[2];
         }
       }
     }

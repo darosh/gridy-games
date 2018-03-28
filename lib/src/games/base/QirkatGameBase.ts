@@ -1,11 +1,11 @@
 import {
-  AnyTile, IGrid, link, Position, Rectangular8Tile, RectangularGrid, RectangularTile, Shape, toMap,
-} from "gridy";
+  AnyTile, IGrid, link, Position, Rectangular8Tile, RectangularGrid, RectangularTile, Shape, toMap
+} from 'gridy';
 
-import { IGame } from "../../IGame";
-import { jumpsToString, stringsToJump } from "../../SerializableGame";
-import { getMovePlace, other } from "../../utils";
-import { CatchTheHareGameBase } from "./CatchTheHareGameBase";
+import { IGame } from '../../IGame';
+import { getMovePlace, other } from '../../utils';
+import { jumpsToString, stringsToJump } from '../utils/serialization';
+import { CatchTheHareGameBase } from './CatchTheHareGameBase';
 
 export class QirkatGameBase extends CatchTheHareGameBase {
   public moveToString = jumpsToString.bind(this);
@@ -128,7 +128,7 @@ export class QirkatGameBase extends CatchTheHareGameBase {
     const o = other(this.player);
 
     return this.grid.tiles.reduce((r: any[], t: any) => {
-      if ((t as any).data !== this.player) {
+      if ((t).data !== this.player) {
         return r;
       }
 
@@ -136,7 +136,7 @@ export class QirkatGameBase extends CatchTheHareGameBase {
       r = r.concat(leaves);
 
       return r;
-    }, []);
+    },                            []);
   }
 
   private multiJumps(parent: any, o: number, leaves: any[] = [], depth: number = 0, removed: any[] = []): any[] {
@@ -144,8 +144,8 @@ export class QirkatGameBase extends CatchTheHareGameBase {
     parent.jumps = [];
 
     for (const [n, m] of t.links) {
-      if (((m as any).data === o) && (removed.indexOf(m) === -1)) {
-        const d = (m as any).links.get(n);
+      if (((m).data === o) && (removed.indexOf(m) === -1)) {
+        const d = (m).links.get(n);
 
         if (d && !d.data) {
           const r: any = { tile: d, removed: m, depth, parent };
@@ -166,8 +166,8 @@ export class QirkatGameBase extends CatchTheHareGameBase {
     const result: any[] = [];
 
     for (const [n, m] of t.links) {
-      if ((m as any).data === o) {
-        const d = (m as any).links.get(n);
+      if ((m).data === o) {
+        const d = (m).links.get(n);
 
         if (d && !d.data) {
           result.push([t, [d, m]]);
@@ -180,17 +180,17 @@ export class QirkatGameBase extends CatchTheHareGameBase {
 
   private simplePossible(): any[] {
     return this.grid.tiles.reduce((r: any[], t: any) => {
-      if ((t as any).data !== this.player) {
+      if ((t).data !== this.player) {
         return r;
       }
 
       for (const [n, m] of t.links) {
-        if (!(m as any).data) {
+        if (!(m).data) {
           r.push([t, m]);
         }
       }
 
       return r;
-    }, []);
+    },                            []);
   }
 }

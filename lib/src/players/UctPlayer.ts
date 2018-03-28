@@ -1,6 +1,6 @@
 // Based on https://github.com/OMerkel/UCThello
 
-import { IGame } from "../IGame";
+import { IGame } from '../IGame';
 
 export class UctNode {
   public action: any;
@@ -27,6 +27,7 @@ export class UctNode {
     const node = new UctNode(game, this, this.unexamined[index]);
     this.unexamined.splice(index, 1);
     this.children.push(node);
+
     return node;
   }
 
@@ -80,7 +81,7 @@ export class UctPlayer {
       return {
         duration: Date.now() - startTime,
         move: root.unexamined[0],
-        nodesVisited,
+        nodesVisited
       };
     }
 
@@ -89,7 +90,7 @@ export class UctPlayer {
     return {
       duration: Date.now() - startTime,
       move: root.mostVisitedChild().action,
-      nodesVisited,
+      nodesVisited
     };
   }
 
@@ -130,7 +131,7 @@ export class UctPlayer {
 
         while (node) {
           node.update(result);
-          node = node.parentNode as any;
+          node = <any>node.parentNode;
         }
 
         while (game.moves.length > original) {

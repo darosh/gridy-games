@@ -1,19 +1,19 @@
-import { Rectangular8Tile, RectangularGrid, Shape } from "gridy";
-import { Move } from "../Move";
-import { Theme } from "../Theme";
-import { ConnectGameBase } from "./base/ConnectGameBase";
+import { Rectangular8Tile, RectangularGrid, Shape } from 'gridy';
+import { Move } from '../Move';
+import { Theme } from '../Theme';
+import { ConnectGameBase } from './base/ConnectGameBase';
 
 export class ConnectFourGame extends ConnectGameBase {
-  public static title = "Connect Four";
+  public static title = 'Connect Four';
   public static theme = Theme.Plastic;
-  public static type = "Connect";
-  public static authors = ["Howard Wexler", "Ned Strongin"];
+  public static type = 'Connect';
+  public static authors = ['Howard Wexler', 'Ned Strongin'];
   public static created = 1974;
-  public static wiki = "https://en.wikipedia.org/wiki/Connect_Four";
-  public static alias = ["Captain's Mistress",
-  "Four Up", "Plot Four", "Find Four", "Four in a Row", "Four in a Line", "Gravitrips"];
-  public static rules: string[] = ["Connect 4"];
-  public static sample = "c1, d1, c2, e1, b1, f1, g1, d2, d3, c3, e2, e3, e4";
+  public static wiki = 'https://en.wikipedia.org/wiki/Connect_Four';
+  public static alias = ['Captain\'s Mistress',
+  'Four Up', 'Plot Four', 'Find Four', 'Four in a Row', 'Four in a Line', 'Gravitrips'];
+  public static rules: string[] = ['Connect 4'];
+  public static sample = 'c1, d1, c2, e1, b1, f1, g1, d2, d3, c3, e2, e3, e4';
 
   public landscape = true;
 

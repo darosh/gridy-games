@@ -72,6 +72,7 @@
     "sw-precache-webpack-plugin": "^0.11.5",
     "ts-loader": "^4.1.0",
     "tslint": "^5.9.1",
+    "tslint-microsoft-contrib": "^5.0.3",
     "typescript": "^2.7.2",
     "uglify-es": "^3.3.10",
     "url-loader": "^1.0.1",
@@ -101,7 +102,7 @@
     "install": "rollup -c rollup.config.js -f es -o plugins/icons.js plugins/icons.bundle.js && cross-env NODE_ENV=es5 babel build/vuetify/src --out-dir build/vuetify/es5 && node ./build/patch.js vuetify",
     "icons": "real-favicon generate icon.config.json .icons/data.json .icons",
     "lint:es": "eslint -f unix --fix --ext .js,.vue src build",
-    "lint:ts": "tslint --fix -p tsconfig.json",
+    "lint:ts": "tslint -t stylish --fix -p tsconfig.json",
     "start": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --open --host 0.0.0.0 --useLocalIp"
   }
 }
