@@ -9,11 +9,16 @@
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       class="d-block">
-      <rect
-        :x="(margin/2).toFixed(3)"
-        :y="((margin + size[1] - rect[1]) / 2 + 0.5).toFixed(3)"
-        :width="(rect[0] - margin).toFixed(3)"
-        :height="(rect[1] - margin).toFixed(3)" />
+      <polygon
+        v-if="hullPoints"
+        :points="hullPoints"
+        :transform="'translate('+ translate +')'"
+        class="hull"/>
+      <!--<rect-->
+        <!--:x="(margin/2).toFixed(3)"-->
+        <!--:y="((margin + size[1] - rect[1]) / 2 + 0.5).toFixed(3)"-->
+        <!--:width="(rect[0] - margin).toFixed(3)"-->
+        <!--:height="(rect[1] - margin).toFixed(3)" />-->
       <g :transform="'translate('+ translate +')'">
         <line
           v-for="(l, k) in lines"
@@ -100,12 +105,12 @@
           :size="game.grid.scale"
           :delay="200" />
       </g>
-      <rect
-        :x="(margin/2).toFixed(3)"
-        :y="((margin + size[1] - rect[1]) / 2 + 0.5).toFixed(3)"
-        :width="(rect[0] - margin).toFixed(3)"
-        :height="(rect[1] - margin).toFixed(3)"
-        style="fill: none"/>
+      <!--<rect-->
+        <!--:x="(margin/2).toFixed(3)"-->
+        <!--:y="((margin + size[1] - rect[1]) / 2 + 0.5).toFixed(3)"-->
+        <!--:width="(rect[0] - margin).toFixed(3)"-->
+        <!--:height="(rect[1] - margin).toFixed(3)"-->
+        <!--style="fill: none"/>-->
     </svg>
   </div>
 </template>

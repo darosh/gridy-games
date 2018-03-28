@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import { scaleToFit } from '../services/utils'
+import {scaleToFit} from '../services/utils'
+import {polygonHull} from 'd3-polygon'
 
 export default {
   props: {
@@ -18,6 +19,7 @@ export default {
       translate: [],
       size: [],
       rect: [],
+      hullPoints: '',
       resizing: false
     }
   },
@@ -37,6 +39,7 @@ export default {
         this.size = [bounds.maxX - bounds.minX + this.margin, this.frame[1] + this.margin]
       }
 
+      this.hullPoints = this.game.hull ? polygonHull(this.getHull()).map(p => `${p[0].toFixed(3)} ${p[1].toFixed(3)}`).join(' ') : ''
       this.translate = getTranslate(bounds, this.size)
     },
     path (tile) {
@@ -67,6 +70,20 @@ export default {
       }
 
       return this.game.grid.bounds()
+    },
+    getHull () {
+      const vertices = this.game.grid.vertices(this.game.grid.orientation)
+      const centers = this.game.grid.tiles.reduce((r, tile) => {
+        const center = this.game.grid.center(tile)
+
+        for (const v of vertices) {
+          r.push([center.x + v.x, center.y + v.y])
+        }
+
+        return r
+      }, [])
+
+      return centers
     }
   },
   computed: {

@@ -25,9 +25,11 @@ export class CatchTheHareGameBase extends QuirkatBoard implements IGame {
   public expandJumps = expandJumps.bind(this);
 
   private finished = false;
+  private maxMoves: number;
 
-  constructor(grid: AnyGrid) {
+  constructor(grid: AnyGrid, maxMoves: number) {
     super(grid);
+    this.maxMoves = maxMoves;
   }
 
   public move(m: any): void {
@@ -114,6 +116,10 @@ export class CatchTheHareGameBase extends QuirkatBoard implements IGame {
   private getWinner() {
     if (this.possible().length === 0) {
       return other(this.player);
+    }
+
+    if(this.moves.length === this.maxMoves) {
+      return -1;
     }
 
     return 0;

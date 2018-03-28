@@ -15,8 +15,11 @@ export class QirkatGameBase extends QuirkatBoard {
   public score: { [player: number]: number };
   public finished: boolean = false;
 
-  constructor(grid: IGrid<AnyTile>) {
+  private maxMoves: number;
+
+  constructor(grid: IGrid<AnyTile>, maxMoves: number) {
     super(grid);
+    this.maxMoves = maxMoves;
 
     quirkatSetup(grid.tiles);
     const stones = (grid.tiles.length - 1) / 2;
@@ -76,7 +79,7 @@ export class QirkatGameBase extends QuirkatBoard {
       return 2;
     } else if (!this.score[2]) {
       return 1;
-    } else if (this.moves.length === (this.grid.tiles.length * 3)) {
+    } else if (this.moves.length === this.maxMoves) {
       return -1;
     } else {
       return 0;
