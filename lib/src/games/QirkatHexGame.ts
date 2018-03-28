@@ -15,7 +15,7 @@ export class QirkatHexGame extends QirkatGameBase {
   constructor() {
     const grid = new HexagonalGrid(1, true, Shape.Rhombus, SIZE, SIZE);
     normalize(grid);
-    super(<any>grid, SIZE * SIZE * 3);
+    super(<any>grid, SIZE * SIZE * SIZE * 3);
     this.hull = true;
   }
 }
