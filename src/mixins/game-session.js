@@ -25,10 +25,10 @@ export default {
       return 3 - this.game.player
     },
     sessionHumanWin () {
-      return humanResult(this.sessionHuman, this.winner, true)
+      return humanResult(this.sessionHuman, this.game.winner, true)
     },
     sessionHumanLost () {
-      return humanResult(false)
+      return humanResult(this.sessionHuman, this.game.winner, false)
     },
     sessionNames () {
       return StoneNames[ThemeStones[this.game.constructor.theme]]
