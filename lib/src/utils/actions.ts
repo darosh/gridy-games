@@ -1,4 +1,4 @@
-import { IAction, ICompoundStep, IGameTile, IGridGame, Move } from '../IGridGame';
+import {IAction, ICompoundStep, IGameTile, IGridGame, Move} from '../IGridGame';
 
 export function getMovePlace(move: Move, cursor: number = 0): IGameTile | undefined {
   if (Array.isArray(move)) {
@@ -18,13 +18,20 @@ export function initHighlight(game: IGridGame) {
   }
 }
 
-export function initActions(game: IGridGame, moves: Move[], cursor: number = 0) {
+export function initActions(game: IGridGame, moves: Move[], cursorInput: number = 0) {
   const highlighted = [];
 
   for (const move of moves) {
-    const tile = <IGameTile>getMovePlace(move, cursor);
+    let cursor = cursorInput;
+    let tile = <IGameTile>getMovePlace(move, cursor);
+
+    if (!tile) {
+      cursor--;
+      tile = <IGameTile>getMovePlace(move, cursor);
+    }
+
     tile.actions = tile.actions || [];
-    tile.actions.push({ move, cursor: cursor + 1 });
+    tile.actions.push({move, cursor: cursor + 1});
 
     if (!tile.highlighted) {
       tile.highlighted = true;
@@ -32,8 +39,8 @@ export function initActions(game: IGridGame, moves: Move[], cursor: number = 0) 
     }
   }
 
-  game.actions = !cursor ? [] : game.actions;
-  (<any>game.actions).push({ highlighted });
+  game.actions = !cursorInput ? [] : game.actions;
+  (<any>game.actions).push({highlighted});
 }
 
 export function selectAction(game: IGridGame, tile: IGameTile) {

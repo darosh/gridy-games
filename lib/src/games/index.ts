@@ -17,7 +17,8 @@ export { Qirkat7Game } from './Qirkat7Game';
 export { QirkatHexGame } from './QirkatHexGame';
 export { QirkatHex7Game } from './QirkatHex7Game';
 export { QirkatHex2Game } from './QirkatHex2Game';
-// export { CatchTheHareGame } from "./CatchTheHareGame";
+export { CatchTheHareGame } from './CatchTheHareGame';
+export { CatchTheHare10Game } from './CatchTheHare10Game';
 
 export { FourInARow11Game } from './FourInARow11Game';
 export { FourInARowRoundGame } from './FourInARowRoundGame';
