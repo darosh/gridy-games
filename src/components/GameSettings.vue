@@ -147,7 +147,7 @@
         dense
         flat
         color="transparent">
-        <v-subheader class="pl-0 ml-0">Turns</v-subheader>
+        <v-subheader class="pl-0 ml-0">Moves</v-subheader>
         <v-spacer/>
         <div
           v-if="Shared.game.moves.length"
@@ -160,7 +160,7 @@
         solo
         spellcheck="false"
         name="input-turns"
-        placeholder="Insert turns"
+        placeholder="Insert moves"
         multi-line
         auto-grow
         rows="3" />
