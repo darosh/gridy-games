@@ -113,7 +113,7 @@
         <div v-else>
           <g-info
             :game="info"
-            class="mx-2"/>
+            class="mx-2" />
         </div>
         <v-card-actions>
           <v-spacer/>

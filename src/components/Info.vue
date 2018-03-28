@@ -1,6 +1,7 @@
 <template>
   <div class="mb-1">
     <v-layout
+      v-if="title"
       row
       mx-3
       mb-1>
@@ -150,6 +151,10 @@ export default {
     game: {
       type: Object,
       required: true
+    },
+    title: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {

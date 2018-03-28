@@ -174,7 +174,8 @@
     </v-toolbar>
     <g-info
       :game="game"
-      class="mx-3" />
+      class="mx-3"
+      title />
   </div>
 </template>
 
