@@ -110,7 +110,7 @@
             :margin="4"
             class="preview d-inline-block" />
         </div>
-        <div v-else>
+        <div v-show="rulesInfo">
           <g-info
             :game="info"
             class="mx-2" />
