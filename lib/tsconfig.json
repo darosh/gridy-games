@@ -6,7 +6,8 @@
     "moduleResolution": "node",
     "lib": ["dom","es5","es6"],
     "removeComments": false,
-    "noLib": false
+    "noLib": false,
+    "sourceMap": true
   },
   "files": [
     "src/index.ts"

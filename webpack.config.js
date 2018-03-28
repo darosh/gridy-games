@@ -83,6 +83,7 @@ const config = {
     modules: [setPath('node_modules')]
   },
   mode: buildingForLocal() ? 'development' : 'production',
+  devtool: buildingForLocal() ? 'inline-source-map' : false,
   devServer: {
     historyApiFallback: true,
     noInfo: false
@@ -111,86 +112,101 @@ const config = {
       filename: 'service-worker.js',
       staticFileGlobs: ['dist/**/*.{js,html,css}', 'dist/**/icon-web.svg'],
       minify: true,
-      logger: () => { },
+      logger: () => {
+      },
       stripPrefix: 'dist/',
-      runtimeCaching: [{
-        urlPattern: /^https:\/\/ajax\.googleapis\.com\//,
-        handler: 'cacheFirst'
-      },
-      {
-        urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
-        handler: 'cacheFirst'
-      },
-      {
-        urlPattern: /^https:\/\/fonts\.gstatic\.com\//,
-        handler: 'cacheFirst'
-      }
+      runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/ajax\.googleapis\.com\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\/\/fonts\.gstatic\.com\//,
+          handler: 'cacheFirst'
+        }
       ]
     })
   ],
   module: {
-    rules: [{
-      test: /\.ts$/,
-      loaders: ['babel-loader', 'ts-loader'],
-      exclude: /node_modules/,
-      include: [resolve('lib')]
-    },
-    {
-      test: /\.vue$/,
-      loader: 'vue-loader',
-      options: {
-        // postcss: [require('postcss-cssnext')()],
-        // options: {
-        //     extractCSS: true
-        // },
-        loaders: {
-          js: 'babel-loader'
+    rules: [
+      {
+        test: /\.ts$/,
+        use: ['babel-loader', {
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true
+          }
+        }],
+        exclude: /node_modules/,
+        include: [resolve('lib')]
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          // postcss: [require('postcss-cssnext')()],
+          // options: {
+          //     extractCSS: true
+          // },
+          loaders: {
+            js: 'babel-loader'
+          }
         }
-      }
-    },
-    {
-      test: /\.js$/,
-      exclude: /node_modules/,
-      use: [{
-        loader: 'babel-loader'
-      }]
-    },
-    // {
-    //   test: /\.css$/,
-    //   use: extractCSS.extract({
-    //     fallback: "style-loader",
-    //     use: ["css-loader", "autoprefixer-loader"]
-    //   })
-    // },
-    {
-      test: /\.styl$/,
-      use:
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [{
+          loader: 'babel-loader'
+        }]
+      },
+      // {
+      //   test: /\.css$/,
+      //   use: extractCSS.extract({
+      //     fallback: "style-loader",
+      //     use: ["css-loader", "autoprefixer-loader"]
+      //   })
+      // },
+      {
+        test: /\.styl$/,
+        use:
         /* buildingForLocal() ?
         extractCSS.extract({
           fallback: "style-loader",
           use: ['css-loader', 'autoprefixer-loader', 'stylus-loader']
         }) : */
-        [{
-          loader: 'style-loader' // creates style nodes from JS strings
-        }, {
-          loader: 'css-loader' // translates CSS into CommonJS
-        },
-        {
-          loader: 'postcss-loader' // creates style nodes from JS strings
-        }, {
-          loader: 'stylus-loader' // compiles Stylus to CSS
+          [
+            {
+              loader: 'style-loader', // creates style nodes from JS strings
+              options: {sourceMap: false}
+            },
+            {
+              loader: 'css-loader', // translates CSS into CommonJS
+              options: {sourceMap: false}
+            },
+            {
+              loader: 'postcss-loader', // creates style nodes from JS strings
+              options: {sourceMap: false}
+            },
+            {
+              loader: 'stylus-loader', // compiles Stylus to CSS
+              options: {sourceMap: false}
+            }
+          ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        loader: 'file-loader',
+        query: {
+          name: '[name].[ext]?[hash]',
+          // useRelativePath: buildingForLocal()
+          useRelativePath: true
         }
-        ]
-    },
-    {
-      test: /\.(png|jpg|gif)$/,
-      loader: 'file-loader',
-      query: {
-        name: '[name].[ext]?[hash]',
-        // useRelativePath: buildingForLocal()
-        useRelativePath: true
       }
-    }
     ]
   }
 }
