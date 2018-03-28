@@ -23,7 +23,7 @@
             :class="props.item.wip ? 'red--text' : 'light-blue--text'">{{ props.item.title | titled }}</router-link>
         </td>
         <td :class="{'grey--text': props.item.originals.original}">{{ props.item.original }}</td>
-        <td>{{ props.item.type }}</td>
+        <td>{{ props.item.group }}</td>
         <td :class="{'grey--text': props.item.originals.created}">{{ props.item.created | era }}</td>
         <td :class="{'grey--text': props.item.originals.loaction}">{{ props.item.location }}</td>
         <td :class="{'grey--text': props.item.originals.authors}">{{ props.item.authors }}</td>
@@ -66,7 +66,7 @@ export default {
         { text: '', value: null, sortable: false, width: '48px' },
         { text: 'Title', value: 'title', width: '160px' },
         { text: 'Original', value: 'original', width: '160px' },
-        { text: 'Type', value: 'type', width: '120px' },
+        { text: 'Type', value: 'group', width: '120px' },
         { text: 'Created', value: 'created', width: '80px' },
         { text: 'Location', value: 'location', width: '80px' },
         { text: 'Authors', value: 'authors', width: '120px' },

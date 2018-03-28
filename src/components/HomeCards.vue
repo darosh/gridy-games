@@ -24,7 +24,7 @@
                 :class="{'red--text': game.wip}"
                 :style="{'text-decoration': game.wip ? 'line-through' : ''}"
                 class="headline">{{ game.title | titled }}</div>
-              <span class="grey--text">{{ game.type }}</span>
+              <span class="grey--text">{{ game.group }}</span>
             </div>
           </v-card-title>
           <div style="min-height: 116px; position: relative">
@@ -59,10 +59,13 @@
             row
             class="px-3 pb-2">
             <v-flex
-              v-if="game.location"
-              class="grey--text d-flex body-1 mb-1">{{ game.location }}</v-flex>
+              v-if="game.originals.original && game.location"
+              class="d-flex body-1 mb-1">{{ game.location }}</v-flex>
             <v-flex
-              v-if="game.created"
+              v-else-if="!game.originals.original"
+              class="grey--text text-xs-center d-flex body-1 mb-1"><i>{{ game.original }} variation</i></v-flex>
+            <v-flex
+              v-if="game.originals.original && game.created"
               class="body-2 text-xs-right mb-1">{{ game.created | era }}
             </v-flex>
           </v-layout>
