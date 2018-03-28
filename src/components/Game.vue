@@ -93,13 +93,17 @@
         <v-card-title>
           <span class="title pa-2">{{ game.constructor.title | titled }}</span>
         </v-card-title>
-        <v-card-text v-if="!rulesInfo" class="pt-0 pb-4">
+        <v-card-text
+          v-if="!rulesInfo"
+          class="pt-0 pb-4">
           <div
             v-for="(r, k) in rulesText"
             :key="k"
             class="px-2">{{ r }}</div>
         </v-card-text>
-        <div v-if="!rulesInfo" class="text-xs-center">
+        <div
+          v-if="!rulesInfo"
+          class="text-xs-center">
           <g-board
             :game="sample"
             :frame="[240,164]"
@@ -107,7 +111,9 @@
             class="preview d-inline-block" />
         </div>
         <div v-else>
-          <g-info :game="info" />
+          <g-info
+            :game="info"
+            class="mx-2"/>
         </div>
         <v-card-actions>
           <v-spacer/>

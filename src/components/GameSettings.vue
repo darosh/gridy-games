@@ -172,7 +172,9 @@
       color="transparent">
       <v-subheader class="pl-3">Info</v-subheader>
     </v-toolbar>
-    <g-info :game="game" />
+    <g-info
+      :game="game"
+      class="mx-3" />
   </div>
 </template>
 

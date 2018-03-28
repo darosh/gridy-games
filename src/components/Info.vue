@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-3 mb-1">
+  <div class="mb-1">
     <v-layout
       row
       mx-3
@@ -19,7 +19,7 @@
       <v-flex
         class="body-2 mr-3"
         xs3>Type</v-flex>
-      <div class="body-1">{{ game.type }}</div>
+      <div class="body-1">{{ game.group }}</div>
     </v-layout>
     <v-layout
       v-if="game.created"
