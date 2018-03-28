@@ -150,6 +150,7 @@
 - https://en.wikipedia.org/wiki/TacTix
 - negative reversi
 - reversi no pass
+- Zamma https://en.wikipedia.org/wiki/Zamma
 
 # DEV
 

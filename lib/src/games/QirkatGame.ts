@@ -2,17 +2,15 @@ import {
   AnyTile, IGrid, link, Position, Rectangular8Tile, RectangularGrid, RectangularTile, Shape, toMap,
 } from "gridy";
 
-import { AlquerqueGameBase } from "./base/AlquerqueGameBase";
-
-// TODO Zamma https://en.wikipedia.org/wiki/Zamma
+import { QirkatGameBase } from "./base/QirkatGameBase";
 
 const SIZE = 5;
 
-export class AlquerqueGame extends AlquerqueGameBase {
-  public static title = "Alquerque";
-  public static type = "Misc";
+export class QirkatGame extends QirkatGameBase {
+  public static title = "Qirkat";
+  public static type = "Qirkat";
   public static created = 950;
-  public static aliases = ["Qirkat"];
+  public static aliases = ["Alquerque"];
   public static location = "Middle East";
   public static wiki = "https://en.wikipedia.org/wiki/Alquerque";
   public static rules = ["Capture all pieces"];

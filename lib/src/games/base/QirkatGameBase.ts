@@ -7,9 +7,7 @@ import { jumpsToString, stringsToJump } from "../../SerializableGame";
 import { getMovePlace, other } from "../../utils";
 import { CatchTheHareGameBase } from "./CatchTheHareGameBase";
 
-// TODO Zamma https://en.wikipedia.org/wiki/Zamma
-
-export class AlquerqueGameBase extends CatchTheHareGameBase {
+export class QirkatGameBase extends CatchTheHareGameBase {
   public moveToString = jumpsToString.bind(this);
   public stringToMove = stringsToJump.bind(this);
 
