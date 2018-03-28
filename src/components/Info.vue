@@ -84,7 +84,7 @@
       </div>
     </v-layout>
     <v-layout
-      v-if="game.rulesArray"
+      v-if="title && game.rulesArray"
       row
       mx-3
       mb-1>
