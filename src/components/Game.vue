@@ -93,21 +93,28 @@
         <v-card-title>
           <span class="title pa-2">{{ game.constructor.title | titled }}</span>
         </v-card-title>
-        <v-card-text class="pt-0 pb-4">
+        <v-card-text v-if="!rulesInfo" class="pt-0 pb-4">
           <div
             v-for="(r, k) in rulesText"
             :key="k"
             class="px-2">{{ r }}</div>
         </v-card-text>
-        <div class="text-xs-center">
+        <div v-if="!rulesInfo" class="text-xs-center">
           <g-board
             :game="sample"
             :frame="[240,164]"
             :margin="4"
             class="preview d-inline-block" />
         </div>
+        <div v-else>
+          <g-info :game="info" />
+        </div>
         <v-card-actions>
           <v-spacer/>
+          <v-btn
+            flat
+            style="min-width: 0"
+            @click="rulesInfo = !rulesInfo">{{ rulesInfo ? 'Rules' : 'Info' }}</v-btn>
           <v-btn
             flat
             style="min-width: 0"
@@ -161,6 +168,7 @@
 import {
   Games,
   TimedProxy,
+  Info,
   initActions,
   initHighlight,
   other,
@@ -190,12 +198,14 @@ export default {
     GBoard: () => import('./Board'),
     GPlayerDivider: () => import('./PlayerDivider'),
     GVerdict: () => import('./Verdict'),
+    GInfo: () => import('./Info'),
     VDialog: () => import('vuetify/es5/components/VDialog')
   },
   mixins: [gameResize, gameSession, playerSwitch],
   data () {
     return {
       game: null,
+      info: null,
       frame: null,
       margin: 20,
       fab: false,
@@ -206,6 +216,7 @@ export default {
       rules: false,
       showRules: true,
       rulesText: true,
+      rulesInfo: false,
       passConfirm: false
     }
   },
@@ -277,6 +288,7 @@ export default {
         this.playerSwitch()
       }
 
+      this.info = Info.game(this.$route.params.id)
       const g = this.$route.params.id + 'Game'
       const game = new Games[g]()
       initHighlight(game)
