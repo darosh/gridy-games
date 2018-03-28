@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import colors from 'vuetify/es5/util/colors'
 
 import {
   VApp,
@@ -23,6 +24,9 @@ import {
 } from 'vuetify/es5/directives'
 
 Vue.use(Vuetify, {
+  theme: {
+    primary: colors.lightBlue.base
+  },
   components: {
     VApp,
     VBtn,

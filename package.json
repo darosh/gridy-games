@@ -1,7 +1,7 @@
 {
   "name": "gridy-games",
   "description": "Board games",
-  "version": "0.36.197",
+  "version": "0.36.198",
   "author": "Jan Forst <ensonador@gmail.com>",
   "browserslist": [
     "> 1%",
@@ -25,7 +25,7 @@
     "vue": "^2.5.16",
     "vue-observe-visibility": "^0.3.1",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.0.10",
+    "vuetify": "^1.0.11",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -73,13 +73,13 @@
     "ts-loader": "^4.1.0",
     "tslint": "^5.9.1",
     "tslint-microsoft-contrib": "^5.0.3",
-    "typescript": "^2.7.2",
+    "typescript": "^2.8.1",
     "uglify-es": "^3.3.10",
     "url-loader": "^1.0.1",
     "vue-loader": "^14.2.2",
     "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16",
-    "webpack": "^4.2.0",
+    "webpack": "^4.3.0",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.13",
     "webpack-dev-server": "^3.1.1",
