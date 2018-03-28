@@ -103,7 +103,7 @@ export function table(games: { [name: string]: IGridGameConstructor }, wip = fal
   return result;
 }
 
-function row(a: IGridGameConstructor, games: { [name: string]: IGridGameConstructor; }, key: string) {
+function row(a: IGridGameConstructor, games: { [name: string]: IGridGameConstructor }, key: string) {
   const originalId = a.original;
   const b = <IGridGameConstructor>(a.original ? games[a.original] : {});
   const m = merge(copy(a), copy(b));

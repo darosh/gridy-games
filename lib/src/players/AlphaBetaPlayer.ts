@@ -35,7 +35,7 @@ export class AlphaBetaPlayer implements IPLayer {
     return bestMoveFound;
   }
 
-  private minimax(depth: number, game: IGame, alpha: number, beta: number, isMaximisingPlayer: boolean) {
+  private minimax(depth: number, game: IGame, inputAlpha: number, inputBeta: number, isMaximisingPlayer: boolean) {
     this.count++;
 
     if (depth === 0) {
@@ -43,6 +43,8 @@ export class AlphaBetaPlayer implements IPLayer {
     }
 
     const newGameMoves = game.possible();
+    let alpha = inputAlpha;
+    let beta = inputBeta;
 
     if (isMaximisingPlayer) {
       let bestMove = -Infinity;

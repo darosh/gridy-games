@@ -17,6 +17,7 @@
     "no-unsafe-any": false,
     "no-any": false,
     "completed-docs": false,
+    "insecure-random": false,
     "strict-boolean-expressions": false
   },
   "rulesDirectory": []

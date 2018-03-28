@@ -7,6 +7,7 @@ export function moveToString(this: IGridMappedGame, move: Move): string {
   }
 
   const p = this.grid.toPoint(<IGameTile>move);
+
   return stringifyPosition(p);
 }
 
@@ -18,7 +19,8 @@ export function stringToMove(this: IGridMappedGame, move: string): Move | null {
   }
 
   const t = this.grid.tile.apply(this.grid, p);
-  return this.tileMap.get(t.key) as Move;
+
+  return <Move>this.tileMap.get(t.key);
 }
 
 export function movesToString(this: IGridMappedGame, move: Move[]): string {
@@ -27,6 +29,7 @@ export function movesToString(this: IGridMappedGame, move: Move[]): string {
   }
 
   const p = (Array.isArray(move) ? move : [move]).map(<any>this.grid.toPoint);
+
   return stringifyPositions(<any>p);
 }
 
@@ -36,11 +39,13 @@ export function jumpsToString(this: IGridMappedGame, move: Move[]): string {
   }
 
   const p = (Array.isArray(move) ? move : [move]).reduce((r: any[], t) => {
-    const a = (Array.isArray(t) ? t.slice() : [t]) as any[];
+    const a = <any[]>(Array.isArray(t) ? t.slice() : [t]);
     a.reverse();
     a.forEach((d) => r.push(d));
+
     return r;
   },                                                     []).map(<any>this.grid.toPoint);
+
   return stringifyPositions(<any>p);
 }
 
@@ -51,7 +56,7 @@ export function stringsToJump(this: IGridMappedGame, move: string): Move | null 
     return p;
   }
 
-  const m = [getTile.call(this, p.shift())] as any;
+  const m = <any>[getTile.call(this, p.shift())];
 
   if (p.length === 1) {
     m.push(getTile.call(this, p.shift()));
@@ -79,6 +84,7 @@ export function stringsToMove(this: IGridMappedGame, move: string): Move | null 
 
   return (<any>p).map((pp: any) => {
     const t = this.grid.tile.apply(this.grid, pp);
+
     return this.tileMap.get(t.key);
   });
 }

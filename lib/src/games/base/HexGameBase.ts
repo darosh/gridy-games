@@ -150,9 +150,9 @@ export class HexGameBase implements IGame {
 
     return 0;
   }
-  private markLine(from: any, to: any, value: any, key: string) {
-    Float3.line(from, to).forEach((t: any) => {
-      (this.tileMap.get(t.toString()) as any)[key + value] = true;
+  private markLine(fromTile: any, to: any, value: any, key: string) {
+    Float3.line(fromTile, to).forEach((t: any) => {
+      (<any>this.tileMap.get(t.toString()))[`${key}${value}`] = true;
     });
   }
 

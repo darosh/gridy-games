@@ -36,7 +36,7 @@ export class UctNode {
     let bestValue = Number.NEGATIVE_INFINITY;
 
     for (const child of this.children) {
-      const uctValue = child.wins / child.visits + Math.sqrt(2 * Math.log(this.visits) / child.visits);
+      const uctValue = child.wins / child.visits + Math.sqrt(Math.log(this.visits) * 2 / child.visits);
 
       if (uctValue > bestValue) {
         selected = child;
