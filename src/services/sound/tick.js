@@ -1,4 +1,10 @@
 import {latency} from './latency'
+import { Constants } from './constants'
+
+const {
+  SOUND_TICK_ENV,
+  SOUND_TICK_OSC
+} = Constants
 
 export let env
 
@@ -19,18 +25,8 @@ export function tickSound () {
     }
 
     if (!env) {
-      env = new AmplitudeEnvelope({
-        attack: 0.025,
-        decay: 0.6,
-        sustain: 0,
-        release: 1
-      }).toMaster()
-
-      new Oscillator({
-        type: 'sawtooth',
-        frequency: 'G3',
-        volume: -12
-      }).connect(env).start()
+      env = new AmplitudeEnvelope(SOUND_TICK_ENV).toMaster()
+      new Oscillator(SOUND_TICK_OSC).connect(env).start()
     }
 
     latency.last = env

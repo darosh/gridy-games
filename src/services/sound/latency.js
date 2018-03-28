@@ -1,23 +1,31 @@
+import { Constants } from './constants'
+
+const {
+  MILLISECONDS,
+  LATENCY_DEFAULT,
+  LATENCY_RATIO
+} = Constants
 class Latency {
   get latency () {
     if (isNaN(this._latency)) {
-      import('../../../plugins/tone').then(({
-        Tone
-      }) => {
-        this._latency = (Tone.supported && !isNaN(Tone.context.baseLatency)) ? Tone.context.baseLatency * 1000 * 2 : 25
-      })
-      this._latency = 100
+      import('../../../plugins/tone')
+        .then(({ Tone }) => {
+          this._latency = (Tone.supported && !isNaN(Tone.context.baseLatency))
+            ? Tone.context.baseLatency * MILLISECONDS * LATENCY_RATIO
+            : LATENCY_DEFAULT
+        })
+      this._latency = LATENCY_DEFAULT
     }
 
     return this._latency
   }
 
   get start () {
-    return `+${this.latency / 1000}`
+    return `+${this.latency / MILLISECONDS}`
   }
 
   get stop () {
-    return `+${this.latency / 2 / 1000}`
+    return `+${this.latency / LATENCY_RATIO / MILLISECONDS}`
   }
 
   set last (value) {

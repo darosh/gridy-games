@@ -1,5 +1,13 @@
 import { tickStop } from './tick'
 import { latency } from './latency'
+import { Constants } from './constants'
+
+const {
+  PAN_LEFT,
+  SOUND_KICK_ENV,
+  SOUND_KICK_1,
+  SOUND_KICK_TIME
+} = Constants
 
 let env
 
@@ -15,26 +23,13 @@ export function kick1Sound () {
     }
 
     if (!env) {
-      env = new Panner(-1).toMaster()
-
-      env = new AmplitudeEnvelope({
-        attack: 0.01,
-        decay: 0.4,
-        sustain: 0.1,
-        release: 0.4
-      }).connect(env)
-
+      env = new Panner(PAN_LEFT).toMaster()
+      env = new AmplitudeEnvelope(SOUND_KICK_ENV).connect(env)
       env.attackCurve = 'exponential'
-
-      new Oscillator({
-        type: 'sawtooth3',
-        frequency: 'B3',
-        volume: -12
-      }).connect(env).start()
+      new Oscillator(SOUND_KICK_1).connect(env).start()
     }
 
-    // latency.last = env
     tickStop(latency.stop)
-    env.triggerAttackRelease(0.2, latency.start)
+    env.triggerAttackRelease(SOUND_KICK_TIME, latency.start)
   })
 }

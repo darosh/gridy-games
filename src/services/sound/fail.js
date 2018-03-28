@@ -1,4 +1,10 @@
 import { latency } from './latency'
+import { Constants } from './constants'
+
+const {
+  SOUND_FAIL_ENV,
+  SOUND_FAIL_OSC
+} = Constants
 
 let env
 
@@ -13,18 +19,8 @@ export function failSound () {
     }
 
     if (!env) {
-      env = new AmplitudeEnvelope({
-        'attack': 0.025,
-        'decay': 1.2,
-        'sustain': 0,
-        'release': 1
-      }).toMaster()
-
-      new Oscillator({
-        'type': 'sawtooth',
-        'frequency': 'C3',
-        'volume': -12
-      }).connect(env).start()
+      env = new AmplitudeEnvelope(SOUND_FAIL_ENV).toMaster()
+      new Oscillator(SOUND_FAIL_OSC).connect(env).start()
     }
 
     latency.last = env
