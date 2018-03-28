@@ -1,7 +1,7 @@
 {
   "name": "gridy-games",
   "description": "Board games",
-  "version": "0.36.203",
+  "version": "0.41.205",
   "author": "Jan Forst <ensonador@gmail.com>",
   "browserslist": [
     "> 1%",
@@ -90,7 +90,7 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
-  "iconVersion": "0.6.0",
+  "iconVersion": "0.7.0",
   "storageVersion": "0.1.144",
   "private": true,
   "scripts": {

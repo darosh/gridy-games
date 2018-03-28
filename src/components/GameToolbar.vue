@@ -7,6 +7,7 @@
     app>
     <v-btn
       :href="homeLink"
+      aria-label="Home"
       icon
       @click.native="back">
       <v-icon>arrow_back</v-icon>
@@ -16,6 +17,7 @@
     <!-- <v-toolbar-title v-else class="hidden-xs-only">{{ title | titled }}</v-toolbar-title> -->
     <v-spacer/>
     <v-btn
+      aria-label="Settings"
       icon
       @click.stop="Shared.drawer = !Shared.drawer">
       <v-icon>settings</v-icon>

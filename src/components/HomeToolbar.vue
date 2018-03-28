@@ -11,6 +11,7 @@
     app>
     <v-btn
       v-if="!Shared.searching"
+      aria-label="Menu"
       icon
       @click.stop="Shared.menu=!Shared.menu">
       <v-icon>menu</v-icon>
@@ -37,6 +38,7 @@
       single-line />
     <v-btn
       v-if="!Shared.searching"
+      aria-label="Search"
       icon
       @click.stop="Shared.searching = !Shared.searching">
       <v-icon>search</v-icon>
