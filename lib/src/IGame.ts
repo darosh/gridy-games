@@ -14,5 +14,6 @@ export interface IGame {
 }
 
 export interface IGameConstructor {
+  group: string;
   new(): IGame;
 }

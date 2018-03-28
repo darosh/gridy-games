@@ -10,9 +10,9 @@ export function evaluateLinked(tiles: AnyTile[], min: number, player: number): n
       if (u[0] > 0) {
         const to: any = u[1];
 
-        const from: any = t.links.get(t.opposite ? t.opposite(u[0]) : -u[0]);
+        const fromTile: any = t.links.get(t.opposite ? t.opposite(u[0]) : -u[0]);
 
-        if ((!from || from.data !== player) && (to.data === player)) {
+        if ((!fromTile || fromTile.data !== player) && (to.data === player)) {
           s.push(u[0]);
         }
       }

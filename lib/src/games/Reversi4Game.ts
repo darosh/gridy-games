@@ -5,7 +5,7 @@ import { ReversiGameBase } from './base/ReversiGameBase';
 
 export class Reversi4Game extends ReversiGameBase {
   public static title = 'Reversi 4x4';
-  public static type = 'Reversi';
+  public static group = 'Reversi';
   public static original = 'ReversiGame';
   public static sample = 'c2, c3, b2, b3, b4, a1, d2, d4, a2, a3, a4, c4, pass, c1, b1, pass, d3, d1';
 

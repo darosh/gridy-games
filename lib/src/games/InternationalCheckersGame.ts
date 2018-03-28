@@ -5,7 +5,7 @@ import { CheckersGameBase } from "./base/CheckersGameBase";
 
 export class InternationalCheckersGame extends CheckersGameBase {
   public static title = "International Checkers";
-  public static type = "Checkers";
+  public static group = "Checkers";
 
   constructor() {
     super(new RectangularGrid(1, undefined, Shape.Even, 10, 10, Rectangular8Tile) as any, 4);

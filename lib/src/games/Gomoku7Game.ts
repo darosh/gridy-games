@@ -4,7 +4,7 @@ import { ConnectGameBase } from "./base/ConnectGameBase";
 
 export class Gomoku7Game extends ConnectGameBase {
   public static title = "Gomoku 7x7";
-  public static type = "Connect";
+  public static group = "Connect";
   public static original = "GomokuGame";
   public static player = () => new MinimaxPlayer(2);
 

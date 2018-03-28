@@ -6,7 +6,7 @@ export function moveToString(this: IGridMappedGame, move: Move): string {
     return 'pass';
   }
 
-  const p = this.grid.toPoint(move as IGameTile);
+  const p = this.grid.toPoint(<IGameTile>move);
   return stringifyPosition(p);
 }
 

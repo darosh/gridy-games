@@ -16,11 +16,11 @@ export class GameProxy implements IGame {
   }
 
   public undo(): void {
-    return this.game.undo();
+    this.game.undo();
   }
 
   public move(m: any): void {
-    return this.game.move(m);
+    this.game.move(m);
   }
 
   public evaluate(): number {

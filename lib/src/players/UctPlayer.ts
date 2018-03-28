@@ -54,6 +54,7 @@ export class UctNode {
 
   public mostVisitedChild() {
     this.children.sort((a, b) => b.visits - a.visits);
+
     return this.children[0];
   }
 }
@@ -104,20 +105,20 @@ export class UctPlayer {
         let node = root;
         const original = game.moves.length;
 
-        /* Selection */
+        // Selection
         while (node.unexamined.length === 0 && node.children.length > 0) {
           node = node.selectChild() as any;
           game.move(node.action);
         }
 
-        /* Expansion */
+        // Expansion
         if (node.unexamined.length > 0) {
           const j = Math.floor(Math.random() * node.unexamined.length);
           game.move(node.unexamined[j]);
           node = node.addChild(game, j);
         }
 
-        /* Simulation */
+        // Simulation
         let actions = game.possible();
 
         while (actions.length > 0) {
@@ -126,7 +127,7 @@ export class UctPlayer {
           actions = game.possible();
         }
 
-        /* Backpropagation */
+        // Backpropagation
         const result = game.winner;
 
         while (node) {

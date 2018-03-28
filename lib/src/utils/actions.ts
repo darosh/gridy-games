@@ -22,7 +22,7 @@ export function initActions(game: IGridGame, moves: Move[], cursor: number = 0) 
   const highlighted = [];
 
   for (const move of moves) {
-    const tile = getMovePlace(move, cursor) as IGameTile;
+    const tile = <IGameTile>getMovePlace(move, cursor);
     tile.actions = tile.actions || [];
     tile.actions.push({ move, cursor: cursor + 1 });
 

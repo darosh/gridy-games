@@ -6,7 +6,7 @@ import { ConnectGameBase } from './base/ConnectGameBase';
 export class ConnectFourGame extends ConnectGameBase {
   public static title = 'Connect Four';
   public static theme = Theme.Plastic;
-  public static type = 'Connect';
+  public static group = 'Connect';
   public static authors = ['Howard Wexler', 'Ned Strongin'];
   public static created = 1974;
   public static wiki = 'https://en.wikipedia.org/wiki/Connect_Four';
@@ -18,7 +18,7 @@ export class ConnectFourGame extends ConnectGameBase {
   public landscape = true;
 
   constructor() {
-    super(new RectangularGrid(1, false, Shape.Even, 7, 6, Rectangular8Tile) as any, 4);
+    super(<any>new RectangularGrid(1, false, Shape.Even, 7, 6, Rectangular8Tile), 4);
   }
 
   public possible() {
@@ -30,7 +30,7 @@ export class ConnectFourGame extends ConnectGameBase {
 
     for (let x = 0; x < this.grid.x; x++) {
       for (let y = 0; y < this.grid.y; y++) {
-        const m = this.tileMap.get([x, y].toString()) as Move;
+        const m = <Move>this.tileMap.get([x, y].toString());
 
         if (!m.data) {
           moves.push(m);

@@ -64,7 +64,7 @@ export interface IGridMappedGame extends IGridGame {
 
 export interface IGridGameConstructor {
   title: string;
-  type: string;
+  group: string;
 
   authors?: string[];
   aliases?: string[];

@@ -5,7 +5,7 @@ import { MorrisGameBase } from "./base/MorrisGameBase";
 
 export class ThreeDiagonalMensMorrisGame extends MorrisGameBase {
   public static title = "Three Diagonal Men's Morris";
-  public static type = "Mills";
+  public static group = "Mills";
 
   constructor() {
     super(1, true, true);

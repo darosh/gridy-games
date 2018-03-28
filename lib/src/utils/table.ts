@@ -30,7 +30,7 @@ function copy(name: {}): {} {
 }
 
 function domain(link: string) {
-  return (/[^.]*\.[^.]{2,3}(?:\.[^.]{2,3})?$/.exec((new URL(link)).hostname) as any)[0];
+  return (<any>(/[^.]*\.[^.]{2,3}(?:\.[^.]{2,3})?$/.exec((new URL(link)).hostname)))[0];
 }
 
 function id(key: string) {
@@ -46,7 +46,7 @@ const links = ['wiki', 'source'];
 function merge(a: IDictionary, b: IDictionary): IDictionary {
   for (const k in a) {
     if (Array.isArray(a[k])) {
-      a[k + 'Array'] = a[k];
+      a[`${k}Array`] = a[k];
       a[k] = a[k].join(', ');
     }
   }
@@ -71,9 +71,10 @@ function getOriginals(a: any, b: any) {
     }
 
     if (Array.isArray(b[k])) {
-      b[k + 'Array'] = b[k];
+      const n = `${k}Array`;
+      b[n] = b[k];
       b[k] = b[k].join(', ');
-      a[k + 'Array'] = b[k + 'Array'];
+      a[n] = b[n];
     }
 
     a[k] = b[k];
@@ -104,7 +105,7 @@ export function table(games: { [name: string]: IGridGameConstructor }, wip = fal
 
 function row(a: IGridGameConstructor, games: { [name: string]: IGridGameConstructor; }, key: string) {
   const originalId = a.original;
-  const b = a.original ? games[a.original] : {} as IGridGameConstructor;
+  const b = <IGridGameConstructor>(a.original ? games[a.original] : {});
   const m = merge(copy(a), copy(b));
   m.id = id(key);
   m.originalId = originalId ? id(originalId) : undefined;
@@ -118,7 +119,8 @@ function row(a: IGridGameConstructor, games: { [name: string]: IGridGameConstruc
         return instance;
       }
       instance = new games[key]();
-      initActions(instance, (instance as any as IGame).possible());
+      initActions(instance, (<IGame><any>instance).possible());
+
       return Object.freeze(instance);
     }
   });

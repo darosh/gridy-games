@@ -7,7 +7,7 @@ import { CatchTheHareGameBase } from "./base/CatchTheHareGameBase";
 
 export class CatchTheHareGame extends CatchTheHareGameBase {
   public static title = "Catch the Hare";
-  public static type = "Misc";
+  public static group = "Misc";
   public static wiki = "https://en.wikipedia.org/wiki/Catch_the_Hare";
   public static location = "Europe";
   public static created = 1283;

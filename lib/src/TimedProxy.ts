@@ -49,7 +49,7 @@ export class TimedProxy implements IGame, IGridGame {
   }
 
   public undo(): void {
-    return this.game.undo();
+    this.game.undo();
   }
 
   public move(m: any): void {
@@ -90,7 +90,7 @@ export class TimedProxy implements IGame, IGridGame {
   }
 
   public stringToMove(move: string): any {
-    return (this.game).stringToMove(move);
+    return (<any>this.game).stringToMove(move);
   }
 
   private start() {
@@ -140,8 +140,8 @@ export class TimedProxy implements IGame, IGridGame {
   }
 
   private bind(prop: string) {
-    if ((this.game) [prop]) {
-      (<any>this)[prop] = (this.game)[prop].bind(this.game);
+    if ((<any>this.game)[prop]) {
+      (<any>this)[prop] = (<any>this.game)[prop].bind(this.game);
     }
   }
 }

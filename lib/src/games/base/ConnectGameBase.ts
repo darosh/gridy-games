@@ -38,7 +38,7 @@ export class ConnectGameBase implements IGame {
     const moves = parseRecord(record);
 
     for (const move of moves) {
-      this.move(this.tileMap.get((this.grid.tile(move[0], move[1]) as AnyTile).key));
+      this.move(this.tileMap.get((<AnyTile>this.grid.tile(move[0], move[1])).key));
     }
   }
 

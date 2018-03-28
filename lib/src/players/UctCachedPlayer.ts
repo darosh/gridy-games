@@ -33,7 +33,7 @@ export class UctCachedPlayer extends UctPlayer {
     }
 
     for (let i = this.cachedRoot.depth; i < game.moves.length; i++) {
-      this.cachedRoot = this.cachedRoot.children.find((c) => c.action === game.moves[i]) as any;
+      this.cachedRoot = <any>this.cachedRoot.children.find((c) => c.action === game.moves[i]);
 
       if (!this.cachedRoot) {
         return;

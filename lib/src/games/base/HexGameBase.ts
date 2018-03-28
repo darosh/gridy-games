@@ -11,7 +11,7 @@ export class HexGameBase implements IGame {
 
   public moves: any[] = [];
   public player: number = 1;
-  public score?: { [player: number]: number; };
+  public score?: { [player: number]: number };
   public winner: number = 0;
   public playerTiles: { [i: number]: AnyTile[] } = { 1: [], 2: [] };
 
