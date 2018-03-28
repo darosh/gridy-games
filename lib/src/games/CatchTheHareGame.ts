@@ -3,9 +3,9 @@ import {
 } from "gridy";
 
 import { IGame } from "../IGame";
-import { CatchTheHareGameBase } from "./base/CatchTheHareGameBase";
+import { QuirkatBoard } from "./base/QuirkatBoard";
 
-export class CatchTheHareGame extends CatchTheHareGameBase {
+export class CatchTheHareGame extends QuirkatBoard {
   public static title = "Catch the Hare";
   public static group = "Misc";
   public static wiki = "https://en.wikipedia.org/wiki/Catch_the_Hare";

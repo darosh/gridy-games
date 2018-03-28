@@ -2,10 +2,10 @@ import {
   AnyTile, IGrid, link, Position, Rectangular8Tile, RectangularGrid, RectangularTile, Shape, toMap
 } from 'gridy';
 
-import { IGame } from '../../IGame';
 import { Theme } from '../../Theme';
+import {isDiagonalCenter} from '../utils/quirkat';
 
-export class CatchTheHareGameBase implements IGame {
+export class QuirkatBoard {
   public static theme = Theme.Qirkat;
   public static move: boolean = true;
 
@@ -23,37 +23,14 @@ export class CatchTheHareGameBase implements IGame {
     this.tileMap = toMap(this.grid.tiles);
     link(this.tileMap);
 
-    let i = 0;
-    const mid = (this.grid.tiles.length - 1) / 2;
-
     for (const t of <any>this.grid.tiles) {
       for (const [n, m] of (t).links) {
-        if (this.isDiagonalCenter(m, t)) {
+        if (isDiagonalCenter(m, t)) {
           t.links.delete(n);
           m.links.delete(-n);
         }
       }
-
-      if (i < mid) {
-        t.data = 1;
-      } else if (i > mid) {
-        t.data = 2;
-      }
-
-      i++;
     }
-  }
-
-  public isDiagonal(a: any, b: any) {
-    return (a.x !== b.x && a.y !== b.y);
-  }
-
-  public isDiagonalCenter(a: any, b: any) {
-    return this.isDiagonal(a, b) && (this.isCenter(a) || this.isCenter(b));
-  }
-
-  public isCenter(a: any) {
-    return ((a.x % 2) && !(a.y % 2));
   }
 
   public rulers() {
@@ -68,18 +45,5 @@ export class CatchTheHareGameBase implements IGame {
     }
 
     return Array.from(m.values());
-  }
-
-  public possible(): any[] {
-    return [];
-  }
-  public move(m: any): void {
-    throw new Error('Method not implemented.');
-  }
-  public undo(): void {
-    throw new Error('Method not implemented.');
-  }
-  public evaluate(): number {
-    throw new Error('Method not implemented.');
   }
 }

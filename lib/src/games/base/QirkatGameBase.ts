@@ -4,10 +4,11 @@ import {
 
 import { IGame } from '../../IGame';
 import { getMovePlace, other } from '../../utils';
+import { quirkatSetup } from '../utils/quirkat';
 import { jumpsToString, stringsToJump } from '../utils/serialization';
-import { CatchTheHareGameBase } from './CatchTheHareGameBase';
+import { QuirkatBoard } from './QuirkatBoard';
 
-export class QirkatGameBase extends CatchTheHareGameBase {
+export class QirkatGameBase extends QuirkatBoard {
   public moveToString = jumpsToString.bind(this);
   public stringToMove = stringsToJump.bind(this);
 
@@ -17,6 +18,7 @@ export class QirkatGameBase extends CatchTheHareGameBase {
   constructor(grid: IGrid<AnyTile>) {
     super(grid);
 
+    quirkatSetup(grid.tiles);
     const stones = (grid.tiles.length - 1) / 2;
     this.score = { 1: stones, 2: stones };
   }
