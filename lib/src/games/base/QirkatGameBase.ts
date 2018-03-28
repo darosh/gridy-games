@@ -97,8 +97,9 @@ export class QirkatGameBase extends CatchTheHareGameBase {
     return r.map(this.leaveToMove);
   }
 
-  private leaveToMove(node: any) {
+  private leaveToMove(nodeInput: any) {
     const result = [];
+    let node = nodeInput;
 
     while (node) {
       if (node.parent) {
@@ -133,9 +134,8 @@ export class QirkatGameBase extends CatchTheHareGameBase {
       }
 
       const leaves: any[] = this.multiJumps({ tile: t }, o);
-      r = r.concat(leaves);
 
-      return r;
+      return r.concat(leaves);
     },                            []);
   }
 

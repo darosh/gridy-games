@@ -1,7 +1,12 @@
 import * as games from './games';
 import { table } from './utils';
 
+// tslint:disable:no-unnecessary-class function-name
+
 export class Info {
+  private static wipValue: boolean = false;
+  private static gamesValue?: ReadonlyArray<any>;
+
   public static set wip(value: boolean) {
     if (value !== this.wipValue) {
       this.wipValue = value;
@@ -24,7 +29,4 @@ export class Info {
   public static similar(id: string, exclude: string) {
     return Info.games.filter((g) => g.originalId === id && g.id !== exclude);
   }
-
-  private static wipValue: boolean = false;
-  private static gamesValue?: ReadonlyArray<any>;
 }

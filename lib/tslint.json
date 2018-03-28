@@ -18,6 +18,7 @@
     "no-any": false,
     "completed-docs": false,
     "insecure-random": false,
+    "possible-timing-attack": false,
     "strict-boolean-expressions": false
   },
   "rulesDirectory": []

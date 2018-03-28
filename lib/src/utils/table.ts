@@ -44,7 +44,7 @@ interface IDictionary {
 const links = ['wiki', 'source'];
 
 function merge(a: IDictionary, b: IDictionary): IDictionary {
-  for (const k in a) {
+  for (const k of Object.keys(a)) {
     if (Array.isArray(a[k])) {
       a[`${k}Array`] = a[k];
       a[k] = a[k].join(', ');
@@ -65,7 +65,7 @@ function merge(a: IDictionary, b: IDictionary): IDictionary {
 function getOriginals(a: any, b: any) {
   const originals: IDictionary = {};
 
-  for (const k in b) {
+  for (const k of Object.keys(b)) {
     if (a[k]) {
       continue;
     }

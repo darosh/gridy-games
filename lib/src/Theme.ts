@@ -16,6 +16,7 @@ export enum Stones {
   RedYellow
 }
 
+// tslint:disable-next-line:variable-name
 export const ThemeStones = {
   [Theme.Checkers]: Stones.BlackWhite,
   [Theme.CheckersHex]: Stones.BlackWhite,
@@ -28,6 +29,7 @@ export const ThemeStones = {
   [Theme.TacTickle]: Stones.OrangeBlue
 };
 
+// tslint:disable-next-line:variable-name
 export const StoneNames = {
   [Stones.BlackWhite]: ['Black', 'White'],
   [Stones.OrangeBlue]: ['Orange', 'Blue'],

@@ -49,7 +49,9 @@ export class ReversiGameBase implements IGame {
     link(this.tileMap);
 
     if (center) {
-      this.center.forEach((t) => this.move(t, true));
+      this.center.forEach((t) => {
+        this.move(t, true);
+      });
     }
 
     this.updatePossible();
@@ -78,7 +80,7 @@ export class ReversiGameBase implements IGame {
       return this.center.filter((t) => !t.data);
     }
 
-    for (const m of this.empty.values() as any) {
+    for (const m of <any>this.empty.values()) {
       for (const d of (m).links.keys()) {
         let node = (m).links.get(d);
         let nodes = 0;
@@ -107,23 +109,22 @@ export class ReversiGameBase implements IGame {
       this.player = other(this.player);
       this.history.pop();
       this.undo();
+
       return;
     }
 
     this.score[m.data]--;
     m.data = null;
     this.empty.set(m.key, m);
-    const h: IState = this.history.pop() as IState;
+    const h: IState = <IState>this.history.pop();
     this.player = (this.player % 2) + 1;
 
-    for (const k in h) {
-      if (h.hasOwnProperty(k)) {
-        const d = (this.tileMap.get(k) as any);
-        this.score[d.data]--;
-        d.data = h[k];
-        this.score[d.data]++;
-      }
-    }
+    for (const k of Object.keys(h)) {
+      const d = <any>(this.tileMap.get(k));
+      this.score[d.data]--;
+      d.data = h[k];
+      this.score[d.data]++;
+  }
 
     this.updatePossible();
   }
@@ -131,6 +132,7 @@ export class ReversiGameBase implements IGame {
   public move(m: any, fake = false): void {
     if (!m) {
       this.movePass(m);
+
       return;
     }
 
@@ -190,7 +192,7 @@ export class ReversiGameBase implements IGame {
 
       if (node && (node.data === m.data)) {
         for (const n of nodes) {
-          state[n.key] = n.data as number;
+          state[n.key] = <number>n.data;
           this.score[n.data]--;
           this.score[m.data]++;
           n.data = m.data;

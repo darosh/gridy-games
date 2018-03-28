@@ -107,7 +107,7 @@ export class UctPlayer {
 
         // Selection
         while (node.unexamined.length === 0 && node.children.length > 0) {
-          node = node.selectChild() as any;
+          node = <any>node.selectChild();
           game.move(node.action);
         }
 
