@@ -39,7 +39,10 @@ export class QirkatGameBase extends QuirkatBoard {
     }
 
     last.data = first.data;
-    first.data = null;
+
+    if (last !== first) {
+      first.data = null;
+    }
 
     this.player = other(this.player);
     this.moves.push(m);
@@ -70,9 +73,13 @@ export class QirkatGameBase extends QuirkatBoard {
     }
 
     first.data = last.data;
-    last.data = null;
+
+    if (last !== first) {
+      last.data = null;
+    }
 
     this.winner = 0;
+    this.finished = false;
     this.player = other(this.player);
   }
 
@@ -89,6 +96,10 @@ export class QirkatGameBase extends QuirkatBoard {
   }
 
   public possible(): any {
+    if (this.finished) {
+      return [];
+    }
+
     let result: any[] = this.jumpsPossible();
     result = this.topJumps(result);
     result = this.leavesToMoves(result);
@@ -143,7 +154,7 @@ export class QirkatGameBase extends QuirkatBoard {
       const leaves: any[] = this.multiJumps({ tile: t }, o);
 
       return r.concat(leaves);
-    },                            []);
+    }, []);
   }
 
   private multiJumps(parent: any, o: number, leaves: any[] = [], depth: number = 0, removed: any[] = []): any[] {
@@ -198,6 +209,6 @@ export class QirkatGameBase extends QuirkatBoard {
       }
 
       return r;
-    },                            []);
+    }, []);
   }
 }

@@ -41,12 +41,16 @@ export class CatchTheHareGameBase extends QuirkatBoard implements IGame {
     for (let i = 1; i < m.length; i++) {
       if (Array.isArray(m[i])) {
         this.score[m[i][1].data]--;
+
         m[i][1].data = null;
       }
     }
 
     last.data = first.data;
-    first.data = null;
+
+    if (last !== first) {
+      first.data = null;
+    }
 
     this.player = other(this.player);
     this.moves.push(m);
@@ -59,6 +63,10 @@ export class CatchTheHareGameBase extends QuirkatBoard implements IGame {
   }
 
   public possible(): Move[] {
+    if (this.finished) {
+      return [];
+    }
+
     if (this.player === 1) {
       return this.possibleHunters(1);
     } else {
@@ -80,14 +88,19 @@ export class CatchTheHareGameBase extends QuirkatBoard implements IGame {
 
       if (Array.isArray(n)) {
         this.score[o]++;
+
         n[1].data = o;
       }
     }
 
     first.data = last.data;
-    last.data = null;
+
+    if (last !== first) {
+      last.data = null;
+    }
 
     this.winner = 0;
+    this.finished = false;
     this.player = other(this.player);
   }
 

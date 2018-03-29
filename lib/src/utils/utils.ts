@@ -73,7 +73,11 @@ export function stringify(game?: IGame) {
 }
 
 export function other(player: number) {
-  return (player % 2) + 1;
+  // if (!player) {
+  //   throw new Error('Undefined player!');
+  // }
+
+  return 3 - player;
 }
 
 export function landscapeHex(grid: HexagonalGrid) {

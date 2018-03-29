@@ -76,7 +76,7 @@ export class TacTickleGameBase implements IGame {
     move[0].data = move[1].data;
     move[1].data = null;
 
-    this.player = other(this.player % 2);
+    this.player = other(this.player);
     this.finished = false;
     this.winner = 0;
   }

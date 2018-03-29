@@ -1,6 +1,7 @@
 // Based on https://github.com/OMerkel/UCThello
 
 import { IGame } from '../IGame';
+import { other } from '../utils';
 
 export class UctNode {
   public action: any;
@@ -20,7 +21,7 @@ export class UctNode {
     this.wins = 0;
     this.visits = 0;
     this.unexamined = game.possible();
-    this.activePlayer = game.player % 2 + 1;
+    this.activePlayer = other(game.player);
   }
 
   public addChild(game: IGame, index: number) {

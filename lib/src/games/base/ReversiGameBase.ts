@@ -65,7 +65,7 @@ export class ReversiGameBase implements IGame {
     this.knownPossible = this.possibleFor(this.player);
 
     if (!this.knownPossible.length) {
-      if (this.possibleFor((this.player % 2) + 1).length) {
+      if (this.possibleFor(other(this.player)).length) {
         this.move(null);
       } else {
         this.finished = true;
@@ -117,7 +117,7 @@ export class ReversiGameBase implements IGame {
     m.data = null;
     this.empty.set(m.key, m);
     const h: IState = <IState>this.history.pop();
-    this.player = (this.player % 2) + 1;
+    this.player = other(this.player);
 
     for (const k of Object.keys(h)) {
       const d = <any>(this.tileMap.get(k));
@@ -140,7 +140,7 @@ export class ReversiGameBase implements IGame {
 
     this.score[this.player] = this.score[this.player] || 0;
     this.score[this.player]++;
-    this.player = (this.player % 2) + 1;
+    this.player = other(this.player);
     this.empty.delete(m.key);
 
     if (fake) {
@@ -171,7 +171,7 @@ export class ReversiGameBase implements IGame {
   }
 
   private movePass(m: any) {
-    this.player = (this.player % 2) + 1;
+    this.player = other(this.player);
     this.moves.push(m);
     this.history.push({});
     this.updatePossible();

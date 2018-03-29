@@ -66,7 +66,7 @@ export class ConnectGameBase implements IGame {
   public move(m: Move): void {
     m.data = this.player;
     (this.playerTiles[this.player] || (this.playerTiles[this.player] = [])).push(m);
-    this.player = (this.player % 2) + 1;
+    this.player = other(this.player);
     this.moves.push(m);
     this.freeTileMap.delete(m.key);
 
