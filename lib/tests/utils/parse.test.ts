@@ -1,7 +1,7 @@
 import { parseRecord } from '../../src/utils';
 
 describe('Function parseRecord()', () => {
-  it('parses undelimited', () => {
+  it('parses not delimited', () => {
     expect(parseRecord('a1b1c2')).toEqual([[0, 0], [1, 0], [2, 1]]);
   });
 

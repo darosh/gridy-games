@@ -9,9 +9,11 @@ describe('Game infos', () => {
 Object.keys(Games).forEach((key) => {
   describe(`Game ${key}`, () => {
     let game: any;
+    let score: any;
 
     it('should create instance', () => {
       game = new (<any>Games)[key]();
+      score = JSON.stringify(game.score);
       expect(game).toBeDefined();
     });
 
@@ -33,6 +35,10 @@ Object.keys(Games).forEach((key) => {
     it('should reset moves', () => {
       reset(game);
       expect(game.moves.length).toBe(0);
+    });
+
+    it('should reset score', () => {
+      expect(JSON.stringify(game.score)).toEqual(score);
     });
   });
 });

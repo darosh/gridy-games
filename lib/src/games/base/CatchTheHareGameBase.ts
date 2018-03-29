@@ -79,6 +79,7 @@ export class CatchTheHareGameBase extends QuirkatBoard implements IGame {
       const n = m[i];
 
       if (Array.isArray(n)) {
+        this.score[o]++;
         n[1].data = o;
       }
     }

@@ -64,6 +64,7 @@ export class QirkatGameBase extends QuirkatBoard {
       const n = m[i];
 
       if (Array.isArray(n)) {
+        this.score[o]++;
         n[1].data = o;
       }
     }

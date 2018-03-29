@@ -21,8 +21,8 @@ export function isEmpty(a: any[]) {
 }
 
 export function playout(game: IGame, players: IPLayer[]) {
-  while (game.possible().length && !game.winner) {
-    game.move(players[game.moves.length % players.length].select(game));
+  while (!game.winner && game.possible().length) {
+    game.move(players[game.moves.length % players.length].select(game).move);
   }
 }
 
