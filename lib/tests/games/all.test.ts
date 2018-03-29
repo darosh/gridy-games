@@ -1,4 +1,6 @@
-import { Games, Info, reset, stringify, update } from '../../src';
+import * as Games from '../../src/games';
+import { Info } from '../../src/Info';
+import { reset, stringify, update } from '../../src/utils';
 
 describe('Game infos', () => {
   it('should load', () => {
