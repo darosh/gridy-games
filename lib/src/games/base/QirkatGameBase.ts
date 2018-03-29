@@ -72,6 +72,7 @@ export class QirkatGameBase extends QuirkatBoard {
     first.data = last.data;
     last.data = null;
 
+    this.winner = 0;
     this.player = other(this.player);
   }
 

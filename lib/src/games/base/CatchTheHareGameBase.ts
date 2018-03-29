@@ -87,6 +87,7 @@ export class CatchTheHareGameBase extends QuirkatBoard implements IGame {
     first.data = last.data;
     last.data = null;
 
+    this.winner = 0;
     this.player = other(this.player);
   }
 
