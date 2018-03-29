@@ -2,12 +2,12 @@ import {
   AnyGrid, AnyTile, IGrid, link, Position, Rectangular8Tile, RectangularGrid, RectangularTile, Shape, toMap
 } from 'gridy';
 
-import {IGame} from '../../IGame';
-import {Move} from '../../Move';
-import {other} from '../../utils';
-import {QuirkatBoard} from '../base/QuirkatBoard';
-import {expandJumps, jumpsPossible, leavesToMoves, leaveToMove, multiJumps} from '../utils/quirkat';
-import {jumpsToString, stringsToJump} from '../utils/serialization';
+import { IGame } from '../../IGame';
+import { Move } from '../../Move';
+import { other } from '../../utils';
+import { QuirkatBoard } from '../base/QuirkatBoard';
+import { expandJumps, jumpsPossible, leavesToMoves, leaveToMove, multiJumps } from '../utils/quirkat';
+import { jumpsToString, stringsToJump } from '../utils/serialization';
 
 export class CatchTheHareGameBase extends QuirkatBoard implements IGame {
   public static title = 'Catch the Hare';
@@ -24,6 +24,7 @@ export class CatchTheHareGameBase extends QuirkatBoard implements IGame {
   public leaveToMove = leaveToMove.bind(this);
   public expandJumps = expandJumps.bind(this);
 
+  public score: { [player: number]: number } = {};
   private finished = false;
   private maxMoves: number;
 
@@ -39,6 +40,7 @@ export class CatchTheHareGameBase extends QuirkatBoard implements IGame {
 
     for (let i = 1; i < m.length; i++) {
       if (Array.isArray(m[i])) {
+        this.score[m[i][1].data]--;
         m[i][1].data = null;
       }
     }
@@ -118,7 +120,11 @@ export class CatchTheHareGameBase extends QuirkatBoard implements IGame {
       return other(this.player);
     }
 
-    if(this.moves.length === this.maxMoves) {
+    if (this.score[1] <= 9) {
+      return 2;
+    }
+
+    if (this.moves.length === this.maxMoves) {
       return -1;
     }
 

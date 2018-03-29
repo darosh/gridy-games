@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import {scaleToFit} from '../services/utils'
-import {polygonHull} from 'd3-polygon'
+import { scaleToFit } from '../services/utils'
+import { polygonHull } from 'd3-polygon'
 
 export default {
   props: {
@@ -15,10 +15,8 @@ export default {
   },
   data () {
     return {
-      // game: null,
       translate: [],
       size: [],
-      rect: [],
       hullPoints: '',
       resizing: false
     }
@@ -31,10 +29,8 @@ export default {
 
       let bounds = this.rescaleToFrame()
 
-      this.rect = [bounds.maxX - bounds.minX + this.margin, bounds.maxY - bounds.minY + this.margin]
-
       if (!this.fixed) {
-        this.size = this.rect
+        this.size = [bounds.maxX - bounds.minX + this.margin, bounds.maxY - bounds.minY + this.margin]
       } else {
         this.size = [bounds.maxX - bounds.minX + this.margin, this.frame[1] + this.margin]
       }

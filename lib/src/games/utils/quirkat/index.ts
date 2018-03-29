@@ -1,6 +1,6 @@
-import {IGame} from '../../../IGame';
-import {IGridGame} from '../../../IGridGame';
-import {other} from '../../../utils';
+import { IGame } from '../../../IGame';
+import { IGridGame } from '../../../IGridGame';
+import { other } from '../../../utils';
 
 export function isDiagonalCenter(a: any, b: any) {
   return isDiagonal(a, b) && (isCenter(a) || isCenter(b));
@@ -37,7 +37,7 @@ export function jumpsPossible(this: IGridGame & IGame) {
       return r;
     }
 
-    const leaves: any[] = (<any>this).multiJumps({tile: t}, o);
+    const leaves: any[] = (<any>this).multiJumps({ tile: t }, o);
 
     return r.concat(leaves);
   }, []);
@@ -48,12 +48,16 @@ export function multiJumps(
   const t = parent.tile;
   parent.jumps = [];
 
+  if (!removed.length) {
+    removed.push(t);
+  }
+
   for (const [n, m] of t.links) {
     if (((m).data === o) && (removed.indexOf(m) === -1)) {
       const d = (m).links.get(n);
 
-      if (d && !d.data) {
-        const r: any = {tile: d, removed: m, depth, parent};
+      if (d && (!d.data || (removed.indexOf(d) > -1))) {
+        const r: any = { tile: d, removed: m, depth, parent };
         parent.jumps.push(r);
         (<any>this).multiJumps(r, o, leaves, depth + 1, removed.concat([m]));
       }

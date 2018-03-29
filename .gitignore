@@ -1,13 +1,13 @@
 .DS_Store
 node_modules/
 /dist/
+/coverage/
 /build/*/es5/
 /build/*_backup/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-yarn.lock
 package-lock.json
 
 # Editor directories and files

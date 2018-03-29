@@ -11,5 +11,8 @@
   },
   "files": [
     "lib/src/index.ts"
+  ],
+  "include": [
+    "lib/tests/**/*.ts"
   ]
 }
