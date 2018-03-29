@@ -1,4 +1,6 @@
-# Gridy Games [![Maintainability](https://api.codeclimate.com/v1/badges/20d1d52d4e8419971228/maintainability)](https://codeclimate.com/github/darosh/gridy-games/maintainability)
+# Gridy Games
+
+[![Build Status](https://travis-ci.org/darosh/gridy-games.svg?branch=master)](https://travis-ci.org/darosh/gridy-games) [![Maintainability](https://api.codeclimate.com/v1/badges/20d1d52d4e8419971228/maintainability)](https://codeclimate.com/github/darosh/gridy-games/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/20d1d52d4e8419971228/test_coverage)](https://codeclimate.com/github/darosh/gridy-games/test_coverage)
 
 > Board games Typescript library and web application
 
