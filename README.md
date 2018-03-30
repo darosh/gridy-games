@@ -1,8 +1,10 @@
 # Gridy Games
 
-[![Build Status](https://img.shields.io/travis/darosh/gridy-games.svg?style=flat-square)](https://travis-ci.org/darosh/gridy-games) [![Maintainability](https://img.shields.io/codeclimate/maintainability-percentage/darosh/gridy-games.svg?style=flat-square)](https://codeclimate.com/github/darosh/gridy-games/maintainability) [![Test Coverage](https://img.shields.io/codeclimate/coverage/darosh/gridy-games.svg?style=flat-square)](https://codeclimate.com/github/darosh/gridy-games/test_coverage)
+[![Build Status](https://travis-ci.org/darosh/gridy-games.svg?branch=master)](https://travis-ci.org/darosh/gridy-games)
+[![Maintainability](https://api.codeclimate.com/v1/badges/20d1d52d4e8419971228/maintainability)](https://codeclimate.com/github/darosh/gridy-games/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/20d1d52d4e8419971228/test_coverage)](https://codeclimate.com/github/darosh/gridy-games/test_coverage)
 
-> Board games Typescript library and web application
+> Board games web application
 
 <img src="https://darosh.github.io/gridy-games/static/img/vector/icon-web.svg" width="112">
 
@@ -36,7 +38,8 @@ https://darosh.github.io/gridy-games/
 
 ### Library
 
-- usability test of [Gridy](https://github.com/darosh/gridy) library
+- [gridy-games-lib](https://github.com/darosh/gridy-games-lib)
+- usability test of [gridy](https://github.com/darosh/gridy) library
 - monte carlo tree search and minmax engines
 - unified franework like interfaces for view and engines
 
