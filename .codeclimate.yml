@@ -32,4 +32,4 @@ checks:
       threshold: 100
 exclude_patterns:
   - "build/vuetify/"
-  - "lib/tests/"
+  - "static/"
