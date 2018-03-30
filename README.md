@@ -4,7 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/20d1d52d4e8419971228/maintainability)](https://codeclimate.com/github/darosh/gridy-games/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/20d1d52d4e8419971228/test_coverage)](https://codeclimate.com/github/darosh/gridy-games/test_coverage)
 
-> Board games web application
+> Board games web app
 
 <img src="https://darosh.github.io/gridy-games/static/img/vector/icon-web.svg" width="112">
 
