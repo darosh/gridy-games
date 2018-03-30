@@ -33,6 +33,8 @@ checks:
 exclude_patterns:
   - "build/vuetify/"
   - "static/"
+  - "src/style/"
+  - .babelrc
   - .codeclimate.yml
   - .editorconfig
   - .eslintignore

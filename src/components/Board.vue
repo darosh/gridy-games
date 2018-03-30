@@ -123,7 +123,7 @@
 
 <script>
 import boardSize from '../mixins/board-size'
-import { theme } from '../style/theme'
+import { theme } from '../services/theme'
 
 let STONE_ID = 0
 

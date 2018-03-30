@@ -186,7 +186,7 @@ import {
 import { isHuman } from '../services/players'
 import { Bus } from '../services/bus'
 import { PlayerWorker } from '../worker/ai'
-import { theme } from '../style/theme'
+import { theme } from '../services/theme'
 import { Shared } from '../services/shared'
 import { gameData } from '../services/utils'
 

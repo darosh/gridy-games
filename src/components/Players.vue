@@ -99,7 +99,7 @@
 <script>
 import Vue from 'vue'
 import { Shared } from '../services/shared'
-import { theme } from '../style/theme'
+import { theme } from '../services/theme'
 import playerSwitch from '../mixins/player-switch'
 import playerTimer from '../mixins/player-timer'
 import gameSession from '../mixins/game-session'
