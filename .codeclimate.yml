@@ -33,6 +33,25 @@ checks:
 exclude_patterns:
   - "build/vuetify/"
   - "static/"
+  - .codeclimate.yml
+  - .editorconfig
+  - .eslintignore
+  - .eslintrc.js
+  - .gitignore
+  - .postcssrc.js
+  - .travis.yml
+  - .vscode/
+  - LICENSE
+  - README.md
+  - TODO.md
+  - build/
+  - icon.config.json
+  - package.json
+  - rollup.config.js
+  - yarn.lock
+  - webpack.config.js
+  - tsconfig.json
+
 plugins:
   eslint:
     enabled: true
