@@ -81,32 +81,21 @@
         </g>
         <g v-else>
           <transition-group
-            v-if="interactive && !resizing"
             name="remove"
             tag="g">
-            <circle
+            <g
               v-for="t in stones"
-              :key="'s' + t.id"
-              :style="{transform: 'translate(' + center(t.tile, 'px') + ')'}"
-              :r="game.grid.radius * game.grid.scale * 0.85 - round * 2"
-              :class="{animate: interactive && !resizing, clickable: t.tile.highlighted && !waiting, ['token-' + t.data]: true}"
-              class="stone"
-              cx="0"
-              cy="0"
-              v-on="interactive ? {click: () => move(t.tile)} : null" />
+              :key="'s' + t.id">
+              <circle
+                :style="{transform: 'translate(' + center(t.tile, 'px') + ')'}"
+                :r="game.grid.radius * game.grid.scale * 0.85 - round * 2"
+                :class="{animate: interactive && !resizing, clickable: t.tile.highlighted && !waiting, ['token-' + t.data]: true}"
+                class="stone"
+                cx="0"
+                cy="0"
+                v-on="interactive ? {click: () => move(t.tile)} : null" />
+            </g>
           </transition-group>
-          <g v-else>
-            <circle
-              v-for="t in stones"
-              :key="'s' + t.id"
-              :style="{transform: 'translate(' + center(t.tile, 'px') + ')'}"
-              :r="game.grid.radius * game.grid.scale * 0.85 - round * 2"
-              :class="{animate: interactive && !resizing, clickable: t.tile.highlighted && !waiting, ['token-' + t.data]: true}"
-              class="stone"
-              cx="0"
-              cy="0"
-              v-on="interactive ? {click: () => move(t.tile)} : null" />
-          </g>
         </g>
         <g-poly-line
           v-if="winning"
