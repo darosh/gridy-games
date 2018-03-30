@@ -1,5 +1,6 @@
 /* globals self */
 
+import '../../../plugins/helpers'
 import { Games, update, reset } from '../../../plugins/lib'
 import { players } from '../../services/players'
 

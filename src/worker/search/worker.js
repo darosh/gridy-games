@@ -1,5 +1,6 @@
 /* globals self */
 
+import '../../../plugins/helpers'
 import '../../../plugins/debug'
 import { search } from './search'
 

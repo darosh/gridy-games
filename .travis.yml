@@ -8,5 +8,15 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+  - git clone --depth=1 https://github.com/darosh/gridy.git
+  - cd gridy
+  - yarn link
+  - cd ..
+  - yarn link gridy
+  - git clone --depth=1 https://github.com/darosh/gridy-games-lib.git
+  - cd gridy-games-lib
+  - yarn link
+  - cd ..
+  - yarn link gridy-games-lib
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

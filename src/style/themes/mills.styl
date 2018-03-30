@@ -1,15 +1,14 @@
 millsTheme = {
-  tileFill: #A1887F,
-  tileOdd: #EFEBE9,
-  possible: #fff,
+  tileFill: #FBC02D,
+  possible: #FFE57F,
   tileStroke: #212121,
   lineStroke: #212121,
   waiting: #E0E0E0,
   waitingDark: #616161,
   tileWaiting: #A1887F,
-  t1: #3E2723,
+  t1: #000,
   t2: #fff,
-  s1: #3E2723,
+  s1: #000,
   s2: #fff,
   l1: #3E2723,
   l2: #3E2723,
@@ -20,15 +19,7 @@ millsTheme = {
 colors(millsTheme, '.mills-theme')
 
 .mills-theme
-  rect, polygon
-    fill: #FFECB3 !important
-  polygon
-    fill: #FFE57F !important
+  polygon:not(.possible)
+    fill: #FBC02D !important
   line
     shape-rendering: crispEdges
-
-  rect
-    stroke: millsTheme.tileStroke
-    stroke-width: 2
-.preview .mills-theme rect
-    stroke-width: 1

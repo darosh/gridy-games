@@ -1,1 +1,1 @@
-export * from '../lib/src'
+export * from 'gridy-games-lib'

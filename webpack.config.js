@@ -63,7 +63,7 @@ const compileManifest = new HtmlWebpackPlugin({
 
 const config = {
   resolve: {
-    extensions: ['.ts', '.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json'],
     alias: {
       'Tone': 'tone/Tone',
       'd3-color': resolve('plugins/dummy'),
@@ -133,17 +133,6 @@ const config = {
   ],
   module: {
     rules: [
-      {
-        test: /\.ts$/,
-        use: ['babel-loader', {
-          loader: 'ts-loader',
-          options: {
-            transpileOnly: true
-          }
-        }],
-        exclude: /node_modules/,
-        include: [resolve('lib')]
-      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',

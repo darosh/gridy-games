@@ -1,3 +1,4 @@
+import '../plugins/helpers'
 import '../plugins/debug'
 import '../plugins/visibility'
 import '../plugins/vuetify'

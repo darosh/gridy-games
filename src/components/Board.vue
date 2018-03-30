@@ -256,6 +256,13 @@ export default {
     animateStones () {
       if (this.isMove && this.game.moves.length) {
         const action = this.game.moves[this.game.moves.length - 1]
+
+        if(!Array.isArray(action)) {
+          this.stones.push({ tile: action, data: action.data, id: ++STONE_ID })
+
+          return
+        }
+
         const first = action[0]
         const firstStone = this.stones.find(s => s.tile === first)
         let index = 1
