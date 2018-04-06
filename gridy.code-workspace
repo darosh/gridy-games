@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\gridy-games-lib"
+		},
+		{
+			"path": "..\\gridy"
+		}
+	],
+	"settings": {}
+}
