@@ -1,7 +1,7 @@
 {
   "name": "gridy-games",
   "description": "Board games",
-  "version": "0.41.216",
+  "version": "0.41.218",
   "author": "Jan Forst <ensonador@gmail.com>",
   "browserslist": [
     "> 1%",
@@ -20,7 +20,7 @@
     "d3-scale": "^2.0.0",
     "firebase": "^4.12.1",
     "fscreen": "^1.0.2",
-    "gridy-avatars": "^1.0.4",
+    "gridy-avatars": "^1.0.6",
     "intersection-observer": "^0.5.0",
     "lunr": "^2.1.6",
     "material-icons-bundle": "github:darosh/material-icons-bundle",
@@ -29,12 +29,12 @@
     "vue-observe-visibility": "^0.3.1",
     "vue-router": "^3.0.1",
     "vuefire": "^1.4.5",
-    "vuetify": "^1.0.11",
+    "vuetify": "^1.0.13",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@types/jest": "^22.2.2",
-    "@types/node": "^9.6.1",
+    "@types/node": "^9.6.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
@@ -60,7 +60,7 @@
     "eslint-friendly-formatter": "^4.0.0",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-html": "^4.0.2",
-    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
@@ -89,9 +89,9 @@
     "vue-loader": "^14.2.2",
     "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16",
-    "webpack": "^4.4.1",
+    "webpack": "^4.5.0",
     "webpack-bundle-analyzer": "^2.11.1",
-    "webpack-cli": "^2.0.13",
+    "webpack-cli": "^2.0.14",
     "webpack-dev-server": "^3.1.1",
     "worker-loader": "^1.1.1"
   },
