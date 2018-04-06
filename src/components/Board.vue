@@ -14,6 +14,11 @@
         :points="hullPoints"
         :transform="'translate('+ translate +')'"
         class="hull" />
+      <!-- <path
+        v-if="hullPoints"
+        :d="hullPoints"
+        :transform="'translate('+ translate +')'"
+        class="hull" /> -->
       <g :transform="'translate('+ translate +')'">
         <line
           v-for="(l, k) in lines"
@@ -50,6 +55,17 @@
           :x2="center(l[1]).x"
           :y2="center(l[1]).y"
           :class="l[2] ? 'line-' + l[2] : ''" />
+        <g
+          v-for="t in dots"
+          :key="'dot' + t.key"
+          :transform="'translate(' + center(t) + ')'">
+          <circle
+            :r="game.grid.scale * 0.085"
+            class="dot"
+            cx="0"
+            cy="0"
+            style="pointer-events: none"/>
+        </g>
         <g
           v-for="t in game.grid.tiles"
           :key="'text' + t.key"
@@ -162,6 +178,7 @@ export default {
     return {
       winning: null,
       lines: null,
+      dots: null,
       rulers: null,
       stones: null
     }
@@ -180,6 +197,7 @@ export default {
       handler: function () {
         this.lines = this.game.links ? this.game.links() : []
         this.rulers = this.game.rulers ? this.game.rulers() : []
+        this.dots = this.game.dots ? this.game.dots() : []
         this.initStones()
       }
     },
