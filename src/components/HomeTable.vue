@@ -21,6 +21,11 @@
           <router-link
             :to="{name: 'game', params: {id: props.item.id}}"
             :class="props.item.wip ? 'red--text' : 'light-blue--text'">{{ props.item.title | titled }}</router-link>
+          <span v-if="!props.item.originals.aliases">
+            <span
+              v-for="(a, k) in props.item.aliasesArray"
+              :key="k"><br >{{ a }}</span>
+          </span>
         </td>
         <td :class="{'grey--text': props.item.originals.original}">{{ props.item.original }}</td>
         <td>{{ props.item.group }}</td>
