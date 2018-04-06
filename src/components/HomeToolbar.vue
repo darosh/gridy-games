@@ -58,6 +58,9 @@
         <v-tab :to="{path: '/table'}">
           Table
         </v-tab>
+        <v-tab v-if="useFirebase" :to="{path: '/online'}">
+          Online
+        </v-tab>
       </v-tabs>
     </div>
   </v-toolbar>
@@ -75,7 +78,8 @@ export default {
   data () {
     return {
       Shared,
-      input: null
+      input: null,
+      useFirebase: !!process.APP_FIREBASE
     }
   },
   watch: {
