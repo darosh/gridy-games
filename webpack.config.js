@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const fs = require('fs')
 // const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -23,10 +24,21 @@ const buildingForLocal = () => {
 function deps () {
   const d = require('./package').dependencies
 
+  d['gridy'] = 'github:darosh/gridy'
+  d['gridy-games-lib'] = 'github:darosh/gridy-games-lib'
+
   return Object.keys(d).reduce((r, k) => {
     r[k] = d[k].startsWith('github') ? d[k] + ':' + require(path.join(k, 'package.json')).version : d[k]
     return r
   }, {})
+}
+
+function firebase () {
+  try {
+    return JSON.parse(fs.readFileSync('.firebase.json', 'utf8'))
+  } catch (ignore) {
+    return false
+  }
 }
 
 // Not extracting CSS because its not compatible yet.
@@ -99,7 +111,8 @@ const config = {
       'process.APP_VERSION': JSON.stringify(require('./package').version),
       'process.APP_STORAGE_VERSION': JSON.stringify(require('./package').storageVersion),
       'process.APP_BUILD': JSON.stringify(new Date().toISOString()),
-      'process.APP_DEPENDENCIES': JSON.stringify(deps())
+      'process.APP_DEPENDENCIES': JSON.stringify(deps()),
+      'process.APP_FIREBASE': JSON.stringify(firebase())
     }),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, 'static'),

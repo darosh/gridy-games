@@ -19,3 +19,5 @@ package-lock.json
 
 /plugins/icons.js
 /plugins/helpers.js
+
+.firebase*

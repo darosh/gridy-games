@@ -1,7 +1,7 @@
 {
   "name": "gridy-games",
   "description": "Board games",
-  "version": "0.41.215",
+  "version": "0.41.216",
   "author": "Jan Forst <ensonador@gmail.com>",
   "browserslist": [
     "> 1%",
@@ -15,9 +15,12 @@
   ],
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
+    "cat-names": "^1.0.2",
     "d3-polygon": "^1.0.3",
     "d3-scale": "^2.0.0",
+    "firebase": "^4.12.1",
     "fscreen": "^1.0.2",
+    "gridy-avatars": "^1.0.4",
     "intersection-observer": "^0.5.0",
     "lunr": "^2.1.6",
     "material-icons-bundle": "github:darosh/material-icons-bundle",
@@ -25,6 +28,7 @@
     "vue": "^2.5.16",
     "vue-observe-visibility": "^0.3.1",
     "vue-router": "^3.0.1",
+    "vuefire": "^1.4.5",
     "vuetify": "^1.0.11",
     "vuex": "^3.0.1"
   },
@@ -45,6 +49,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
     "cli-real-favicon": "^0.0.6",
+    "concurrently": "^3.5.1",
     "copy-webpack-plugin": "^4.5.1",
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
@@ -119,6 +124,7 @@
     "lint:es": "eslint -f unix --fix --ext .js,.vue src build",
     "lint:ts": "tslint -t stylish --fix -p tsconfig.json",
     "start": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --open --host 0.0.0.0 --useLocalIp",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "watch": "concurrently \"cd ../gridy && npm start\" \"cd ../gridy-games-lib && npm start\""
   }
 }
