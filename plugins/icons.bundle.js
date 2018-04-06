@@ -19,5 +19,9 @@ export {
   swap_horiz,
   swap_vert,
   timer_off,
-  undo
+  undo,
+  logout,
+  person,
+  help,
+  share
 } from 'material-icons-bundle'
