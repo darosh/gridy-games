@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { scaleToFit } from '../services/utils'
+// import { roundedHull, simpleHull } from '../services/vector'
 import { polygonHull } from 'd3-polygon'
 
 export default {
@@ -36,6 +37,7 @@ export default {
       }
 
       this.hullPoints = this.game.hull ? polygonHull(this.getHull()).map(p => `${p[0].toFixed(3)} ${p[1].toFixed(3)}`).join(' ') : ''
+      // this.hullPoints = this.game.hull ? roundedHull(simpleHull(polygonHull(this.getHull()))) : ''
       this.translate = getTranslate(bounds, this.size)
     },
     path (tile) {
