@@ -15,6 +15,11 @@ import './style/index.styl'
 
 import { era, link, titled } from './filters'
 
+if (process.APP_FIREBASE) {
+  const VueFire = require('vuefire')
+  Vue.use(VueFire)
+}
+
 require('vuetify/src/stylus/app.styl')
 
 Vue.config.productionTip = false
