@@ -31,3 +31,31 @@ colors(theme, name)
       fill: theme.s1
     .symbol-2
       fill: theme.s2
+
+blackAndWhite(theme, name)
+  .theme--dark {name} .symbol-1
+    fill: #000
+
+  {name}
+    .player-2 .player-status.icon
+      fill: rgba(0,0,0,0.87)
+    .player-2 .counter
+      color: rgba(0,0,0,0.87)
+
+  .theme--light {name}
+    .symbol-2
+      fill: #E0E0E0
+
+  .theme--dark {name}
+    .symbol-2
+      stroke: theme.s2
+
+  // .theme--light {name} .player-timer
+  //   stroke: theme.tileFill !important
+  // .theme--dark {name} .player-timer
+  //   stroke: theme.possible !important
+
+  // {name}.preview-icon
+  //   .tile
+  //     stroke: theme.lineStroke
+  //     stroke-width: 1

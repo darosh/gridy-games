@@ -19,6 +19,7 @@ qirkatTheme = {
 @require "./colors"
 
 colors(qirkatTheme, '.qirkat-theme')
+blackAndWhite(qirkatTheme, '.qirkat-theme')
 
 .qirkat-theme
   .tile:not(.possible)
@@ -35,33 +36,11 @@ colors(qirkatTheme, '.qirkat-theme')
   .hull
     fill: qirkatTheme.tileFill
 
-  //rect
-  //  stroke: qirkatTheme.lineStroke
-  //  stroke-width: 3
-  //  fill: qirkatTheme.tileFill
-
   text
     opacity: 1
 
-//.preview .qirkat-theme rect
-//  stroke-width: 1
-
-.theme--dark .qirkat-theme .symbol-1
-    fill: #000
-
-.qirkat-theme
-  .player-2 .player-status.icon
-    fill: rgba(0,0,0,0.87)
-  .player-2 .counter
-    color: rgba(0,0,0,0.87)
-
-.theme--light .qirkat-theme
-  .symbol-2
-    fill: #E0E0E0
-
-.theme--dark .qirkat-theme
-  .symbol-2
-    stroke: qirkatTheme.s2
+  .dot
+    fill: qirkatTheme.lineStroke
 
 .theme--light .qirkat-theme .player-timer
   stroke: qirkatTheme.tileFill !important

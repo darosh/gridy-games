@@ -17,9 +17,26 @@ millsTheme = {
 @require "./colors"
 
 colors(millsTheme, '.mills-theme')
+blackAndWhite(millsTheme, '.mills-theme')
+
+// .mills-theme
+//   polygon:not(.possible)
+//     fill: #FBC02D !important
+//   line
+//     shape-rendering: crispEdges
+
 
 .mills-theme
-  polygon:not(.possible)
-    fill: #FBC02D !important
-  line
-    shape-rendering: crispEdges
+  .tile:not(.possible)
+    stroke-width: 1
+
+  .tile.possible:not(.waiting)
+    stroke-width: 1
+    stroke: millsTheme.possible
+
+  .tile
+    stroke-width: 1
+    stroke: millsTheme.tileFill
+
+  .hull
+    fill: millsTheme.tileFill
