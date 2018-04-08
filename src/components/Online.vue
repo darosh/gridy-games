@@ -29,7 +29,7 @@
             width="48"
             style="width: calc(100% - 74px)" />
         </div>
-        <div style="position: absolute; bottom: 8px; left: 0">
+        <div style="position: absolute; bottom: 8px; left: 4px">
           <v-icon v-if="!user.guest" class="pl-3" :style="{opacity: 0.5}">{{user.online ? 'cloud_queue' : 'cloud_off'}}</v-icon>
           <v-icon v-else class="pl-2" :style="{opacity: 0.5}">{{user.online ? 'visibility' : 'visibility_off'}}</v-icon>
           <span class="pl-2 grey--text" style="position: relative; bottom: -2px">{{user.last ? format(new Date(user.last)) : ''}}</span>
@@ -112,7 +112,8 @@ import {
   userRef,
   usersRef,
   gamesRef,
-states
+  updateUser,
+  states
 } from '../services/online'
 import { Info } from '../../plugins/lib'
 import { copy } from '../services/copy'
@@ -204,7 +205,7 @@ export default {
         })
     },
     edited (values) {
-      userRef.update(values)
+      updateUser(values)
     }
   }
 }
