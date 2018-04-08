@@ -32,7 +32,7 @@ https://darosh.github.io/gridy-games/
 - material design
 - flat, Scalable Vector Graphics, pixel perfect without horizontal/vertical lines allias
 - traditional board theme colors using material design colors
-- non blicked interface, engines running workers
+- non blocked interface, engines running workers
 - vibration and audio API (tuned in G Major as in Gridy :-)
 
 
