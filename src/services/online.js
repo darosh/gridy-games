@@ -89,13 +89,15 @@ function setUser (u) {
           name: randomName(),
           avatar: random(),
           online: true,
-          guest: user.isAnonymous ? true : null
+          guest: user.isAnonymous ? true : null,
+          version: process.APP_VERSION
         })
       } else {
         userRef.update({
           last: firebase.database.ServerValue.TIMESTAMP,
           online: true,
-          guest: user.isAnonymous ? true : null
+          guest: user.isAnonymous ? true : null,
+          version: process.APP_VERSION
         })
       }
 
