@@ -58,7 +58,9 @@
         <v-tab :to="{path: '/table'}">
           Table
         </v-tab>
-        <v-tab v-if="useFirebase" :to="{path: '/online'}">
+        <v-tab
+          v-if="useFirebase"
+          :to="{path: '/online'}">
           Online
         </v-tab>
       </v-tabs>

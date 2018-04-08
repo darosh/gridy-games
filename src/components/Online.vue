@@ -1,52 +1,33 @@
 <template>
   <div>
     <v-container grid-list-lg fluid>
-      <g-avatar width="128" />
-
-      <div class="title mb-3">Play Online</div>
-      <v-layout row wrap>
-        <v-flex xs12 sm4 md3 lg2>
-          <v-card>
-            <v-layout class="ma-0">
-              <v-card-title>
-                <div class="title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
-                  {{user.name || ('Guest')}}
-                </div>
-              </v-card-title>
-              <v-spacer></v-spacer>
-              <v-btn icon flat @click="share()">
-                <v-icon>share</v-icon>
-              </v-btn>
-            </v-layout>
-            <v-card-media height="144px">
-              <v-icon>person</v-icon>
-            </v-card-media>
-            <v-card-actions class="mt-2">
-              <v-btn flat color="primary" block>48 preferred games</v-btn>
-            </v-card-actions>
-            <v-layout row>
-              <v-spacer></v-spacer>
-              <v-flex style="min-width: 136px;" class="pl-3 pb-4">
-                <v-switch v-model="user.available" @change="availableChanged(user.available)" color="primary" label="Accept invites" hide-details></v-switch>
-              </v-flex>
-              <v-spacer></v-spacer>
-            </v-layout>
-          </v-card>
-        </v-flex>
-        <v-flex xs12 sm4 md3 lg2>
-          <v-card>
-            <v-card-title>
-              <div class="title">Random opponent</div>
-            </v-card-title>
-            <v-card-media height="144px">
-              <v-icon>help</v-icon>
-            </v-card-media>
-            <v-card-actions class="mt-2">
-              <v-btn flat color="primary" block>Play</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-      </v-layout>
+      <div class="app-grid">
+        <v-card>
+          <v-layout class="ma-0">
+            <div class="title pa-3" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
+              {{ user.name || ('Guest') }}
+            </div>
+            <v-spacer/>
+            <v-btn icon flat @click="showEdit = true">
+              <v-icon>mode_edit</v-icon>
+            </v-btn>
+            <v-btn icon flat @click="share()">
+              <v-icon>share</v-icon>
+            </v-btn>
+          </v-layout>
+          <div class="text-xs-center pb-3">
+            <g-avatar width="48" :value="user.avatar" style="width: calc(100% - 74px)" />
+          </div>
+        </v-card>
+        <v-card v-for="user in users" :key="user['.key']">
+          <v-card-title>
+            <div class="subheading" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">{{user.name || user['.key']}}</div>
+          </v-card-title>
+          <div class="text-xs-center pb-3">
+            <g-avatar width="96" :value="user.avatar" style="width: calc(100% - 58px)"/>
+          </div>
+        </v-card>
+      </div>
 
       <v-dialog :value="showShare" max-width="360px" persistent>
         <v-card>
@@ -54,7 +35,7 @@
             <span class="title pa-2">Share your profile</span>
           </v-card-title>
           <v-card-text class="py-0 px-4">
-            <v-text-field :value="profileLink" hide-details single-line solo-inverted></v-text-field>
+            <v-text-field :value="profileLink" class="grey darken-2" append-icon="content_copy" :append-icon-cb="copyLink" hide-details readonly single-line solo/>
           </v-card-text>
           <v-card-actions>
             <v-spacer/>
@@ -63,31 +44,14 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <!-- <div class="headline">Players</div>
 
-      <v-layout row wrap>
-        <v-flex xs6 sm4 lg1 v-for="user in users" :key="user['.key']">
-          <v-card>
-            <v-card-media :src="user.photo" height="80px"></v-card-media>
-            <v-card-title>
-              <div style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">{{user.name || user['.key']}}</div>
-            </v-card-title>
-            <v-card-actions>
-              <v-btn small>play</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-      </v-layout>
-      <div class="headline">Games</div>
-      <v-layout row wrap>
-        <v-flex xs6 sm4 lg1 v-for="game in games" :key="game['.key']">
-          <v-card>
-            <v-card-title>
-            </v-card-title>
-          </v-card>
-        </v-flex>
-      </v-layout> -->
+      <v-snackbar v-model="showSnack" :timeout="2000" color="grey darken-3" top>
+        <v-flex @click="showSnack = false">{{ snackMessage }}</v-flex>
+      </v-snackbar>
+
     </v-container>
+
+    <g-profile-edit v-if="showEdit" v-model="showEdit" :avatar="user.avatar" :name="user.name" @edit="edited" />
   </div>
 </template>
 
@@ -100,9 +64,11 @@ import {
   availableChanged
 } from "../services/online";
 import { Info } from "../../plugins/lib";
+import { copy } from "../services/copy";
 
 export default {
   components: {
+    GProfileEdit: () => import("./ProfileEdit"),
     VTextField: () => import("vuetify/es5/components/VTextField"),
     VSwitch: () => import("vuetify/es5/components/VSwitch"),
     VDialog: () => import("vuetify/es5/components/VDialog"),
@@ -114,7 +80,10 @@ export default {
       state,
       Info,
       acceptInvites: false,
-      showShare: false
+      showShare: false,
+      showEdit: false,
+      showSnack: false,
+      snackMessage: ""
     };
   },
   firebase: {
@@ -123,27 +92,11 @@ export default {
   },
   computed: {
     profileLink() {
-      const r = this.$router.resolve(this.profileRoute)
-      return location.origin + location.pathname + r.href
+      const r = this.$router.resolve(this.profileRoute);
+      return location.origin + location.pathname + r.href;
     },
     profileRoute() {
-      return {name: 'player', params: {id: this.user['.key'] }}
-    }
-  },
-  methods: {
-    logOut,
-    availableChanged,
-    share() {
-      if(navigator.share) {
-        navigator.share({
-          url: this.profileLink
-        });
-      } else {
-        this.showShare = !this.showShare
-      }
-    },
-    openShare() {
-      this.$router.push(this.profileRoute)
+      return { name: "player", params: { id: this.user[".key"] } };
     }
   },
   watch: {
@@ -165,6 +118,36 @@ export default {
         }
       }
     }
+  },
+  methods: {
+    logOut,
+    availableChanged,
+    share() {
+      if (navigator.share) {
+        navigator.share({
+          url: this.profileLink
+        });
+      } else {
+        this.showShare = !this.showShare;
+      }
+    },
+    openShare() {
+      this.$router.push(this.profileRoute);
+    },
+    copyLink() {
+      copy(this.profileLink)
+        .then(() => {
+          this.snackMessage = "Copied to clipboard";
+          this.showSnack = true;
+        })
+        .catch(() => {
+          this.snackMessage = "Copy to clipboard failed";
+          this.showSnack = true;
+        });
+    },
+    edited(values) {
+      state.userRef.update(values);
+    }
   }
 };
 </script>
@@ -179,5 +162,37 @@ export default {
   width: 100%;
   display: block;
   height: 144px;
+}
+
+.app-grid {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(16, 1fr);
+}
+
+.app-grid > *:first-child {
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
+}
+
+@media (max-width: 1904px) {
+  .app-grid {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+@media (max-width: 1264px) {
+  .app-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+@media (max-width: 960px) {
+  .app-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .app-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 </style>

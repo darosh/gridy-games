@@ -23,5 +23,13 @@ export {
   logout,
   person,
   help,
-  share
+  share,
+  content_copy,
+  filter_list,
+  mode_edit,
+  autorenew,
+  keyboard_arrow_down,
+  keyboard_arrow_up,
+  fiber_manual_record,
+  sync_disabled
 } from 'material-icons-bundle'

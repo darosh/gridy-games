@@ -14,11 +14,18 @@
     </v-btn>
     <v-spacer/>
     <v-btn
-      v-if="state.user"
+      v-if="state.value >= states.LOGIN"
       aria-label="Log out"
       icon
       @click.native="logOut()">
       <v-icon>logout</v-icon>
+    </v-btn>
+    <v-btn
+      v-if="state.value === states.DISCONNECTED"
+      aria-label="Log out"
+      icon
+      @click.native="reconnect()">
+      <v-icon>sync_disabled</v-icon>
     </v-btn>
   </v-toolbar>
 </template>
@@ -27,7 +34,7 @@
 import { Shared } from '../services/shared'
 import { Games } from '../../plugins/lib'
 import { full } from '../services/full'
-import { state, logOut } from "../services/online";
+import { state, states, logOut, reconnect } from '../services/online'
 
 let wayToHome = null
 
@@ -52,7 +59,8 @@ export default {
     return {
       Shared,
       homeLink: this.$router.resolve('/').href,
-      state
+      state,
+      states
     }
   },
   destroyed () {
@@ -62,6 +70,7 @@ export default {
   beforeRouteEnter: guard,
   methods: {
     logOut,
+    reconnect,
     back (event) {
       full(this.$store.state.full)
 

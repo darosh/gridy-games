@@ -112,22 +112,6 @@ const router = new Router({
             false: '#fafafa'
           }
         }
-      },
-      {
-        path: '/avatars',
-        name: 'avatars',
-        components: {
-          default: () => import('../components/Avatars')
-          // toolbar: () => import('../components/OnlineToolbar')
-        },
-        meta: {
-          title: 'Gridy Games',
-          overflow: 'auto',
-          theme: {
-            true: '#303030',
-            false: '#fafafa'
-          }
-        }
       }
     ])
   ]
