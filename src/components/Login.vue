@@ -53,7 +53,6 @@ export default {
     'state.value': {
       immediate: true,
       handler (value) {
-        console.log(value)
         if (value === states.USER) {
           this.$router.replace('online')
         } else if (value >= states.LOADING) {

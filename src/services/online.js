@@ -61,7 +61,6 @@ function initCurrent () {
 
   currentRef.on('value', (snap) => {
     if (!snap.val()) {
-      console.log('other login', state.user)
       state.value = states.DISCONNECTED
       db.goOffline()
     }
@@ -70,7 +69,6 @@ function initCurrent () {
 
 function setUser (user) {
   state.value = states.INITIALIZED
-  console.log('setUser', user)
 
   if (user) {
     state.user = user

@@ -85,7 +85,6 @@ function cross (xy1, xy2, xy3, xy4) {
 export function simpleHull (points) {
   const di = diameter(points) * 0.001
   const rel = relFactory(points)
-  console.log('in', points.length)
 
   for (let i = 0; i < points.length; i++) {
     const p1 = rel(i - 1)
@@ -107,8 +106,6 @@ export function simpleHull (points) {
       i--
     }
   }
-
-  console.log('out', points.length)
 
   return points
 }
