@@ -124,6 +124,11 @@ export default {
   data () {
     return {
       meta: [
+        {
+          title: 'Twitter',
+          value: '@GridyGames',
+          link: 'https://twitter.com/GridyGames'
+        },
         { title: 'Version', value: process.APP_VERSION },
         {
           title: 'Build',

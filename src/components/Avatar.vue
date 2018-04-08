@@ -1,8 +1,8 @@
 <template>
   <svg
     v-if="value"
-    v-html="inner(value)"
-    viewBox="0 0 24 24" />
+    viewBox="0 0 24 24"
+    v-html="inner(value)" />
 </template>
 
 <script>

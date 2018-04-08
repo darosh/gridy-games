@@ -32,7 +32,6 @@
 
 <script>
 import { Shared } from '../services/shared'
-import { Games } from '../../plugins/lib'
 import { full } from '../services/full'
 import { state, states, logOut, reconnect } from '../services/online'
 

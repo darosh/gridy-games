@@ -3,6 +3,7 @@ import { random } from 'gridy-avatars'
 import { random as randomHero } from '../../plugins/superheroes'
 
 export const states = {
+  LOADING: 0,
   INITIALIZED: 1,
   DISCONNECTED: 2,
   SIGNING: 3,
@@ -19,7 +20,7 @@ export const db = app.database()
 export const state = {
   user: firebase.auth().currentUser,
   userRef: null,
-  value: states.INITIALIZED
+  value: states.LOADING
 }
 export const newGamesRef = db.ref('newGames')
 export const gamesRef = db.ref('games')
@@ -68,6 +69,7 @@ function initCurrent () {
 }
 
 function setUser (user) {
+  state.value = states.INITIALIZED
   console.log('setUser', user)
 
   if (user) {
@@ -160,6 +162,16 @@ export function signInGitHub () {
 
   firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
     var provider = new firebase.auth.GithubAuthProvider()
+    firebase.auth().signInWithPopup(provider)
+  })
+}
+
+export function signInTwitter () {
+  db.goOnline()
+  state.value = states.SIGNING
+
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+    var provider = new firebase.auth.TwitterAuthProvider()
     firebase.auth().signInWithPopup(provider)
   })
 }

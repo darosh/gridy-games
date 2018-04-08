@@ -7,16 +7,16 @@
       <div class="px-3 pt-3">
         <v-text-field
           v-model="nameEdit"
+          :append-icon-cb="renewName"
           label="Name"
           append-icon="autorenew"
-          :append-icon-cb="renewName"
           hide-details/>
         <v-text-field
-          class="mt-3"
           v-model="avatarEdit"
+          :append-icon-cb="renewAvatar"
+          class="mt-3"
           label="Avatar"
           append-icon="autorenew"
-          :append-icon-cb="renewAvatar"
           hide-details/>
       </div>
       <div class="text-xs-center py-3">
