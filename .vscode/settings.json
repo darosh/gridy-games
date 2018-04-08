@@ -16,6 +16,7 @@
     "playout",
     "qirkat",
     "quirkat",
+    "readonly",
     "reversi",
     "serializable",
     "vuex",
