@@ -33,7 +33,9 @@ export {
   fiber_manual_record,
   sync_disabled,
   github_circle,
-  twitter_circle
+  twitter_circle,
+  cloud_queue,
+  cloud_off
 } from 'material-icons-bundle'
 
 // from https://github.com/firebase/firebaseui-web/blob/master/image/google.svg

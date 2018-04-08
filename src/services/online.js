@@ -1,32 +1,39 @@
-import * as firebase from 'firebase'
 import { random } from 'gridy-avatars'
 import { random as randomHero } from '../../plugins/superheroes'
 
+const firebase = require('firebase/app')
+require('firebase/auth')
+require('firebase/database')
+
 export const states = {
-  LOADING: 0,
-  INITIALIZED: 1,
+  INITIALIZED: 0,
+  LOADING: 1,
   DISCONNECTED: 2,
   SIGNING: 3,
   LOGIN: 4,
   USER: 5
 }
 
+Object.keys(states).forEach(k => { states[states[k]] = k })
+
 const config = process.APP_FIREBASE
+let ignoreOnline = false
 
 // firebase.database.enableLogging(true)
 export const app = firebase.initializeApp(config)
 export const db = app.database()
 
 export const state = {
-  user: firebase.auth().currentUser,
-  userRef: null,
   value: states.LOADING
 }
+export let user = firebase.auth().currentUser
+export let userRef = null
+
 export const newGamesRef = db.ref('newGames')
 export const gamesRef = db.ref('games')
 export const finishedGamesRef = db.ref('finishedGames')
-// export const usersRef = db.ref('users').orderByChild('online').equalTo(true)
-export const usersRef = db.ref('users')
+export const usersRef = db.ref('users').orderByChild('online').equalTo(true)
+// export const usersRef = db.ref('users')
 
 let conRef
 let currentRef
@@ -67,24 +74,24 @@ function initCurrent () {
   })
 }
 
-function setUser (user) {
+function setUser (u) {
   state.value = states.INITIALIZED
 
-  if (user) {
-    state.user = user
-    state.userRef = db.ref('users/' + user.uid)
+  if (u) {
+    user = u
+    userRef = db.ref('users/' + user.uid)
     state.value = states.LOGIN
 
-    state.userRef.once('value').then(snap => {
+    userRef.once('value').then(snap => {
       if (!snap.child('name').exists()) {
-        state.userRef.update({
+        userRef.update({
           last: firebase.database.ServerValue.TIMESTAMP,
           name: randomName(),
           avatar: random(),
           online: true
         })
       } else {
-        state.userRef.update({
+        userRef.update({
           last: firebase.database.ServerValue.TIMESTAMP,
           online: true
         })
@@ -92,12 +99,12 @@ function setUser (user) {
 
       state.value = states.USER
 
-      conRef = state.userRef.child('connection')
+      conRef = userRef.child('connection')
 
       initCurrent()
     })
 
-    onlineRef = state.userRef.child('online')
+    onlineRef = userRef.child('online')
 
     onlineRef.onDisconnect().set(false)
 
@@ -105,32 +112,33 @@ function setUser (user) {
 
     connectedRef.on('value', function (snap) {
       if (snap.val() === true) {
+        log('Connection setting user online:true')
         onlineRef.set(true)
       } else {
+        log('Connection setting user online:false')
         onlineRef.set(false)
       }
     })
 
-    // let ignoreOnline = false
+    onlineRef.on('value', (snap) => {
+      if (ignoreOnline) {
+        ignoreOnline = false
+        return
+      }
 
-    // onlineRef.on('value', (snap) => {
-    //   if (ignoreOnline) {
-    //     ignoreOnline = false
-    //     return
-    //   }
-
-    //   if (!snap.val()) {
-    //     connectedRef.once('value', function (snap) {
-    //       if (snap.val() === true) {
-    //         ignoreOnline = true
-    //         onlineRef.set(true)
-    //       }
-    //     })
-    //   }
-    // })
+      if (!snap.val()) {
+        connectedRef.once('value', function (snap) {
+          if (snap.val() === true) {
+            ignoreOnline = true
+            log('Setting user online:true')
+            onlineRef.set(true)
+          }
+        })
+      }
+    })
   } else {
-    state.user = null
-    state.userRef = null
+    user = null
+    userRef = null
     state.value = states.INITIALIZED
   }
 }
@@ -174,29 +182,29 @@ export function signInTwitter () {
   })
 }
 
-export function createGame () {
-  newGamesRef.push({
-    createdBy: state.user.uid,
-    createdAt: state.user.database.ServerValue.TIMESTAMP,
-    player1: state.user.uid,
-    player2: null
-  })
-}
+// export function createGame () {
+//   newGamesRef.push({
+//     createdBy: state.user.uid,
+//     createdAt: state.user.database.ServerValue.TIMESTAMP,
+//     player1: state.user.uid,
+//     player2: null
+//   })
+// }
 
 export function logOut () {
-  onlineRef.set(false)
-
-  firebase.auth().signOut().then(() => {
-    state.user = null
-    state.userRef = null
-    state.value = states.INITIALIZED
-    db.goOffline()
+  log('Log out')
+  log('Log out setting user online:false')
+  ignoreOnline = true
+  onlineRef.set(false).then(() => {
+    firebase.auth().signOut().then(() => {
+      user = null
+      userRef = null
+      state.value = states.INITIALIZED
+      db.goOffline()
+    })
   })
 }
 
-export function availableChanged (value) {
-  state.userRef.update({
-    last: firebase.database.ServerValue.TIMESTAMP,
-    available: value
-  })
+function log (msg) {
+  console.log(`%c${msg}`, 'background-color: lightgreen')
 }

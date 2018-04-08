@@ -1,10 +1,9 @@
 <template>
-  <v-container
-    v-if="user && user['.key']"
-    fluid>
+  <div v-if="user && user['.key']" class="pa-3">
     <div class="app-grid">
       <v-card>
         <v-layout class="ma-0">
+          <v-icon class="pl-3" :style="{opacity: 0.5}">{{user.online ? 'cloud_queue' : 'cloud_off'}}</v-icon>
           <div
             class="title pa-3"
             style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
@@ -32,16 +31,17 @@
         </div>
       </v-card>
       <v-card
-        v-for="user in users"
-        :key="user['.key']">
+        v-for="u in users"
+        v-if="user['.key'] !== u['.key']"
+        :key="u['.key']">
         <v-card-title>
           <div
             class="subheading"
-            style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">{{ user.name || user['.key'] }}</div>
+            style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">{{ u.name || user['.key'] }}</div>
         </v-card-title>
         <div class="text-xs-center pb-3">
           <g-avatar
-            :value="user.avatar"
+            :value="u.avatar"
             width="96"
             style="width: calc(100% - 58px)" />
         </div>
@@ -95,16 +95,17 @@
       :avatar="user.avatar"
       :name="user.name"
       @edit="edited" />
-  </v-container>
+  </div>
 </template>
 
 <script>
 import {
   state,
   logOut,
+  userRef,
   usersRef,
   gamesRef,
-  availableChanged
+states
 } from '../services/online'
 import { Info } from '../../plugins/lib'
 import { copy } from '../services/copy'
@@ -143,28 +144,23 @@ export default {
     }
   },
   watch: {
-    'state.user': {
+    'state.value': {
       immediate: true,
       handler (value) {
-        if (!value) {
+        console.log('Online state value:', states[value])
+
+        if (value === states.USER) {
+          console.log('Online binding user')
+          this.$bindAsObject('user', userRef)
+        } else if (value !== states.DISCONNECTED) {
+          console.log('Online redirect to login')
           this.$router.replace('login')
-        }
-      }
-    },
-    'state.userRef': {
-      immediate: true,
-      handler (value) {
-        if (!value) {
-          this.user = null
-        } else {
-          this.$bindAsObject('user', state.userRef)
         }
       }
     }
   },
   methods: {
     logOut,
-    availableChanged,
     share () {
       if (navigator.share) {
         navigator.share({
@@ -189,7 +185,7 @@ export default {
         })
     },
     edited (values) {
-      state.userRef.update(values)
+      userRef.update(values)
     }
   }
 }

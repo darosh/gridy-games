@@ -128,8 +128,8 @@ if (process.APP_FIREBASE) {
     let isOnline = to.matched.some(record => record.meta.online)
 
     if (isOnline) {
-      import('../services/online').then(({ state }) => {
-        if (!state.user) {
+      import('../services/online').then(({ user }) => {
+        if (!user) {
           next('login')
         } else {
           next()
