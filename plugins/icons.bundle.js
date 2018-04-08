@@ -35,7 +35,11 @@ export {
   github_circle,
   twitter_circle,
   cloud_queue,
-  cloud_off
+  cloud_off,
+  view_module,
+  view_stream,
+  home,
+  earth
 } from 'material-icons-bundle'
 
 // from https://github.com/firebase/firebaseui-web/blob/master/image/google.svg

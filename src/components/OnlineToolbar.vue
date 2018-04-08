@@ -4,14 +4,18 @@
     :style="{'background-color': this.$store.state.dark ? !this.$route.meta.home ? '#303030' : '' : ''}"
     class="elevation-1"
     dense
+    scroll-off-screen
     app>
     <v-btn
       :href="homeLink"
       aria-label="Home"
       icon
       @click.native="back">
-      <v-icon>arrow_back</v-icon>
+      <v-icon>home</v-icon>
     </v-btn>
+    <v-toolbar-title class="hidden-xs-only">
+      Gridy Games Online
+    </v-toolbar-title>
     <v-spacer/>
     <v-btn
       v-if="state.value >= states.LOGIN"

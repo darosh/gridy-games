@@ -10,7 +10,7 @@
       aria-label="Home"
       icon
       @click.native="back">
-      <v-icon>arrow_back</v-icon>
+      <v-icon>home</v-icon>
     </v-btn>
     <v-spacer/>
     <g-players />

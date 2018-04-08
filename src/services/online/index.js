@@ -1,5 +1,6 @@
 import { random } from 'gridy-avatars'
-import { random as randomHero } from '../../plugins/superheroes'
+import { log } from './log'
+import { randomName } from './name'
 
 const firebase = require('firebase/app')
 require('firebase/auth')
@@ -24,7 +25,8 @@ export const app = firebase.initializeApp(config)
 export const db = app.database()
 
 export const state = {
-  value: states.LOADING
+  value: states.LOADING,
+  offset: null
 }
 export let user = firebase.auth().currentUser
 export let userRef = null
@@ -34,32 +36,45 @@ export const gamesRef = db.ref('games')
 export const finishedGamesRef = db.ref('finishedGames')
 export const usersRef = db.ref('users').orderByChild('online').equalTo(true)
 // export const usersRef = db.ref('users')
+const connectedRef = firebase.database().ref('.info/connected')
 
 let conRef
 let currentRef
 let onlineRef
+let onlineRefOnDisconnect
+
+const offsetRef = firebase.database().ref('.info/serverTimeOffset')
+
+offsetRef.on('value', function (snap) {
+  state.offset = snap.val()
+  log(`Server offset: ${state.offset}`)
+})
 
 firebase.auth().onAuthStateChanged(setUser)
 
-function randomDigit () {
-  return Math.floor(Math.random() * 9) + 1
-}
-
-function randomLetter () {
-  const a = 'A'.charCodeAt(0)
-  const z = 'Z'.charCodeAt(0)
-
-  return String.fromCharCode(Math.floor(Math.random() * (z - a + 1)) + a)
-}
-
-export function randomName () {
-  return `${randomHero()} ${randomLetter()}${randomDigit()}`
-}
-
 export function reconnect () {
+  initConnected()
   db.goOnline()
   initCurrent()
   state.value = states.USER
+}
+
+function initConnected () {
+  if (!connectedRef) {
+    return
+  }
+
+  connectedRef.off('value')
+
+  connectedRef.on('value', function (snap) {
+    if (snap.val() === true) {
+      log('Connection setting user online:true')
+      onlineRef.set(true)
+    } else {
+      log('Connection setting user online:false')
+      onlineRef.set(false)
+    }
+  })
 }
 
 function initCurrent () {
@@ -68,6 +83,10 @@ function initCurrent () {
 
   currentRef.on('value', (snap) => {
     if (!snap.val()) {
+      log('Connection replaced', true)
+      if (connectedRef) {
+        connectedRef.off('value')
+      }
       state.value = states.DISCONNECTED
       db.goOffline()
     }
@@ -77,7 +96,21 @@ function initCurrent () {
 function setUser (u) {
   state.value = states.INITIALIZED
 
+  if (onlineRef) {
+    onlineRef.off('value')
+  }
+
+  if (connectedRef) {
+    connectedRef.off('value')
+  }
+
+  if (onlineRefOnDisconnect) {
+    onlineRefOnDisconnect.cancel()
+  }
+
   if (u) {
+    log('Setting user')
+
     user = u
     userRef = db.ref('users/' + user.uid)
     state.value = states.LOGIN
@@ -110,19 +143,10 @@ function setUser (u) {
 
     onlineRef = userRef.child('online')
 
-    onlineRef.onDisconnect().set(false)
+    onlineRefOnDisconnect = onlineRef.onDisconnect()
+    onlineRefOnDisconnect.set(false)
 
-    const connectedRef = firebase.database().ref('.info/connected')
-
-    connectedRef.on('value', function (snap) {
-      if (snap.val() === true) {
-        log('Connection setting user online:true')
-        onlineRef.set(true)
-      } else {
-        log('Connection setting user online:false')
-        onlineRef.set(false)
-      }
-    })
+    initConnected()
 
     onlineRef.on('value', (snap) => {
       if (ignoreOnline) {
@@ -141,13 +165,14 @@ function setUser (u) {
       }
     })
   } else {
+    log('Resetting user')
     user = null
     userRef = null
-    state.value = states.INITIALIZED
   }
 }
 
 export function signInAnonym () {
+  initConnected()
   db.goOnline()
   state.value = states.SIGNING
 
@@ -157,6 +182,7 @@ export function signInAnonym () {
 }
 
 export function signInGoogle () {
+  initConnected()
   db.goOnline()
   state.value = states.SIGNING
 
@@ -167,6 +193,7 @@ export function signInGoogle () {
 }
 
 export function signInGitHub () {
+  initConnected()
   db.goOnline()
   state.value = states.SIGNING
 
@@ -177,6 +204,7 @@ export function signInGitHub () {
 }
 
 export function signInTwitter () {
+  initConnected()
   db.goOnline()
   state.value = states.SIGNING
 
@@ -185,15 +213,6 @@ export function signInTwitter () {
     firebase.auth().signInWithPopup(provider)
   })
 }
-
-// export function createGame () {
-//   newGamesRef.push({
-//     createdBy: state.user.uid,
-//     createdAt: state.user.database.ServerValue.TIMESTAMP,
-//     player1: state.user.uid,
-//     player2: null
-//   })
-// }
 
 export function logOut () {
   log('Log out')
@@ -207,8 +226,4 @@ export function logOut () {
       db.goOffline()
     })
   })
-}
-
-function log (msg) {
-  console.log(`%c${msg}`, 'background-color: lightgreen')
 }

@@ -49,21 +49,9 @@
     <div
       :class="{'mr-3': Shared.searching}"
       :slot="Shared.searching ? 'extension' : null">
-      <v-tabs
-        color="transparent"
-        slider-color="light-blue">
-        <v-tab :to="{path: '/'}">
-          Cards
-        </v-tab>
-        <v-tab :to="{path: '/table'}">
-          Table
-        </v-tab>
-        <v-tab
-          v-if="useFirebase"
-          :to="{path: '/online'}">
-          Online
-        </v-tab>
-      </v-tabs>
+
+      <v-btn icon :to="{path: $route.name === 'table' ? '/' : '/table'}"><v-icon>{{$route.name === 'table' ? 'view_module' : 'view_stream'}}</v-icon></v-btn>
+      <v-btn icon :to="{path: '/online'}"><v-icon>earth</v-icon></v-btn>
     </div>
   </v-toolbar>
 </template>

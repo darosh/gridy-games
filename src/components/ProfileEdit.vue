@@ -61,7 +61,7 @@
 
 <script>
 import { random, base } from 'gridy-avatars'
-import { randomName } from '../services/online'
+import { randomName } from '../services/online/name'
 
 export default {
   components: {
