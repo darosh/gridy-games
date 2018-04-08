@@ -37,6 +37,49 @@
         </v-layout>
       </div>
     </div>
+
+    <v-divider/>
+    <v-toolbar
+      dense
+      flat
+      color="transparent">
+      <v-subheader class="pl-3">Contact</v-subheader>
+    </v-toolbar>
+
+    <div class="mx-3 mb-3">
+      <v-layout
+        v-for="m in contacts"
+        :key="m.title"
+        row
+        mx-3
+        align-center
+        mb-1>
+        <v-flex class="body-2">{{ m.title }}</v-flex>
+        <div
+          v-if="m.link"
+          class="body-1">
+          <a
+            :href="m.link"
+            target="_blank"
+            rel="noopener"
+            class="light-blue--text">{{ m.value }}</a>
+        </div>
+        <div
+          v-else
+          class="body-1">{{ m.value }}</div>
+      </v-layout>
+      <div
+        v-if="$store.state.registration"
+        class="px-3 mb-3 mt-3">
+        <v-btn
+          flat
+          color="light-blue"
+          small
+          block
+          @click="checkForUpdate()">Check for update</v-btn>
+      </div>
+    </div>
+
     <v-divider/>
     <v-toolbar
       dense
@@ -123,12 +166,14 @@ export default {
   },
   data () {
     return {
-      meta: [
+      contacts: [
         {
           title: 'Twitter',
           value: '@GridyGames',
           link: 'https://twitter.com/GridyGames'
-        },
+        }
+      ],
+        meta: [
         { title: 'Version', value: process.APP_VERSION },
         {
           title: 'Build',
