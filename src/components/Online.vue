@@ -1,9 +1,9 @@
 <template>
   <div v-if="user && user['.key']" class="pa-3">
+    <div style="display: none">{{counter}}</div>
     <div class="app-grid">
       <v-card>
         <v-layout class="ma-0">
-          <v-icon class="pl-3" :style="{opacity: 0.5}">{{user.online ? 'cloud_queue' : 'cloud_off'}}</v-icon>
           <div
             class="title pa-3"
             style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
@@ -29,6 +29,11 @@
             width="48"
             style="width: calc(100% - 74px)" />
         </div>
+        <div style="position: absolute; bottom: 8px; left: 0">
+          <v-icon v-if="!user.guest" class="pl-3" :style="{opacity: 0.5}">{{user.online ? 'cloud_queue' : 'cloud_off'}}</v-icon>
+          <v-icon v-else class="pl-2" :style="{opacity: 0.5}">{{user.online ? 'visibility' : 'visibility_off'}}</v-icon>
+          <span class="pl-2 grey--text" style="position: relative; bottom: -2px">{{user.last ? format(new Date(user.last)) : ''}}</span>
+        </div>
       </v-card>
       <v-card
         v-for="u in users"
@@ -44,6 +49,12 @@
             :value="u.avatar"
             width="96"
             style="width: calc(100% - 58px)" />
+        </div>
+        <div style="height: 8px;"></div>
+        <div style="position: absolute; bottom: 8px; left: 0; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%">
+          <v-icon v-if="!u.guest" class="pl-3" :style="{opacity: 0.5}">{{u.online ? 'cloud_queue' : 'cloud_off'}}</v-icon>
+          <v-icon v-else class="pl-2" :style="{opacity: 0.5}">{{u.online ? 'visibility' : 'visibility_off'}}</v-icon>
+          <span class="pl-2 grey--text" style="position: relative; bottom: -2px">{{u.last ? format(new Date(u.last)) : ''}}</span>
         </div>
       </v-card>
     </div>
@@ -69,10 +80,6 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer/>
-          <v-btn
-            flat
-            style="min-width: 0"
-            @click="openShare()">Open</v-btn>
           <v-btn
             flat
             style="min-width: 0"
@@ -109,6 +116,8 @@ states
 } from '../services/online'
 import { Info } from '../../plugins/lib'
 import { copy } from '../services/copy'
+import { format } from 'pretty-date'
+import { clearInterval } from 'timers';
 
 export default {
   components: {
@@ -127,8 +136,17 @@ export default {
       showShare: false,
       showEdit: false,
       showSnack: false,
-      snackMessage: ''
+      snackMessage: '',
+      counter: 0
     }
+  },
+  mounted() {
+    this.timer = setInterval(() => {
+      this.counter++
+    }, 1000)
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
   },
   firebase: {
     users: usersRef.limitToLast(25),
@@ -161,6 +179,7 @@ export default {
   },
   methods: {
     logOut,
+    format,
     share () {
       if (navigator.share) {
         navigator.share({

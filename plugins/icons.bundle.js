@@ -39,7 +39,9 @@ export {
   view_module,
   view_stream,
   home,
-  earth
+  earth,
+  visibility,
+  visibility_off
 } from 'material-icons-bundle'
 
 // from https://github.com/firebase/firebaseui-web/blob/master/image/google.svg

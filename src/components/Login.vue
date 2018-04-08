@@ -20,7 +20,7 @@
       <div><v-btn
         dark
         color="grey darken-3"
-        @click="signInAnonym()"><v-icon class="mr-3">person</v-icon>Guest login</v-btn></div>
+        @click="signInAnonym()"><v-icon class="mr-3">visibility</v-icon>Guest login</v-btn></div>
     </div>
     <v-progress-circular
       v-else

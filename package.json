@@ -26,6 +26,7 @@
     "intersection-observer": "^0.5.0",
     "lunr": "^2.1.6",
     "material-icons-bundle": "github:darosh/material-icons-bundle",
+    "pretty-date": "^0.2.0",
     "superheroes": "^1.0.0",
     "tone": "^0.12.80",
     "vue": "^2.5.16",

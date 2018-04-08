@@ -34,8 +34,8 @@ export let userRef = null
 export const newGamesRef = db.ref('newGames')
 export const gamesRef = db.ref('games')
 export const finishedGamesRef = db.ref('finishedGames')
-export const usersRef = db.ref('users').orderByChild('online').equalTo(true)
-// export const usersRef = db.ref('users')
+// export const usersRef = db.ref('users').orderByChild('online').equalTo(true)
+export const usersRef = db.ref('users')
 const connectedRef = firebase.database().ref('.info/connected')
 
 let conRef
