@@ -9,6 +9,8 @@ const loadMinified = require('./build/load-minified')
 
 const NODE_ENV = process.env.NODE_ENV
 
+// process.traceDeprecation = true
+
 const setPath = function (folderName) {
   return path.join(__dirname, folderName)
 }
