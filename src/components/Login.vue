@@ -2,7 +2,7 @@
   <div class="text-xs-center pa-2">
     <div
       v-if="!loading"
-      class="login-buttons">
+      class="login-buttons mt-1">
       <div><v-btn
         light
         color="white"
@@ -25,6 +25,7 @@
     <v-progress-circular
       v-else
       color="light-blue"
+      class="mt-1"
       indeterminate />
   </div>
 </template>
