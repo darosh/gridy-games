@@ -1,257 +1,246 @@
-import { random } from 'gridy-avatars'
 import { log } from './log'
+import { states } from './states'
+
+import { random as randomAvatar } from 'gridy-avatars'
 import { randomName } from './name'
 
 const firebase = require('firebase/app')
 require('firebase/auth')
 require('firebase/database')
 
-export const states = {
-  INITIALIZED: 0,
-  LOADING: 1,
-  DISCONNECTED: 2,
-  SIGNING: 3,
-  LOGIN: 4,
-  USER: 5,
-  LOGOUT: 6
-}
-
-Object.keys(states).forEach(k => { states[states[k]] = k })
-
 const config = process.APP_FIREBASE
-let ignoreOnline = false
 
-// firebase.database.enableLogging(true)
-export const app = firebase.initializeApp(config)
-export const db = app.database()
+let app
+let db
 
-export const state = {
-  value: states.LOADING,
-  offset: null
+export let state
+export let user
+
+export let infoConnectedRef
+export let infoOffsetRef
+
+export let userRef
+export let userConnectionRef
+export let userConnectionCurrentRef
+export let userOnlineRef
+export let userOnlineRefOnDisconnect
+
+export let usersRef
+
+initialize()
+attach()
+
+function initialize () {
+  app = firebase.initializeApp(config)
+  db = app.database()
+
+  state = {
+    value: states.LOADING,
+    error: null,
+    offset: null
+  }
+
+  user = firebase.auth().currentUser
+  userRef = null
+  usersRef = db.ref('users').orderByChild('online').equalTo(true)
+  infoConnectedRef = firebase.database().ref('.info/connected')
+  infoOffsetRef = firebase.database().ref('.info/serverTimeOffset')
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 }
-export let user = firebase.auth().currentUser
-export let userRef = null
 
-export const newGamesRef = db.ref('newGames')
-export const gamesRef = db.ref('games')
-export const finishedGamesRef = db.ref('finishedGames')
-export const usersRef = db.ref('users').orderByChild('online').equalTo(true)
-// export const usersRef = db.ref('users')
-const connectedRef = firebase.database().ref('.info/connected')
+function attach () {
+  infoOffsetRef.on('value', handleOffsetRef)
+  infoConnectedRef.on('value', handleInfoConnected)
+  firebase.auth().onAuthStateChanged(handleAuthChange)
+}
 
-let conRef
-let currentRef
-let onlineRef
-let onlineRefOnDisconnect
+function detach () {
+  if (userConnectionCurrentRef) {
+    userConnectionCurrentRef.off('value')
+  }
 
-const offsetRef = firebase.database().ref('.info/serverTimeOffset')
+  if (userOnlineRef) {
+    userOnlineRef.off('value')
+  }
 
-offsetRef.on('value', function (snap) {
+  if (userOnlineRefOnDisconnect) {
+    userOnlineRefOnDisconnect.cancel()
+  }
+}
+
+function handleOffsetRef (snap) {
   state.offset = snap.val()
   log(`Server offset: ${state.offset}`)
-})
-
-firebase.auth().onAuthStateChanged(setUser)
-
-export function reconnect () {
-  initConnected()
-  db.goOnline()
-  initCurrent()
-  state.value = states.USER
 }
 
-function initConnected () {
-  log('Initializing connected')
-
-  if (!connectedRef) {
+function handleInfoConnected (snap) {
+  if (!userOnlineRef) {
     return
   }
 
-  log('Removing connected')
-
-  connectedRef.off('value')
-
-  if (!onlineRef) {
-    return
+  if (snap.val() === true) {
+    log('Connection setting user online:true')
+    userOnlineRef.set(true)
+  } else {
+    log('Connection setting user online:false')
+    userOnlineRef.set(false)
   }
-
-  log('Adding connected')
-
-  connectedRef.on('value', function (snap) {
-    if (snap.val() === true) {
-      log('Connection setting user online:true')
-      onlineRef.set(true)
-    } else {
-      log('Connection setting user online:false')
-      onlineRef.set(false)
-    }
-  })
 }
 
-function initCurrent () {
-  conRef.remove()
-  currentRef = conRef.push(true)
-
-  currentRef.on('value', (snap) => {
-    if (!snap.val()) {
-      log('Connection replaced', true)
-      if (connectedRef) {
-        connectedRef.off('value')
-      }
-      state.value = states.DISCONNECTED
-      db.goOffline()
-    }
-  })
-}
-
-function setUser (u) {
-  state.value = states.INITIALIZED
-
-  if (onlineRef) {
-    onlineRef.off('value')
-  }
-
-  if (connectedRef) {
-    connectedRef.off('value')
-  }
-
-  if (onlineRefOnDisconnect) {
-    onlineRefOnDisconnect.cancel()
-  }
+function handleAuthChange (u) {
+  setState(states.INITIALIZED)
 
   if (u) {
-    log('Setting user')
+    handleAuthChangeOn(u)
+  } else {
+    handleAuthChangeOff(u)
+  }
+}
 
-    user = u
-    userRef = db.ref('users/' + user.uid)
-    state.value = states.LOGIN
+function handleAuthChangeOn (u) {
+  log('Setting user')
+  user = u
+  userRef = db.ref('users/' + user.uid)
+  setState(states.LOGIN)
+  userRef.once('value').then(handleUserInit)
+}
 
-    userRef.once('value').then(snap => {
-      if (!snap.child('name').exists()) {
-        userRef.update({
-          last: firebase.database.ServerValue.TIMESTAMP,
-          name: randomName(),
-          avatar: random(),
-          online: true,
-          guest: user.isAnonymous ? true : null,
-          version: process.APP_VERSION
-        })
-      } else {
-        userRef.update({
-          last: firebase.database.ServerValue.TIMESTAMP,
-          online: true,
-          guest: user.isAnonymous ? true : null,
-          version: process.APP_VERSION
-        })
-      }
+function handleAuthChangeOff (u) {
+  log('Resetting user')
+  detach()
+  user = null
+  userRef = null
+  userOnlineRef = null
+  userConnectionRef = null
+  userConnectionCurrentRef = null
+}
 
-      state.value = states.USER
+function handleUserInit (snap) {
+  const last = firebase.database.ServerValue.TIMESTAMP
+  const name = randomName()
+  const avatar = randomAvatar()
+  const online = true
+  const guest = user.isAnonymous ? true : null
+  const version = process.APP_VERSION
 
-      conRef = userRef.child('connection')
-
-      initCurrent()
-    })
-
-    onlineRef = userRef.child('online')
-
-    onlineRefOnDisconnect = onlineRef.onDisconnect()
-    onlineRefOnDisconnect.set(false)
-
-    initConnected()
-
-    onlineRef.on('value', (snap) => {
-      if (ignoreOnline) {
-        ignoreOnline = false
-        return
-      }
-
-      if (!snap.val()) {
-        connectedRef.once('value', function (snap) {
-          if (snap.val() === true) {
-            ignoreOnline = true
-            log('Setting user online:true')
-            onlineRef.set(true)
-          }
-        })
-      }
+  if (!snap.child('name').exists()) {
+    userRef.update({
+      last,
+      name,
+      avatar,
+      online,
+      guest
+    }, () => {
+      setState(states.USER)
     })
   } else {
-    log('Resetting user')
-    user = null
-    userRef = null
-  }
-}
-
-export function signInAnonym () {
-  // initConnected()
-  db.goOnline()
-  state.value = states.SIGNING
-
-  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
-    firebase.auth().signInAnonymously()
-  })
-}
-
-export function signInGoogle () {
-  // initConnected()
-  db.goOnline()
-  state.value = states.SIGNING
-
-  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
-    var provider = new firebase.auth.GoogleAuthProvider()
-    firebase.auth().signInWithPopup(provider)
-  })
-}
-
-export function signInGitHub () {
-  // initConnected()
-  db.goOnline()
-  state.value = states.SIGNING
-
-  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
-    var provider = new firebase.auth.GithubAuthProvider()
-    firebase.auth().signInWithPopup(provider)
-  })
-}
-
-export function signInTwitter () {
-  // initConnected()
-  db.goOnline()
-  state.value = states.SIGNING
-
-  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
-    var provider = new firebase.auth.TwitterAuthProvider()
-    firebase.auth().signInWithPopup(provider)
-  })
-}
-
-export function logOut () {
-  log('Log out')
-
-  if (connectedRef) {
-    log('Removing connected')
-    connectedRef.off('value')
-  }
-
-  log('Log out setting user online:false')
-  ignoreOnline = true
-  state.value = states.LOGOUT
-  onlineRef.set(false).then(() => {
-    log('Log out setting user online:false DONE')
-    firebase.auth().signOut().then(() => {
-      log('Log out DONE')
-      setTimeout(() => {
-        log('Going offline')
-        db.goOffline()
-        user = null
-        userRef = null
-        state.value = states.INITIALIZED
-      }, 200)
+    userRef.update({
+      last,
+      online,
+      version
     })
-  })
+    setState(states.USER)
+  }
+
+  userConnectionRef = userRef.child('connection')
+  userOnlineRef = userRef.child('online')
+  userOnlineRefOnDisconnect = userOnlineRef.onDisconnect()
+  userOnlineRefOnDisconnect.set(false)
+  setCurrentConnection()
+}
+
+function setCurrentConnection () {
+  userConnectionRef.remove()
+  userConnectionCurrentRef = userConnectionRef.push(true)
+  userConnectionCurrentRef.on('value', handleUserConnectionCurrent)
+}
+
+function handleUserConnectionCurrent (snap) {
+  if (!snap.val()) {
+    log('Connection replaced', true)
+
+    if (infoConnectedRef) {
+      infoConnectedRef.off('value')
+    }
+
+    setState(states.DISCONNECTED)
+    goOffline()
+  }
+}
+
+function setState (s) {
+  log(`State: ${states[s]}`, 1)
+  state.value = s
+}
+
+function setError (e) {
+  console.error(e)
+  state.error = e
+  setState(states.SIGNING)
+}
+
+function goOffline () {
+  log('Going offline', true)
+  db.goOffline()
+}
+
+function goOnline () {
+  log('Going online')
+  db.goOnline()
 }
 
 export function updateUser (values) {
   values.last = firebase.database.ServerValue.TIMESTAMP
   userRef.update(values)
+}
+
+export function reconnect () {
+  goOnline()
+  setCurrentConnection()
+  setState(states.USER)
+}
+
+export function logOut () {
+  log('Log out')
+  log('Log out setting user online:false')
+  setState(states.LOGOUT)
+
+  userOnlineRef.set(false).then(() => {
+    log('Log out setting user online:false DONE')
+
+    firebase.auth().signOut().then(() => {
+      log('Log out DONE')
+
+      setTimeout(() => {
+        goOffline()
+        user = null
+        userRef = null
+        setState(states.INITIALIZED)
+      }, 200)
+    })
+  })
+}
+
+export function signInAnonym () {
+  goOnline()
+  setState(states.SIGNING)
+  firebase.auth().signInAnonymously().catch(setError)
+}
+
+export function signInGoogle () {
+  goOnline()
+  setState(states.SIGNING)
+  firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(setError)
+}
+
+export function signInGitHub () {
+  goOnline()
+  setState(states.SIGNING)
+  firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider()).catch(setError)
+}
+
+export function signInTwitter () {
+  goOnline()
+  setState(states.SIGNING)
+  firebase.auth().signInWithPopup(new firebase.auth.TwitterAuthProvider()).catch(setError)
 }

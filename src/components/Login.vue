@@ -33,12 +33,12 @@
 <script>
 import {
   state,
-  states,
   signInAnonym,
   signInGitHub,
   signInTwitter,
   signInGoogle
 } from '../services/online'
+import { states } from '../services/online/states'
 
 export default {
   components: {
@@ -54,8 +54,6 @@ export default {
     'state.value': {
       immediate: true,
       handler (value) {
-        console.log('Login state value:', states[value])
-
         if (value === states.USER) {
           this.$router.replace('online')
         } else if (value >= states.LOADING) {

@@ -129,10 +129,9 @@ import {
   logOut,
   userRef,
   usersRef,
-  gamesRef,
-  updateUser,
-  states
+  updateUser
 } from '../services/online'
+import { states } from '../services/online/states'
 import { Info } from '../../plugins/lib'
 import { copy } from '../services/copy'
 import { format } from 'pretty-date'
@@ -159,8 +158,7 @@ export default {
     }
   },
   firebase: {
-    users: usersRef.limitToLast(25),
-    games: gamesRef.limitToLast(25)
+    users: usersRef.limitToLast(100)
   },
   computed: {
     profileLink () {
@@ -175,13 +173,9 @@ export default {
     'state.value': {
       immediate: true,
       handler (value) {
-        console.log('Online state value:', states[value])
-
         if (value === states.USER) {
-          console.log('Online binding user')
           this.$bindAsObject('user', userRef)
         } else if (value !== states.DISCONNECTED) {
-          console.log('Online redirect to login')
           this.$router.replace('login')
         }
       }

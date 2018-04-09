@@ -9,8 +9,7 @@
     <v-btn
       :href="homeLink"
       aria-label="Home"
-      icon
-      @click.native="back">
+      icon>
       <v-icon>home</v-icon>
     </v-btn>
     <v-toolbar-title class="hidden-xs-only">
@@ -37,23 +36,8 @@
 <script>
 import { Shared } from '../services/shared'
 import { full } from '../services/full'
-import { state, states, logOut, reconnect } from '../services/online'
-
-let wayToHome = null
-
-function guard (to, from, next) {
-  if (wayToHome === null) {
-    if (from.meta.home) {
-      wayToHome = -1
-    } else {
-      wayToHome = 0
-    }
-  } else if (wayToHome) {
-    wayToHome--
-  }
-
-  next()
-}
+import { state, logOut, reconnect } from '../services/online'
+import { states } from '../services/online/states'
 
 export default {
   components: {
@@ -66,22 +50,9 @@ export default {
       states
     }
   },
-  destroyed () {
-    wayToHome = null
-  },
-  beforeRouteUpdate: guard,
-  beforeRouteEnter: guard,
   methods: {
     logOut,
-    reconnect,
-    back (event) {
-      full(this.$store.state.full)
-
-      if (wayToHome) {
-        event.preventDefault()
-        this.$router.go(wayToHome)
-      }
-    }
+    reconnect
   }
 }
 </script>
