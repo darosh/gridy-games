@@ -17,21 +17,36 @@
             :type="props.item.grid"
             class="preview preview-md d-block" />
         </td>
-        <td>
+        <td class="py-3">
           <router-link
             :to="{name: 'game', params: {id: props.item.id}}"
-            :class="props.item.wip ? 'red--text' : 'light-blue--text'">{{ props.item.title | titled }}</router-link>
+            :class="props.item.wip ? 'red--text' : 'light-blue--text'"
+            class="nowrap">{{ props.item.title | titled }}</router-link>
           <span v-if="!props.item.originals.aliases">
             <span
               v-for="(a, k) in props.item.aliasesArray"
-              :key="k"><br >{{ a }}</span>
+              :key="k"
+              class="nowrap"><br >{{ a }}</span>
           </span>
         </td>
         <td :class="{'grey--text': props.item.originals.original}">{{ props.item.original }}</td>
-        <td>{{ props.item.group }}</td>
-        <td :class="{'grey--text': props.item.originals.created}">{{ props.item.created | era }}</td>
-        <td :class="{'grey--text': props.item.originals.loaction}">{{ props.item.location }}</td>
-        <td :class="{'grey--text': props.item.originals.authors}">{{ props.item.authors }}</td>
+        <td class="nowrap">{{ props.item.group }}</td>
+        <td
+          :class="{'grey--text': props.item.originals.created}"
+          class="nowrap">{{ props.item.created | era }}</td>
+        <td
+          :class="{'grey--text': props.item.originals.loaction}"
+          class="nowrap">{{ props.item.location }}</td>
+        <td
+          :class="{'grey--text': props.item.originals.authors}"
+          class="py-3">
+          <span v-if="!props.item.originals.authors">
+            <span
+              v-for="(a, k) in props.item.authorsArray"
+              :key="k"
+              class="nowrap"><br v-if="k">{{ a }}</span>
+          </span>
+        </td>
         <td>{{ props.item.tiles }}</td>
         <td>
           <a
@@ -91,5 +106,9 @@ export default {
 <style scoped>
 .table--fixed >>> .table {
   table-layout: fixed !important;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 </style>
