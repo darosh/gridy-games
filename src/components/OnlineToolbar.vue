@@ -35,7 +35,6 @@
 
 <script>
 import { Shared } from '../services/shared'
-import { full } from '../services/full'
 import { state, logOut, reconnect } from '../services/online'
 import { states } from '../services/online/states'
 
