@@ -12,7 +12,8 @@ export const states = {
   DISCONNECTED: 2,
   SIGNING: 3,
   LOGIN: 4,
-  USER: 5
+  USER: 5,
+  LOGOUT: 6
 }
 
 Object.keys(states).forEach(k => { states[states[k]] = k })
@@ -60,11 +61,21 @@ export function reconnect () {
 }
 
 function initConnected () {
+  log('Initializing connected')
+
   if (!connectedRef) {
     return
   }
 
+  log('Removing connected')
+
   connectedRef.off('value')
+
+  if (!onlineRef) {
+    return
+  }
+
+  log('Adding connected')
 
   connectedRef.on('value', function (snap) {
     if (snap.val() === true) {
@@ -172,7 +183,7 @@ function setUser (u) {
 }
 
 export function signInAnonym () {
-  initConnected()
+  // initConnected()
   db.goOnline()
   state.value = states.SIGNING
 
@@ -182,7 +193,7 @@ export function signInAnonym () {
 }
 
 export function signInGoogle () {
-  initConnected()
+  // initConnected()
   db.goOnline()
   state.value = states.SIGNING
 
@@ -193,7 +204,7 @@ export function signInGoogle () {
 }
 
 export function signInGitHub () {
-  initConnected()
+  // initConnected()
   db.goOnline()
   state.value = states.SIGNING
 
@@ -204,7 +215,7 @@ export function signInGitHub () {
 }
 
 export function signInTwitter () {
-  initConnected()
+  // initConnected()
   db.goOnline()
   state.value = states.SIGNING
 
@@ -216,14 +227,26 @@ export function signInTwitter () {
 
 export function logOut () {
   log('Log out')
+
+  if (connectedRef) {
+    log('Removing connected')
+    connectedRef.off('value')
+  }
+
   log('Log out setting user online:false')
   ignoreOnline = true
+  state.value = states.LOGOUT
   onlineRef.set(false).then(() => {
+    log('Log out setting user online:false DONE')
     firebase.auth().signOut().then(() => {
-      user = null
-      userRef = null
-      state.value = states.INITIALIZED
-      db.goOffline()
+      log('Log out DONE')
+      setTimeout(() => {
+        log('Going offline')
+        db.goOffline()
+        user = null
+        userRef = null
+        state.value = states.INITIALIZED
+      }, 200)
     })
   })
 }
