@@ -4,11 +4,15 @@ import { states } from './states'
 import { random as randomAvatar } from 'gridy-avatars'
 import { randomName } from './name'
 
+import Idle from 'idle-js'
+
 const firebase = require('firebase/app')
 require('firebase/auth')
 require('firebase/database')
 
 const config = process.APP_FIREBASE
+const MINUTE = 60000
+const IDLE_TIMEOUT = MINUTE * 5
 
 let app
 let db
@@ -46,6 +50,13 @@ function initialize () {
   infoConnectedRef = firebase.database().ref('.info/connected')
   infoOffsetRef = firebase.database().ref('.info/serverTimeOffset')
   firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+  new Idle({ idle: IDLE_TIMEOUT, onIdle }).start()
+}
+
+function onIdle () {
+  log('Idle', true)
+  setState(states.DISCONNECTED)
+  goOffline()
 }
 
 function attach () {
