@@ -31,7 +31,7 @@
             width="48"
             style="width: calc(100% - 74px)" />
         </div>
-        <div style="position: absolute; bottom: 8px; left: 4px">
+        <div style="position: absolute; bottom: 8px; left: 0">
           <v-icon
             v-if="!user.guest"
             :style="{opacity: 0.5}"
