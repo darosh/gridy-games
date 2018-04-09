@@ -120,7 +120,9 @@ const config = {
       from: path.resolve(__dirname, 'static'),
       to: 'static',
       ignore: ['.*']
-    }]),
+    }
+    // { from: path.resolve(__dirname, 'CNAME'), to: '.' }
+    ]),
     // service worker caching
     new SWPrecacheWebpackPlugin({
       cacheId: 'gridy-games',
@@ -178,27 +180,27 @@ const config = {
       {
         test: /\.styl$/,
         use:
-        /* buildingForLocal() ?
-        extractCSS.extract({
-          fallback: "style-loader",
-          use: ['css-loader', 'autoprefixer-loader', 'stylus-loader']
-        }) : */
+          /* buildingForLocal() ?
+          extractCSS.extract({
+            fallback: "style-loader",
+            use: ['css-loader', 'autoprefixer-loader', 'stylus-loader']
+          }) : */
           [
             {
               loader: 'style-loader', // creates style nodes from JS strings
-              options: {sourceMap: false}
+              options: { sourceMap: false }
             },
             {
               loader: 'css-loader', // translates CSS into CommonJS
-              options: {sourceMap: false}
+              options: { sourceMap: false }
             },
             {
               loader: 'postcss-loader', // creates style nodes from JS strings
-              options: {sourceMap: false}
+              options: { sourceMap: false }
             },
             {
               loader: 'stylus-loader', // compiles Stylus to CSS
-              options: {sourceMap: false}
+              options: { sourceMap: false }
             }
           ]
       },
