@@ -52,7 +52,7 @@
 
       <v-btn
         :to="{path: $route.name === 'table' ? '/' : '/table'}"
-        icon><v-icon>{{ $route.name === 'table' ? 'view_module' : 'view_stream' }}</v-icon></v-btn>
+        icon><v-icon>{{ $route.name === 'table' ? 'view_cards' : 'view_table' }}</v-icon></v-btn>
       <v-btn
         v-if="useFirebase"
         :to="{path: '/online'}"

@@ -67,14 +67,17 @@ function attach () {
 
 function detach () {
   if (userConnectionCurrentRef) {
+    log('Detach userConnectionCurrentRef', true)
     userConnectionCurrentRef.off('value')
   }
 
   if (userOnlineRef) {
+    log('Detach userOnlineRef', true)
     userOnlineRef.off('value')
   }
 
   if (userOnlineRefOnDisconnect) {
+    log('Cancel userOnlineRefOnDisconnect', true)
     userOnlineRefOnDisconnect.cancel()
   }
 }
@@ -160,7 +163,11 @@ function handleUserInit (snap) {
   setCurrentConnection()
 }
 
-function setCurrentConnection () {
+function setCurrentConnection (reconnect) {
+  if (reconnect && userConnectionCurrentRef) {
+    userConnectionCurrentRef.off('value')
+  }
+
   userConnectionRef.remove()
   userConnectionCurrentRef = userConnectionRef.push(true)
   userConnectionCurrentRef.on('value', handleUserConnectionCurrent)
@@ -169,11 +176,6 @@ function setCurrentConnection () {
 function handleUserConnectionCurrent (snap) {
   if (!snap.val()) {
     log('Connection replaced', true)
-
-    if (infoConnectedRef) {
-      infoConnectedRef.off('value')
-    }
-
     setState(states.DISCONNECTED)
     goOffline()
   }
@@ -190,9 +192,20 @@ function setError (e) {
   setState(states.SIGNING)
 }
 
+function goToOffline () {
+  log('Gone offline', true)
+  db.goOffline()
+}
+
 function goOffline () {
   log('Going offline', true)
-  db.goOffline()
+
+  if (userOnlineRef) {
+    log('Setting user online: false')
+    userOnlineRef.set(false, goToOffline)
+  } else {
+    goToOffline()
+  }
 }
 
 function goOnline () {
@@ -207,7 +220,7 @@ export function updateUser (values) {
 
 export function reconnect () {
   goOnline()
-  setCurrentConnection()
+  setCurrentConnection(true)
   setState(states.USER)
 }
 

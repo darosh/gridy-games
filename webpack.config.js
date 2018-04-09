@@ -8,6 +8,8 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const loadMinified = require('./build/load-minified')
 
 const NODE_ENV = process.env.NODE_ENV
+const USE_CNAME = process.env.USE_CNAME
+const USE_FIREBASE = process.env.USE_FIREBASE
 
 // process.traceDeprecation = true
 
@@ -36,6 +38,10 @@ function deps () {
 }
 
 function firebase () {
+  if (!USE_FIREBASE) {
+    return false
+  }
+
   try {
     return JSON.parse(fs.readFileSync('./firebase/.firebase.json', 'utf8'))
   } catch (ignore) {
@@ -120,8 +126,8 @@ const config = {
       from: path.resolve(__dirname, 'static'),
       to: 'static',
       ignore: ['.*']
-    }
-    // { from: path.resolve(__dirname, 'CNAME'), to: '.' }
+    },
+    ...(USE_CNAME ? [{ from: path.resolve(__dirname, 'CNAME'), to: '.' }] : [])
     ]),
     // service worker caching
     new SWPrecacheWebpackPlugin({
