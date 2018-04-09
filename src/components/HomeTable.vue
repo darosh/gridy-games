@@ -83,7 +83,7 @@ export default {
   mounted () {
     setTimeout(() => {
       this.show = true
-    }, 500)
+    }, 400)
   }
 }
 </script>
