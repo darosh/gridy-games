@@ -50,8 +50,13 @@
       :class="{'mr-3': Shared.searching}"
       :slot="Shared.searching ? 'extension' : null">
 
-      <v-btn icon :to="{path: $route.name === 'table' ? '/' : '/table'}"><v-icon>{{$route.name === 'table' ? 'view_module' : 'view_stream'}}</v-icon></v-btn>
-      <v-btn icon :to="{path: '/online'}"><v-icon>earth</v-icon></v-btn>
+      <v-btn
+        :to="{path: $route.name === 'table' ? '/' : '/table'}"
+        icon><v-icon>{{ $route.name === 'table' ? 'view_module' : 'view_stream' }}</v-icon></v-btn>
+      <v-btn
+        v-if="useFirebase"
+        :to="{path: '/online'}"
+        icon><v-icon>earth</v-icon></v-btn>
     </div>
   </v-toolbar>
 </template>

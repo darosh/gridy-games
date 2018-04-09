@@ -68,16 +68,6 @@
           v-else
           class="body-1">{{ m.value }}</div>
       </v-layout>
-      <div
-        v-if="$store.state.registration"
-        class="px-3 mb-3 mt-3">
-        <v-btn
-          flat
-          color="light-blue"
-          small
-          block
-          @click="checkForUpdate()">Check for update</v-btn>
-      </div>
     </div>
 
     <v-divider/>
@@ -173,7 +163,7 @@ export default {
           link: 'https://twitter.com/GridyGames'
         }
       ],
-        meta: [
+      meta: [
         { title: 'Version', value: process.APP_VERSION },
         {
           title: 'Build',
