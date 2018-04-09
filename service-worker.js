@@ -16,7 +16,7 @@ workbox.setConfig({modulePathPrefix: "workbox-v3.0.1"});
 
 importScripts(
   "service-worker-analytics.js",
-  "precache-manifest.6911c27186a35fc8e258bfff2a45498d.js"
+  "precache-manifest.0c4eab542a860eee7b0140940b8f77fe.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "gridy-games"});
