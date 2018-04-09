@@ -11,6 +11,9 @@
 		}
 	],
 	"settings": {
-		"npm-scripts.showStartNotification": false
+		"npm-scripts.showStartNotification": false,
+		"cSpell.words": [
+			"homescreen"
+		]
 	}
 }

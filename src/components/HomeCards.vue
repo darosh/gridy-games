@@ -1,10 +1,10 @@
 <template>
   <div class="app-grid pa-3">
     <v-card
+      v-if="showHero"
       class="app-grid-1"
       color="transparent"
       flat>
-
       <v-icon
         style="position: absolute;"
         class="bg-icon">gridy</v-icon>
@@ -24,7 +24,7 @@
       </div>
     </v-card>
     <v-card
-      v-if="useFirebase"
+      v-if="showHero"
       class="app-grid-2"
       color="transparent"
       flat>
@@ -150,7 +150,8 @@ export default {
       initialized: {},
       rendered: {},
       show: false,
-      useFirebase: !!process.APP_FIREBASE
+      showHero: location.search !== '?utm_source=homescreen'
+      // useFirebase: !!process.APP_FIREBASE
     }
   },
   watch: {

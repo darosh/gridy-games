@@ -4,7 +4,7 @@ const fs = require('fs')
 // const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const { GenerateSW } = require('workbox-webpack-plugin')
 const loadMinified = require('./build/load-minified')
 
 const NODE_ENV = process.env.NODE_ENV
@@ -127,29 +127,25 @@ const config = {
       to: 'static',
       ignore: ['.*']
     },
+    { from: path.resolve(__dirname, 'build/service-worker-analytics.js'), to: '.' },
     ...(USE_CNAME ? [{ from: path.resolve(__dirname, 'CNAME'), to: '.' }] : [])
     ]),
     // service worker caching
-    new SWPrecacheWebpackPlugin({
+    new GenerateSW({
+      // filename: 'service-worker.js',
+      // staticFileGlobs: ['dist/**/*.{js,html,css}', 'dist/**/icon-web.svg'],
+      // minify: true,
+      // logger: () => {
+      // },
+      // stripPrefix: 'dist/',
+      include: [/\.(js|html|css)$/],
+      importWorkboxFrom: 'local',
       cacheId: 'gridy-games',
-      filename: 'service-worker.js',
-      staticFileGlobs: ['dist/**/*.{js,html,css}', 'dist/**/icon-web.svg'],
-      minify: true,
-      logger: () => {
-      },
-      stripPrefix: 'dist/',
+      importScripts: ['service-worker-analytics.js'],
       runtimeCaching: [
         {
-          urlPattern: /^https:\/\/ajax\.googleapis\.com\//,
-          handler: 'cacheFirst'
-        },
-        {
-          urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
-          handler: 'cacheFirst'
-        },
-        {
-          urlPattern: /^https:\/\/fonts\.gstatic\.com\//,
-          handler: 'cacheFirst'
+          urlPattern: /.*(?:googleapis|gstatic)\.com.*$/,
+          handler: 'staleWhileRevalidate'
         }
       ]
     })
