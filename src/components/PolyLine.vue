@@ -98,6 +98,11 @@ export default {
         .to({ value: length }, this.duration)
         .delay(this.delay)
         .onUpdate(({ value }) => {
+          if(isNaN(value)) {
+            this.points = []
+            return
+          }
+
           const to = scale(value)
           const part = scales.get(to)
           const index = centers.indexOf(to)
