@@ -47,9 +47,8 @@
       v-if="Shared.searching"
       slot="extension" />
     <div
-      :class="{'mr-3': Shared.searching}"
-      :slot="Shared.searching ? 'extension' : null">
-
+      :slot="Shared.searching ? 'extension' : null"
+      style="margin-right: 0 !important">
       <v-btn
         :to="{path: $route.name === 'table' ? '/' : '/table'}"
         icon><v-icon>{{ $route.name === 'table' ? 'view_cards' : 'view_table' }}</v-icon></v-btn>

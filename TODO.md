@@ -152,6 +152,10 @@
 - reversi no pass
 - Zamma https://en.wikipedia.org/wiki/Zamma
 
+# ONLINE
+
+- [ ] readme goals
+
 # DEV
 
 - [ ] readme goals

@@ -9,11 +9,5 @@
 		{
 			"path": "..\\gridy"
 		}
-	],
-	"settings": {
-		"npm-scripts.showStartNotification": false,
-		"cSpell.words": [
-			"homescreen"
-		]
-	}
+	]
 }

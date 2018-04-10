@@ -93,10 +93,10 @@ function handleInfoConnected (snap) {
   }
 
   if (snap.val() === true) {
-    log('Connection setting user online:true')
+    log('Connection setting user online: true')
     userOnlineRef.set(true)
   } else {
-    log('Connection setting user online:false')
+    log('Connection setting user online: false')
     userOnlineRef.set(false)
   }
 }
@@ -134,7 +134,8 @@ function handleUserInit (snap) {
   const name = randomName()
   const avatar = randomAvatar()
   const online = true
-  const guest = user.isAnonymous ? true : null
+  const authed = true
+  const guest = user.isAnonymous
   const version = process.APP_VERSION
 
   if (!snap.child('name').exists()) {
@@ -143,6 +144,7 @@ function handleUserInit (snap) {
       name,
       avatar,
       online,
+      authed,
       guest
     }, () => {
       setState(states.USER)
@@ -151,12 +153,13 @@ function handleUserInit (snap) {
     userRef.update({
       last,
       online,
+      authed,
       version
     })
     setState(states.USER)
   }
 
-  userConnectionRef = userRef.child('connection')
+  userConnectionRef = userRef.child('connections')
   userOnlineRef = userRef.child('online')
   userOnlineRefOnDisconnect = userOnlineRef.onDisconnect()
   userOnlineRefOnDisconnect.set(false)
@@ -226,11 +229,11 @@ export function reconnect () {
 
 export function logOut () {
   log('Log out')
-  log('Log out setting user online:false')
+  log('Log out setting user online+authed: false')
   setState(states.LOGOUT)
 
-  userOnlineRef.set(false).then(() => {
-    log('Log out setting user online:false DONE')
+  userRef.update({online: false, authed: false, connections: null}).then(() => {
+    log('Log out setting user online+authed: false DONE')
 
     firebase.auth().signOut().then(() => {
       log('Log out DONE')

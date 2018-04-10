@@ -5,10 +5,12 @@
   "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
   "cSpell.words": [
     "alquerque",
+    "authed",
     "fscreen",
     "fullscreen",
     "gomoku",
     "gridy",
+    "homescreen",
     "lunr",
     "mixin",
     "mixins",
