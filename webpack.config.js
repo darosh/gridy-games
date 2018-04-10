@@ -121,7 +121,7 @@ const config = {
       'process.APP_BUILD': JSON.stringify(new Date().toISOString()),
       'process.APP_DEPENDENCIES': JSON.stringify(deps()),
       'process.APP_FIREBASE': JSON.stringify(firebase()),
-      'process.USE_GA': JSON.stringify(!!process.env.USE_GA)
+      'process.APP_GA': JSON.stringify(process.env.USE_GA || false)
     }),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, 'static'),

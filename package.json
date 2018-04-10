@@ -29,6 +29,7 @@
     "superheroes": "^1.0.0",
     "tone": "^0.12.80",
     "vue": "^2.5.16",
+    "vue-analytics": "^5.10.2",
     "vue-observe-visibility": "^0.3.1",
     "vue-router": "^3.0.1",
     "vuefire": "^1.4.5",
@@ -122,12 +123,12 @@
     "build:report": "npm run build --report",
     "build:stats": "webpack --profile --json > stats.json",
     "clean": "del-cli dist/*.js dist/*.html dist/static dist/workbox* dist/CNAME",
-    "deploy": "npm run clean && npm --no-git-tag-version version patch && cross-env USE_GA=1 USE_CNAME=1 npm run build && deploy-to-gh-pages --local ./dist",
+    "deploy": "npm run clean && npm --no-git-tag-version version patch && cross-env USE_GA=UA-117246854-1 USE_CNAME=1 npm run build && deploy-to-gh-pages --local ./dist",
     "install": "node ./plugins/heroes.bundle.js > ./plugins/heroes.json && babel-external-helpers > plugins/helpers.js && rollup -c rollup.config.js -f es -o plugins/icons.js plugins/icons.bundle.js && cross-env NODE_ENV=es5 babel build/vuetify/src --out-dir build/vuetify/es5 && node ./build/patch.js vuetify",
     "icons": "real-favicon generate icon.config.json .icons/data.json .icons",
     "lint:es": "eslint -f unix --fix --ext .js,.vue src build firebase",
     "lint:ts": "tslint -t stylish --fix -p tsconfig.json",
-    "start": "cross-env USE_FIREBASE=1 NODE_ENV=development webpack-dev-server --inline --hot --open --host 0.0.0.0 --useLocalIp",
+    "start": "cross-env USE_FIREBASE=1 USE_GA=UA-117246854-1 NODE_ENV=development webpack-dev-server --inline --hot --open --host 0.0.0.0 --useLocalIp",
     "test": "jest --coverage",
     "watch": "concurrently \"cd ../gridy && npm start\" \"cd ../gridy-games-lib && npm start\""
   }
