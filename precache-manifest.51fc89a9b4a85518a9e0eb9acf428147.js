@@ -8,7 +8,7 @@ self.__precacheManifest = [
     "url": "service-worker-analytics.js"
   },
   {
-    "revision": "a43e5e9de4ebeee1a79d",
+    "revision": "4e5eecb509e7699a2a39",
     "url": "vendors~main.js"
   },
   {
@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "6.js"
   },
   {
-    "revision": "c361a9d491a2a11ab77d",
+    "revision": "dfb55661513f3c4f6b7b",
     "url": "7.js"
   },
   {
@@ -44,12 +44,12 @@ self.__precacheManifest = [
     "url": "index.html"
   },
   {
-    "revision": "dcfdd319aba6795018f1f1ae5aa43a07",
-    "url": "7f000953147b0275a86c.worker.js"
-  },
-  {
     "revision": "9a195b635bbb52dbe09553a46beff38d",
     "url": "bd2119b1be116aa0ce71.worker.js"
+  },
+  {
+    "revision": "dcfdd319aba6795018f1f1ae5aa43a07",
+    "url": "7f000953147b0275a86c.worker.js"
   },
   {
     "revision": "df21ef7d4746f8aa134d",
