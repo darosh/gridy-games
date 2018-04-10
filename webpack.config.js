@@ -120,7 +120,8 @@ const config = {
       'process.APP_STORAGE_VERSION': JSON.stringify(require('./package').storageVersion),
       'process.APP_BUILD': JSON.stringify(new Date().toISOString()),
       'process.APP_DEPENDENCIES': JSON.stringify(deps()),
-      'process.APP_FIREBASE': JSON.stringify(firebase())
+      'process.APP_FIREBASE': JSON.stringify(firebase()),
+      'process.USE_GA': JSON.stringify(!!process.env.USE_GA)
     }),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, 'static'),
@@ -132,12 +133,6 @@ const config = {
     ]),
     // service worker caching
     new GenerateSW({
-      // filename: 'service-worker.js',
-      // staticFileGlobs: ['dist/**/*.{js,html,css}', 'dist/**/icon-web.svg'],
-      // minify: true,
-      // logger: () => {
-      // },
-      // stripPrefix: 'dist/',
       include: [/\.(js|html|css)$/],
       importWorkboxFrom: 'local',
       cacheId: 'gridy-games',
