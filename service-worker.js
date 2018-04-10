@@ -11,12 +11,11 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("workbox-v3.0.1/workbox-sw.js");
-workbox.setConfig({modulePathPrefix: "workbox-v3.0.1"});
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.0.1/workbox-sw.js");
 
 importScripts(
   "service-worker-analytics.js",
-  "precache-manifest.1464c3339d19a48e9ffeb8fa2ac5cd5d.js"
+  "precache-manifest.b741c2ce9eab784777a12636a32a1226.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "gridy-games"});
