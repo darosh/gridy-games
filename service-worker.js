@@ -16,10 +16,13 @@ workbox.setConfig({modulePathPrefix: "workbox-v3.0.1"});
 
 importScripts(
   "service-worker-analytics.js",
-  "precache-manifest.0e9d6cbec019dc423308aa296adec27b.js"
+  "precache-manifest.751a4d87eaf0c9f6dd29de367442c4dd.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "gridy-games"});
+
+workbox.skipWaiting();
+workbox.clientsClaim();
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
