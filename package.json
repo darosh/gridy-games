@@ -1,7 +1,7 @@
 {
   "name": "gridy-games",
   "description": "Board games",
-  "version": "0.41.233",
+  "version": "0.41.238",
   "author": "Jan Forst <ensonador@gmail.com>",
   "browserslist": [
     "> 1%",
@@ -104,7 +104,7 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
-  "iconVersion": "0.7.0",
+  "iconVersion": "0.8.0",
   "storageVersion": "0.1.144",
   "jest": {
     "transform": {
@@ -120,6 +120,7 @@
   "scripts": {
     "build": "webpack --mode production -p",
     "build:dev": "webpack --mode development",
+    "build:prod": "cross-env cross-env USE_GA=UA-117246854-1 USE_CNAME=1 npm run build",
     "build:report": "npm run build --report",
     "build:stats": "webpack --profile --json > stats.json",
     "clean": "del-cli dist/*.js dist/*.html dist/static dist/workbox* dist/CNAME",

@@ -133,8 +133,10 @@ const config = {
     ]),
     // service worker caching
     new GenerateSW({
+      skipWaiting: true,
+      clientsClaim: true,
       include: [/\.(js|html|css)$/],
-      importWorkboxFrom: 'local',
+      importWorkboxFrom: 'cdn',
       cacheId: 'gridy-games',
       importScripts: ['service-worker-analytics.js'],
       runtimeCaching: [
