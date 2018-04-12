@@ -43,7 +43,7 @@ function firebase () {
   }
 
   try {
-    return JSON.parse(fs.readFileSync('./firebase/.firebase.json', 'utf8'))
+    return JSON.parse(fs.readFileSync('./.firebase.json', 'utf8'))
   } catch (ignore) {
     return false
   }
