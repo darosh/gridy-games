@@ -33,7 +33,7 @@
       </div>
       <v-icon
         style="position: absolute;"
-        class="bg-icon">lan_connect</v-icon>
+        class="bg-icon">earth</v-icon>
       <div class="pa-5">
         <div class="display-1 text-xs-left mb-3">Online
           <small style="opacity: 0.5">coming soon</small>
