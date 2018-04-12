@@ -2,6 +2,7 @@
   <div
     v-if="!loading"
     class="pa-3">
+    <div class="title mb-3">Log in</div>
     <div class="login-buttons app-grid">
       <v-btn
         light
@@ -35,42 +36,77 @@
         <v-icon
           class="icon-large"
           color="white">person_outline</v-icon>Guest login</v-btn>
-      <div
-        class="pb-3"
-        style="position: relative">
-        <v-divider/>
-        <v-icon
-          style="position: absolute;"
-          class="bg-icon ml-3 mt-1">person</v-icon>
-        <ul
-          class="body-1 ml-4"
-          style="opacity: 0.87; margin-top: 56px">
-          <li class="mb-1">Only random name and avatar will be visible to other players</li>
-          <li class="mb-1">You can delete account manually during logout</li>
-          <li class="mb-1">Account may be deleted due to inactivity automatically</li>
-          <li class="mb-1">Only one provider per unique email allowed</li>
-          <li>Only one connection (device, browser tab) per account allowed</li>
-        </ul>
-        <v-divider style="position: absolute; bottom: 0"/>
+      <div>
+        <v-expansion-panel>
+          <v-expansion-panel-content expand-icon="person">
+            <div slot="header">
+              <div class="subheading">Account help</div>
+            </div>
+            <div
+              class="pb-3"
+              style="position: relative">
+              <v-divider/>
+              <ul
+                class="body-1 ml-3 pl-3 pr-3 mt-3 square-list"
+                style="opacity: 0.87">
+                <li class="mb-1">Only random name and avatar will be visible to other players</li>
+                <li class="mb-1">You can delete account manually during logout</li>
+                <li class="mb-1">Account may be deleted due to inactivity automatically</li>
+                <li class="mb-1">Only one provider per unique email allowed</li>
+                <li>Only one connection (device, browser tab) per account allowed</li>
+              </ul>
+            </div>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
       </div>
-      <div
-        class="ma-0 pb-3"
-        style="position: relative">
-        <v-divider/>
-        <v-icon
-          style="position: absolute;"
-          class="bg-icon ml-3 mt-1">person_outline</v-icon>
-        <ul
-          class="body-1 ml-4"
-          style="opacity: 0.87; margin-top: 56px">
-          <li class="mb-1">Only random name and avatar will be visible to other players</li>
-          <li class="mb-1">Guest account is marked with outline person icon
-            <v-icon class="size-16">person_outline</v-icon>
-          </li>
-          <li class="mb-1">Guest account is deleted after logout</li>
-          <li>Guest account may be deleted due to inactivity automatically</li>
-        </ul>
-        <v-divider style="position: absolute; bottom: 0"/>
+      <div>
+        <v-expansion-panel>
+          <v-expansion-panel-content expand-icon="person_outline">
+            <div slot="header">
+              <div class="subheading">Guest help</div>
+            </div>
+            <div class="ma-0 pb-3">
+              <v-divider/>
+              <ul
+                class="body-1 ml-3 pl-3 pr-3 mt-3 square-list"
+                style="opacity: 0.87">
+                <li class="mb-1">Only random name and avatar will be visible to other players</li>
+                <li class="mb-1">Guest account is marked with outline person icon
+                  <v-icon class="size-16">person_outline</v-icon>
+                </li>
+                <li class="mb-1">Guest account is deleted after logout</li>
+                <li>Guest account may be deleted due to inactivity automatically</li>
+              </ul>
+            </div>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </div>
+    </div>
+    <div
+      v-if="onlineUsers && onlineUsers.onlineUsers && onlineUsers.onlineUsers.length"
+      class="mt-3 pt-3">
+      <div class="title">Online players</div>
+      <div class="users-grid mt-3">
+        <v-card
+          v-for="(i, k) in onlineUsers.onlineUsers"
+          :key="k"
+          bottom
+          tag="div">
+          <g-avatar
+            :value="i.avatar"
+            width="48"
+            class="d-block py-1"
+            style="margin: 0 auto" />
+          <div
+            style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 100%; max-width: 100%; font-size: 12px;"
+            class="text-xs-center px-1">{{ i.name }}</div>
+        </v-card>
+        <div v-if="onlineUsers.onlineUsersCount > onlineUsers.onlineUsers.length">
+          <div class="display-2 text-xs-center mt-1">+</div>
+          <div
+            class="text-xs-center body-2"
+            style="margin-top: -2px">{{ (onlineUsers.onlineUsersCount - onlineUsers.onlineUsers.length) | number }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -80,11 +116,14 @@
     <v-progress-circular
       color="light-blue"
       indeterminate />
+    <div class="mt-1">{{ state.message }}</div>
   </div>
 </template>
 
 <script>
+// import { onlineUsersFnc } from "../services/online/fake";
 import {
+  onlineUsersFnc,
   state,
   signInAnonym,
   signInGitHub,
@@ -93,15 +132,24 @@ import {
 } from '../services/online'
 import { states } from '../services/online/states'
 
+const onlineUsers = onlineUsersFnc()
+
 export default {
   components: {
     VDivider: () => import('vuetify/es5/components/VDivider'),
-    VProgressCircular: () => import('vuetify/es5/components/VProgressCircular')
+    VTooltip: () => import('vuetify/es5/components/VTooltip'),
+    VExpansionPanel: () =>
+      import('vuetify/es5/components/VExpansionPanel/VExpansionPanel'),
+    VExpansionPanelContent: () =>
+      import('vuetify/es5/components/VExpansionPanel/VExpansionPanelContent'),
+    VProgressCircular: () => import('vuetify/es5/components/VProgressCircular'),
+    GAvatar: () => import('./Avatar')
   },
   data () {
     return {
       state,
-      loading: false
+      loading: false,
+      onlineUsers: null
     }
   },
   watch: {
@@ -117,6 +165,13 @@ export default {
         }
       }
     }
+  },
+  mounted () {
+    onlineUsers().then(res => {
+      if (res) {
+        this.onlineUsers = res.data
+      }
+    })
   },
   methods: {
     signInAnonym,
@@ -221,7 +276,7 @@ export default {
   }
 
   .app-grid *:nth-child(6) {
-    grid-row: 6;
+    grid-row: 5;
     grid-column: 1/3;
   }
 }
@@ -241,11 +296,12 @@ export default {
   }
 
   .app-grid *:nth-child(6) {
+    grid-row: 6;
     grid-column: 1;
   }
 }
 
-li {
+.square-list li {
   list-style-type: square;
 }
 
@@ -266,5 +322,41 @@ li {
   height: 48px;
   width: auto;
   opacity: 0.5;
+}
+
+.users-grid {
+  display: grid;
+  grid-gap: 2px;
+  grid-template-columns: repeat(25, 1fr);
+}
+
+@media (max-width: 1904px) {
+  .users-grid {
+    grid-template-columns: repeat(20, 1fr);
+  --aspect-ratio: 2/1
+  }
+}
+
+@media (max-width: 1264px) {
+  .users-grid {
+    grid-template-columns: repeat(16, 1fr);
+  }
+}
+
+@media (max-width: 960px) {
+  .users-grid {
+    grid-template-columns: repeat(10, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .users-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+@media (max-width: 320px) {
+  .users-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 </style>

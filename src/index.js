@@ -14,7 +14,7 @@ import App from './components/App'
 
 import './style/index.styl'
 
-import { era, link, titled } from './filters'
+import { era, link, titled, number } from './filters'
 
 if (process.APP_FIREBASE) {
   const VueFire = require('vuefire')
@@ -34,6 +34,7 @@ window.$icons = icons
 Vue.filter('era', era)
 Vue.filter('link', link)
 Vue.filter('titled', titled)
+Vue.filter('number', number)
 
 /* eslint-disable no-new */
 new Vue({

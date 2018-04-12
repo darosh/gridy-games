@@ -1,5 +1,5 @@
 import { log } from './log'
-import { states } from './states'
+import { messages, states } from './states'
 
 import { random as randomAvatar } from 'gridy-avatars'
 import { randomName } from './name'
@@ -9,6 +9,7 @@ import Idle from 'idle-js'
 const firebase = require('firebase/app')
 require('firebase/auth')
 require('firebase/database')
+require('firebase/functions')
 
 const config = process.APP_FIREBASE
 const MINUTE = 60000
@@ -31,26 +32,30 @@ export let userOnlineRefOnDisconnect
 
 export let usersRef
 
-initialize()
-attach()
+initializeAuth()
+attachAuth()
 
-function initialize () {
+function initializeAuth () {
   app = firebase.initializeApp(config)
-  db = app.database()
 
   state = {
     value: states.LOADING,
+    message: messages.INITIALIZING,
     error: null,
     offset: null
   }
 
   user = firebase.auth().currentUser
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+}
+
+function initializeDatabase () {
+  db = app.database()
   userRef = null
   usersRef = db.ref('users').orderByChild('online').equalTo(true)
   infoConnectedRef = firebase.database().ref('.info/connected')
   infoOffsetRef = firebase.database().ref('.info/serverTimeOffset')
-  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-  new Idle({ idle: IDLE_TIMEOUT, onIdle }).start()
+  // new Idle({ idle: IDLE_TIMEOUT, onIdle }).start()
 }
 
 function onIdle () {
@@ -59,10 +64,13 @@ function onIdle () {
   goOffline()
 }
 
-function attach () {
+function attachAuth () {
+  firebase.auth().onAuthStateChanged(handleAuthChange)
+}
+
+function attachDatabase () {
   infoOffsetRef.on('value', handleOffsetRef)
   infoConnectedRef.on('value', handleInfoConnected)
-  firebase.auth().onAuthStateChanged(handleAuthChange)
 }
 
 function detach () {
@@ -113,6 +121,16 @@ function handleAuthChange (u) {
 }
 
 function handleAuthChangeOn (u) {
+  setState(null, messages.CONNECTING)
+
+  if (!db) {
+    log('Initializing database')
+    initializeDatabase()
+    attachDatabase()
+  } else {
+    goOnline()
+  }
+
   log('Setting user')
   user = u
   userRef = db.ref('users/' + user.uid)
@@ -138,6 +156,8 @@ function handleUserInit (snap) {
   const authed = true
   const guest = user.isAnonymous
   const version = process.APP_VERSION
+
+  setState(null, messages.UPDATING_USER)
 
   if (!snap.child('name').exists()) {
     userRef.update({
@@ -185,9 +205,16 @@ function handleUserConnectionCurrent (snap) {
   }
 }
 
-function setState (s) {
-  log(`State: ${states[s]}`, 1)
-  state.value = s
+function setState (s, m) {
+  if (!isNaN(s)) {
+    log(`State: ${states[s]}`, 1)
+    state.value = s
+  }
+
+  if (m) {
+    log(`Message: ${m}`, 1)
+    state.message = m
+  }
 }
 
 function setError (e) {
@@ -217,6 +244,10 @@ function goOnline () {
   db.goOnline()
 }
 
+export function onlineUsersFnc () {
+  return firebase.functions().httpsCallable('onlineUsers')
+}
+
 export function updateUser (values) {
   values.last = firebase.database.ServerValue.TIMESTAMP
   userRef.update(values)
@@ -233,7 +264,7 @@ export function logOut () {
   log('Log out setting user online+authed: false')
   setState(states.LOGOUT)
 
-  userRef.update({online: false, authed: false, connections: null}).then(() => {
+  userRef.update({ online: false, authed: false, connections: null }).then(() => {
     log('Log out setting user online+authed: false DONE')
 
     firebase.auth().signOut().then(() => {
@@ -250,25 +281,21 @@ export function logOut () {
 }
 
 export function signInAnonym () {
-  goOnline()
   setState(states.SIGNING)
   firebase.auth().signInAnonymously().catch(setError)
 }
 
 export function signInGoogle () {
-  goOnline()
   setState(states.SIGNING)
   firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(setError)
 }
 
 export function signInGitHub () {
-  goOnline()
   setState(states.SIGNING)
   firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider()).catch(setError)
 }
 
 export function signInTwitter () {
-  goOnline()
   setState(states.SIGNING)
   firebase.auth().signInWithPopup(new firebase.auth.TwitterAuthProvider()).catch(setError)
 }
