@@ -33,7 +33,7 @@
       </div>
       <v-icon
         style="position: absolute;"
-        class="bg-icon">earth</v-icon>
+        class="bg-icon">lan_connect</v-icon>
       <div class="pa-5">
         <div class="display-1 text-xs-left mb-3">Online
           <small style="opacity: 0.5">coming soon</small>
@@ -198,7 +198,7 @@ export default {
 .app-grid {
   display: grid;
   grid-gap: 8px;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(7, 1fr);
 }
 
 .app-grid-1 {
@@ -216,6 +216,7 @@ export default {
     grid-template-columns: repeat(6, 1fr);
   }
 }
+
 @media (max-width: 1264px) {
   .app-grid {
     grid-template-columns: repeat(5, 1fr);

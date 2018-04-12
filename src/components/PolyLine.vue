@@ -98,7 +98,7 @@ export default {
         .to({ value: length }, this.duration)
         .delay(this.delay)
         .onUpdate(({ value }) => {
-          if(isNaN(value)) {
+          if (isNaN(value)) {
             this.points = []
             return
           }

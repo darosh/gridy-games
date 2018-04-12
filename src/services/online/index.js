@@ -102,6 +102,7 @@ function handleInfoConnected (snap) {
 }
 
 function handleAuthChange (u) {
+  log('Auth changed')
   setState(states.INITIALIZED)
 
   if (u) {

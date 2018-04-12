@@ -35,11 +35,11 @@
           <v-icon
             v-if="!user.guest"
             :style="{opacity: 0.5}"
-            class="pl-3">{{ user.online ? 'cloud_queue' : 'cloud_off' }}</v-icon>
+            class="pl-3">{{ user.online ? 'person' : 'lan_disconnect' }}</v-icon>
           <v-icon
             v-else
             :style="{opacity: 0.5}"
-            class="pl-3">{{ user.online ? 'visibility' : 'visibility_off' }}</v-icon>
+            class="pl-3">{{ user.online ? 'person_outline' : 'lan_disconnect' }}</v-icon>
           <span
             class="pl-2 grey--text"
             style="position: relative; bottom: -2px">{{ user.last ? format(new Date(user.last)) : '' }}</span>
@@ -65,11 +65,11 @@
           <v-icon
             v-if="!u.guest"
             :style="{opacity: 0.5}"
-            class="pl-3">{{ u.online ? 'cloud_queue' : 'cloud_off' }}</v-icon>
+            class="pl-3">{{ u.online ? 'person' : 'lan_disconnect' }}</v-icon>
           <v-icon
             v-else
             :style="{opacity: 0.5}"
-            class="pl-3">{{ u.online ? 'visibility' : 'visibility_off' }}</v-icon>
+            class="pl-3">{{ u.online ? 'person_outline' : 'lan_disconnect' }}</v-icon>
           <span
             class="pl-2 grey--text"
             style="position: relative; bottom: -2px">{{ u.last ? format(new Date(u.last)) : '' }}</span>
