@@ -15,7 +15,7 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.0.1/workbox
 
 importScripts(
   "service-worker-analytics.js",
-  "precache-manifest.e4924a3af1b12e46178d0252c6304c5a.js"
+  "precache-manifest.ad60aa35d1992aeb6c9361a83c620fb1.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "gridy-games"});
