@@ -4,10 +4,19 @@
 			"path": "."
 		},
 		{
-			"path": "..\\gridy-games-lib"
+			"path": "../gridy-games-lib"
 		},
 		{
-			"path": "..\\gridy"
+			"path": "../gridy"
+		},
+		{
+			"path": "../gridy-firebase"
+		},
+		{
+			"path": "../gridy-firebase/functions"
 		}
-	]
+	],
+	"settings": {
+		"npm-scripts.showStartNotification": false
+	}
 }
