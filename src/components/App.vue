@@ -5,7 +5,7 @@
     <v-navigation-drawer
       v-model="Shared.menu"
       :touchless="!$route.meta.home"
-      class="pb-3"
+      class="pb-0"
       fixed
       left
       app

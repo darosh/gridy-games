@@ -113,34 +113,39 @@
     </div>
 
     <v-divider/>
-    <v-toolbar
-      dense
-      flat
-      color="transparent">
-      <v-subheader class="pl-3">Acknowledgement</v-subheader>
-    </v-toolbar>
 
-    <div class="mx-3 mb-3">
-      <v-layout
-        v-for="d in dependencies"
-        :key="d.text"
-        row
-        mx-3
-        align-center
-        mb-1>
-        <div class="body-1 pr-3">
-          <a
-            :href="d.link"
-            target="_blank"
-            rel="noopener"
-            class="light-blue--text">{{ d.text }}</a>
-        </div>
-        <v-divider/>
+    <v-expansion-panel>
+      <v-expansion-panel-content>
         <div
-          v-if="d.version"
-          class="pl-3">{{ d.version }}</div>
-      </v-layout>
-    </div>
+          slot="header"
+          style="margin-left: -8px">
+          <v-subheader
+            class="pa-0 ma-0"
+            style="height: auto">Acknowledgement</v-subheader>
+        </div>
+        <v-layout
+          v-for="d in dependencies"
+          :key="d.text"
+          row
+          mx-3
+          align-center
+          mb-1
+          px-3>
+          <div class="body-1 pr-3">
+            <a
+              :href="d.link"
+              target="_blank"
+              rel="noopener"
+              class="light-blue--text">{{ d.text }}</a>
+          </div>
+          <v-divider/>
+          <div
+            v-if="d.version"
+            class="pl-3">{{ d.version }}</div>
+        </v-layout>
+        <div class="pb-3"/>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
   </div>
 </template>
 
@@ -152,7 +157,11 @@ export default {
   components: {
     VSwitch: () => import('vuetify/es5/components/VSwitch'),
     VSubheader: () => import('vuetify/es5/components/VSubheader'),
-    VDivider: () => import('vuetify/es5/components/VDivider')
+    VDivider: () => import('vuetify/es5/components/VDivider'),
+    VExpansionPanel: () =>
+      import('vuetify/es5/components/VExpansionPanel/VExpansionPanel'),
+    VExpansionPanelContent: () =>
+      import('vuetify/es5/components/VExpansionPanel/VExpansionPanelContent')
   },
   data () {
     return {
