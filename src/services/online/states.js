@@ -18,7 +18,10 @@ export const messages = {
   INITIALIZING: 'Initializing…',
   RECONNECTING: 'Reconnecting…',
   CONNECTING: 'Connecting to database…',
-  UPDATING_USER: 'Updating player…'
+  UPDATING_USER: 'Updating player…',
+  DELETING_DATA: 'Erasing data…',
+  DELETING_USER: 'Removing player…',
+  BINDING: 'Joining…'
 }
 
 Object.freeze(messages)
@@ -27,7 +30,8 @@ export const state = {
   value: null,
   message: null,
   error: null,
-  offset: null
+  offset: null,
+  logout: false
 }
 
 export function isState (s) {
@@ -36,6 +40,10 @@ export function isState (s) {
   }
 
   return state.value === s
+}
+
+export function isReady () {
+  return state.value === states.USER
 }
 
 export function isDisconnected () {

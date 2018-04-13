@@ -115,7 +115,14 @@ function handleAuthChange (u) {
   log('Auth changed')
   setState(states.INITIALIZED)
 
+  state.guest = u && u.isAnonymous
+
   if (u) {
+    // log('User')
+    // log(u)
+    // log('Provider: ' + u.providerId)
+    // log('Token')
+    // log(u.getIdToken())
     handleAuthChangeOn(u)
   } else {
     handleAuthChangeOff(u)
@@ -203,7 +210,7 @@ function setCurrentConnection (reconnect) {
 function handleUserConnectionCurrent (snap) {
   if (!snap.val()) {
     log('Connection replaced', true)
-    setState(states.DISCONNECTED_NET)
+    setState(states.DISCONNECTED_OTHER)
     goOffline(true)
   }
 }
@@ -228,7 +235,7 @@ function setState (s, m) {
 function setError (e) {
   console.error(e)
   state.error = e
-  setState(states.SIGNING)
+  setState(states.INITIALIZED)
 }
 
 function goToOffline (external) {
@@ -261,9 +268,18 @@ export function onlineUsersFnc () {
   return firebase.functions().httpsCallable('onlineUsers')
 }
 
+export function bindingData () {
+  setState(null, messages.BINDING)
+}
+
 export function updateUser (values) {
   values.last = firebase.database.ServerValue.TIMESTAMP
   userRef.update(values)
+}
+
+export function disconnect () {
+  goOffline()
+  setState(states.DISCONNECTED_NET)
 }
 
 export function reconnect () {
@@ -271,6 +287,23 @@ export function reconnect () {
   goOnline()
   setCurrentConnection(true)
   setState(states.USER)
+}
+
+export function deleteOut () {
+  log('Delete user data', true)
+  detach()
+  setState(null, messages.DELETING_DATA)
+  userRef.remove().then(() => {
+    log('Delete user', true)
+    setState(null, messages.DELETING_USER)
+
+    user.delete()
+      .then(() => {
+        log('Delete user DONE', true)
+        setState(states.INITIALIZED)
+      })
+      .catch(setError)
+  })
 }
 
 export function logOut () {
@@ -296,21 +329,21 @@ export function logOut () {
 }
 
 export function signInAnonym () {
-  setState(states.SIGNING)
+  setState(states.SIGNING, messages.INITIALIZING)
   firebase.auth().signInAnonymously().catch(setError)
 }
 
 export function signInGoogle () {
-  setState(states.SIGNING)
+  setState(states.SIGNING, messages.INITIALIZING)
   firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(setError)
 }
 
 export function signInGitHub () {
-  setState(states.SIGNING)
+  setState(states.SIGNING, messages.INITIALIZING)
   firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider()).catch(setError)
 }
 
 export function signInTwitter () {
-  setState(states.SIGNING)
+  setState(states.SIGNING, messages.INITIALIZING)
   firebase.auth().signInWithPopup(new firebase.auth.TwitterAuthProvider()).catch(setError)
 }

@@ -12,6 +12,13 @@
       @click.native="back">
       <v-icon>home</v-icon>
     </v-btn>
+    <v-btn
+      v-if="useFirebase && isReady()"
+      :to="{path: '/online'}"
+      color="light-blue--text"
+      icon>
+      <v-icon>earth</v-icon>
+    </v-btn>
     <v-spacer/>
     <g-players />
     <!-- <v-toolbar-title v-else class="hidden-xs-only">{{ title | titled }}</v-toolbar-title> -->
@@ -29,6 +36,7 @@
 import { Shared } from '../services/shared'
 import { Games } from '../../plugins/lib'
 import { full } from '../services/full'
+import { isReady } from '../services/online/states'
 
 let wayToHome = null
 
@@ -53,7 +61,8 @@ export default {
   data () {
     return {
       Shared,
-      homeLink: this.$router.resolve('/').href
+      homeLink: this.$router.resolve('/').href,
+      useFirebase: !!process.env.APP_FIREBASE
     }
   },
   computed: {
@@ -69,6 +78,7 @@ export default {
   beforeRouteUpdate: guard,
   beforeRouteEnter: guard,
   methods: {
+    isReady,
     back (event) {
       full(this.$store.state.full)
 

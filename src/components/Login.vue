@@ -5,9 +5,10 @@
     <div class="title mb-3">Disconnected</div>
     <div class="login-buttons app-grid">
       <v-btn
+        dark
         color="grey darken-3 btn-large"
         @click="reconnect()">
-        <v-icon class="icon-large">sync_disabled</v-icon>
+        <v-icon class="icon-large white--text">lan_pending</v-icon>
         Reconnect
       </v-btn>
     </div>
@@ -62,8 +63,7 @@
               style="position: relative">
               <v-divider light/>
               <ul
-                class="body-1 ml-3 pl-3 pr-3 mt-3 square-list"
-                style="opacity: 0.87">
+                class="body-1 ml-3 pl-3 pr-3 mt-3 square-list">
                 <li class="mb-0">Only random name and avatar will be visible to other players</li>
                 <li class="mb-0">You can delete account manually during logout</li>
                 <li class="mb-0">Account may be deleted due to inactivity automatically</li>
@@ -75,7 +75,9 @@
         </v-expansion-panel>
       </div>
       <div>
-        <v-expansion-panel class="rounded">
+        <v-expansion-panel
+          dark
+          class="rounded">
           <v-expansion-panel-content expand-icon="person_outline">
             <div slot="header">
               <div class="subheading">Guest help</div>
@@ -83,11 +85,10 @@
             <div class="ma-0 pb-3">
               <v-divider/>
               <ul
-                class="body-1 ml-3 pl-3 pr-3 mt-3 square-list"
-                style="opacity: 0.87">
+                class="body-1 ml-3 pl-3 pr-3 mt-3 square-list">
                 <li class="mb-0">Only random name and avatar will be visible to other players</li>
                 <li class="mb-0">Guest account is marked with outline person icon
-                  <v-icon class="size-16">person_outline</v-icon>
+                  <v-icon class="size-16 white--text">person_outline</v-icon>
                 </li>
                 <li class="mb-0">Guest account is deleted after logout</li>
                 <li>Guest account may be deleted due to inactivity automatically</li>
@@ -105,7 +106,9 @@
         <v-card
           v-for="(i, k) in onlineUsers.onlineUsers"
           :key="k"
+          flat
           bottom
+          color="transparent"
           tag="div">
           <g-avatar
             :value="i.avatar"
@@ -258,6 +261,19 @@ export default {
   display: none;
 }
 
+.app-grid > *:nth-child(1) {
+  border-top-left-radius: 8px;
+}
+
+.app-grid > *:nth-child(3) {
+  border-top-right-radius: 8px;
+}
+
+.app-grid > *:nth-child(4) {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
 @media (max-width: 1264px) {
   .app-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -274,6 +290,12 @@ export default {
   /* .app-grid *:nth-child(5) {
     padding-bottom: 8px;
   } */
+
+  .app-grid > *:nth-child(4) {
+    border-top-right-radius: 0;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
 }
 
 @media (max-width: 960px) {
@@ -311,6 +333,16 @@ export default {
     grid-row: 5;
     grid-column: 1/3;
   }
+
+  .app-grid > *:nth-child(2) {
+    border-top-right-radius: 8px;
+  }
+  .app-grid > *:nth-child(3) {
+    border-top-right-radius: 0;
+  }
+  .app-grid > *:nth-child(4) {
+    border-bottom-left-radius: 0;
+  }
 }
 
 @media (max-width: 320px) {
@@ -330,6 +362,17 @@ export default {
   .app-grid *:nth-child(6) {
     grid-row: 6;
     grid-column: 1;
+  }
+
+  .app-grid > *:nth-child(1) {
+    border-top-right-radius: 8px;
+  }
+
+  .app-grid > *:nth-child(2) {
+    border-top-right-radius: 0;
+  }
+  .app-grid > *:nth-child(4) {
+    border-top-right-radius: 8px;
   }
 }
 

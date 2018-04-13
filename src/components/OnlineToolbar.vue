@@ -20,15 +20,15 @@
       v-if="state.value >= states.USER"
       aria-label="Log out"
       icon
-      @click.native="logOut()">
+      @click.native="state.logout = true">
       <v-icon>logout</v-icon>
     </v-btn>
     <v-btn
       v-if="canReconnect()"
-      aria-label="Log out"
+      aria-label="Reconnect"
       icon
       @click.native="reconnect()">
-      <v-icon>sync_disabled</v-icon>
+      <v-icon>lan_pending</v-icon>
     </v-btn>
   </v-toolbar>
 </template>

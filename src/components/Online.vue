@@ -142,7 +142,8 @@ import {
   logOut,
   userRef,
   usersRef,
-  updateUser
+  updateUser,
+  bindingData
 } from '../services/online'
 import { isDisconnected, isState, state, states } from '../services/online/states'
 import { Info } from '../../plugins/lib'
@@ -188,6 +189,7 @@ export default {
       immediate: true,
       handler (value) {
         if (isState(states.USER)) {
+          bindingData()
           this.$bindAsObject('user', userRef)
         } else if (isDisconnected()) {
           this.$router.replace('login')

@@ -47,6 +47,8 @@
         @click.native="reload()">Reload</v-btn>
     </v-snackbar>
     <g-patterns />
+    <g-error v-if="state.error" />
+    <g-logout v-if="state.logout" />
   </v-app>
 </template>
 
@@ -55,16 +57,20 @@ import { Games } from '../../plugins/lib'
 import { Shared } from '../services/shared'
 import { full } from '../services/full'
 import { titled } from '../filters/titled'
+import { state } from '../services/online/states'
 
 export default {
   components: {
     GMenu: () => import('./HomeMenu'),
     GSettings: () => import('./GameSettings'),
-    GPatterns: () => import('./BoardPatterns')
+    GPatterns: () => import('./BoardPatterns'),
+    GError: () => import('./Error'),
+    GLogout: () => import('./Logout')
   },
   data () {
     return {
       Shared,
+      state,
       update: true
     }
   },

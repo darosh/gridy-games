@@ -33,7 +33,7 @@ const router = new Router({
         toolbar: () => import('../components/HomeToolbar')
       },
       meta: {
-        title: 'Gridy Games',
+        title: 'Table | Gridy Games',
         home: true,
         table: true,
         overflow: 'scroll',
@@ -70,7 +70,7 @@ const router = new Router({
           toolbar: () => import('../components/OnlineToolbar')
         },
         meta: {
-          title: 'Gridy Games',
+          title: 'Login | Gridy Games',
           login: true,
           overflow: 'auto',
           theme: {
@@ -87,7 +87,7 @@ const router = new Router({
           toolbar: () => import('../components/OnlineToolbar')
         },
         meta: {
-          title: 'Gridy Games',
+          title: 'Online | Gridy Games',
           online: true,
           overflow: 'auto',
           theme: {
@@ -104,7 +104,7 @@ const router = new Router({
           toolbar: () => import('../components/OnlineToolbar')
         },
         meta: {
-          title: 'Gridy Games',
+          title: 'Player | Gridy Games',
           online: true,
           overflow: 'auto',
           theme: {

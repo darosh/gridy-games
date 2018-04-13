@@ -54,6 +54,7 @@
         icon><v-icon>{{ $route.name === 'table' ? 'view_cards' : 'view_table' }}</v-icon></v-btn>
       <v-btn
         v-if="useFirebase"
+        :color="isReady() ? 'light-blue--text' : ''"
         :to="{path: '/online'}"
         icon><v-icon>earth</v-icon></v-btn>
     </div>
@@ -64,6 +65,7 @@
 import Vue from 'vue'
 import { Shared } from '../services/shared'
 import { search } from '../worker/search'
+import { isReady } from '../services/online/states'
 
 export default {
   components: {
@@ -87,6 +89,7 @@ export default {
     }
   },
   methods: {
+    isReady,
     updateSearch (value, oldValue) {
       Shared.loading = true
       search(value).then(({ items }) => {
