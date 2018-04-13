@@ -17,14 +17,14 @@
     </v-toolbar-title>
     <v-spacer/>
     <v-btn
-      v-if="state.value >= states.LOGIN"
+      v-if="state.value >= states.USER"
       aria-label="Log out"
       icon
       @click.native="logOut()">
       <v-icon>logout</v-icon>
     </v-btn>
     <v-btn
-      v-if="state.value === states.DISCONNECTED"
+      v-if="canReconnect()"
       aria-label="Log out"
       icon
       @click.native="reconnect()">
@@ -35,8 +35,8 @@
 
 <script>
 import { Shared } from '../services/shared'
-import { state, logOut, reconnect } from '../services/online'
-import { states } from '../services/online/states'
+import { logOut, reconnect } from '../services/online'
+import { canReconnect, isDisconnected, state, states } from '../services/online/states'
 
 export default {
   components: {
@@ -50,7 +50,9 @@ export default {
     }
   },
   methods: {
+    canReconnect,
     logOut,
+    isDisconnected,
     reconnect
   }
 }

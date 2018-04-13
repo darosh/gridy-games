@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import VueAnalytics, { onAnalyticsReady } from 'vue-analytics'
 
-export function analytics (id, router, isProd) {
+export function analytics (id, router, isProd, debug) {
   Vue.use(VueAnalytics, {
     id,
     router,
     debug: {
-      enabled: !isProd,
+      enabled: !isProd && debug,
       sendHitTask: isProd
     }
   })

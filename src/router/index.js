@@ -61,7 +61,7 @@ const router = new Router({
         }
       }
     },
-    ...(!process.APP_FIREBASE ? [] : [
+    ...(!process.env.APP_FIREBASE ? [] : [
       {
         path: '/login',
         name: 'login',
@@ -117,7 +117,7 @@ const router = new Router({
   ]
 })
 
-if (process.APP_FIREBASE) {
+if (process.env.APP_FIREBASE) {
   router.beforeEach((to, from, next) => {
     let isOnlineOrLogin = to.matched.some(record => record.meta.online || record.meta.login)
 

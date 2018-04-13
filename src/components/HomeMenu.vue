@@ -164,10 +164,10 @@ export default {
         }
       ],
       meta: [
-        { title: 'Version', value: process.APP_VERSION },
+        { title: 'Version', value: process.env.APP_VERSION },
         {
           title: 'Build',
-          value: new Date(process.APP_BUILD).toLocaleString('en')
+          value: new Date(process.env.APP_BUILD).toLocaleString('en')
         },
         { title: 'Games', value: Info.games.length },
         {
@@ -176,9 +176,9 @@ export default {
           link: 'https://github.com/darosh/gridy-games'
         }
       ],
-      dependencies: Object.keys(process.APP_DEPENDENCIES)
+      dependencies: Object.keys(process.env.APP_DEPENDENCIES)
         .map(k => {
-          const v = process.APP_DEPENDENCIES[k]
+          const v = process.env.APP_DEPENDENCIES[k]
 
           return {
             link: v.startsWith('github')

@@ -151,7 +151,7 @@ export default {
       rendered: {},
       show: false,
       showHero: location.search !== '?utm_source=homescreen'
-      // useFirebase: !!process.APP_FIREBASE
+      // useFirebase: !!process.env.APP_FIREBASE
     }
   },
   watch: {

@@ -16,13 +16,13 @@ import './style/index.styl'
 
 import { era, link, titled, number } from './filters'
 
-if (process.APP_FIREBASE) {
+if (process.env.APP_FIREBASE) {
   const VueFire = require('vuefire')
   Vue.use(VueFire)
 }
 
-if (process.APP_GA) {
-  analytics(process.APP_GA, router, process.env.NODE_ENV === 'production')
+if (process.env.APP_GA) {
+  analytics(process.env.APP_GA, router, process.env.NODE_ENV === 'production', process.env.DEBUG_GA)
 }
 
 require('vuetify/src/stylus/app.styl')

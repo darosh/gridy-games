@@ -114,14 +114,15 @@ const config = {
     // extractCSS,
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: '"' + NODE_ENV + '"'
-      },
-      'process.APP_VERSION': JSON.stringify(require('./package').version),
-      'process.APP_STORAGE_VERSION': JSON.stringify(require('./package').storageVersion),
-      'process.APP_BUILD': JSON.stringify(new Date().toISOString()),
-      'process.APP_DEPENDENCIES': JSON.stringify(deps()),
-      'process.APP_FIREBASE': JSON.stringify(firebase()),
-      'process.APP_GA': JSON.stringify(process.env.USE_GA || false)
+        NODE_ENV: '"' + NODE_ENV + '"',
+        APP_VERSION: JSON.stringify(require('./package').version),
+        APP_STORAGE_VERSION: JSON.stringify(require('./package').storageVersion),
+        APP_BUILD: JSON.stringify(new Date().toISOString()),
+        APP_DEPENDENCIES: JSON.stringify(deps()),
+        APP_FIREBASE: JSON.stringify(firebase()),
+        APP_GA: JSON.stringify(process.env.USE_GA || false),
+        DEBUG_GA: JSON.stringify(process.env.DEBUG_GA || false)
+      }
     }),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, 'static'),

@@ -1,6 +1,19 @@
 <template>
   <div
-    v-if="!loading"
+    v-if="canReconnect"
+    class="pa-3">
+    <div class="title mb-3">Disconnected</div>
+    <div class="login-buttons app-grid">
+      <v-btn
+        color="grey darken-3 btn-large"
+        @click="reconnect()">
+        <v-icon class="icon-large">sync_disabled</v-icon>
+        Reconnect
+      </v-btn>
+    </div>
+  </div>
+  <div
+    v-else-if="!loading"
     class="pa-3">
     <div class="title mb-3">Log in</div>
     <div class="login-buttons app-grid">
@@ -37,7 +50,9 @@
           class="icon-large"
           color="white">person_outline</v-icon>Guest login</v-btn>
       <div>
-        <v-expansion-panel>
+        <v-expansion-panel
+          class="rounded"
+          light>
           <v-expansion-panel-content expand-icon="person">
             <div slot="header">
               <div class="subheading">Account help</div>
@@ -45,14 +60,14 @@
             <div
               class="pb-3"
               style="position: relative">
-              <v-divider/>
+              <v-divider light/>
               <ul
                 class="body-1 ml-3 pl-3 pr-3 mt-3 square-list"
                 style="opacity: 0.87">
-                <li class="mb-1">Only random name and avatar will be visible to other players</li>
-                <li class="mb-1">You can delete account manually during logout</li>
-                <li class="mb-1">Account may be deleted due to inactivity automatically</li>
-                <li class="mb-1">Only one provider per unique email allowed</li>
+                <li class="mb-0">Only random name and avatar will be visible to other players</li>
+                <li class="mb-0">You can delete account manually during logout</li>
+                <li class="mb-0">Account may be deleted due to inactivity automatically</li>
+                <li class="mb-0">Only one provider per unique email allowed</li>
                 <li>Only one connection (device, browser tab) per account allowed</li>
               </ul>
             </div>
@@ -60,7 +75,7 @@
         </v-expansion-panel>
       </div>
       <div>
-        <v-expansion-panel>
+        <v-expansion-panel class="rounded">
           <v-expansion-panel-content expand-icon="person_outline">
             <div slot="header">
               <div class="subheading">Guest help</div>
@@ -70,11 +85,11 @@
               <ul
                 class="body-1 ml-3 pl-3 pr-3 mt-3 square-list"
                 style="opacity: 0.87">
-                <li class="mb-1">Only random name and avatar will be visible to other players</li>
-                <li class="mb-1">Guest account is marked with outline person icon
+                <li class="mb-0">Only random name and avatar will be visible to other players</li>
+                <li class="mb-0">Guest account is marked with outline person icon
                   <v-icon class="size-16">person_outline</v-icon>
                 </li>
-                <li class="mb-1">Guest account is deleted after logout</li>
+                <li class="mb-0">Guest account is deleted after logout</li>
                 <li>Guest account may be deleted due to inactivity automatically</li>
               </ul>
             </div>
@@ -116,7 +131,13 @@
     <v-progress-circular
       color="light-blue"
       indeterminate />
-    <div class="mt-1">{{ state.message }}</div>
+    <div
+      v-if="state.message"
+      class="mt-1">
+      <span
+        v-if="state.message[state.message.length - 1] === '…'"
+        style="visibility: hidden">…</span>{{ state.message }}
+    </div>
   </div>
 </template>
 
@@ -124,13 +145,18 @@
 // import { onlineUsersFnc } from "../services/online/fake";
 import {
   onlineUsersFnc,
-  state,
+  reconnect,
   signInAnonym,
   signInGitHub,
   signInTwitter,
   signInGoogle
 } from '../services/online'
-import { states } from '../services/online/states'
+import {
+  canReconnect,
+  isState,
+  state,
+  states
+} from '../services/online/states'
 
 const onlineUsers = onlineUsersFnc()
 
@@ -149,6 +175,7 @@ export default {
     return {
       state,
       loading: false,
+      canReconnect: false,
       onlineUsers: null
     }
   },
@@ -156,12 +183,13 @@ export default {
     'state.value': {
       immediate: true,
       handler (value) {
-        if (value === states.USER) {
+        if (isState(states.USER)) {
           this.$router.replace('online')
-        } else if (value >= states.LOADING) {
-          this.loading = true
-        } else {
+        } else if (isState(states.INITIALIZED) || canReconnect()) {
           this.loading = false
+          this.canReconnect = canReconnect()
+        } else {
+          this.loading = true
         }
       }
     }
@@ -174,6 +202,7 @@ export default {
     })
   },
   methods: {
+    reconnect,
     signInAnonym,
     signInGoogle,
     signInTwitter,
@@ -217,7 +246,7 @@ export default {
 
 .app-grid {
   display: grid;
-  grid-gap: 16px;
+  grid-gap: 8px;
   grid-template-columns: repeat(4, 1fr);
 }
 
@@ -242,6 +271,9 @@ export default {
     grid-row: 3;
     grid-column: 2/4;
   }
+  /* .app-grid *:nth-child(5) {
+    padding-bottom: 8px;
+  } */
 }
 
 @media (max-width: 960px) {
@@ -333,7 +365,6 @@ export default {
 @media (max-width: 1904px) {
   .users-grid {
     grid-template-columns: repeat(20, 1fr);
-  --aspect-ratio: 2/1
   }
 }
 
@@ -358,5 +389,24 @@ export default {
   .users-grid {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+.rounded.expansion-panel,
+.rounded.expansion-panel > li {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+@media (max-width: 1264px) and (min-width: 601px) {
+  div:nth-child(6) > .rounded.expansion-panel,
+  div:nth-child(6) > .rounded.expansion-panel > li {
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 8px;
+  }
+}
+
+.icon--rounded {
+  background: #fff;
+  border-radius: 50%;
 }
 </style>

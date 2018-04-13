@@ -4,7 +4,7 @@ import { defaultPlayers } from '../services/players'
 import storage from './storage'
 // import createLogger from 'vuex/dist/logger'
 
-const STORAGE = 'gridy-games' + '-' + process.APP_STORAGE_VERSION
+const STORAGE = 'gridy-games' + '-' + process.env.APP_STORAGE_VERSION
 
 const { state, plugin: storagePlugin } = storage(
   {

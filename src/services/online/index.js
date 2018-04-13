@@ -1,5 +1,5 @@
 import { log } from './log'
-import { messages, states } from './states'
+import { messages, states, state } from './states'
 
 import { random as randomAvatar } from 'gridy-avatars'
 import { randomName } from './name'
@@ -11,14 +11,14 @@ require('firebase/auth')
 require('firebase/database')
 require('firebase/functions')
 
-const config = process.APP_FIREBASE
+const config = process.env.APP_FIREBASE
 const MINUTE = 60000
 const IDLE_TIMEOUT = MINUTE * 5
 
 let app
 let db
+let attached
 
-export let state
 export let user
 
 export let infoConnectedRef
@@ -32,19 +32,14 @@ export let userOnlineRefOnDisconnect
 
 export let usersRef
 
+let ignoreDisconnection = 0
+
 initializeAuth()
 attachAuth()
 
 function initializeAuth () {
+  setState(states.NULL, messages.INITIALIZING)
   app = firebase.initializeApp(config)
-
-  state = {
-    value: states.LOADING,
-    message: messages.INITIALIZING,
-    error: null,
-    offset: null
-  }
-
   user = firebase.auth().currentUser
   firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 }
@@ -60,7 +55,7 @@ function initializeDatabase () {
 
 function onIdle () {
   log('Idle', true)
-  setState(states.DISCONNECTED)
+  setState(states.DISCONNECTED_IDLE)
   goOffline()
 }
 
@@ -74,6 +69,8 @@ function attachDatabase () {
 }
 
 function detach () {
+  attached = false
+
   if (userConnectionCurrentRef) {
     log('Detach userConnectionCurrentRef', true)
     userConnectionCurrentRef.off('value')
@@ -96,6 +93,11 @@ function handleOffsetRef (snap) {
 }
 
 function handleInfoConnected (snap) {
+  if (ignoreDisconnection) {
+    ignoreDisconnection--
+    return
+  }
+
   if (!userOnlineRef) {
     return
   }
@@ -155,7 +157,7 @@ function handleUserInit (snap) {
   const online = true
   const authed = true
   const guest = user.isAnonymous
-  const version = process.APP_VERSION
+  const version = process.env.APP_VERSION
 
   setState(null, messages.UPDATING_USER)
 
@@ -176,8 +178,9 @@ function handleUserInit (snap) {
       online,
       authed,
       version
+    }, () => {
+      setState(states.USER)
     })
-    setState(states.USER)
   }
 
   userConnectionRef = userRef.child('connections')
@@ -200,14 +203,19 @@ function setCurrentConnection (reconnect) {
 function handleUserConnectionCurrent (snap) {
   if (!snap.val()) {
     log('Connection replaced', true)
-    setState(states.DISCONNECTED)
-    goOffline()
+    setState(states.DISCONNECTED_NET)
+    goOffline(true)
   }
 }
 
 function setState (s, m) {
-  if (!isNaN(s)) {
+  if ((s !== null) && !isNaN(s)) {
     log(`State: ${states[s]}`, 1)
+
+    if (states[s] === undefined) {
+      throw new Error('Undefined state: ', s)
+    }
+
     state.value = s
   }
 
@@ -223,19 +231,24 @@ function setError (e) {
   setState(states.SIGNING)
 }
 
-function goToOffline () {
+function goToOffline (external) {
+  if (external) {
+    ignoreDisconnection++
+    detach()
+  }
+
   log('Gone offline', true)
   db.goOffline()
 }
 
-function goOffline () {
+function goOffline (external) {
   log('Going offline', true)
 
-  if (userOnlineRef) {
+  if (userOnlineRef && !external) {
     log('Setting user online: false')
     userOnlineRef.set(false, goToOffline)
   } else {
-    goToOffline()
+    goToOffline(external)
   }
 }
 
@@ -254,6 +267,7 @@ export function updateUser (values) {
 }
 
 export function reconnect () {
+  setState(state.LOADING, messages.RECONNECTING)
   goOnline()
   setCurrentConnection(true)
   setState(states.USER)
@@ -263,6 +277,7 @@ export function logOut () {
   log('Log out')
   log('Log out setting user online+authed: false')
   setState(states.LOGOUT)
+  detach()
 
   userRef.update({ online: false, authed: false, connections: null }).then(() => {
     log('Log out setting user online+authed: false DONE')

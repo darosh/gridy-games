@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="user && user['.key']"
+    v-if="user && user['.key'] && user.name && user.avatar"
     class="pa-3">
     <div style="display: none">{{ counter }}</div>
     <div class="app-grid">
@@ -121,17 +121,30 @@
       :name="user.name"
       @edit="edited" />
   </div>
+  <div
+    v-else
+    class="pa-3 text-xs-center">
+    <v-progress-circular
+      color="light-blue"
+      indeterminate />
+    <div
+      v-if="state.message"
+      class="mt-1">
+      <span
+        v-if="state.message[state.message.length - 1] === '…'"
+        style="visibility: hidden">…</span>{{ state.message }}
+    </div>
+  </div>
 </template>
 
 <script>
 import {
-  state,
   logOut,
   userRef,
   usersRef,
   updateUser
 } from '../services/online'
-import { states } from '../services/online/states'
+import { isDisconnected, isState, state, states } from '../services/online/states'
 import { Info } from '../../plugins/lib'
 import { copy } from '../services/copy'
 import { format } from 'pretty-date'
@@ -142,7 +155,8 @@ export default {
     VTextField: () => import('vuetify/es5/components/VTextField'),
     VSwitch: () => import('vuetify/es5/components/VSwitch'),
     VDialog: () => import('vuetify/es5/components/VDialog'),
-    GAvatar: () => import('./Avatar')
+    GAvatar: () => import('./Avatar'),
+    VProgressCircular: () => import('vuetify/es5/components/VProgressCircular')
   },
   data () {
     return {
@@ -173,9 +187,9 @@ export default {
     'state.value': {
       immediate: true,
       handler (value) {
-        if (value === states.USER) {
+        if (isState(states.USER)) {
           this.$bindAsObject('user', userRef)
-        } else if (value !== states.DISCONNECTED) {
+        } else if (isDisconnected()) {
           this.$router.replace('login')
         }
       }

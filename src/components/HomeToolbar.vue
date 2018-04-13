@@ -73,7 +73,7 @@ export default {
     return {
       Shared,
       input: null,
-      useFirebase: !!process.APP_FIREBASE
+      useFirebase: !!process.env.APP_FIREBASE
     }
   },
   watch: {
