@@ -43,7 +43,8 @@ export {
   visibility_off,
   lan_connect,
   lan_disconnect,
-  lan_pending
+  lan_pending,
+  warning
 } from 'material-icons-bundle'
 
 // from https://github.com/firebase/firebaseui-web/blob/master/image/google.svg
