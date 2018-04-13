@@ -8,7 +8,7 @@
       <v-icon
         style="position: absolute;"
         class="bg-icon">gridy</v-icon>
-      <div class="pa-5">
+      <div class="pa-5 pa-3-sm">
         <div class="display-1 text-xs-left mb-4">Offline games</div>
         <ul
           class="headline ml-4"
@@ -34,7 +34,7 @@
       <v-icon
         style="position: absolute;"
         class="bg-icon">earth</v-icon>
-      <div class="pa-5">
+      <div class="pa-5  pa-3-sm">
         <div class="display-1 text-xs-left mb-3">Online
           <small style="opacity: 0.5">coming soon</small>
         </div>
@@ -256,5 +256,11 @@ li {
   height: 100%;
   width: auto;
   opacity: 0.08;
+}
+
+@media (max-width: 600px) {
+  .pa-3-sm {
+    padding: 16px !important;
+  }
 }
 </style>
