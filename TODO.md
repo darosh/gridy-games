@@ -162,6 +162,9 @@
 - [ ] extract css?
 - [ ] remove export defaults
 - [ ] remove ts-loader from webpack
+- [ ] http://browserl.ist/?q=> 1%, not op_mini all, not ie_mob <= 100, not op_mob <= 30, not android < 60, not samsung < 6, not ie < 100
+
+http://browserl.ist/?q=%3E+1%25%2C+not+op_mini+all%2C+not+ie_mob+%3C%3D+100%2C+not+op_mob+%3C%3D+30%2C+not+android+%3C+60%2C+not+samsung+%3C+6%2C+not+ie+%3C+100
 
 ## Done
 - [x] add triangle to icon

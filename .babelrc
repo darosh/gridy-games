@@ -4,10 +4,10 @@
       "modules": false,
       "targets": {
         "browsers": ["> 1%",
-          "last 2 versions",
           "not ie <= 11",
           "not op_mini all",
           "not ie_mob <= 100",
+          "not ie < 100",
           "not op_mob <= 30",
           "not android < 60",
           "not samsung < 6"]

@@ -47,7 +47,8 @@ function initializeAuth () {
 function initializeDatabase () {
   db = app.database()
   userRef = null
-  usersRef = db.ref('users').orderByChild('online').equalTo(true)
+  // usersRef = db.ref('users').orderByChild('online').equalTo(true)
+  usersRef = db.ref('users').orderByValue()
   infoConnectedRef = firebase.database().ref('.info/connected')
   infoOffsetRef = firebase.database().ref('.info/serverTimeOffset')
   // new Idle({ idle: IDLE_TIMEOUT, onIdle }).start()

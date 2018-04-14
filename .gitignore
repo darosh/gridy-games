@@ -23,3 +23,11 @@ package-lock.json
 
 .firebase.json
 ADMIN.md
+
+key.pem
+cert.pem
+ca.key
+ca.pem
+ca.srl
+cert.ext
+req.csr

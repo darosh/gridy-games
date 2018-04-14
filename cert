@@ -1,0 +1,7 @@
+# https://deliciousbrains.com/ssl-certificate-authority-for-local-https-development/
+
+openssl genrsa -des3 -out ca.key 2048
+openssl req -x509 -new -nodes -key ca.key -sha256 -days 1825 -out ca.pem
+openssl genrsa -out key.pem 2048
+openssl req -new -key key.pem -out req.csr
+openssl x509 -req -in req.csr -CA ca.pem -CAkey ca.key -CAcreateserial -out cert.pem -days 1825 -sha256 -extfile cert.ext
