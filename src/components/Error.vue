@@ -1,5 +1,9 @@
 <template>
-  <v-dialog :value="showDialog" light persistent max-width="360">
+  <v-dialog
+    :value="showDialog"
+    light
+    persistent
+    max-width="360">
     <v-card light>
       <v-card-title class="title red white--text">
         <span class="pl-2">Error</span>
@@ -14,45 +18,48 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer/>
-        <v-btn flat light @click="showDialog = false">Dismiss</v-btn>
+        <v-btn
+          flat
+          light
+          @click="showDialog = false">Dismiss</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
-import { state } from "../services/online/states";
-import Vue from "vue";
-import { setTimeout } from "timers";
+import { state } from '../services/online/states'
+import Vue from 'vue'
+import { setTimeout } from 'timers'
 
 export default {
   components: {
-    VDialog: () => import("vuetify/es5/components/VDialog")
+    VDialog: () => import('vuetify/es5/components/VDialog')
   },
-  data() {
+  data () {
     return {
       showDialog: false,
       state
-    };
+    }
   },
   watch: {
-    "state.error": {
+    'state.error': {
       immediate: true,
-      handler(value) {
+      handler (value) {
         if (value) {
           Vue.nextTick(() => {
-            this.showDialog = true;
-          });
+            this.showDialog = true
+          })
         }
       }
     },
-    showDialog(value) {
+    showDialog (value) {
       if (!value) {
         setTimeout(() => {
-          state.error = null;
-        }, 300);
+          state.error = null
+        }, 300)
       }
     }
   }
-};
+}
 </script>
