@@ -18,3 +18,4 @@
 - [ ] protect config with rule
 - [ ] connect to realtime database after login
 - [ ] offer reauth to user when needed for account removal
+- [ ] handle user change in disconnected tab correctly
