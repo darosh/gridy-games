@@ -3,11 +3,11 @@ const COLORS = ['lightgreen', 'lightgoldenrodyellow', 'lightsalmon', 'deepskyblu
 export const logs = []
 
 export function log (msg, level = 0) {
-  const time = Date.now()
+  const time = new Date()
 
   if (typeof msg === 'object') {
     logs.push({ msg: serialize(msg), level, time })
-  } else {
+  } else if (!msg.startsWith('Message: ')) {
     logs.push({ msg, level, time })
   }
 

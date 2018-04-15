@@ -54,6 +54,7 @@ const router = new Router({
         title () {
           return Games[this.$route.params.id + 'Game'].title + ' | Gridy Games'
         },
+        game: true,
         overflow: 'auto',
         theme: {
           true: '#303030',

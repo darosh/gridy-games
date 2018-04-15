@@ -75,21 +75,26 @@ function attach () {
   onlineTimestampCount = 0
   userOnlineRef = userRef.child('online')
   attachUserOnlineRefOnDisconnect()
-
-  log('Attach userOnlineRef', 3)
+  log('Attach online', 3)
   userOnlineRef.on('value', handleUserOnlineOn)
   attached = true
 }
 
 function attachUserOnlineRefOnDisconnect () {
-  log('Attach userOnlineRefOnDisconnect', 3)
+  log('Attach on disconnect', 3)
   userOnlineRefOnDisconnect = userOnlineRef.onDisconnect()
   userOnlineRefOnDisconnect.set(0, userOnlineRefOnDisconnectDone)
 }
 
-function userOnlineRefOnDisconnectDone () {
-  log('User on disconnect done', 3)
-  attachUserOnlineRefOnDisconnect()
+function userOnlineRefOnDisconnectDone (error) {
+  log('On disconnect DONE', 3)
+
+  if (error) {
+    log(error, 2)
+  }
+
+  // TODO ???
+  // attachUserOnlineRefOnDisconnect()
 }
 
 function detach () {
@@ -98,13 +103,15 @@ function detach () {
   //   userConnectionCurrentRef.off('value')
   // }
 
+  onlineTimestampCount = 0
+
   if (userOnlineRef) {
-    log('Detach userOnlineRef', 3)
+    log('Detach online', 3)
     userOnlineRef.off('value')
   }
 
   if (userOnlineRefOnDisconnect) {
-    log('Cancel userOnlineRefOnDisconnect', 3)
+    log('Cancel on disconnect', 3)
     userOnlineRefOnDisconnect.cancel()
   }
 
@@ -117,18 +124,22 @@ function handleOffsetRef (snap) {
 }
 
 function handleInfoConnected (snap) {
-  log('Connection changed', 2)
+  const val = snap.val()
+
+  log('Connection changed to: ' + val, 2)
 
   if (ignoreDisconnection) {
+    log('Ignoring diconnection,forced')
     ignoreDisconnection--
     return
   }
 
   if (!userOnlineRef) {
+    log('Ignoring diconnection, no user')
     return
   }
 
-  if (!snap.val()) {
+  if (!val) {
     // log('Lost connection setting user offline')
     // userOnlineRef.set(0)
     log('Connection lost', 2)
@@ -144,9 +155,11 @@ function handleAuthChange (u) {
 
   state.guest = u && u.isAnonymous
 
-  if (!expectAuth) {
+  if (!expectAuth && u) {
     log('Auth ignored', 2)
     ignoredAuth = u
+    handleAuthChangeOff()
+    setState(states.DISCONNECTED_OTHER)
     return
   } else {
     ignoredAuth = false
@@ -161,7 +174,7 @@ function handleAuthChange (u) {
     // log(u.getIdToken())
     handleAuthChangeOn(u)
   } else {
-    handleAuthChangeOff(u)
+    handleAuthChangeOff()
   }
 }
 
@@ -183,7 +196,7 @@ function handleAuthChangeOn (u) {
   userRef.once('value').then(handleUserInit)
 }
 
-function handleAuthChangeOff (u) {
+function handleAuthChangeOff () {
   log('Resetting user')
   detach()
   user = null
@@ -205,7 +218,7 @@ function handleUserInit (snap) {
   setState(null, messages.UPDATING_USER)
 
   if (!snap.child('name').exists()) {
-    log('Setting user')
+    log('Setting meta')
 
     userRef.update({
       last,
@@ -215,10 +228,11 @@ function handleUserInit (snap) {
       authed,
       guest
     }, () => {
+      log('Setting meta DONE')
       setState(states.USER)
     })
   } else {
-    log('Updating user')
+    log('Updating meta')
 
     userRef.update({
       last,
@@ -226,6 +240,7 @@ function handleUserInit (snap) {
       authed,
       version
     }, () => {
+      log('Updating meta DONE')
       setState(states.USER)
     })
   }
@@ -243,7 +258,7 @@ function handleUserOnlineOn (snap) {
   }
 
   const val = snap.val()
-  log('Online value: ' + val + '/' + onlineTimestampCount)
+  log('Online counter: ' + onlineTimestampCount)
 
   if (onlineTimestampCount === 2) {
     onlineTimestamp = val
@@ -260,11 +275,13 @@ function handleUserOnlineOn (snap) {
 }
 
 function setCurrentOnlineTimestamp (reconnect) {
+  onlineTimestampCount = 0
+  onlineTimestamp = undefined
+
   if (reconnect && !attached) {
     attach()
   }
-  onlineTimestampCount = 0
-  onlineTimestamp = undefined
+
   userOnlineRef.set(firebase.database.ServerValue.TIMESTAMP)
 }
 
@@ -351,16 +368,25 @@ export function updateUser (values) {
 }
 
 export function disconnect () {
+  ignoreDisconnection++
   goOffline()
   setState(states.DISCONNECTED_NET)
 }
 
 export function reconnect () {
-  setState(state.LOADING, messages.RECONNECTING)
-  goOnline()
-  // setCurrentConnection(true)
-  setCurrentOnlineTimestamp(true)
-  setState(states.USER)
+  log('Reconnecting')
+
+  if (ignoredAuth) {
+    expectAuth = true
+    handleAuthChange(ignoredAuth)
+  } else {
+    setState(state.LOADING, messages.RECONNECTING)
+    goOnline()
+    setCurrentOnlineTimestamp(true)
+    setState(states.USER)
+  }
+
+  log('Reconnecting DONE')
 }
 
 export function deleteOut () {
@@ -383,13 +409,12 @@ export function deleteOut () {
 
 export function logOut () {
   expectAuth = true
-  log('Log out')
-  log('Log out setting user online+authed: false')
+  log('Resetting log out')
   setState(states.LOGOUT)
   detach()
 
-  userRef.update({ online: false, authed: false, connections: null }).then(() => {
-    log('Log out setting user online+authed: false DONE')
+  userRef.update({ online: 0, authed: false }).then(() => {
+    log('Resetting log out DONE')
 
     firebase.auth().signOut().then(() => {
       log('Log out DONE')

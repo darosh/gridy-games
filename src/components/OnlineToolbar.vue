@@ -20,6 +20,7 @@
       v-if="state.value >= states.USER"
       aria-label="Log out"
       icon
+      class="light-blue--text"
       @click.native="state.logout = true">
       <v-icon>logout</v-icon>
     </v-btn>
@@ -27,8 +28,15 @@
       v-if="canReconnect()"
       aria-label="Reconnect"
       icon
+      class="light-blue--text"
       @click.native="reconnect()">
       <v-icon>lan_pending</v-icon>
+    </v-btn>
+    <v-btn
+      aria-label="Settings"
+      icon
+      @click.stop="Shared.drawer = !Shared.drawer">
+      <v-icon>settings</v-icon>
     </v-btn>
   </v-toolbar>
 </template>
