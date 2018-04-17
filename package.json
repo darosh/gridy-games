@@ -1,7 +1,7 @@
 {
   "name": "gridy-games",
   "description": "Board games",
-  "version": "0.41.246",
+  "version": "0.41.248",
   "author": "Jan Forst <ensonador@gmail.com>",
   "browserslist": [
     "> 1%",
@@ -77,9 +77,9 @@
     "http-server": "^0.11.1",
     "inject-loader": "^4.0.1",
     "jest": "^22.4.3",
-    "postcss-loader": "^2.1.3",
+    "postcss-loader": "^2.1.4",
     "recursive-readdir": "^2.2.2",
-    "rollup": "^0.57.1",
+    "rollup": "^0.58.0",
     "rollup-plugin-node-resolve": "^3.3.0",
     "style-loader": "^0.20.3",
     "stylus": "^0.54.5",
