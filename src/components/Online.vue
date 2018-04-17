@@ -15,17 +15,11 @@
           <v-btn
             icon
             flat
-            @click="showEdit = true">
-            <v-icon>mode_edit</v-icon>
-          </v-btn>
-          <v-btn
-            icon
-            flat
             @click="share()">
             <v-icon>share</v-icon>
           </v-btn>
         </v-layout>
-        <div class="text-xs-center pb-3">
+        <div class="text-xs-center pb-5">
           <g-avatar
             :value="user.avatar"
             width="48"
@@ -44,6 +38,20 @@
             class="pl-2 grey--text"
             style="position: relative; bottom: -2px">{{ user.last ? format(new Date(user.last)) : '' }}</span>
         </div>
+        <div style="position: absolute; bottom: 0px; right: 0">
+          <v-btn
+            icon
+            flat
+            @click="showEdit = !showEdit">
+            <v-icon>mode_edit</v-icon>
+          </v-btn>
+          <v-btn
+            icon
+            flat
+            @click="showSelect = !showSelect">
+            <v-icon>gridy</v-icon>
+          </v-btn>
+        </div>
       </v-card>
       <v-card
         v-for="u in users"
@@ -60,7 +68,7 @@
             width="96"
             style="width: calc(100% - 58px)" />
         </div>
-        <div style="height: 8px;"/>
+        <div style="height: 8px;" />
         <div style="position: absolute; bottom: 8px; left: 0; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%">
           <v-icon
             v-if="!u.guest"
@@ -77,49 +85,17 @@
       </v-card>
     </div>
 
-    <v-dialog
-      :value="showShare"
-      max-width="360px"
-      persistent>
-      <v-card>
-        <v-card-title>
-          <span class="title pa-2">Share your profile</span>
-        </v-card-title>
-        <v-card-text class="py-0 px-4">
-          <v-text-field
-            :value="profileLink"
-            :append-icon-cb="copyLink"
-            class="grey darken-2"
-            append-icon="content_copy"
-            hide-details
-            readonly
-            single-line
-            solo/>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer/>
-          <v-btn
-            flat
-            style="min-width: 0"
-            @click="showShare = !showShare">Close</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <g-online-share-dialog
+      v-if="showShare"
+      :profile-link="profileLink" />
 
-    <v-snackbar
-      v-model="showSnack"
-      :timeout="2000"
-      color="grey darken-3"
-      top>
-      <v-flex @click="showSnack = false">{{ snackMessage }}</v-flex>
-    </v-snackbar>
-
-    <g-profile-edit
+    <g-online-profile-edit-dialog
       v-if="showEdit"
       v-model="showEdit"
       :avatar="user.avatar"
       :name="user.name"
       @edit="edited" />
+    <g-online-select-games-dialog v-if="showSelect" />
   </div>
   <div
     v-else
@@ -145,19 +121,22 @@ import {
   updateUser,
   bindingData
 } from '../services/online'
-import { isDisconnected, isState, state, states } from '../services/online/states'
+import {
+  isDisconnected,
+  isState,
+  state,
+  states
+} from '../services/online/states'
 import { Info } from '../../plugins/lib'
-import { copy } from '../services/copy'
 import { format } from 'pretty-date'
 
 export default {
   components: {
-    GProfileEdit: () => import('./ProfileEdit'),
-    VTextField: () => import('vuetify/es5/components/VTextField'),
-    VSwitch: () => import('vuetify/es5/components/VSwitch'),
-    VDialog: () => import('vuetify/es5/components/VDialog'),
+    VProgressCircular: () => import('vuetify/es5/components/VProgressCircular'),
     GAvatar: () => import('./Avatar'),
-    VProgressCircular: () => import('vuetify/es5/components/VProgressCircular')
+    GOnlineProfileEditDialog: () => import('./OnlineProfileEditDialog'),
+    GOnlineSelectGamesDialog: () => import('./OnlineSelectGamesDialog'),
+    GOnlineShareDialog: () => import('./OnlineShareDialog')
   },
   data () {
     return {
@@ -167,8 +146,7 @@ export default {
       acceptInvites: false,
       showShare: false,
       showEdit: false,
-      showSnack: false,
-      snackMessage: '',
+      showSelect: false,
       counter: 0
     }
   },
@@ -219,17 +197,6 @@ export default {
     },
     openShare () {
       this.$router.push(this.profileRoute)
-    },
-    copyLink () {
-      copy(this.profileLink)
-        .then(() => {
-          this.snackMessage = 'Copied to clipboard'
-          this.showSnack = true
-        })
-        .catch(() => {
-          this.snackMessage = 'Copy to clipboard failed'
-          this.showSnack = true
-        })
     },
     edited (values) {
       updateUser(values)

@@ -1,8 +1,7 @@
 <template>
   <v-dialog
-    :value="showDialog"
+    v-model="showDialog"
     light
-    persistent
     max-width="520">
     <v-card light>
       <v-card-title class="title">
@@ -49,6 +48,7 @@
             style="justify-content: flex-end">
             <div>
               <v-btn
+                class="mb-2"
                 flat
                 light
                 @click="showDialog = false">Dismiss</v-btn>
@@ -63,38 +63,16 @@
 <script>
 import { logOut, deleteOut, disconnect } from '../services/online'
 import { state } from '../services/online/states'
-import Vue from 'vue'
-import { setTimeout } from 'timers'
+import { dialogLazy } from '../mixins/dialog-lazy'
 
 export default {
   components: {
     VDialog: () => import('vuetify/es5/components/VDialog')
   },
+  mixins: [dialogLazy('state.logout')],
   data () {
     return {
-      showDialog: false,
       state
-    }
-  },
-  watch: {
-    'state.logout': {
-      immediate: true,
-      handler (value) {
-        if (value) {
-          Vue.nextTick(() => {
-            setTimeout(() => {
-              this.showDialog = true
-            }, 50)
-          })
-        }
-      }
-    },
-    showDialog: function (value) {
-      if (!value) {
-        setTimeout(() => {
-          this.state.logout = false
-        }, 300)
-      }
     }
   },
   methods: {

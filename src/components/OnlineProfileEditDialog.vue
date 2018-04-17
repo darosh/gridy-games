@@ -1,10 +1,10 @@
 <template>
   <v-dialog
-    :value="show"
-    max-width="236px"
-    persistent>
+    v-model="showDialog"
+    max-width="236px">
     <v-card>
-      <div class="px-3 pt-3">
+      <v-card-title class="title pa-4">Edit profile</v-card-title>
+      <div class="px-4 pt-0">
         <v-text-field
           v-model="nameEdit"
           :append-icon-cb="renewName"
@@ -49,11 +49,11 @@
         <v-btn
           flat
           style="min-width: 0"
-          @click="$emit('change', false)">Dismiss</v-btn>
+          @click="showDialog = false">Dismiss</v-btn>
         <v-btn
           flat
           style="min-width: 0"
-          @click="$emit('edit', {name: nameEdit, avatar: avatarEdit}); $emit('change', false)">Save</v-btn>
+          @click="$emit('edit', {name: nameEdit, avatar: avatarEdit}); showDialog = false">Save</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -62,6 +62,7 @@
 <script>
 import { random, base } from 'gridy-avatars'
 import { randomName } from '../services/online/name'
+import { dialogLazy } from '../mixins/dialog-lazy'
 
 export default {
   components: {
@@ -69,6 +70,7 @@ export default {
     GAvatar: () => import('./Avatar'),
     VTextField: () => import('vuetify/es5/components/VTextField')
   },
+  mixins: [dialogLazy('$parent.showEdit')],
   model: {
     prop: 'show',
     event: 'change'

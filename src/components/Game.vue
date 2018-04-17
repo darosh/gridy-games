@@ -80,93 +80,22 @@
       </v-btn>
     </v-speed-dial>
 
-    <g-verdict
-      v-model="showVerdict"
-      :reset="reset"
+    <g-game-info-dialog
+      v-if="rules"
       :game="game"
+      :info="info" />
+
+    <g-game-verdict-dialog
+      v-if="showVerdict"
+      :reset="reset"
+      :game-once="game"
       :theme="theme" />
 
-    <v-dialog
-      :value="rules"
-      max-width="280px">
-      <v-card>
-        <v-card-title>
-          <span class="title pa-2">{{ game.constructor.title | titled }}</span>
-        </v-card-title>
-        <v-card-text
-          v-if="!rulesInfo"
-          class="pt-0 pb-4">
-          <div
-            v-for="(r, k) in rulesText"
-            :key="k"
-            class="px-2">{{ r }}</div>
-        </v-card-text>
-        <div
-          v-if="!rulesInfo"
-          class="text-xs-center">
-          <g-board
-            :game="sample"
-            :frame="[240,164]"
-            :margin="4"
-            class="preview d-inline-block" />
-        </div>
-        <div v-show="rulesInfo">
-          <g-info
-            :game="info"
-            class="mx-2" />
-        </div>
-        <v-card-actions>
-          <v-spacer/>
-          <v-btn
-            flat
-            style="min-width: 0"
-            @click="rulesInfo = !rulesInfo">{{ rulesInfo ? 'Rules' : 'Info' }}</v-btn>
-          <v-btn
-            flat
-            style="min-width: 0"
-            @click="rules = false">Ok</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
-    <v-dialog
-      :value="passConfirm"
-      max-width="280px"
-      persistent>
-      <v-card>
-        <v-card-title>
-          <span class="title pa-2">No moves available</span>
-        </v-card-title>
-        <div
-          :class="{[theme]: true}"
-          class="text-xs-center">
-          <div
-            :class="{['player-' + sessionOther]: true}"
-            class="d-inline-block relative player"
-            style="height: 120px; width: 120px">
-            <svg
-              height="120"
-              width="120"
-              class="d-block absolute">
-              <circle
-                :class="'symbol-' + sessionOther"
-                cx="60"
-                cy="60"
-                r="60" />
-            </svg>
-            <v-icon class="absolute player-status icon-large">close</v-icon>
-          </div>
-        </div>
-        <v-card-actions>
-          <v-spacer/>
-          <v-btn
-            flat
-            style="min-width: 0"
-            @click="game.start(); passConfirm = false">Pass</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
+    <g-game-pass-dialog
+      v-if="passConfirm"
+      :theme="theme"
+      :game="game"
+      :session-other="sessionOther" />
   </div>
 </template>
 
@@ -180,7 +109,6 @@ import {
   other,
   selectAction,
   undoAction,
-  update,
   undoFor
 } from '../../plugins/lib'
 import { isHuman } from '../services/players'
@@ -203,9 +131,9 @@ export default {
   components: {
     GBoard: () => import('./Board'),
     GPlayerDivider: () => import('./PlayerDivider'),
-    GVerdict: () => import('./Verdict'),
-    GInfo: () => import('./Info'),
-    VDialog: () => import('vuetify/es5/components/VDialog')
+    GGameVerdictDialog: () => import('./GameVerdictDialog'),
+    GGameInfoDialog: () => import('./GameInfoDialog'),
+    GGamePassDialog: () => import('./GamePassDialog')
   },
   mixins: [gameResize, gameSession, playerSwitch],
   data () {
@@ -221,17 +149,7 @@ export default {
       showVerdict: false,
       rules: false,
       showRules: true,
-      rulesText: true,
-      rulesInfo: false,
       passConfirm: false
-    }
-  },
-  computed: {
-    sample () {
-      const game = new this.game.constructor()
-      update(game, this.game.constructor.sample)
-
-      return game
     }
   },
   watch: {
@@ -412,14 +330,12 @@ export default {
       initActions(this.game, this.game.possible())
     },
     undo () {
-      this.showVerdict = false
       const target = this.sessionHotSeat ? other(this.game.player) : this.game.player
       undoFor(this.game, target)
       this.update()
     },
     reset () {
       this.fab = false
-      this.showVerdict = false
       this.initGame()
       this.onResize()
       this.initRobots()
@@ -437,22 +353,5 @@ export default {
 
 .mt-1-5 {
   margin-top: 5px;
-}
-
-.icon-large > svg,
-.divider-large {
-  width: 96px;
-  height: 96px;
-  margin: 12px;
-}
-.icon-large {
-  display: block;
-}
-.relative {
-  position: relative;
-}
-
-.absolute {
-  position: absolute;
 }
 </style>

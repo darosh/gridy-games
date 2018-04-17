@@ -44,7 +44,10 @@ export {
   lan_connect,
   lan_disconnect,
   lan_pending,
-  warning
+  warning,
+  check,
+  check_box,
+  check_box_outline_blank
 } from 'material-icons-bundle'
 
 // from https://github.com/firebase/firebaseui-web/blob/master/image/google.svg

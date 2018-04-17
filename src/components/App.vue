@@ -11,7 +11,7 @@
       app
       disable-resize-watcher
       disable-route-watcher>
-      <g-menu/>
+      <g-home-menu-drawer />
     </v-navigation-drawer>
     <v-navigation-drawer
       v-model="Shared.drawer"
@@ -23,8 +23,8 @@
       disable-resize-watcher
       disable-route-watcher>
       <!-- TODO: use route view? -->
-      <g-game-settings v-if="$route.meta.game && Shared.drawer" />
-      <g-online-settings v-else-if="($route.meta.online || $route.meta.login) && Shared.drawer" />
+      <g-game-settings-drawer v-if="$route.meta.game && Shared.drawer" />
+      <g-online-settings-drawer v-else-if="($route.meta.online || $route.meta.login) && Shared.drawer" />
     </v-navigation-drawer>
     <router-view name="toolbar" />
     <v-content :class="{'no-animation': $route.meta.home}">
@@ -48,9 +48,9 @@
         color="light-blue"
         @click.native="reload()">Reload</v-btn>
     </v-snackbar>
+    <g-online-error-dialog v-if="state.error" />
+    <g-online-logout-dialog v-if="state.logout" />
     <g-patterns />
-    <g-error v-if="state.error" />
-    <g-logout v-if="state.logout" />
   </v-app>
 </template>
 
@@ -63,12 +63,12 @@ import { state } from '../services/online/states'
 
 export default {
   components: {
-    GMenu: () => import('./HomeMenu'),
-    GGameSettings: () => import('./GameSettings'),
-    GOnlineSettings: () => import('./OnlineSettings'),
-    GPatterns: () => import('./BoardPatterns'),
-    GError: () => import('./Error'),
-    GLogout: () => import('./Logout')
+    GHomeMenuDrawer: () => import('./HomeMenuDrawer'),
+    GGameSettingsDrawer: () => import('./GameSettingsDrawer'),
+    GOnlineSettingsDrawer: () => import('./OnlineSettingsDrawer'),
+    GOnlineErrorDialog: () => import('./OnlineErrorDialog'),
+    GOnlineLogoutDialog: () => import('./OnlineLogoutDialog'),
+    GPatterns: () => import('./BoardPatterns')
   },
   data () {
     return {

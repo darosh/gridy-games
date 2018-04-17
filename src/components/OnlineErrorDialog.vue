@@ -1,8 +1,7 @@
 <template>
   <v-dialog
-    :value="showDialog"
+    v-model="showDialog"
     light
-    persistent
     max-width="360">
     <v-card light>
       <v-card-title class="title red white--text">
@@ -29,36 +28,16 @@
 
 <script>
 import { state } from '../services/online/states'
-import Vue from 'vue'
-import { setTimeout } from 'timers'
+import { dialogLazy } from '../mixins/dialog-lazy'
 
 export default {
   components: {
     VDialog: () => import('vuetify/es5/components/VDialog')
   },
+  mixins: [dialogLazy('state.error')],
   data () {
     return {
-      showDialog: false,
       state
-    }
-  },
-  watch: {
-    'state.error': {
-      immediate: true,
-      handler (value) {
-        if (value) {
-          Vue.nextTick(() => {
-            this.showDialog = true
-          })
-        }
-      }
-    },
-    showDialog (value) {
-      if (!value) {
-        setTimeout(() => {
-          state.error = null
-        }, 300)
-      }
     }
   }
 }

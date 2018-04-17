@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    :value="value"
+    v-model="showDialog"
     transition="slide-y-transition"
     max-width="288px">
     <v-card
@@ -43,17 +43,18 @@
         <v-btn
           flat
           style="min-width: 0"
-          @click="$emit('change', false)">Cancel</v-btn>
+          @click="showDialog = false">Cancel</v-btn>
         <v-btn
           flat
           style="min-width: 0"
-          @click="reset()">Restart</v-btn>
+          @click="showDialog = false; reset()">Restart</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
+import { dialogLazy } from '../mixins/dialog-lazy'
 import Vue from 'vue'
 import gameSession from '../mixins/game-session'
 import gameVerdict from '../mixins/game-verdict'
@@ -63,21 +64,17 @@ export default {
     VDialog: () => import('vuetify/es5/components/VDialog'),
     GPlayerDivider: () => import('./PlayerDivider')
   },
-  mixins: [gameSession, gameVerdict],
-  model: {
-    prop: 'value',
-    event: 'change'
-  },
+  mixins: [
+    gameSession,
+    gameVerdict,
+    dialogLazy('$parent.showVerdict')
+  ],
   props: {
-    value: {
-      type: Boolean,
-      required: true
-    },
     reset: {
       type: Function,
       required: true
     },
-    game: {
+    gameOnce: {
       type: Object,
       required: true
     },
@@ -86,9 +83,14 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      game: this.gameOnce
+    }
+  },
   watch: {
-    value () {
-      if (this.value) {
+    showDialog (value) {
+      if (value) {
         Vue.nextTick(() => {
           this.$refs.dlg.$el.parentElement.parentElement.id = 'top-dialog'
         })
