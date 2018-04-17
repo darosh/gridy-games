@@ -35,8 +35,10 @@ export default {
 
         Vue.nextTick(() => {
           requestAnimationFrame(() => {
-            this.timer = 0
-            this.timerTransition = this.game.limit
+            requestAnimationFrame(() => {
+              this.timer = 0
+              this.timerTransition = this.game.limit
+            })
           })
         })
       } else {

@@ -36,8 +36,9 @@ export default {
 <style scoped>
 .l1, .l2 {
   stroke-width: 2;
-  transition: all 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
   transform-origin: 50% 50%;
+  will-change: transform;
 }
 
 .divider-0 .l1 {

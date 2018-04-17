@@ -64,7 +64,7 @@
             class="dot"
             cx="0"
             cy="0"
-            style="pointer-events: none"/>
+            style="pointer-events: none" />
         </g>
         <g
           v-for="t in game.grid.tiles"
@@ -303,12 +303,22 @@ export default {
 <style scoped>
 polygon.animate,
 circle.animate {
-  transition: fill 0.2s ease-in-out, stroke 0.2s ease-in-out,
-    stroke-width 0.2s ease-in-out;
+  transition: fill 0.2s ease-in-out;
 }
 .stone.animate {
-  transition: all 0.2s ease-in-out;
+  transition: fill 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
+
+polygon.animate {
+  will-change: fill;
+}
+circle.animate {
+  will-change: transform, fill;
+}
+.stone.animate {
+  will-change: transform, fill;
+}
+
 .vertical {
   transform-origin: 100% 0%;
   transform: rotate(90deg) translateX(100%);

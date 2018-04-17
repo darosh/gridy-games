@@ -176,15 +176,13 @@ export default {
 }
 
 .player {
+  will-change: transform;
   transition: transform 0.2s ease-out;
 }
 .player circle {
   transition: fill 0.2s linear, stroke 0.2s linear;
+  will-change: fill, stroke;
 }
-
-/* .player * {
-  transition: none;
-} */
 
 .player-timer {
   stroke-dasharray: 141.371;
@@ -193,6 +191,7 @@ export default {
   stroke-width: 3;
   stroke: #fff;
   fill: none;
+  will-change: stroke-dashoffset;
 }
 
 .clickable:hover {
@@ -216,7 +215,8 @@ export default {
   opacity: 0.5;
 }
 .count-transition-enter-active {
-  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: opacity 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  will-change: opacity, transform;
 }
 .count-transition-enter-to {
   transform: scale(1);
@@ -225,6 +225,7 @@ export default {
 
 .rotate-animation {
   animation: rotate 2s ease-in-out infinite;
+  will-change: transform;
 }
 
 @keyframes rotate {
